@@ -39,4 +39,4 @@ Route::post(
 
 
 
-Route::resource('jurusans', App\Http\Controllers\jurusanController::class);
+
