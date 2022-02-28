@@ -40,3 +40,6 @@ Route::resource('master_business_categories', App\Http\Controllers\API\master_bu
 
 
 Route::resource('master_status_businesses', App\Http\Controllers\API\master_status_businessAPIController::class);
+
+
+Route::resource('master_units', App\Http\Controllers\API\master_unitAPIController::class);

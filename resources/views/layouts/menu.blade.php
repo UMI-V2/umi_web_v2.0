@@ -35,3 +35,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('masterUnits.index') }}"
+       class="nav-link {{ Request::is('masterUnits*') ? 'active' : '' }}">
+        <p>Master Satuan</p>
+    </a>
+</li>
+
+

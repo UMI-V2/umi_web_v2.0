@@ -6,6 +6,205 @@
     },
     "basePath": "/api/v1",
     "paths": {
+        "/masterBusinessCategories": {
+            "get": {
+                "tags": [
+                    "master_business_category"
+                ],
+                "summary": "Get a listing of the master_business_categories.",
+                "description": "Get all master_business_categories",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/master_business_category"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "master_business_category"
+                ],
+                "summary": "Store a newly created master_business_category in storage",
+                "description": "Store master_business_category",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "master_business_category that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/master_business_category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_business_category"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/masterBusinessCategories/{id}": {
+            "get": {
+                "tags": [
+                    "master_business_category"
+                ],
+                "summary": "Display the specified master_business_category",
+                "description": "Get master_business_category",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_business_category",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_business_category"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "master_business_category"
+                ],
+                "summary": "Update the specified master_business_category in storage",
+                "description": "Update master_business_category",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_business_category",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "master_business_category that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/master_business_category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_business_category"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "master_business_category"
+                ],
+                "summary": "Remove the specified master_business_category from storage",
+                "description": "Delete master_business_category",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_business_category",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/masterProductCategories": {
             "get": {
                 "tags": [
@@ -205,13 +404,13 @@
                 }
             }
         },
-        "/productCategories": {
+        "/masterStatusBusinesses": {
             "get": {
                 "tags": [
-                    "product_category"
+                    "master_status_business"
                 ],
-                "summary": "Get a listing of the product_categories.",
-                "description": "Get all product_categories",
+                "summary": "Get a listing of the master_status_businesses.",
+                "description": "Get all master_status_businesses",
                 "produces": [
                     "application/json"
                 ],
@@ -226,7 +425,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/product_category"
+                                        "$ref": "#/definitions/master_status_business"
                                     }
                                 },
                                 "message": {
@@ -240,10 +439,10 @@
             },
             "post": {
                 "tags": [
-                    "product_category"
+                    "master_status_business"
                 ],
-                "summary": "Store a newly created product_category in storage",
-                "description": "Store product_category",
+                "summary": "Store a newly created master_status_business in storage",
+                "description": "Store master_status_business",
                 "produces": [
                     "application/json"
                 ],
@@ -251,10 +450,10 @@
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "product_category that should be stored",
+                        "description": "master_status_business that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/product_category"
+                            "$ref": "#/definitions/master_status_business"
                         }
                     }
                 ],
@@ -267,7 +466,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/product_category"
+                                    "$ref": "#/definitions/master_status_business"
                                 },
                                 "message": {
                                     "type": "string"
@@ -279,13 +478,13 @@
                 }
             }
         },
-        "/productCategories/{id}": {
+        "/masterStatusBusinesses/{id}": {
             "get": {
                 "tags": [
-                    "product_category"
+                    "master_status_business"
                 ],
-                "summary": "Display the specified product_category",
-                "description": "Get product_category",
+                "summary": "Display the specified master_status_business",
+                "description": "Get master_status_business",
                 "produces": [
                     "application/json"
                 ],
@@ -293,7 +492,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of product_category",
+                        "description": "id of master_status_business",
                         "required": true,
                         "type": "integer"
                     }
@@ -307,7 +506,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/product_category"
+                                    "$ref": "#/definitions/master_status_business"
                                 },
                                 "message": {
                                     "type": "string"
@@ -320,10 +519,10 @@
             },
             "put": {
                 "tags": [
-                    "product_category"
+                    "master_status_business"
                 ],
-                "summary": "Update the specified product_category in storage",
-                "description": "Update product_category",
+                "summary": "Update the specified master_status_business in storage",
+                "description": "Update master_status_business",
                 "produces": [
                     "application/json"
                 ],
@@ -331,17 +530,17 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of product_category",
+                        "description": "id of master_status_business",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "product_category that should be updated",
+                        "description": "master_status_business that should be updated",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/product_category"
+                            "$ref": "#/definitions/master_status_business"
                         }
                     }
                 ],
@@ -354,7 +553,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/product_category"
+                                    "$ref": "#/definitions/master_status_business"
                                 },
                                 "message": {
                                     "type": "string"
@@ -367,10 +566,10 @@
             },
             "delete": {
                 "tags": [
-                    "product_category"
+                    "master_status_business"
                 ],
-                "summary": "Remove the specified product_category from storage",
-                "description": "Delete product_category",
+                "summary": "Remove the specified master_status_business from storage",
+                "description": "Delete master_status_business",
                 "produces": [
                     "application/json"
                 ],
@@ -378,7 +577,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of product_category",
+                        "description": "id of master_status_business",
                         "required": true,
                         "type": "integer"
                     }
@@ -406,9 +605,10 @@
         }
     },
     "definitions": {
-        "master_product_category": {
+        "master_business_category": {
             "required": [
-                ""
+                "nama_kategori_usaha",
+                "status_kategori_usaha"
             ],
             "properties": {
                 "id": {
@@ -416,8 +616,12 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "nama": {
-                    "description": "nama",
+                "nama_kategori_usaha": {
+                    "description": "nama_kategori_usaha",
+                    "type": "string"
+                },
+                "status_kategori_usaha": {
+                    "description": "status_kategori_usaha",
                     "type": "string"
                 },
                 "created_at": {
@@ -432,9 +636,10 @@
                 }
             }
         },
-        "product_category": {
+        "master_product_category": {
             "required": [
-                ""
+                "nama_kategori_produk",
+                "status_kategori_produk"
             ],
             "properties": {
                 "id": {
@@ -442,15 +647,39 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "id_produk": {
-                    "description": "id_produk",
+                "nama_kategori_produk": {
+                    "description": "nama_kategori_produk",
+                    "type": "string"
+                },
+                "status_kategori_produk": {
+                    "description": "status_kategori_produk",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "master_status_business": {
+            "required": [
+                "nama_status_usaha"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "id_kategori_produk": {
-                    "description": "id_kategori_produk",
-                    "type": "integer",
-                    "format": "int32"
+                "nama_status_usaha": {
+                    "description": "nama_status_usaha",
+                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",
