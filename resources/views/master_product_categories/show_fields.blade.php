@@ -4,10 +4,16 @@
     <p>{{ $masterProductCategory->id }}</p>
 </div>
 
-<!-- Nama Field -->
+<!-- Nama Kategori Produk Field -->
 <div class="col-sm-12">
-    {!! Form::label('nama', 'Nama:') !!}
-    <p>{{ $masterProductCategory->nama }}</p>
+    {!! Form::label('nama_kategori_produk', 'Nama Kategori Produk:') !!}
+    <p>{{ $masterProductCategory->nama_kategori_produk }}</p>
+</div>
+
+<!-- Status Kategori Produk Field -->
+<div class="col-sm-12">
+    {!! Form::label('status_kategori_produk', 'Status Kategori Produk:') !!}
+    <p>{{ $masterProductCategory->status_kategori_produk }}</p>
 </div>
 
 <!-- Created At Field -->

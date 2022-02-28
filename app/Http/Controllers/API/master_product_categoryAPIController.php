@@ -65,7 +65,7 @@ class master_product_categoryAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($masterProductCategories->toArray(), 'Master Product Categories retrieved successfully');
+        return $this->sendResponse($masterProductCategories->toArray(), 'Master Kategori Produk retrieved successfully');
     }
 
     /**

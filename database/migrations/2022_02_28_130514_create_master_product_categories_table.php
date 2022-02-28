@@ -16,9 +16,9 @@ class CreateMasterProductCategoriesTable extends Migration
     {
         Schema::create('master_product_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama');
+            $table->string('nama_kategori_produk');
+            $table->string('status_kategori_produk');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

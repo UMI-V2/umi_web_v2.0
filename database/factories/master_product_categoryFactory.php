@@ -22,7 +22,8 @@ class master_product_categoryFactory extends Factory
     public function definition()
     {
         return [
-            'nama' => $this->faker->word,
+            'nama_kategori_produk' => $this->faker->word,
+        'status_kategori_produk' => $this->faker->word,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

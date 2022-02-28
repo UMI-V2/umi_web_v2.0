@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class master_product_categoryRepository
  * @package App\Repositories
- * @version February 26, 2022, 10:43 am UTC
+ * @version February 28, 2022, 1:05 pm UTC
 */
 
 class master_product_categoryRepository extends BaseRepository
@@ -17,7 +17,8 @@ class master_product_categoryRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'nama'
+        'nama_kategori_produk',
+        'status_kategori_produk'
     ];
 
     /**

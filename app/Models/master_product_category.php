@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
  *      definition="master_product_category",
- *      required={""},
+ *      required={"nama_kategori_produk", "status_kategori_produk"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -17,8 +17,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="nama",
- *          description="nama",
+ *          property="nama_kategori_produk",
+ *          description="nama_kategori_produk",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="status_kategori_produk",
+ *          description="status_kategori_produk",
  *          type="string"
  *      ),
  *      @SWG\Property(
@@ -37,19 +42,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class master_product_category extends Model
 {
-    use SoftDeletes;
 
     use HasFactory;
 
     public $table = 'master_product_categories';
     
 
-    protected $dates = ['deleted_at'];
-
 
 
     public $fillable = [
-        'nama'
+        'nama_kategori_produk',
+        'status_kategori_produk'
     ];
 
     /**
@@ -59,7 +62,8 @@ class master_product_category extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'nama' => 'string'
+        'nama_kategori_produk' => 'string',
+        'status_kategori_produk' => 'string'
     ];
 
     /**
@@ -68,7 +72,8 @@ class master_product_category extends Model
      * @var array
      */
     public static $rules = [
-        
+        'nama_kategori_produk' => 'required',
+        'status_kategori_produk' => 'required'
     ];
 
     

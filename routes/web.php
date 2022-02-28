@@ -50,4 +50,12 @@ Route::post(
 
 
 
+
+
+
+
+
+
+
+
 Route::resource('masterProductCategories', App\Http\Controllers\master_product_categoryController::class);

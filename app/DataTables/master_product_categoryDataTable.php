@@ -65,7 +65,8 @@ class master_product_categoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'nama'
+            'nama_kategori_produk',
+            'status_kategori_produk'
         ];
     }
 
