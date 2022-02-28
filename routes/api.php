@@ -64,3 +64,9 @@ Route::resource('master_provinces', App\Http\Controllers\API\master_provinceAPIC
 
 
 Route::resource('master_delivery_services', App\Http\Controllers\API\master_delivery_serviceAPIController::class);
+
+
+Route::resource('master_payment_methods', App\Http\Controllers\API\master_payment_methodAPIController::class);
+
+
+Route::resource('master_transaction_categories', App\Http\Controllers\API\master_transaction_categoryAPIController::class);

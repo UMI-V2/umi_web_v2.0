@@ -73,3 +73,12 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('masterPaymentMethods.index') }}"
+       class="nav-link {{ Request::is('masterPaymentMethods*') ? 'active' : '' }}">
+        <p>Master Metode Pembayaran</p>
+    </a>
+</li>
+
+
+
