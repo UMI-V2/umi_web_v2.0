@@ -95,3 +95,6 @@ Route::resource('masterPaymentMethods', App\Http\Controllers\master_payment_meth
 
 
 Route::resource('masterTransactionCategories', App\Http\Controllers\master_transaction_categoryController::class);
+
+
+Route::resource('masterTransactionCategories', App\Http\Controllers\master_transaction_categoryController::class);

@@ -82,3 +82,11 @@
 
 
 
+<li class="nav-item">
+    <a href="{{ route('masterTransactionCategories.index') }}"
+       class="nav-link {{ Request::is('masterTransactionCategories*') ? 'active' : '' }}">
+        <p>Master Kategori Transaksi</p>
+    </a>
+</li>
+
+
