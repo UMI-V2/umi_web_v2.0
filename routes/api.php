@@ -52,3 +52,6 @@ Route::resource('master_units', App\Http\Controllers\API\master_unitAPIControlle
 
 
 Route::resource('master_privileges', App\Http\Controllers\API\master_privilegeAPIController::class);
+
+
+Route::resource('master_provinces', App\Http\Controllers\API\master_provinceAPIController::class);

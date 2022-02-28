@@ -54,3 +54,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('masterProvinces.index') }}"
+       class="nav-link {{ Request::is('masterProvinces*') ? 'active' : '' }}">
+        <p>Master Provinsi</p>
+    </a>
+</li>
+
+

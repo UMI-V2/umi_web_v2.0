@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
                 'email'          => 'yoga@gmail.com',
                 'password'       => bcrypt('yoga1234'),
                 'created_at'     => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'     => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             // [
             //     'name'           => 'Admin',
