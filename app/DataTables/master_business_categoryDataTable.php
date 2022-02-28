@@ -65,6 +65,7 @@ class master_business_categoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id',
             'nama_kategori_usaha',
             'status_kategori_usaha'
         ];
