@@ -27,3 +27,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('masterStatusBusinesses.index') }}"
+       class="nav-link {{ Request::is('masterStatusBusinesses*') ? 'active' : '' }}">
+        <p>Master Status Usaha</p>
+    </a>
+</li>
+
+

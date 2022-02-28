@@ -37,3 +37,6 @@ Route::resource('master_product_categories', App\Http\Controllers\API\master_pro
 
 
 Route::resource('master_business_categories', App\Http\Controllers\API\master_business_categoryAPIController::class);
+
+
+Route::resource('master_status_businesses', App\Http\Controllers\API\master_status_businessAPIController::class);

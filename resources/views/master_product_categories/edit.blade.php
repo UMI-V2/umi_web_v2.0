@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit Master Product Category</h1>
+                    <h1>Ubah Master Kategori Produk</h1>
                 </div>
             </div>
         </div>

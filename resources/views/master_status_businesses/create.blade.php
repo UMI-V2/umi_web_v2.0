@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Tambah Master Kategori Produk</h1>
+                    <h1>Tambah Master Status Usaha</h1>
                 </div>
             </div>
         </div>
@@ -17,19 +17,19 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'masterProductCategories.store']) !!}
+            {!! Form::open(['route' => 'masterStatusBusinesses.store']) !!}
 
             <div class="card-body">
 
                 <div class="row">
-                    @include('master_product_categories.fields')
+                    @include('master_status_businesses.fields')
                 </div>
 
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('masterProductCategories.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('masterStatusBusinesses.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}
