@@ -43,3 +43,14 @@
 </li>
 
 
+
+
+
+<li class="nav-item">
+    <a href="{{ route('masterPrivileges.index') }}"
+       class="nav-link {{ Request::is('masterPrivileges*') ? 'active' : '' }}">
+        <p>Master Hak Akses Pengguna</p>
+    </a>
+</li>
+
+

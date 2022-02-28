@@ -68,3 +68,12 @@ Route::resource('masterStatusBusinesses', App\Http\Controllers\master_status_bus
 
 
 Route::resource('masterUnits', App\Http\Controllers\master_unitController::class);
+
+
+
+
+
+
+
+
+Route::resource('masterPrivileges', App\Http\Controllers\master_privilegeController::class);
