@@ -62,3 +62,14 @@
 </li>
 
 
+
+
+
+<li class="nav-item">
+    <a href="{{ route('masterDeliveryServices.index') }}"
+       class="nav-link {{ Request::is('masterDeliveryServices*') ? 'active' : '' }}">
+        <p>Master Jasa Pengiriman</p>
+    </a>
+</li>
+
+

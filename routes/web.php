@@ -80,3 +80,12 @@ Route::resource('masterPrivileges', App\Http\Controllers\master_privilegeControl
 
 
 Route::resource('masterProvinces', App\Http\Controllers\master_provinceController::class);
+
+
+
+
+
+
+
+
+Route::resource('masterDeliveryServices', App\Http\Controllers\master_delivery_serviceController::class);
