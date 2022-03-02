@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\API;
 
+use Response;
+use Exception;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
+use App\Models\master_business_category;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\master_business_categoryRepository;
 use App\Http\Requests\API\Createmaster_business_categoryAPIRequest;
 use App\Http\Requests\API\Updatemaster_business_categoryAPIRequest;
-use App\Models\master_business_category;
-use App\Repositories\master_business_categoryRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 /**
  * Class master_business_categoryController
@@ -17,6 +19,8 @@ use Response;
 
 class master_business_categoryAPIController extends AppBaseController
 {
+    // master_business_categoryAPIController
+    // MasterBisinessCategoryAPI
     /** @var  master_business_categoryRepository */
     private $masterBusinessCategoryRepository;
 
@@ -59,13 +63,21 @@ class master_business_categoryAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $masterBusinessCategories = $this->masterBusinessCategoryRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        try {
+            $masterBusinessCategories = $this->masterBusinessCategoryRepository->all(
+                $request->except(['skip', 'limit']),
+                $request->get('skip'),
+                $request->get('limit')
+            );
+            // return data ketika data sukses
+            return ResponseFormatter::success($masterBusinessCategories, 'Master Business Categories retrieved successfully');
 
-        return $this->sendResponse($masterBusinessCategories->toArray(), 'Master Business Categories retrieved successfully');
+        } catch (Exception $e) {
+            // return data ketika data error
+            return ResponseFormatter::error(null,'Master Business Categories retrieved Error');
+        }
+        
+
     }
 
     /**
@@ -109,10 +121,12 @@ class master_business_categoryAPIController extends AppBaseController
     public function store(Createmaster_business_categoryAPIRequest $request)
     {
         $input = $request->all();
+        // dd("Disini");
 
         $masterBusinessCategory = $this->masterBusinessCategoryRepository->create($input);
 
-        return $this->sendResponse($masterBusinessCategory->toArray(), 'Master Business Category saved successfully');
+        // return $this->sendResponse($masterBusinessCategory->toArray(), 'Master Business Category saved successfully');
+        return ResponseFormatter::success($masterBusinessCategory, 'Master Business Category saved successfully');
     }
 
     /**

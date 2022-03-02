@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\master_delivery_serviceAPIController;
+use App\Http\Controllers\API\master_business_categoryAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('addMasterCategoryBusiness', [master_business_categoryAPIController::class, 'store']);
+Route::get('getMasterCategoryBusiness', [master_business_categoryAPIController::class, 'index']);
+// master_delivery_serviceAPIController
+Route::get('getMasterDeliveryService', [master_delivery_serviceAPIController::class, 'index']);
+
+Route::middleware('auth:sanctum')->group(function (){
 });
 
 

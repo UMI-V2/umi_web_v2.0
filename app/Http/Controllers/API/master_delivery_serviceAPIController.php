@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
+use Response;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
+use App\Models\master_delivery_service;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\master_delivery_serviceRepository;
 use App\Http\Requests\API\Createmaster_delivery_serviceAPIRequest;
 use App\Http\Requests\API\Updatemaster_delivery_serviceAPIRequest;
-use App\Models\master_delivery_service;
-use App\Repositories\master_delivery_serviceRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 /**
  * Class master_delivery_serviceController
@@ -65,7 +66,9 @@ class master_delivery_serviceAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($masterDeliveryServices->toArray(), 'Master Delivery Services retrieved successfully');
+        // return $this->sendResponse($masterDeliveryServices->toArray(), 'Master Delivery Services retrieved successfully');
+        return ResponseFormatter::success($masterDeliveryServices, 'Master Delivery Services retrieved successfully');
+
     }
 
     /**
