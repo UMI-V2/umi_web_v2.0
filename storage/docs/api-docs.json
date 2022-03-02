@@ -205,6 +205,404 @@
                 }
             }
         },
+        "/masterDeliveryServices": {
+            "get": {
+                "tags": [
+                    "master_delivery_service"
+                ],
+                "summary": "Get a listing of the master_delivery_services.",
+                "description": "Get all master_delivery_services",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/master_delivery_service"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "master_delivery_service"
+                ],
+                "summary": "Store a newly created master_delivery_service in storage",
+                "description": "Store master_delivery_service",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "master_delivery_service that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/master_delivery_service"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_delivery_service"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/masterDeliveryServices/{id}": {
+            "get": {
+                "tags": [
+                    "master_delivery_service"
+                ],
+                "summary": "Display the specified master_delivery_service",
+                "description": "Get master_delivery_service",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_delivery_service",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_delivery_service"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "master_delivery_service"
+                ],
+                "summary": "Update the specified master_delivery_service in storage",
+                "description": "Update master_delivery_service",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_delivery_service",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "master_delivery_service that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/master_delivery_service"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_delivery_service"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "master_delivery_service"
+                ],
+                "summary": "Remove the specified master_delivery_service from storage",
+                "description": "Delete master_delivery_service",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_delivery_service",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/masterPaymentMethods": {
+            "get": {
+                "tags": [
+                    "master_payment_method"
+                ],
+                "summary": "Get a listing of the master_payment_methods.",
+                "description": "Get all master_payment_methods",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/master_payment_method"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "master_payment_method"
+                ],
+                "summary": "Store a newly created master_payment_method in storage",
+                "description": "Store master_payment_method",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "master_payment_method that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/master_payment_method"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_payment_method"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/masterPaymentMethods/{id}": {
+            "get": {
+                "tags": [
+                    "master_payment_method"
+                ],
+                "summary": "Display the specified master_payment_method",
+                "description": "Get master_payment_method",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_payment_method",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_payment_method"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "master_payment_method"
+                ],
+                "summary": "Update the specified master_payment_method in storage",
+                "description": "Update master_payment_method",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_payment_method",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "master_payment_method that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/master_payment_method"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_payment_method"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "master_payment_method"
+                ],
+                "summary": "Remove the specified master_payment_method from storage",
+                "description": "Delete master_payment_method",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_payment_method",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/masterPrivileges": {
             "get": {
                 "tags": [
@@ -603,6 +1001,205 @@
                 }
             }
         },
+        "/masterProvinces": {
+            "get": {
+                "tags": [
+                    "master_province"
+                ],
+                "summary": "Get a listing of the master_provinces.",
+                "description": "Get all master_provinces",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/master_province"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "master_province"
+                ],
+                "summary": "Store a newly created master_province in storage",
+                "description": "Store master_province",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "master_province that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/master_province"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_province"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/masterProvinces/{id}": {
+            "get": {
+                "tags": [
+                    "master_province"
+                ],
+                "summary": "Display the specified master_province",
+                "description": "Get master_province",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_province",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_province"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "master_province"
+                ],
+                "summary": "Update the specified master_province in storage",
+                "description": "Update master_province",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_province",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "master_province that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/master_province"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_province"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "master_province"
+                ],
+                "summary": "Remove the specified master_province from storage",
+                "description": "Delete master_province",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_province",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/masterStatusBusinesses": {
             "get": {
                 "tags": [
@@ -777,6 +1374,205 @@
                         "name": "id",
                         "in": "path",
                         "description": "id of master_status_business",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/masterTransactionCategories": {
+            "get": {
+                "tags": [
+                    "master_transaction_category"
+                ],
+                "summary": "Get a listing of the master_transaction_categories.",
+                "description": "Get all master_transaction_categories",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/master_transaction_category"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "master_transaction_category"
+                ],
+                "summary": "Store a newly created master_transaction_category in storage",
+                "description": "Store master_transaction_category",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "master_transaction_category that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/master_transaction_category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_transaction_category"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/masterTransactionCategories/{id}": {
+            "get": {
+                "tags": [
+                    "master_transaction_category"
+                ],
+                "summary": "Display the specified master_transaction_category",
+                "description": "Get master_transaction_category",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_transaction_category",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_transaction_category"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "master_transaction_category"
+                ],
+                "summary": "Update the specified master_transaction_category in storage",
+                "description": "Update master_transaction_category",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_transaction_category",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "master_transaction_category that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/master_transaction_category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/master_transaction_category"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "master_transaction_category"
+                ],
+                "summary": "Remove the specified master_transaction_category from storage",
+                "description": "Delete master_transaction_category",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of master_transaction_category",
                         "required": true,
                         "type": "integer"
                     }
@@ -1034,6 +1830,77 @@
                 }
             }
         },
+        "master_delivery_service": {
+            "required": [
+                "nama_jasa_pengiriman",
+                "ongkir",
+                "deskripsi"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "nama_jasa_pengiriman": {
+                    "description": "nama_jasa_pengiriman",
+                    "type": "string"
+                },
+                "ongkir": {
+                    "description": "ongkir",
+                    "type": "string"
+                },
+                "deskripsi": {
+                    "description": "deskripsi",
+                    "type": "string"
+                },
+                "kode_rajaongkir": {
+                    "description": "kode_rajaongkir",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "master_payment_method": {
+            "required": [
+                "nama_metode_pembayaran",
+                "deskripsi_metode_pembayaran"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "nama_metode_pembayaran": {
+                    "description": "nama_metode_pembayaran",
+                    "type": "string"
+                },
+                "deskripsi_metode_pembayaran": {
+                    "description": "deskripsi_metode_pembayaran",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "master_privilege": {
             "required": [
                 "nama_hak_akses_pengguna"
@@ -1091,6 +1958,32 @@
                 }
             }
         },
+        "master_province": {
+            "required": [
+                "nama_provinsi"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "nama_provinsi": {
+                    "description": "nama_provinsi",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "master_status_business": {
             "required": [
                 "nama_status_usaha"
@@ -1103,6 +1996,37 @@
                 },
                 "nama_status_usaha": {
                     "description": "nama_status_usaha",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "master_transaction_category": {
+            "required": [
+                "nama_kategori_transaksi",
+                "deskripsi_kategori_transaksi"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "nama_kategori_transaksi": {
+                    "description": "nama_kategori_transaksi",
+                    "type": "string"
+                },
+                "deskripsi_kategori_transaksi": {
+                    "description": "deskripsi_kategori_transaksi",
                     "type": "string"
                 },
                 "created_at": {
