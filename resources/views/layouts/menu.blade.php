@@ -3,13 +3,11 @@
     
 </li>
 
-
-
-
-
-
-
-
+<button class="dropdown-btn">Master Data 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    
 
 <li class="nav-item">
     <a href="{{ route('masterProductCategories.index') }}"
@@ -43,13 +41,10 @@
 </li>
 
 
-
-
-
 <li class="nav-item">
     <a href="{{ route('masterPrivileges.index') }}"
        class="nav-link {{ Request::is('masterPrivileges*') ? 'active' : '' }}">
-        <p>Master Hak Akses Pengguna</p>
+        <p>Master Akses Pengguna</p>
     </a>
 </li>
 
@@ -60,9 +55,6 @@
         <p>Master Provinsi</p>
     </a>
 </li>
-
-
-
 
 
 <li class="nav-item">
@@ -89,4 +81,6 @@
     </a>
 </li>
 
+
+  </div>
 

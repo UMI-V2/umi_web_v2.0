@@ -25,20 +25,6 @@ Route::middleware('auth:sanctum')->group(function (){
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::resource('master_product_categories', App\Http\Controllers\API\master_product_categoryAPIController::class);
 
 
@@ -51,22 +37,10 @@ Route::resource('master_status_businesses', App\Http\Controllers\API\master_stat
 Route::resource('master_units', App\Http\Controllers\API\master_unitAPIController::class);
 
 
-
-
-
-
-
-
 Route::resource('master_privileges', App\Http\Controllers\API\master_privilegeAPIController::class);
 
 
 Route::resource('master_provinces', App\Http\Controllers\API\master_provinceAPIController::class);
-
-
-
-
-
-
 
 
 Route::resource('master_delivery_services', App\Http\Controllers\API\master_delivery_serviceAPIController::class);
