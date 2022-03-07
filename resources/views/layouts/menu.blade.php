@@ -1,13 +1,12 @@
+<!-- <button class="dropdown-btn nav-link">
+    <p><i class="fa fa-caret-down"></i> Master Data </p>
+</button>
 
-<li class="nav-item">
+<div class="dropdown-container">
     
-</li>
+</div> -->
 
-<button class="dropdown-btn">Master Data 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    
+
 
 <li class="nav-item">
     <a href="{{ route('masterProductCategories.index') }}"
@@ -80,7 +79,4 @@
         <p>Master Kategori Transaksi</p>
     </a>
 </li>
-
-
-  </div>
 
