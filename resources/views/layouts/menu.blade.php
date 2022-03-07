@@ -80,3 +80,13 @@
     </a>
 </li>
 
+
+
+<li class="nav-item">
+    <a href="{{ route('masterStatusUsers.index') }}"
+       class="nav-link {{ Request::is('masterStatusUsers*') ? 'active' : '' }}">
+        <p>Master Status Pengguna</p>
+    </a>
+</li>
+
+
