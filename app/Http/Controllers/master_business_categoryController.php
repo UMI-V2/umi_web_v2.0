@@ -30,7 +30,7 @@ class master_business_categoryController extends AppBaseController
      */
     public function index(master_business_categoryDataTable $masterBusinessCategoryDataTable)
     {
-        return $masterBusinessCategoryDataTable->render('mister_business_categories.index');
+        return $masterBusinessCategoryDataTable->render('meeeeeeeeeeeeester_business_categories.index');
     }
 
     /**
