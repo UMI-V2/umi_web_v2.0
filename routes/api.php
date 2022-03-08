@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\master_delivery_serviceAPIController;
 use App\Http\Controllers\API\master_business_categoryAPIController;
+use App\Http\Controllers\API\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,10 @@ Route::post('addMasterCategoryBusiness', [master_business_categoryAPIController:
 Route::get('getMasterCategoryBusiness', [master_business_categoryAPIController::class, 'index']);
 // master_delivery_serviceAPIController
 Route::get('getMasterDeliveryService', [master_delivery_serviceAPIController::class, 'index']);
+
+// AUTH
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function (){
 });

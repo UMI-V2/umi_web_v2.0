@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -16,19 +18,19 @@ class AuthController extends Controller
             $request->validate(
                 [
                     'password' => 'required',
-                    'nomor_hp_1' => 'required',
+                    'no_hp' => 'required',
                 ]
             );
             $user = User::query();
 
-            $creadentials = request(['nomor_hp_1', 'password']);
+            $creadentials = request(['no_hp', 'password']);
             if (!Auth::attempt($creadentials)) {
                 return ResponseFormatter::error([
                     'message' => "Nomor HP atau password tidak sesuai",
                 ], 'Unauthorized', 500);
             }
 
-            $user = User::with('photo')->where('nomor_hp_1', $request->nomor_hp_1)->first();
+            $user = User::where('no_hp', $request->no_hp)->first();
 
             $tokenResult = $user->createToken('authToken')->plainTextToken;
 
@@ -59,33 +61,24 @@ class AuthController extends Controller
 
             // $user = User::query();
             $request->validate([
-                'nomor_hp_1' => ['required', 'string', 'max:255', 'unique:users'],
+                'no_hp' => ['required', 'string', 'max:255', 'unique:users'],
                 'password' => ['required', 'string'],
             ]);
             // dd($request->nama);
             User::create([
-                'nama' => $request->nama,
-                'tanggal_lahir' => $request->tanggal_lahir,
+                'name' => $request->name,
+                'username' => $request->username,
                 'jenis_kelamin' => $request->jenis_kelamin,
-                'nomor_hp_1' => $request->nomor_hp_1,
-                'nomor_hp_2' => $request->nomor_hp_2,
-                'kode_pos' => $request->kode_pos,
-                'alamat' => $request->alamat,
-                'pengalaman' => $request->pengalaman,
-
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'no_hp' => $request->no_hp,
                 'password' => Hash::make($request->password),
-                'provider_auth' => $request->provider_auth,
             ]);
 
-            $user = User::with('photo')->where('nomor_hp_1', $request->nomor_hp_1)->first();
+            $user = User::where('no_hp', $request->no_hp)->first();
 
 
             $tokenResult = $user->createToken('auth_token')->plainTextToken;
 
-            if ($request->file_ktp || $request->file_selfie) {
-                Auth::login($user, true);
-                PhotoController::updateUserPhoto($request);
-            }
 
             return ResponseFormatter::success([
                 'access_token' => $tokenResult,
@@ -93,7 +86,7 @@ class AuthController extends Controller
                 'user' => $user->load('photo'),
             ], 'Authenticated');
         } catch (Exception $error) {
-            $userUserPhone = User::where('nomor_hp_1', $request->nomor_hp_1)->first();
+            $userUserPhone = User::where('no_hp', $request->no_hp)->first();
 
             if ($userUserPhone) {
                 return ResponseFormatter::error([
@@ -118,17 +111,17 @@ class AuthController extends Controller
     }
 
 
-    
+
     public function checkNoHp(Request $request)
     {
         try {
-            $nomorHp = $request->nomor_hp;
-            $user = User::where('nomor_hp_1',  $nomorHp)->orWhere('nomor_hp_2', $nomorHp)->get();
-            if($user->isNotEmpty()){
+            $nomorHp = $request->no_hp;
+            $user = User::where('no_hp',  $nomorHp)->get();
+            if ($user->isNotEmpty()) {
                 return ResponseFormatter::error([
                     'message' => "Nomor HP telah digunakan",
                 ],  'Nomor HP Not Ready', 500);
-            }else{
+            } else {
                 return ResponseFormatter::success(
                     [
                         'message' => "Nomor Tersedia",
@@ -143,5 +136,4 @@ class AuthController extends Controller
             ],  'Get failed', 500);
         }
     }
-
 }
