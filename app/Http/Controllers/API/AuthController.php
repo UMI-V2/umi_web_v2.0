@@ -83,7 +83,7 @@ class AuthController extends Controller
             return ResponseFormatter::success([
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
-                'user' => $user->load('photo'),
+                'user'=> $user,
             ], 'Authenticated');
         } catch (Exception $error) {
             $userUserPhone = User::where('no_hp', $request->no_hp)->first();
