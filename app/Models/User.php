@@ -32,6 +32,8 @@ class User extends Authenticatable
         'tanggal_lahir',
         'no_hp',
         'foto',
+        'id_status_pengguna',
+        'id_privilege',
     ];
 
     /**

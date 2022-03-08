@@ -18,11 +18,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('username')->nullable();
             $table->string('jenis_kelamin');
-            $table->string('tanggal_lahir');
+            $table->date('tanggal_lahir');
             $table->string('no_hp')->unique();
             $table->string('foto')->nullable();
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->integer('id_status_pengguna')->default(1);
+            $table->integer('id_privilege')->default(2);
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

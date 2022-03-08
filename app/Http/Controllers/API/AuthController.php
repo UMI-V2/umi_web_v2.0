@@ -65,17 +65,19 @@ class AuthController extends Controller
                 'password' => ['required', 'string'],
             ]);
             // dd($request->nama);
-            User::create([
+          $user=  User::create([
                 'name' => $request->name,
-                'username' => $request->username,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'no_hp' => $request->no_hp,
                 'password' => Hash::make($request->password),
             ]);
 
-            $user = User::where('no_hp', $request->no_hp)->first();
 
+            $user->update([
+                'username' => "user-".$user->id.rand(10,100),
+            ]);
+            $user = User::where('no_hp', $request->no_hp)->first();
 
             $tokenResult = $user->createToken('auth_token')->plainTextToken;
 
@@ -83,7 +85,7 @@ class AuthController extends Controller
             return ResponseFormatter::success([
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
-                'user'=> $user,
+                'user' => $user,
             ], 'Authenticated');
         } catch (Exception $error) {
             $userUserPhone = User::where('no_hp', $request->no_hp)->first();
