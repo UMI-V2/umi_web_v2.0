@@ -22,11 +22,11 @@ return new class extends Migration
             $table->string('no_hp')->unique();
             $table->string('foto')->nullable();
             $table->string('email')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->foreignId('current_team_id')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
