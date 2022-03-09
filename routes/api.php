@@ -18,17 +18,22 @@ use App\Http\Controllers\API\UserController;
 |
 */
 
-Route::post('addMasterCategoryBusiness', [master_business_categoryAPIController::class, 'store']);
+#Master category business
 Route::get('getMasterCategoryBusiness', [master_business_categoryAPIController::class, 'index']);
+Route::post('addMasterCategoryBusiness', [master_business_categoryAPIController::class, 'store']);
+
 // master_delivery_serviceAPIController
 Route::get('getMasterDeliveryService', [master_delivery_serviceAPIController::class, 'index']);
 
 // AUTH
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::post('checkNoHp', [AuthController::class, 'checkNoHp']);
+Route::post('changePassword', [AuthController::class, 'changePassword']);
+
 
 Route::middleware('auth:sanctum')->group(function (){
-    
+    Route::delete('logout', [AuthController::class, 'logout']);
 });
 
 

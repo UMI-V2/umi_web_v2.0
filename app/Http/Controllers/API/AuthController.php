@@ -138,4 +138,28 @@ class AuthController extends Controller
             ],  'Get failed', 500);
         }
     }
+
+    public function changePassword(Request $request)
+    {
+        try {
+
+            $user = User::where('no_hp', $request->no_hp)->first();
+            if ($request->password) {
+                $user->update([
+                    'password' => Hash::make($request->password),
+                ]);
+                return ResponseFormatter::success(
+                    true,
+                    'Password Berhasil Diubah',
+                );
+            }
+
+           
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => "Ubah Passowrd gagal",
+                'error' => $error,
+            ],  'Update Failed', 500);
+        }
+    }
 }

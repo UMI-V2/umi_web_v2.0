@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\API;
 
+use Response;
+use Exception;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
+use App\Models\master_product_category;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\master_product_categoryRepository;
 use App\Http\Requests\API\Createmaster_product_categoryAPIRequest;
 use App\Http\Requests\API\Updatemaster_product_categoryAPIRequest;
-use App\Models\master_product_category;
-use App\Repositories\master_product_categoryRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 /**
  * Class master_product_categoryController
@@ -59,13 +61,17 @@ class master_product_categoryAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $masterProductCategories = $this->masterProductCategoryRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
-
-        return $this->sendResponse($masterProductCategories->toArray(), 'Master Kategori Produk retrieved successfully');
+        try {
+            $masterProductCategories = $this->masterProductCategoryRepository->all(
+                $request->except(['skip', 'limit']),
+                $request->get('skip'),
+                $request->get('limit')
+            );
+    
+            return $this->sendResponse($masterProductCategories->toArray(), 'Master Kategori Produk retrieved successfully');
+            } catch (Exception $error) {
+            
+        }
     }
 
     /**
@@ -111,8 +117,10 @@ class master_product_categoryAPIController extends AppBaseController
         $input = $request->all();
 
         $masterProductCategory = $this->masterProductCategoryRepository->create($input);
-
-        return $this->sendResponse($masterProductCategory->toArray(), 'Master Product Category saved successfully');
+        return ResponseFormatter::success(
+            $masterProductCategory,
+            'Master Product Category saved successfully',
+        );
     }
 
     /**
