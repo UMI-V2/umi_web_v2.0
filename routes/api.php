@@ -1,11 +1,15 @@
 <?php
 
-use App\Http\Controllers\API\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\AuthAPIController;
+use App\Http\Controllers\API\AddressAPIController;
+use App\Http\Controllers\API\BusinessAPIController;
+use App\Http\Controllers\API\MasterCityAPIController;
+use App\Http\Controllers\API\master_provinceAPIController;
+use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\master_delivery_serviceAPIController;
 use App\Http\Controllers\API\master_business_categoryAPIController;
-use App\Http\Controllers\API\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,14 +29,32 @@ Route::post('addMasterCategoryBusiness', [master_business_categoryAPIController:
 // master_delivery_serviceAPIController
 Route::get('getMasterDeliveryService', [master_delivery_serviceAPIController::class, 'index']);
 
+// Master Province
+Route::get('getMasterProvince', [master_provinceAPIController::class, 'index']);
+
+// Master City
+Route::get('getMasterCity', [MasterCityAPIController::class, 'index']);
+
+// Master Sub District
+Route::get('getSubDistrict', [MasterSubDistrictAPIController::class, 'index']);
+
+
+
 // AUTH
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
-Route::post('checkNoHp', [AuthController::class, 'checkNoHp']);
-Route::post('changePassword', [AuthController::class, 'changePassword']);
+Route::post('register', [AuthAPIController::class, 'register']);
+Route::post('login', [AuthAPIController::class, 'login']);
+Route::post('checkNoHp', [AuthAPIController::class, 'checkNoHp']);
+Route::post('changePassword', [AuthAPIController::class, 'changePassword']);
 
 
 Route::middleware('auth:sanctum')->group(function (){
+    #Address
+    Route::post('updateAddress', [AddressAPIController::class, 'store']);
+    Route::get('getAddress', [AddressAPIController::class, 'index']);
+    #business
+    Route::post('updateBusiness', [BusinessAPIController::class, 'store']);
+    Route::get('getBusiness', [BusinessAPIController::class, 'index']);
+    
     Route::delete('logout', [AuthController::class, 'logout']);
 });
 

@@ -46,7 +46,7 @@ class master_province extends Model
 
 
     public $fillable = [
-        'nama_provinsi'
+        'province_name'
     ];
 
     /**
@@ -55,8 +55,8 @@ class master_province extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'nama_provinsi' => 'string'
+        'province_id' => 'integer',
+        'province_name' => 'string'
     ];
 
     /**

@@ -17,8 +17,8 @@ class master_provinceRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'id',
-        'nama_provinsi'
+        'province_id',
+        'province_name'
     ];
 
     /**
