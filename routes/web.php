@@ -100,3 +100,6 @@ Route::resource('masterTransactionCategories', App\Http\Controllers\master_trans
 Route::resource('masterTransactionCategories', App\Http\Controllers\master_transaction_categoryController::class);
 
 Route::resource('masterStatusUsers', App\Http\Controllers\master_status_userController::class);
+
+
+Route::resource('users', App\Http\Controllers\UserController::class);

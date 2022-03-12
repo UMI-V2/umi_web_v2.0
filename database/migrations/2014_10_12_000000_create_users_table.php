@@ -18,18 +18,21 @@ return new class extends Migration
             $table->string('name');
             $table->string('username')->nullable();
             $table->string('jenis_kelamin');
-            $table->date('tanggal_lahir');
+            $table->string('tanggal_lahir');
             $table->string('no_hp')->unique();
             $table->string('foto')->nullable();
-            $table->string('email')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->integer('id_status_pengguna')->default(1);
-            $table->integer('id_privilege')->default(2);
+            $table->string('email')->unique()->nullable();
             $table->string('password');
-            $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
+            $table->integer('id_privilege')->unsigned()->default(2);
+            $table->integer('id_status_pengguna')->unsigned()->default(1);
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->foreignId('current_team_id')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('id_privilege')->references('id')->on('master_privileges');
+            $table->foreign('id_status_pengguna')->references('id')->on('master_status_users');
         });
     }
 

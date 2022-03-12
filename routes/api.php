@@ -86,3 +86,6 @@ Route::resource('master_payment_methods', App\Http\Controllers\API\master_paymen
 Route::resource('master_transaction_categories', App\Http\Controllers\API\master_transaction_categoryAPIController::class);
 
 Route::resource('master_status_users', App\Http\Controllers\API\master_status_userAPIController::class);
+
+
+Route::resource('users', App\Http\Controllers\API\UserAPIController::class);

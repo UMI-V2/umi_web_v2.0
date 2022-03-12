@@ -1,5 +1,5 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
-    <a href="{{ url('/home') }}" class="brand-link">
+    <a href="{{ url('/dashboard') }}" class="brand-link">
         <!-- <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
              alt="{{ config('app.name') }} Logo"
              class="brand-image img-circle elevation-3"> -->

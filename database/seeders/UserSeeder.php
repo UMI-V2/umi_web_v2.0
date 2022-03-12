@@ -17,11 +17,17 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name'           => 'Super Admin',
-                'email'          => 'yoga@gmail.com',
-                'password'       => bcrypt('yoga1234'),
-                'created_at'     => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'     => Carbon::now()->format('Y-m-d H:i:s'),
+                'name'                  => 'Super Admin',
+                'username'              => 'Super Admin',
+                'jenis_kelamin'         => 'Pria',
+                'tanggal_lahir'         => '2000-03-25',
+                'no_hp'                 => '081212121212',
+                'email'                 => 'yoga@gmail.com',
+                'id_privilege'          => 1,
+                'id_status_pengguna'    => 1,
+                'password'              => bcrypt('yoga1234'),
+                'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             // [
             //     'name'           => 'Admin',

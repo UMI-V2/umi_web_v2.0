@@ -25,9 +25,9 @@
 
 
 <li class="nav-item">
-    <a href="{{ route('masterStatusBusinesses.index') }}"
-       class="nav-link {{ Request::is('masterStatusBusinesses*') ? 'active' : '' }}">
-        <p>Master Status Usaha</p>
+    <a href="{{ route('masterPrivileges.index') }}"
+       class="nav-link {{ Request::is('masterPrivileges*') ? 'active' : '' }}">
+        <p>Master Akses Pengguna</p>
     </a>
 </li>
 
@@ -41,9 +41,25 @@
 
 
 <li class="nav-item">
-    <a href="{{ route('masterPrivileges.index') }}"
-       class="nav-link {{ Request::is('masterPrivileges*') ? 'active' : '' }}">
-        <p>Master Akses Pengguna</p>
+    <a href="{{ route('masterStatusUsers.index') }}"
+       class="nav-link {{ Request::is('masterStatusUsers*') ? 'active' : '' }}">
+        <p>Master Status Pengguna</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('users.index') }}"
+       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+        <p>Master Pengguna</p>
+    </a>
+</li>
+
+<!-- 
+<li class="nav-item">
+    <a href="{{ route('masterStatusBusinesses.index') }}"
+       class="nav-link {{ Request::is('masterStatusBusinesses*') ? 'active' : '' }}">
+        <p>Master Status Usaha</p>
     </a>
 </li>
 
@@ -78,15 +94,9 @@
        class="nav-link {{ Request::is('masterTransactionCategories*') ? 'active' : '' }}">
         <p>Master Kategori Transaksi</p>
     </a>
-</li>
+</li> -->
 
 
 
-<li class="nav-item">
-    <a href="{{ route('masterStatusUsers.index') }}"
-       class="nav-link {{ Request::is('masterStatusUsers*') ? 'active' : '' }}">
-        <p>Master Status Pengguna</p>
-    </a>
-</li>
 
 
