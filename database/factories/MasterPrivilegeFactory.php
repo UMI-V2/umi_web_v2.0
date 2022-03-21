@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\master_privilege;
+use App\Models\MasterPrivilege;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class master_privilegeFactory extends Factory
+class MasterPrivilegeFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = master_privilege::class;
+    protected $model = MasterPrivilege::class;
 
     /**
      * Define the model's default state.

@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\master_privilege;
+use App\Models\MasterPrivilege;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class master_privilegeDataTable extends DataTable
+class MasterPrivilegeDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,10 +24,10 @@ class master_privilegeDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\master_privilege $model
+     * @param \App\Models\MasterPrivilege $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(master_privilege $model)
+    public function query(MasterPrivilege $model)
     {
         return $model->newQuery();
     }

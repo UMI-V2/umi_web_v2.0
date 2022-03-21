@@ -724,7 +724,7 @@
         },
         "/masterPrivileges": {
             "get": {
-                "tags": ["master_privilege"],
+                "tags": ["MasterPrivilege"],
                 "summary": "Get a listing of the master_privileges.",
                 "description": "Get all master_privileges",
                 "produces": ["application/json"],
@@ -739,7 +739,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/master_privilege"
+                                        "$ref": "#/definitions/MasterPrivilege"
                                     }
                                 },
                                 "message": {
@@ -752,18 +752,18 @@
                 }
             },
             "post": {
-                "tags": ["master_privilege"],
-                "summary": "Store a newly created master_privilege in storage",
-                "description": "Store master_privilege",
+                "tags": ["MasterPrivilege"],
+                "summary": "Store a newly created MasterPrivilege in storage",
+                "description": "Store MasterPrivilege",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_privilege that should be stored",
+                        "description": "MasterPrivilege that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_privilege"
+                            "$ref": "#/definitions/MasterPrivilege"
                         }
                     }
                 ],
@@ -776,7 +776,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_privilege"
+                                    "$ref": "#/definitions/MasterPrivilege"
                                 },
                                 "message": {
                                     "type": "string"
@@ -790,15 +790,15 @@
         },
         "/masterPrivileges/{id}": {
             "get": {
-                "tags": ["master_privilege"],
-                "summary": "Display the specified master_privilege",
-                "description": "Get master_privilege",
+                "tags": ["MasterPrivilege"],
+                "summary": "Display the specified MasterPrivilege",
+                "description": "Get MasterPrivilege",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_privilege",
+                        "description": "id of MasterPrivilege",
                         "required": true,
                         "type": "integer"
                     }
@@ -812,7 +812,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_privilege"
+                                    "$ref": "#/definitions/MasterPrivilege"
                                 },
                                 "message": {
                                     "type": "string"
@@ -824,25 +824,25 @@
                 }
             },
             "put": {
-                "tags": ["master_privilege"],
-                "summary": "Update the specified master_privilege in storage",
-                "description": "Update master_privilege",
+                "tags": ["MasterPrivilege"],
+                "summary": "Update the specified MasterPrivilege in storage",
+                "description": "Update MasterPrivilege",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_privilege",
+                        "description": "id of MasterPrivilege",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_privilege that should be updated",
+                        "description": "MasterPrivilege that should be updated",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_privilege"
+                            "$ref": "#/definitions/MasterPrivilege"
                         }
                     }
                 ],
@@ -855,7 +855,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_privilege"
+                                    "$ref": "#/definitions/MasterPrivilege"
                                 },
                                 "message": {
                                     "type": "string"
@@ -867,15 +867,15 @@
                 }
             },
             "delete": {
-                "tags": ["master_privilege"],
-                "summary": "Remove the specified master_privilege from storage",
-                "description": "Delete master_privilege",
+                "tags": ["MasterPrivilege"],
+                "summary": "Remove the specified MasterPrivilege from storage",
+                "description": "Delete MasterPrivilege",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_privilege",
+                        "description": "id of MasterPrivilege",
                         "required": true,
                         "type": "integer"
                     }
@@ -2145,7 +2145,7 @@
                 }
             }
         },
-        "master_privilege": {
+        "MasterPrivilege": {
             "required": ["nama_hak_akses_pengguna"],
             "properties": {
                 "id": {

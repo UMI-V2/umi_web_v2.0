@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_privilege;
+use App\Models\MasterPrivilege;
 
-class Createmaster_privilegeRequest extends FormRequest
+class CreateMasterPrivilegeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class Createmaster_privilegeRequest extends FormRequest
      */
     public function rules()
     {
-        return master_privilege::$rules;
+        return MasterPrivilege::$rules;
     }
 }

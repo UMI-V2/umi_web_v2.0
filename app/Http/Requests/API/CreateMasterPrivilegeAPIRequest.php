@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
-use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_privilege;
+use App\Models\MasterPrivilege;
+use InfyOm\Generator\Request\APIRequest;
 
-class Updatemaster_privilegeRequest extends FormRequest
+class CreateMasterPrivilegeAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class Updatemaster_privilegeRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = master_privilege::$rules;
-        
-        return $rules;
+        return MasterPrivilege::$rules;
     }
 }

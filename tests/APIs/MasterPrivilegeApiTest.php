@@ -4,18 +4,18 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use App\Models\master_privilege;
+use App\Models\MasterPrivilege;
 
-class master_privilegeApiTest extends TestCase
+class MasterPrivilegeApiTest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
-    public function test_create_master_privilege()
+    public function test_create_MasterPrivilege()
     {
-        $masterPrivilege = master_privilege::factory()->make()->toArray();
+        $masterPrivilege = MasterPrivilege::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -28,9 +28,9 @@ class master_privilegeApiTest extends TestCase
     /**
      * @test
      */
-    public function test_read_master_privilege()
+    public function test_read_MasterPrivilege()
     {
-        $masterPrivilege = master_privilege::factory()->create();
+        $masterPrivilege = MasterPrivilege::factory()->create();
 
         $this->response = $this->json(
             'GET',
@@ -43,26 +43,26 @@ class master_privilegeApiTest extends TestCase
     /**
      * @test
      */
-    public function test_update_master_privilege()
+    public function test_update_MasterPrivilege()
     {
-        $masterPrivilege = master_privilege::factory()->create();
-        $editedmaster_privilege = master_privilege::factory()->make()->toArray();
+        $masterPrivilege = MasterPrivilege::factory()->create();
+        $editedMasterPrivilege = MasterPrivilege::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
             '/api/master_privileges/'.$masterPrivilege->id,
-            $editedmaster_privilege
+            $editedMasterPrivilege
         );
 
-        $this->assertApiResponse($editedmaster_privilege);
+        $this->assertApiResponse($editedMasterPrivilege);
     }
 
     /**
      * @test
      */
-    public function test_delete_master_privilege()
+    public function test_delete_MasterPrivilege()
     {
-        $masterPrivilege = master_privilege::factory()->create();
+        $masterPrivilege = MasterPrivilege::factory()->create();
 
         $this->response = $this->json(
             'DELETE',

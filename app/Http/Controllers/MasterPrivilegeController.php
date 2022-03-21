@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\master_privilegeDataTable;
+use App\DataTables\MasterPrivilegeDataTable;
 use App\Http\Requests;
-use App\Http\Requests\Createmaster_privilegeRequest;
-use App\Http\Requests\Updatemaster_privilegeRequest;
-use App\Repositories\master_privilegeRepository;
+use App\Http\Requests\CreateMasterPrivilegeRequest;
+use App\Http\Requests\UpdateMasterPrivilegeRequest;
+use App\Repositories\MasterPrivilegeRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
-class master_privilegeController extends AppBaseController
+class MasterPrivilegeController extends AppBaseController
 {
-    /** @var master_privilegeRepository $masterPrivilegeRepository*/
+    /** @var MasterPrivilegeRepository $masterPrivilegeRepository*/
     private $masterPrivilegeRepository;
 
-    public function __construct(master_privilegeRepository $masterPrivilegeRepo)
+    public function __construct(MasterPrivilegeRepository $masterPrivilegeRepo)
     {
         $this->masterPrivilegeRepository = $masterPrivilegeRepo;
     }
 
     /**
-     * Display a listing of the master_privilege.
+     * Display a listing of the MasterPrivilege.
      *
-     * @param master_privilegeDataTable $masterPrivilegeDataTable
+     * @param MasterPrivilegeDataTable $masterPrivilegeDataTable
      *
      * @return Response
      */
-    public function index(master_privilegeDataTable $masterPrivilegeDataTable)
+    public function index(MasterPrivilegeDataTable $masterPrivilegeDataTable)
     {
         return $masterPrivilegeDataTable->render('master_privileges.index');
     }
 
     /**
-     * Show the form for creating a new master_privilege.
+     * Show the form for creating a new MasterPrivilege.
      *
      * @return Response
      */
@@ -44,13 +44,13 @@ class master_privilegeController extends AppBaseController
     }
 
     /**
-     * Store a newly created master_privilege in storage.
+     * Store a newly created MasterPrivilege in storage.
      *
-     * @param Createmaster_privilegeRequest $request
+     * @param CreateMasterPrivilegeRequest $request
      *
      * @return Response
      */
-    public function store(Createmaster_privilegeRequest $request)
+    public function store(CreateMasterPrivilegeRequest $request)
     {
         $input = $request->all();
 
@@ -62,7 +62,7 @@ class master_privilegeController extends AppBaseController
     }
 
     /**
-     * Display the specified master_privilege.
+     * Display the specified MasterPrivilege.
      *
      * @param int $id
      *
@@ -82,7 +82,7 @@ class master_privilegeController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified master_privilege.
+     * Show the form for editing the specified MasterPrivilege.
      *
      * @param int $id
      *
@@ -102,14 +102,14 @@ class master_privilegeController extends AppBaseController
     }
 
     /**
-     * Update the specified master_privilege in storage.
+     * Update the specified MasterPrivilege in storage.
      *
      * @param int $id
-     * @param Updatemaster_privilegeRequest $request
+     * @param UpdateMasterPrivilegeRequest $request
      *
      * @return Response
      */
-    public function update($id, Updatemaster_privilegeRequest $request)
+    public function update($id, UpdateMasterPrivilegeRequest $request)
     {
         $masterPrivilege = $this->masterPrivilegeRepository->find($id);
 
@@ -127,7 +127,7 @@ class master_privilegeController extends AppBaseController
     }
 
     /**
-     * Remove the specified master_privilege from storage.
+     * Remove the specified MasterPrivilege from storage.
      *
      * @param int $id
      *

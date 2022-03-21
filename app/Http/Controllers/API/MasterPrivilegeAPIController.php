@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\Createmaster_privilegeAPIRequest;
-use App\Http\Requests\API\Updatemaster_privilegeAPIRequest;
-use App\Models\master_privilege;
-use App\Repositories\master_privilegeRepository;
+use App\Http\Requests\API\CreateMasterPrivilegeAPIRequest;
+use App\Http\Requests\API\UpdateMasterPrivilegeAPIRequest;
+use App\Models\MasterPrivilege;
+use App\Repositories\MasterPrivilegeRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class master_privilegeController
+ * Class MasterPrivilegeController
  * @package App\Http\Controllers\API
  */
 
-class master_privilegeAPIController extends AppBaseController
+class MasterPrivilegeAPIController extends AppBaseController
 {
-    /** @var  master_privilegeRepository */
+    /** @var  MasterPrivilegeRepository */
     private $masterPrivilegeRepository;
 
-    public function __construct(master_privilegeRepository $masterPrivilegeRepo)
+    public function __construct(MasterPrivilegeRepository $masterPrivilegeRepo)
     {
         $this->masterPrivilegeRepository = $masterPrivilegeRepo;
     }
@@ -32,7 +32,7 @@ class master_privilegeAPIController extends AppBaseController
      * @SWG\Get(
      *      path="/masterPrivileges",
      *      summary="Get a listing of the master_privileges.",
-     *      tags={"master_privilege"},
+     *      tags={"MasterPrivilege"},
      *      description="Get all master_privileges",
      *      produces={"application/json"},
      *      @SWG\Response(
@@ -47,7 +47,7 @@ class master_privilegeAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/master_privilege")
+     *                  @SWG\Items(ref="#/definitions/MasterPrivilege")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -69,21 +69,21 @@ class master_privilegeAPIController extends AppBaseController
     }
 
     /**
-     * @param Createmaster_privilegeAPIRequest $request
+     * @param CreateMasterPrivilegeAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
      *      path="/masterPrivileges",
-     *      summary="Store a newly created master_privilege in storage",
-     *      tags={"master_privilege"},
-     *      description="Store master_privilege",
+     *      summary="Store a newly created MasterPrivilege in storage",
+     *      tags={"MasterPrivilege"},
+     *      description="Store MasterPrivilege",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_privilege that should be stored",
+     *          description="MasterPrivilege that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_privilege")
+     *          @SWG\Schema(ref="#/definitions/MasterPrivilege")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class master_privilegeAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_privilege"
+     *                  ref="#/definitions/MasterPrivilege"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,7 +106,7 @@ class master_privilegeAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(Createmaster_privilegeAPIRequest $request)
+    public function store(CreateMasterPrivilegeAPIRequest $request)
     {
         $input = $request->all();
 
@@ -121,13 +121,13 @@ class master_privilegeAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/masterPrivileges/{id}",
-     *      summary="Display the specified master_privilege",
-     *      tags={"master_privilege"},
-     *      description="Get master_privilege",
+     *      summary="Display the specified MasterPrivilege",
+     *      tags={"MasterPrivilege"},
+     *      description="Get MasterPrivilege",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_privilege",
+     *          description="id of MasterPrivilege",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class master_privilegeAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_privilege"
+     *                  ref="#/definitions/MasterPrivilege"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,7 +155,7 @@ class master_privilegeAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var master_privilege $masterPrivilege */
+        /** @var MasterPrivilege $masterPrivilege */
         $masterPrivilege = $this->masterPrivilegeRepository->find($id);
 
         if (empty($masterPrivilege)) {
@@ -167,18 +167,18 @@ class master_privilegeAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param Updatemaster_privilegeAPIRequest $request
+     * @param UpdateMasterPrivilegeAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
      *      path="/masterPrivileges/{id}",
-     *      summary="Update the specified master_privilege in storage",
-     *      tags={"master_privilege"},
-     *      description="Update master_privilege",
+     *      summary="Update the specified MasterPrivilege in storage",
+     *      tags={"MasterPrivilege"},
+     *      description="Update MasterPrivilege",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_privilege",
+     *          description="id of MasterPrivilege",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class master_privilegeAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_privilege that should be updated",
+     *          description="MasterPrivilege that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_privilege")
+     *          @SWG\Schema(ref="#/definitions/MasterPrivilege")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class master_privilegeAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_privilege"
+     *                  ref="#/definitions/MasterPrivilege"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,11 +211,11 @@ class master_privilegeAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, Updatemaster_privilegeAPIRequest $request)
+    public function update($id, UpdateMasterPrivilegeAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var master_privilege $masterPrivilege */
+        /** @var MasterPrivilege $masterPrivilege */
         $masterPrivilege = $this->masterPrivilegeRepository->find($id);
 
         if (empty($masterPrivilege)) {
@@ -224,7 +224,7 @@ class master_privilegeAPIController extends AppBaseController
 
         $masterPrivilege = $this->masterPrivilegeRepository->update($input, $id);
 
-        return $this->sendResponse($masterPrivilege->toArray(), 'master_privilege updated successfully');
+        return $this->sendResponse($masterPrivilege->toArray(), 'MasterPrivilege updated successfully');
     }
 
     /**
@@ -233,13 +233,13 @@ class master_privilegeAPIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/masterPrivileges/{id}",
-     *      summary="Remove the specified master_privilege from storage",
-     *      tags={"master_privilege"},
-     *      description="Delete master_privilege",
+     *      summary="Remove the specified MasterPrivilege from storage",
+     *      tags={"MasterPrivilege"},
+     *      description="Delete MasterPrivilege",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_privilege",
+     *          description="id of MasterPrivilege",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,7 +267,7 @@ class master_privilegeAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var master_privilege $masterPrivilege */
+        /** @var MasterPrivilege $masterPrivilege */
         $masterPrivilege = $this->masterPrivilegeRepository->find($id);
 
         if (empty($masterPrivilege)) {

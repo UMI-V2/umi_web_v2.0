@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\master_privilege;
+use App\Models\MasterPrivilege;
 use App\Repositories\BaseRepository;
 
 /**
- * Class master_privilegeRepository
+ * Class MasterPrivilegeRepository
  * @package App\Repositories
  * @version February 28, 2022, 3:35 pm UTC
 */
 
-class master_privilegeRepository extends BaseRepository
+class MasterPrivilegeRepository extends BaseRepository
 {
     /**
      * @var array
@@ -36,6 +36,6 @@ class master_privilegeRepository extends BaseRepository
      **/
     public function model()
     {
-        return master_privilege::class;
+        return MasterPrivilege::class;
     }
 }

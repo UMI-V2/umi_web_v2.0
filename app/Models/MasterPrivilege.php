@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
- *      definition="master_privilege",
+ *      definition="MasterPrivilege",
  *      required={"nama_hak_akses_pengguna"},
  *      @SWG\Property(
  *          property="id",
@@ -35,7 +35,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
  * )
  */
-class master_privilege extends Model
+class MasterPrivilege extends Model
 {
 
     use HasFactory;

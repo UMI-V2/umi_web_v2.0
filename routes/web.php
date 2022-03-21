@@ -76,7 +76,7 @@ Route::resource('masterUnits', App\Http\Controllers\master_unitController::class
 
 
 
-Route::resource('masterPrivileges', App\Http\Controllers\master_privilegeController::class);
+Route::resource('masterPrivileges', App\Http\Controllers\MasterPrivilegeController::class);
 
 
 Route::resource('masterProvinces', App\Http\Controllers\master_provinceController::class);

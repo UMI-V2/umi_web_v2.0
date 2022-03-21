@@ -182,9 +182,9 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      **/
-    public function master_privilege()
+    public function MasterPrivilege()
     {
-        return $this->belongsTo(\App\Models\master_privilege::class, 'id_privilege');
+        return $this->belongsTo(\App\Models\MasterPrivilege::class, 'id_privilege');
     }
 
     /**

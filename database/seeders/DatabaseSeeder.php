@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\master_privilege;
+use App\Models\MasterPrivilege;
 use App\Models\master_status_user;
 use Carbon\Carbon;
 
@@ -59,35 +59,35 @@ class DatabaseSeeder extends Seeder
             ],
         );
         
-        master_privilege::create(
+        MasterPrivilege::create(
             [
                 'nama_hak_akses_pengguna'   => 'Super Admin',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
-        master_privilege::create(
+        MasterPrivilege::create(
             [
                 'nama_hak_akses_pengguna'   => 'Admin',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
-        master_privilege::create(
+        MasterPrivilege::create(
             [
                 'nama_hak_akses_pengguna'   => 'Dinas UKM',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
-        master_privilege::create(
+        MasterPrivilege::create(
             [
                 'nama_hak_akses_pengguna'   => 'Pembeli',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
-        master_privilege::create(
+        MasterPrivilege::create(
             [
                 'nama_hak_akses_pengguna'   => 'Pembeli & Penjual',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),

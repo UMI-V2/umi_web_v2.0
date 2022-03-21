@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\master_privilege;
+use App\Models\MasterPrivilege;
 use InfyOm\Generator\Request\APIRequest;
 
-class Updatemaster_privilegeAPIRequest extends APIRequest
+class UpdateMasterPrivilegeAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class Updatemaster_privilegeAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = master_privilege::$rules;
+        $rules = MasterPrivilege::$rules;
         
         return $rules;
     }

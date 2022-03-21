@@ -43,7 +43,7 @@ Route::resource('master_status_businesses', App\Http\Controllers\API\master_stat
 Route::resource('master_units', App\Http\Controllers\API\master_unitAPIController::class);
 
 
-Route::resource('master_privileges', App\Http\Controllers\API\master_privilegeAPIController::class);
+Route::resource('master_privileges', App\Http\Controllers\API\MasterPrivilegeAPIController::class);
 
 
 Route::resource('master_provinces', App\Http\Controllers\API\master_provinceAPIController::class);

@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\master_privilege;
+use App\Models\MasterPrivilege;
 use Carbon\Carbon;
 
 class PrivilegeSeeder extends Seeder
@@ -37,6 +37,6 @@ class PrivilegeSeeder extends Seeder
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         ];
-        master_privilege::insert($privileges);
+        MasterPrivilege::insert($privileges);
     }
 }
