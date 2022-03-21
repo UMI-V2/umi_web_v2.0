@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\master_product_categoryDataTable;
+use App\DataTables\MasterProductCategoryDataTable;
 use App\Http\Requests;
-use App\Http\Requests\Createmaster_product_categoryRequest;
-use App\Http\Requests\Updatemaster_product_categoryRequest;
-use App\Repositories\master_product_categoryRepository;
+use App\Http\Requests\CreateMasterProductCategoryRequest;
+use App\Http\Requests\UpdateMasterProductCategoryRequest;
+use App\Repositories\MasterProductCategoryRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
-class master_product_categoryController extends AppBaseController
+class MasterProductCategoryController extends AppBaseController
 {
-    /** @var master_product_categoryRepository $masterProductCategoryRepository*/
+    /** @var MasterProductCategoryRepository $masterProductCategoryRepository*/
     private $masterProductCategoryRepository;
 
-    public function __construct(master_product_categoryRepository $masterProductCategoryRepo)
+    public function __construct(MasterProductCategoryRepository $masterProductCategoryRepo)
     {
         $this->masterProductCategoryRepository = $masterProductCategoryRepo;
     }
 
     /**
-     * Display a listing of the master_product_category.
+     * Display a listing of the MasterProductCategory.
      *
-     * @param master_product_categoryDataTable $masterProductCategoryDataTable
+     * @param MasterProductCategoryDataTable $masterProductCategoryDataTable
      *
      * @return Response
      */
-    public function index(master_product_categoryDataTable $masterProductCategoryDataTable)
+    public function index(MasterProductCategoryDataTable $masterProductCategoryDataTable)
     {
         return $masterProductCategoryDataTable->render('master_product_categories.index');
     }
 
     /**
-     * Show the form for creating a new master_product_category.
+     * Show the form for creating a new MasterProductCategory.
      *
      * @return Response
      */
@@ -44,13 +44,13 @@ class master_product_categoryController extends AppBaseController
     }
 
     /**
-     * Store a newly created master_product_category in storage.
+     * Store a newly created MasterProductCategory in storage.
      *
-     * @param Createmaster_product_categoryRequest $request
+     * @param CreateMasterProductCategoryRequest $request
      *
      * @return Response
      */
-    public function store(Createmaster_product_categoryRequest $request)
+    public function store(CreateMasterProductCategoryRequest $request)
     {
         $input = $request->all();
 
@@ -62,7 +62,7 @@ class master_product_categoryController extends AppBaseController
     }
 
     /**
-     * Display the specified master_product_category.
+     * Display the specified MasterProductCategory.
      *
      * @param int $id
      *
@@ -82,7 +82,7 @@ class master_product_categoryController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified master_product_category.
+     * Show the form for editing the specified MasterProductCategory.
      *
      * @param int $id
      *
@@ -102,14 +102,14 @@ class master_product_categoryController extends AppBaseController
     }
 
     /**
-     * Update the specified master_product_category in storage.
+     * Update the specified MasterProductCategory in storage.
      *
      * @param int $id
-     * @param Updatemaster_product_categoryRequest $request
+     * @param UpdateMasterProductCategoryRequest $request
      *
      * @return Response
      */
-    public function update($id, Updatemaster_product_categoryRequest $request)
+    public function update($id, UpdateMasterProductCategoryRequest $request)
     {
         $masterProductCategory = $this->masterProductCategoryRepository->find($id);
 
@@ -127,7 +127,7 @@ class master_product_categoryController extends AppBaseController
     }
 
     /**
-     * Remove the specified master_product_category from storage.
+     * Remove the specified MasterProductCategory from storage.
      *
      * @param int $id
      *

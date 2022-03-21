@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\Createmaster_product_categoryAPIRequest;
-use App\Http\Requests\API\Updatemaster_product_categoryAPIRequest;
-use App\Models\master_product_category;
-use App\Repositories\master_product_categoryRepository;
+use App\Http\Requests\API\CreateMasterProductCategoryAPIRequest;
+use App\Http\Requests\API\UpdateMasterProductCategoryAPIRequest;
+use App\Models\MasterProductCategory;
+use App\Repositories\MasterProductCategoryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class master_product_categoryController
+ * Class MasterProductCategoryController
  * @package App\Http\Controllers\API
  */
 
-class master_product_categoryAPIController extends AppBaseController
+class MasterProductCategoryAPIController extends AppBaseController
 {
-    /** @var  master_product_categoryRepository */
+    /** @var  MasterProductCategoryRepository */
     private $masterProductCategoryRepository;
 
-    public function __construct(master_product_categoryRepository $masterProductCategoryRepo)
+    public function __construct(MasterProductCategoryRepository $masterProductCategoryRepo)
     {
         $this->masterProductCategoryRepository = $masterProductCategoryRepo;
     }
@@ -32,7 +32,7 @@ class master_product_categoryAPIController extends AppBaseController
      * @SWG\Get(
      *      path="/masterProductCategories",
      *      summary="Get a listing of the master_product_categories.",
-     *      tags={"master_product_category"},
+     *      tags={"MasterProductCategory"},
      *      description="Get all master_product_categories",
      *      produces={"application/json"},
      *      @SWG\Response(
@@ -47,7 +47,7 @@ class master_product_categoryAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/master_product_category")
+     *                  @SWG\Items(ref="#/definitions/MasterProductCategory")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -69,21 +69,21 @@ class master_product_categoryAPIController extends AppBaseController
     }
 
     /**
-     * @param Createmaster_product_categoryAPIRequest $request
+     * @param CreateMasterProductCategoryAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
      *      path="/masterProductCategories",
-     *      summary="Store a newly created master_product_category in storage",
-     *      tags={"master_product_category"},
-     *      description="Store master_product_category",
+     *      summary="Store a newly created MasterProductCategory in storage",
+     *      tags={"MasterProductCategory"},
+     *      description="Store MasterProductCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_product_category that should be stored",
+     *          description="MasterProductCategory that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_product_category")
+     *          @SWG\Schema(ref="#/definitions/MasterProductCategory")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class master_product_categoryAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_product_category"
+     *                  ref="#/definitions/MasterProductCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,7 +106,7 @@ class master_product_categoryAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(Createmaster_product_categoryAPIRequest $request)
+    public function store(CreateMasterProductCategoryAPIRequest $request)
     {
         $input = $request->all();
 
@@ -121,13 +121,13 @@ class master_product_categoryAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/masterProductCategories/{id}",
-     *      summary="Display the specified master_product_category",
-     *      tags={"master_product_category"},
-     *      description="Get master_product_category",
+     *      summary="Display the specified MasterProductCategory",
+     *      tags={"MasterProductCategory"},
+     *      description="Get MasterProductCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_product_category",
+     *          description="id of MasterProductCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class master_product_categoryAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_product_category"
+     *                  ref="#/definitions/MasterProductCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,7 +155,7 @@ class master_product_categoryAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var master_product_category $masterProductCategory */
+        /** @var MasterProductCategory $masterProductCategory */
         $masterProductCategory = $this->masterProductCategoryRepository->find($id);
 
         if (empty($masterProductCategory)) {
@@ -167,18 +167,18 @@ class master_product_categoryAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param Updatemaster_product_categoryAPIRequest $request
+     * @param UpdateMasterProductCategoryAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
      *      path="/masterProductCategories/{id}",
-     *      summary="Update the specified master_product_category in storage",
-     *      tags={"master_product_category"},
-     *      description="Update master_product_category",
+     *      summary="Update the specified MasterProductCategory in storage",
+     *      tags={"MasterProductCategory"},
+     *      description="Update MasterProductCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_product_category",
+     *          description="id of MasterProductCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class master_product_categoryAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_product_category that should be updated",
+     *          description="MasterProductCategory that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_product_category")
+     *          @SWG\Schema(ref="#/definitions/MasterProductCategory")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class master_product_categoryAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_product_category"
+     *                  ref="#/definitions/MasterProductCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,11 +211,11 @@ class master_product_categoryAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, Updatemaster_product_categoryAPIRequest $request)
+    public function update($id, UpdateMasterProductCategoryAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var master_product_category $masterProductCategory */
+        /** @var MasterProductCategory $masterProductCategory */
         $masterProductCategory = $this->masterProductCategoryRepository->find($id);
 
         if (empty($masterProductCategory)) {
@@ -224,7 +224,7 @@ class master_product_categoryAPIController extends AppBaseController
 
         $masterProductCategory = $this->masterProductCategoryRepository->update($input, $id);
 
-        return $this->sendResponse($masterProductCategory->toArray(), 'master_product_category updated successfully');
+        return $this->sendResponse($masterProductCategory->toArray(), 'MasterProductCategory updated successfully');
     }
 
     /**
@@ -233,13 +233,13 @@ class master_product_categoryAPIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/masterProductCategories/{id}",
-     *      summary="Remove the specified master_product_category from storage",
-     *      tags={"master_product_category"},
-     *      description="Delete master_product_category",
+     *      summary="Remove the specified MasterProductCategory from storage",
+     *      tags={"MasterProductCategory"},
+     *      description="Delete MasterProductCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_product_category",
+     *          description="id of MasterProductCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,7 +267,7 @@ class master_product_categoryAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var master_product_category $masterProductCategory */
+        /** @var MasterProductCategory $masterProductCategory */
         $masterProductCategory = $this->masterProductCategoryRepository->find($id);
 
         if (empty($masterProductCategory)) {

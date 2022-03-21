@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\master_product_category;
+use App\Models\MasterProductCategory;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class master_product_categoryDataTable extends DataTable
+class MasterProductCategoryDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,10 +24,10 @@ class master_product_categoryDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\master_product_category $model
+     * @param \App\Models\MasterProductCategory $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(master_product_category $model)
+    public function query(MasterProductCategory $model)
     {
         return $model->newQuery();
     }

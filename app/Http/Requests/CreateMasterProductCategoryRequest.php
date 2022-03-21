@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_product_category;
+use App\Models\MasterProductCategory;
 
-class Updatemaster_product_categoryRequest extends FormRequest
+class CreateMasterProductCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class Updatemaster_product_categoryRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = master_product_category::$rules;
-        
-        return $rules;
+        return MasterProductCategory::$rules;
     }
 }

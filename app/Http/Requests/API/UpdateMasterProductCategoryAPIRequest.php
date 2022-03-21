@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
-use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_product_category;
+use App\Models\MasterProductCategory;
+use InfyOm\Generator\Request\APIRequest;
 
-class Createmaster_product_categoryRequest extends FormRequest
+class UpdateMasterProductCategoryAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,8 @@ class Createmaster_product_categoryRequest extends FormRequest
      */
     public function rules()
     {
-        return master_product_category::$rules;
+        $rules = MasterProductCategory::$rules;
+        
+        return $rules;
     }
 }

@@ -903,7 +903,7 @@
         },
         "/masterProductCategories": {
             "get": {
-                "tags": ["master_product_category"],
+                "tags": ["MasterProductCategory"],
                 "summary": "Get a listing of the master_product_categories.",
                 "description": "Get all master_product_categories",
                 "produces": ["application/json"],
@@ -918,7 +918,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/master_product_category"
+                                        "$ref": "#/definitions/MasterProductCategory"
                                     }
                                 },
                                 "message": {
@@ -931,18 +931,18 @@
                 }
             },
             "post": {
-                "tags": ["master_product_category"],
-                "summary": "Store a newly created master_product_category in storage",
-                "description": "Store master_product_category",
+                "tags": ["MasterProductCategory"],
+                "summary": "Store a newly created MasterProductCategory in storage",
+                "description": "Store MasterProductCategory",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_product_category that should be stored",
+                        "description": "MasterProductCategory that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_product_category"
+                            "$ref": "#/definitions/MasterProductCategory"
                         }
                     }
                 ],
@@ -955,7 +955,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_product_category"
+                                    "$ref": "#/definitions/MasterProductCategory"
                                 },
                                 "message": {
                                     "type": "string"
@@ -969,15 +969,15 @@
         },
         "/masterProductCategories/{id}": {
             "get": {
-                "tags": ["master_product_category"],
-                "summary": "Display the specified master_product_category",
-                "description": "Get master_product_category",
+                "tags": ["MasterProductCategory"],
+                "summary": "Display the specified MasterProductCategory",
+                "description": "Get MasterProductCategory",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_product_category",
+                        "description": "id of MasterProductCategory",
                         "required": true,
                         "type": "integer"
                     }
@@ -991,7 +991,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_product_category"
+                                    "$ref": "#/definitions/MasterProductCategory"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1003,25 +1003,25 @@
                 }
             },
             "put": {
-                "tags": ["master_product_category"],
-                "summary": "Update the specified master_product_category in storage",
-                "description": "Update master_product_category",
+                "tags": ["MasterProductCategory"],
+                "summary": "Update the specified MasterProductCategory in storage",
+                "description": "Update MasterProductCategory",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_product_category",
+                        "description": "id of MasterProductCategory",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_product_category that should be updated",
+                        "description": "MasterProductCategory that should be updated",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_product_category"
+                            "$ref": "#/definitions/MasterProductCategory"
                         }
                     }
                 ],
@@ -1034,7 +1034,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_product_category"
+                                    "$ref": "#/definitions/MasterProductCategory"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1046,15 +1046,15 @@
                 }
             },
             "delete": {
-                "tags": ["master_product_category"],
-                "summary": "Remove the specified master_product_category from storage",
-                "description": "Delete master_product_category",
+                "tags": ["MasterProductCategory"],
+                "summary": "Remove the specified MasterProductCategory from storage",
+                "description": "Delete MasterProductCategory",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_product_category",
+                        "description": "id of MasterProductCategory",
                         "required": true,
                         "type": "integer"
                     }
@@ -2169,7 +2169,7 @@
                 }
             }
         },
-        "master_product_category": {
+        "MasterProductCategory": {
             "required": ["nama_kategori_produk", "status_kategori_produk"],
             "properties": {
                 "id": {

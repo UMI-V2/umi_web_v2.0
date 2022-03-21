@@ -61,6 +61,6 @@
     },
     {
         "type": "relation",
-        "relation": "1tm,master_product_category"
+        "relation": "1tm,MasterProductCategory"
     }
 ]

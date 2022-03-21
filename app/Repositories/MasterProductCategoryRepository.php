@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\master_product_category;
+use App\Models\MasterProductCategory;
 use App\Repositories\BaseRepository;
 
 /**
- * Class master_product_categoryRepository
+ * Class MasterProductCategoryRepository
  * @package App\Repositories
  * @version February 28, 2022, 1:05 pm UTC
 */
 
-class master_product_categoryRepository extends BaseRepository
+class MasterProductCategoryRepository extends BaseRepository
 {
     /**
      * @var array
@@ -36,6 +36,6 @@ class master_product_categoryRepository extends BaseRepository
      **/
     public function model()
     {
-        return master_product_category::class;
+        return MasterProductCategory::class;
     }
 }

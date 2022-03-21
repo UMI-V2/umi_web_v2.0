@@ -7,6 +7,13 @@
 </div> -->
 
 
+<li class="nav-item">
+    <a href="{{ route('users.index') }}"
+       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+        <p>Master Pengguna</p>
+    </a>
+</li>
+
 
 <li class="nav-item">
     <a href="{{ route('masterProductCategories.index') }}"
@@ -49,14 +56,6 @@
 
 
 <li class="nav-item">
-    <a href="{{ route('users.index') }}"
-       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
-        <p>Master Pengguna</p>
-    </a>
-</li>
-
-<!-- 
-<li class="nav-item">
     <a href="{{ route('masterStatusBusinesses.index') }}"
        class="nav-link {{ Request::is('masterStatusBusinesses*') ? 'active' : '' }}">
         <p>Master Status Usaha</p>
@@ -94,7 +93,7 @@
        class="nav-link {{ Request::is('masterTransactionCategories*') ? 'active' : '' }}">
         <p>Master Kategori Transaksi</p>
     </a>
-</li> -->
+</li>
 
 
 

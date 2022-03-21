@@ -58,7 +58,7 @@ Route::post(
 
 
 
-Route::resource('masterProductCategories', App\Http\Controllers\master_product_categoryController::class);
+Route::resource('masterProductCategories', App\Http\Controllers\MasterProductCategoryController::class);
 
 
 Route::resource('masterBusinessCategories', App\Http\Controllers\MasterBusinessCategoryController::class);
