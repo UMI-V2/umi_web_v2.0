@@ -8,14 +8,10 @@
     "paths": {
         "/users": {
             "get": {
-                "tags": [
-                    "User"
-                ],
+                "tags": ["User"],
                 "summary": "Get a listing of the Users.",
                 "description": "Get all Users",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -40,14 +36,10 @@
                 }
             },
             "post": {
-                "tags": [
-                    "User"
-                ],
+                "tags": ["User"],
                 "summary": "Store a newly created User in storage",
                 "description": "Store User",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
@@ -82,14 +74,10 @@
         },
         "/users/{id}": {
             "get": {
-                "tags": [
-                    "User"
-                ],
+                "tags": ["User"],
                 "summary": "Display the specified User",
                 "description": "Get User",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -120,14 +108,10 @@
                 }
             },
             "put": {
-                "tags": [
-                    "User"
-                ],
+                "tags": ["User"],
                 "summary": "Update the specified User in storage",
                 "description": "Update User",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -167,14 +151,10 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "User"
-                ],
+                "tags": ["User"],
                 "summary": "Remove the specified User from storage",
                 "description": "Delete User",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -207,14 +187,10 @@
         },
         "/masterBusinessCategories": {
             "get": {
-                "tags": [
-                    "master_business_category"
-                ],
+                "tags": ["MasterBusinessCategory"],
                 "summary": "Get a listing of the master_business_categories.",
                 "description": "Get all master_business_categories",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -226,7 +202,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/master_business_category"
+                                        "$ref": "#/definitions/MasterBusinessCategory"
                                     }
                                 },
                                 "message": {
@@ -239,22 +215,18 @@
                 }
             },
             "post": {
-                "tags": [
-                    "master_business_category"
-                ],
-                "summary": "Store a newly created master_business_category in storage",
-                "description": "Store master_business_category",
-                "produces": [
-                    "application/json"
-                ],
+                "tags": ["MasterBusinessCategory"],
+                "summary": "Store a newly created MasterBusinessCategory in storage",
+                "description": "Store MasterBusinessCategory",
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_business_category that should be stored",
+                        "description": "MasterBusinessCategory that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_business_category"
+                            "$ref": "#/definitions/MasterBusinessCategory"
                         }
                     }
                 ],
@@ -267,7 +239,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_business_category"
+                                    "$ref": "#/definitions/MasterBusinessCategory"
                                 },
                                 "message": {
                                     "type": "string"
@@ -281,19 +253,15 @@
         },
         "/masterBusinessCategories/{id}": {
             "get": {
-                "tags": [
-                    "master_business_category"
-                ],
-                "summary": "Display the specified master_business_category",
-                "description": "Get master_business_category",
-                "produces": [
-                    "application/json"
-                ],
+                "tags": ["MasterBusinessCategory"],
+                "summary": "Display the specified MasterBusinessCategory",
+                "description": "Get MasterBusinessCategory",
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_business_category",
+                        "description": "id of MasterBusinessCategory",
                         "required": true,
                         "type": "integer"
                     }
@@ -307,7 +275,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_business_category"
+                                    "$ref": "#/definitions/MasterBusinessCategory"
                                 },
                                 "message": {
                                     "type": "string"
@@ -319,29 +287,25 @@
                 }
             },
             "put": {
-                "tags": [
-                    "master_business_category"
-                ],
-                "summary": "Update the specified master_business_category in storage",
-                "description": "Update master_business_category",
-                "produces": [
-                    "application/json"
-                ],
+                "tags": ["MasterBusinessCategory"],
+                "summary": "Update the specified MasterBusinessCategory in storage",
+                "description": "Update MasterBusinessCategory",
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_business_category",
+                        "description": "id of MasterBusinessCategory",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_business_category that should be updated",
+                        "description": "MasterBusinessCategory that should be updated",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_business_category"
+                            "$ref": "#/definitions/MasterBusinessCategory"
                         }
                     }
                 ],
@@ -354,7 +318,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_business_category"
+                                    "$ref": "#/definitions/MasterBusinessCategory"
                                 },
                                 "message": {
                                     "type": "string"
@@ -366,19 +330,15 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "master_business_category"
-                ],
-                "summary": "Remove the specified master_business_category from storage",
-                "description": "Delete master_business_category",
-                "produces": [
-                    "application/json"
-                ],
+                "tags": ["MasterBusinessCategory"],
+                "summary": "Remove the specified MasterBusinessCategory from storage",
+                "description": "Delete MasterBusinessCategory",
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_business_category",
+                        "description": "id of MasterBusinessCategory",
                         "required": true,
                         "type": "integer"
                     }
@@ -406,14 +366,10 @@
         },
         "/masterDeliveryServices": {
             "get": {
-                "tags": [
-                    "master_delivery_service"
-                ],
+                "tags": ["master_delivery_service"],
                 "summary": "Get a listing of the master_delivery_services.",
                 "description": "Get all master_delivery_services",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -438,14 +394,10 @@
                 }
             },
             "post": {
-                "tags": [
-                    "master_delivery_service"
-                ],
+                "tags": ["master_delivery_service"],
                 "summary": "Store a newly created master_delivery_service in storage",
                 "description": "Store master_delivery_service",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
@@ -480,14 +432,10 @@
         },
         "/masterDeliveryServices/{id}": {
             "get": {
-                "tags": [
-                    "master_delivery_service"
-                ],
+                "tags": ["master_delivery_service"],
                 "summary": "Display the specified master_delivery_service",
                 "description": "Get master_delivery_service",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -518,14 +466,10 @@
                 }
             },
             "put": {
-                "tags": [
-                    "master_delivery_service"
-                ],
+                "tags": ["master_delivery_service"],
                 "summary": "Update the specified master_delivery_service in storage",
                 "description": "Update master_delivery_service",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -565,14 +509,10 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "master_delivery_service"
-                ],
+                "tags": ["master_delivery_service"],
                 "summary": "Remove the specified master_delivery_service from storage",
                 "description": "Delete master_delivery_service",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -605,14 +545,10 @@
         },
         "/masterPaymentMethods": {
             "get": {
-                "tags": [
-                    "master_payment_method"
-                ],
+                "tags": ["master_payment_method"],
                 "summary": "Get a listing of the master_payment_methods.",
                 "description": "Get all master_payment_methods",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -637,14 +573,10 @@
                 }
             },
             "post": {
-                "tags": [
-                    "master_payment_method"
-                ],
+                "tags": ["master_payment_method"],
                 "summary": "Store a newly created master_payment_method in storage",
                 "description": "Store master_payment_method",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
@@ -679,14 +611,10 @@
         },
         "/masterPaymentMethods/{id}": {
             "get": {
-                "tags": [
-                    "master_payment_method"
-                ],
+                "tags": ["master_payment_method"],
                 "summary": "Display the specified master_payment_method",
                 "description": "Get master_payment_method",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -717,14 +645,10 @@
                 }
             },
             "put": {
-                "tags": [
-                    "master_payment_method"
-                ],
+                "tags": ["master_payment_method"],
                 "summary": "Update the specified master_payment_method in storage",
                 "description": "Update master_payment_method",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -764,14 +688,10 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "master_payment_method"
-                ],
+                "tags": ["master_payment_method"],
                 "summary": "Remove the specified master_payment_method from storage",
                 "description": "Delete master_payment_method",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -804,14 +724,10 @@
         },
         "/masterPrivileges": {
             "get": {
-                "tags": [
-                    "master_privilege"
-                ],
+                "tags": ["master_privilege"],
                 "summary": "Get a listing of the master_privileges.",
                 "description": "Get all master_privileges",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -836,14 +752,10 @@
                 }
             },
             "post": {
-                "tags": [
-                    "master_privilege"
-                ],
+                "tags": ["master_privilege"],
                 "summary": "Store a newly created master_privilege in storage",
                 "description": "Store master_privilege",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
@@ -878,14 +790,10 @@
         },
         "/masterPrivileges/{id}": {
             "get": {
-                "tags": [
-                    "master_privilege"
-                ],
+                "tags": ["master_privilege"],
                 "summary": "Display the specified master_privilege",
                 "description": "Get master_privilege",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -916,14 +824,10 @@
                 }
             },
             "put": {
-                "tags": [
-                    "master_privilege"
-                ],
+                "tags": ["master_privilege"],
                 "summary": "Update the specified master_privilege in storage",
                 "description": "Update master_privilege",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -963,14 +867,10 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "master_privilege"
-                ],
+                "tags": ["master_privilege"],
                 "summary": "Remove the specified master_privilege from storage",
                 "description": "Delete master_privilege",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1003,14 +903,10 @@
         },
         "/masterProductCategories": {
             "get": {
-                "tags": [
-                    "master_product_category"
-                ],
+                "tags": ["master_product_category"],
                 "summary": "Get a listing of the master_product_categories.",
                 "description": "Get all master_product_categories",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1035,14 +931,10 @@
                 }
             },
             "post": {
-                "tags": [
-                    "master_product_category"
-                ],
+                "tags": ["master_product_category"],
                 "summary": "Store a newly created master_product_category in storage",
                 "description": "Store master_product_category",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
@@ -1077,14 +969,10 @@
         },
         "/masterProductCategories/{id}": {
             "get": {
-                "tags": [
-                    "master_product_category"
-                ],
+                "tags": ["master_product_category"],
                 "summary": "Display the specified master_product_category",
                 "description": "Get master_product_category",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1115,14 +1003,10 @@
                 }
             },
             "put": {
-                "tags": [
-                    "master_product_category"
-                ],
+                "tags": ["master_product_category"],
                 "summary": "Update the specified master_product_category in storage",
                 "description": "Update master_product_category",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1162,14 +1046,10 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "master_product_category"
-                ],
+                "tags": ["master_product_category"],
                 "summary": "Remove the specified master_product_category from storage",
                 "description": "Delete master_product_category",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1202,14 +1082,10 @@
         },
         "/masterProvinces": {
             "get": {
-                "tags": [
-                    "master_province"
-                ],
+                "tags": ["master_province"],
                 "summary": "Get a listing of the master_provinces.",
                 "description": "Get all master_provinces",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1234,14 +1110,10 @@
                 }
             },
             "post": {
-                "tags": [
-                    "master_province"
-                ],
+                "tags": ["master_province"],
                 "summary": "Store a newly created master_province in storage",
                 "description": "Store master_province",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
@@ -1276,14 +1148,10 @@
         },
         "/masterProvinces/{id}": {
             "get": {
-                "tags": [
-                    "master_province"
-                ],
+                "tags": ["master_province"],
                 "summary": "Display the specified master_province",
                 "description": "Get master_province",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1314,14 +1182,10 @@
                 }
             },
             "put": {
-                "tags": [
-                    "master_province"
-                ],
+                "tags": ["master_province"],
                 "summary": "Update the specified master_province in storage",
                 "description": "Update master_province",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1361,14 +1225,10 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "master_province"
-                ],
+                "tags": ["master_province"],
                 "summary": "Remove the specified master_province from storage",
                 "description": "Delete master_province",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1401,14 +1261,10 @@
         },
         "/masterStatusBusinesses": {
             "get": {
-                "tags": [
-                    "master_status_business"
-                ],
+                "tags": ["master_status_business"],
                 "summary": "Get a listing of the master_status_businesses.",
                 "description": "Get all master_status_businesses",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1433,14 +1289,10 @@
                 }
             },
             "post": {
-                "tags": [
-                    "master_status_business"
-                ],
+                "tags": ["master_status_business"],
                 "summary": "Store a newly created master_status_business in storage",
                 "description": "Store master_status_business",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
@@ -1475,14 +1327,10 @@
         },
         "/masterStatusBusinesses/{id}": {
             "get": {
-                "tags": [
-                    "master_status_business"
-                ],
+                "tags": ["master_status_business"],
                 "summary": "Display the specified master_status_business",
                 "description": "Get master_status_business",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1513,14 +1361,10 @@
                 }
             },
             "put": {
-                "tags": [
-                    "master_status_business"
-                ],
+                "tags": ["master_status_business"],
                 "summary": "Update the specified master_status_business in storage",
                 "description": "Update master_status_business",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1560,14 +1404,10 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "master_status_business"
-                ],
+                "tags": ["master_status_business"],
                 "summary": "Remove the specified master_status_business from storage",
                 "description": "Delete master_status_business",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1600,14 +1440,10 @@
         },
         "/masterStatusUsers": {
             "get": {
-                "tags": [
-                    "master_status_user"
-                ],
+                "tags": ["master_status_user"],
                 "summary": "Get a listing of the master_status_users.",
                 "description": "Get all master_status_users",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1632,14 +1468,10 @@
                 }
             },
             "post": {
-                "tags": [
-                    "master_status_user"
-                ],
+                "tags": ["master_status_user"],
                 "summary": "Store a newly created master_status_user in storage",
                 "description": "Store master_status_user",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
@@ -1674,14 +1506,10 @@
         },
         "/masterStatusUsers/{id}": {
             "get": {
-                "tags": [
-                    "master_status_user"
-                ],
+                "tags": ["master_status_user"],
                 "summary": "Display the specified master_status_user",
                 "description": "Get master_status_user",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1712,14 +1540,10 @@
                 }
             },
             "put": {
-                "tags": [
-                    "master_status_user"
-                ],
+                "tags": ["master_status_user"],
                 "summary": "Update the specified master_status_user in storage",
                 "description": "Update master_status_user",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1759,14 +1583,10 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "master_status_user"
-                ],
+                "tags": ["master_status_user"],
                 "summary": "Remove the specified master_status_user from storage",
                 "description": "Delete master_status_user",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1799,14 +1619,10 @@
         },
         "/masterTransactionCategories": {
             "get": {
-                "tags": [
-                    "master_transaction_category"
-                ],
+                "tags": ["master_transaction_category"],
                 "summary": "Get a listing of the master_transaction_categories.",
                 "description": "Get all master_transaction_categories",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1831,14 +1647,10 @@
                 }
             },
             "post": {
-                "tags": [
-                    "master_transaction_category"
-                ],
+                "tags": ["master_transaction_category"],
                 "summary": "Store a newly created master_transaction_category in storage",
                 "description": "Store master_transaction_category",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
@@ -1873,14 +1685,10 @@
         },
         "/masterTransactionCategories/{id}": {
             "get": {
-                "tags": [
-                    "master_transaction_category"
-                ],
+                "tags": ["master_transaction_category"],
                 "summary": "Display the specified master_transaction_category",
                 "description": "Get master_transaction_category",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1911,14 +1719,10 @@
                 }
             },
             "put": {
-                "tags": [
-                    "master_transaction_category"
-                ],
+                "tags": ["master_transaction_category"],
                 "summary": "Update the specified master_transaction_category in storage",
                 "description": "Update master_transaction_category",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1958,14 +1762,10 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "master_transaction_category"
-                ],
+                "tags": ["master_transaction_category"],
                 "summary": "Remove the specified master_transaction_category from storage",
                 "description": "Delete master_transaction_category",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -1998,14 +1798,10 @@
         },
         "/masterUnits": {
             "get": {
-                "tags": [
-                    "master_unit"
-                ],
+                "tags": ["master_unit"],
                 "summary": "Get a listing of the master_units.",
                 "description": "Get all master_units",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -2030,14 +1826,10 @@
                 }
             },
             "post": {
-                "tags": [
-                    "master_unit"
-                ],
+                "tags": ["master_unit"],
                 "summary": "Store a newly created master_unit in storage",
                 "description": "Store master_unit",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
@@ -2072,14 +1864,10 @@
         },
         "/masterUnits/{id}": {
             "get": {
-                "tags": [
-                    "master_unit"
-                ],
+                "tags": ["master_unit"],
                 "summary": "Display the specified master_unit",
                 "description": "Get master_unit",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -2110,14 +1898,10 @@
                 }
             },
             "put": {
-                "tags": [
-                    "master_unit"
-                ],
+                "tags": ["master_unit"],
                 "summary": "Update the specified master_unit in storage",
                 "description": "Update master_unit",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -2157,14 +1941,10 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "master_unit"
-                ],
+                "tags": ["master_unit"],
                 "summary": "Remove the specified master_unit from storage",
                 "description": "Delete master_unit",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
@@ -2270,11 +2050,8 @@
                 }
             }
         },
-        "master_business_category": {
-            "required": [
-                "nama_kategori_usaha",
-                "status_kategori_usaha"
-            ],
+        "MasterBusinessCategory": {
+            "required": ["nama_kategori_usaha", "status_kategori_usaha"],
             "properties": {
                 "id": {
                     "description": "id",
@@ -2302,11 +2079,7 @@
             }
         },
         "master_delivery_service": {
-            "required": [
-                "nama_jasa_pengiriman",
-                "ongkir",
-                "deskripsi"
-            ],
+            "required": ["nama_jasa_pengiriman", "ongkir", "deskripsi"],
             "properties": {
                 "id": {
                     "description": "id",
@@ -2373,9 +2146,7 @@
             }
         },
         "master_privilege": {
-            "required": [
-                "nama_hak_akses_pengguna"
-            ],
+            "required": ["nama_hak_akses_pengguna"],
             "properties": {
                 "id": {
                     "description": "id",
@@ -2399,10 +2170,7 @@
             }
         },
         "master_product_category": {
-            "required": [
-                "nama_kategori_produk",
-                "status_kategori_produk"
-            ],
+            "required": ["nama_kategori_produk", "status_kategori_produk"],
             "properties": {
                 "id": {
                     "description": "id",
@@ -2430,9 +2198,7 @@
             }
         },
         "master_province": {
-            "required": [
-                "nama_provinsi"
-            ],
+            "required": ["nama_provinsi"],
             "properties": {
                 "id": {
                     "description": "id",
@@ -2456,9 +2222,7 @@
             }
         },
         "master_status_business": {
-            "required": [
-                "nama_status_usaha"
-            ],
+            "required": ["nama_status_usaha"],
             "properties": {
                 "id": {
                     "description": "id",
@@ -2482,9 +2246,7 @@
             }
         },
         "master_status_user": {
-            "required": [
-                "nama_status_pengguna"
-            ],
+            "required": ["nama_status_pengguna"],
             "properties": {
                 "id": {
                     "description": "id",
@@ -2539,10 +2301,7 @@
             }
         },
         "master_unit": {
-            "required": [
-                "nama_satuan",
-                "singkatan_satuan"
-            ],
+            "required": ["nama_satuan", "singkatan_satuan"],
             "properties": {
                 "id": {
                     "description": "id",

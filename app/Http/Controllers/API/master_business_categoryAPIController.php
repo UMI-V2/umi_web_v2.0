@@ -6,25 +6,25 @@ use Response;
 use Exception;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
-use App\Models\master_business_category;
+use App\Models\MasterBusinessCategory;
 use App\Http\Controllers\AppBaseController;
-use App\Repositories\master_business_categoryRepository;
-use App\Http\Requests\API\Createmaster_business_categoryAPIRequest;
-use App\Http\Requests\API\Updatemaster_business_categoryAPIRequest;
+use App\Repositories\MasterBusinessCategoryRepository;
+use App\Http\Requests\API\CreateMasterBusinessCategoryAPIRequest;
+use App\Http\Requests\API\UpdateMasterBusinessCategoryAPIRequest;
 
 /**
- * Class master_business_categoryController
+ * Class MasterBusinessCategoryController
  * @package App\Http\Controllers\API
  */
 
-class master_business_categoryAPIController extends AppBaseController
+class MasterBusinessCategoryAPIController extends AppBaseController
 {
-    // master_business_categoryAPIController
+    // MasterBusinessCategoryAPIController
     // MasterBisinessCategoryAPI
-    /** @var  master_business_categoryRepository */
+    /** @var  MasterBusinessCategoryRepository */
     private $masterBusinessCategoryRepository;
 
-    public function __construct(master_business_categoryRepository $masterBusinessCategoryRepo)
+    public function __construct(MasterBusinessCategoryRepository $masterBusinessCategoryRepo)
     {
         $this->masterBusinessCategoryRepository = $masterBusinessCategoryRepo;
     }
@@ -36,7 +36,7 @@ class master_business_categoryAPIController extends AppBaseController
      * @SWG\Get(
      *      path="/masterBusinessCategories",
      *      summary="Get a listing of the master_business_categories.",
-     *      tags={"master_business_category"},
+     *      tags={"MasterBusinessCategory"},
      *      description="Get all master_business_categories",
      *      produces={"application/json"},
      *      @SWG\Response(
@@ -51,7 +51,7 @@ class master_business_categoryAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/master_business_category")
+     *                  @SWG\Items(ref="#/definitions/MasterBusinessCategory")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -81,21 +81,21 @@ class master_business_categoryAPIController extends AppBaseController
     }
 
     /**
-     * @param Createmaster_business_categoryAPIRequest $request
+     * @param CreateMasterBusinessCategoryAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
      *      path="/masterBusinessCategories",
-     *      summary="Store a newly created master_business_category in storage",
-     *      tags={"master_business_category"},
-     *      description="Store master_business_category",
+     *      summary="Store a newly created MasterBusinessCategory in storage",
+     *      tags={"MasterBusinessCategory"},
+     *      description="Store MasterBusinessCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_business_category that should be stored",
+     *          description="MasterBusinessCategory that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_business_category")
+     *          @SWG\Schema(ref="#/definitions/MasterBusinessCategory")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -108,7 +108,7 @@ class master_business_categoryAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_business_category"
+     *                  ref="#/definitions/MasterBusinessCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -118,7 +118,7 @@ class master_business_categoryAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(Createmaster_business_categoryAPIRequest $request)
+    public function store(CreateMasterBusinessCategoryAPIRequest $request)
     {
         $input = $request->all();
         // dd("Disini");
@@ -135,13 +135,13 @@ class master_business_categoryAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/masterBusinessCategories/{id}",
-     *      summary="Display the specified master_business_category",
-     *      tags={"master_business_category"},
-     *      description="Get master_business_category",
+     *      summary="Display the specified MasterBusinessCategory",
+     *      tags={"MasterBusinessCategory"},
+     *      description="Get MasterBusinessCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_business_category",
+     *          description="id of MasterBusinessCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -157,7 +157,7 @@ class master_business_categoryAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_business_category"
+     *                  ref="#/definitions/MasterBusinessCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -169,7 +169,7 @@ class master_business_categoryAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var master_business_category $masterBusinessCategory */
+        /** @var MasterBusinessCategory $masterBusinessCategory */
         $masterBusinessCategory = $this->masterBusinessCategoryRepository->find($id);
 
         if (empty($masterBusinessCategory)) {
@@ -181,18 +181,18 @@ class master_business_categoryAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param Updatemaster_business_categoryAPIRequest $request
+     * @param UpdateMasterBusinessCategoryAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
      *      path="/masterBusinessCategories/{id}",
-     *      summary="Update the specified master_business_category in storage",
-     *      tags={"master_business_category"},
-     *      description="Update master_business_category",
+     *      summary="Update the specified MasterBusinessCategory in storage",
+     *      tags={"MasterBusinessCategory"},
+     *      description="Update MasterBusinessCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_business_category",
+     *          description="id of MasterBusinessCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -200,9 +200,9 @@ class master_business_categoryAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_business_category that should be updated",
+     *          description="MasterBusinessCategory that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_business_category")
+     *          @SWG\Schema(ref="#/definitions/MasterBusinessCategory")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -215,7 +215,7 @@ class master_business_categoryAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_business_category"
+     *                  ref="#/definitions/MasterBusinessCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -225,11 +225,11 @@ class master_business_categoryAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, Updatemaster_business_categoryAPIRequest $request)
+    public function update($id, UpdateMasterBusinessCategoryAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var master_business_category $masterBusinessCategory */
+        /** @var MasterBusinessCategory $masterBusinessCategory */
         $masterBusinessCategory = $this->masterBusinessCategoryRepository->find($id);
 
         if (empty($masterBusinessCategory)) {
@@ -238,7 +238,7 @@ class master_business_categoryAPIController extends AppBaseController
 
         $masterBusinessCategory = $this->masterBusinessCategoryRepository->update($input, $id);
 
-        return $this->sendResponse($masterBusinessCategory->toArray(), 'master_business_category updated successfully');
+        return $this->sendResponse($masterBusinessCategory->toArray(), 'MasterBusinessCategory updated successfully');
     }
 
     /**
@@ -247,13 +247,13 @@ class master_business_categoryAPIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/masterBusinessCategories/{id}",
-     *      summary="Remove the specified master_business_category from storage",
-     *      tags={"master_business_category"},
-     *      description="Delete master_business_category",
+     *      summary="Remove the specified MasterBusinessCategory from storage",
+     *      tags={"MasterBusinessCategory"},
+     *      description="Delete MasterBusinessCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_business_category",
+     *          description="id of MasterBusinessCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -281,7 +281,7 @@ class master_business_categoryAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var master_business_category $masterBusinessCategory */
+        /** @var MasterBusinessCategory $masterBusinessCategory */
         $masterBusinessCategory = $this->masterBusinessCategoryRepository->find($id);
 
         if (empty($masterBusinessCategory)) {

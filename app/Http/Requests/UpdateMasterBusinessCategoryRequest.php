@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_business_category;
+use App\Models\MasterBusinessCategory;
 
-class Updatemaster_business_categoryRequest extends FormRequest
+class UpdateMasterBusinessCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class Updatemaster_business_categoryRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = master_business_category::$rules;
+        $rules = MasterBusinessCategory::$rules;
         
         return $rules;
     }

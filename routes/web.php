@@ -61,7 +61,7 @@ Route::post(
 Route::resource('masterProductCategories', App\Http\Controllers\master_product_categoryController::class);
 
 
-Route::resource('masterBusinessCategories', App\Http\Controllers\master_business_categoryController::class);
+Route::resource('masterBusinessCategories', App\Http\Controllers\MasterBusinessCategoryController::class);
 
 
 Route::resource('masterStatusBusinesses', App\Http\Controllers\master_status_businessController::class);

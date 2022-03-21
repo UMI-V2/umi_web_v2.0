@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\master_business_category;
+use App\Models\MasterBusinessCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class master_business_categoryFactory extends Factory
+class MasterBusinessCategoryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = master_business_category::class;
+    protected $model = MasterBusinessCategory::class;
 
     /**
      * Define the model's default state.

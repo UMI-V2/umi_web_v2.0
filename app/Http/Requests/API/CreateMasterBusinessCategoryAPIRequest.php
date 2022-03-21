@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
-use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_business_category;
+use App\Models\MasterBusinessCategory;
+use InfyOm\Generator\Request\APIRequest;
 
-class Createmaster_business_categoryRequest extends FormRequest
+class CreateMasterBusinessCategoryAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class Createmaster_business_categoryRequest extends FormRequest
      */
     public function rules()
     {
-        return master_business_category::$rules;
+        return MasterBusinessCategory::$rules;
     }
 }

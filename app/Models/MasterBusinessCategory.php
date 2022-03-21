@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
- *      definition="master_business_category",
+ *      definition="MasterBusinessCategory",
  *      required={"nama_kategori_usaha", "status_kategori_usaha"},
  *      @SWG\Property(
  *          property="id",
@@ -40,7 +40,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
  * )
  */
-class master_business_category extends Model
+class MasterBusinessCategory extends Model
 {
 
     use HasFactory;

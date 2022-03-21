@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\master_business_category;
+use App\Models\MasterBusinessCategory;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class master_business_categoryDataTable extends DataTable
+class MasterBusinessCategoryDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,10 +24,10 @@ class master_business_categoryDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\master_business_category $model
+     * @param \App\Models\MasterBusinessCategory $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(master_business_category $model)
+    public function query(MasterBusinessCategory $model)
     {
         return $model->newQuery();
     }

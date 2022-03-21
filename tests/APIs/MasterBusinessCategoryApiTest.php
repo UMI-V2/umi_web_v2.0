@@ -4,18 +4,18 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use App\Models\master_business_category;
+use App\Models\MasterBusinessCategory;
 
-class master_business_categoryApiTest extends TestCase
+class MasterBusinessCategoryApiTest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
-    public function test_create_master_business_category()
+    public function test_create_MasterBusinessCategory()
     {
-        $masterBusinessCategory = master_business_category::factory()->make()->toArray();
+        $masterBusinessCategory = MasterBusinessCategory::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -28,9 +28,9 @@ class master_business_categoryApiTest extends TestCase
     /**
      * @test
      */
-    public function test_read_master_business_category()
+    public function test_read_MasterBusinessCategory()
     {
-        $masterBusinessCategory = master_business_category::factory()->create();
+        $masterBusinessCategory = MasterBusinessCategory::factory()->create();
 
         $this->response = $this->json(
             'GET',
@@ -43,26 +43,26 @@ class master_business_categoryApiTest extends TestCase
     /**
      * @test
      */
-    public function test_update_master_business_category()
+    public function test_update_MasterBusinessCategory()
     {
-        $masterBusinessCategory = master_business_category::factory()->create();
-        $editedmaster_business_category = master_business_category::factory()->make()->toArray();
+        $masterBusinessCategory = MasterBusinessCategory::factory()->create();
+        $editedMasterBusinessCategory = MasterBusinessCategory::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
             '/api/master_business_categories/'.$masterBusinessCategory->id,
-            $editedmaster_business_category
+            $editedMasterBusinessCategory
         );
 
-        $this->assertApiResponse($editedmaster_business_category);
+        $this->assertApiResponse($editedMasterBusinessCategory);
     }
 
     /**
      * @test
      */
-    public function test_delete_master_business_category()
+    public function test_delete_MasterBusinessCategory()
     {
-        $masterBusinessCategory = master_business_category::factory()->create();
+        $masterBusinessCategory = MasterBusinessCategory::factory()->create();
 
         $this->response = $this->json(
             'DELETE',

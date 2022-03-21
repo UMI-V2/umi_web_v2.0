@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\master_business_category;
+use App\Models\MasterBusinessCategory;
 use App\Repositories\BaseRepository;
 
 /**
- * Class master_business_categoryRepository
+ * Class MasterBusinessCategoryRepository
  * @package App\Repositories
  * @version February 28, 2022, 2:16 pm UTC
 */
 
-class master_business_categoryRepository extends BaseRepository
+class MasterBusinessCategoryRepository extends BaseRepository
 {
     /**
      * @var array
@@ -36,6 +36,6 @@ class master_business_categoryRepository extends BaseRepository
      **/
     public function model()
     {
-        return master_business_category::class;
+        return MasterBusinessCategory::class;
     }
 }

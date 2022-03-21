@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\master_business_category;
+use App\Models\MasterBusinessCategory;
 use InfyOm\Generator\Request\APIRequest;
 
-class Updatemaster_business_categoryAPIRequest extends APIRequest
+class UpdateMasterBusinessCategoryAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class Updatemaster_business_categoryAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = master_business_category::$rules;
+        $rules = MasterBusinessCategory::$rules;
         
         return $rules;
     }

@@ -4,7 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\master_delivery_serviceAPIController;
-use App\Http\Controllers\API\master_business_categoryAPIController;
+use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
 use App\Http\Controllers\API\UserController;
 
 /*
@@ -18,8 +18,8 @@ use App\Http\Controllers\API\UserController;
 |
 */
 
-Route::post('addMasterCategoryBusiness', [master_business_categoryAPIController::class, 'store']);
-Route::get('getMasterCategoryBusiness', [master_business_categoryAPIController::class, 'index']);
+Route::post('addMasterCategoryBusiness', [MasterBusinessCategoryAPIController::class, 'store']);
+Route::get('getMasterCategoryBusiness', [MasterBusinessCategoryAPIController::class, 'index']);
 // master_delivery_serviceAPIController
 Route::get('getMasterDeliveryService', [master_delivery_serviceAPIController::class, 'index']);
 
@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function (){
 Route::resource('master_product_categories', App\Http\Controllers\API\master_product_categoryAPIController::class);
 
 
-Route::resource('master_business_categories', App\Http\Controllers\API\master_business_categoryAPIController::class);
+Route::resource('master_business_categories', App\Http\Controllers\API\MasterBusinessCategoryAPIController::class);
 
 
 Route::resource('master_status_businesses', App\Http\Controllers\API\master_status_businessAPIController::class);

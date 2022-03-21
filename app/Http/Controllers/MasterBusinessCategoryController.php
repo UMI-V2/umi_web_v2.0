@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\master_business_categoryDataTable;
+use App\DataTables\MasterBusinessCategoryDataTable;
 use App\Http\Requests;
-use App\Http\Requests\Createmaster_business_categoryRequest;
-use App\Http\Requests\Updatemaster_business_categoryRequest;
-use App\Repositories\master_business_categoryRepository;
+use App\Http\Requests\CreateMasterBusinessCategoryRequest;
+use App\Http\Requests\UpdateMasterBusinessCategoryRequest;
+use App\Repositories\MasterBusinessCategoryRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
-class master_business_categoryController extends AppBaseController
+class MasterBusinessCategoryController extends AppBaseController
 {
-    /** @var master_business_categoryRepository $masterBusinessCategoryRepository*/
+    /** @var MasterBusinessCategoryRepository $masterBusinessCategoryRepository*/
     private $masterBusinessCategoryRepository;
 
-    public function __construct(master_business_categoryRepository $masterBusinessCategoryRepo)
+    public function __construct(MasterBusinessCategoryRepository $masterBusinessCategoryRepo)
     {
         $this->masterBusinessCategoryRepository = $masterBusinessCategoryRepo;
     }
 
     /**
-     * Display a listing of the master_business_category.
+     * Display a listing of the MasterBusinessCategory.
      *
-     * @param master_business_categoryDataTable $masterBusinessCategoryDataTable
+     * @param MasterBusinessCategoryDataTable $masterBusinessCategoryDataTable
      *
      * @return Response
      */
-    public function index(master_business_categoryDataTable $masterBusinessCategoryDataTable)
+    public function index(MasterBusinessCategoryDataTable $masterBusinessCategoryDataTable)
     {
         return $masterBusinessCategoryDataTable->render('master_business_categories.index');
     }
 
     /**
-     * Show the form for creating a new master_business_category.
+     * Show the form for creating a new MasterBusinessCategory.
      *
      * @return Response
      */
@@ -44,13 +44,13 @@ class master_business_categoryController extends AppBaseController
     }
 
     /**
-     * Store a newly created master_business_category in storage.
+     * Store a newly created MasterBusinessCategory in storage.
      *
-     * @param Createmaster_business_categoryRequest $request
+     * @param CreateMasterBusinessCategoryRequest $request
      *
      * @return Response
      */
-    public function store(Createmaster_business_categoryRequest $request)
+    public function store(CreateMasterBusinessCategoryRequest $request)
     {
         $input = $request->all();
 
@@ -62,7 +62,7 @@ class master_business_categoryController extends AppBaseController
     }
 
     /**
-     * Display the specified master_business_category.
+     * Display the specified MasterBusinessCategory.
      *
      * @param int $id
      *
@@ -82,7 +82,7 @@ class master_business_categoryController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified master_business_category.
+     * Show the form for editing the specified MasterBusinessCategory.
      *
      * @param int $id
      *
@@ -102,14 +102,14 @@ class master_business_categoryController extends AppBaseController
     }
 
     /**
-     * Update the specified master_business_category in storage.
+     * Update the specified MasterBusinessCategory in storage.
      *
      * @param int $id
-     * @param Updatemaster_business_categoryRequest $request
+     * @param UpdateMasterBusinessCategoryRequest $request
      *
      * @return Response
      */
-    public function update($id, Updatemaster_business_categoryRequest $request)
+    public function update($id, UpdateMasterBusinessCategoryRequest $request)
     {
         $masterBusinessCategory = $this->masterBusinessCategoryRepository->find($id);
 
@@ -127,7 +127,7 @@ class master_business_categoryController extends AppBaseController
     }
 
     /**
-     * Remove the specified master_business_category from storage.
+     * Remove the specified MasterBusinessCategory from storage.
      *
      * @param int $id
      *
