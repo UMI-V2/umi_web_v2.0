@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\master_status_user;
+use App\Models\MasterStatusUser;
 use App\Repositories\BaseRepository;
 
 /**
- * Class master_status_userRepository
+ * Class MasterStatusUserRepository
  * @package App\Repositories
  * @version March 7, 2022, 3:09 pm UTC
 */
 
-class master_status_userRepository extends BaseRepository
+class MasterStatusUserRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class master_status_userRepository extends BaseRepository
      **/
     public function model()
     {
-        return master_status_user::class;
+        return MasterStatusUser::class;
     }
 }

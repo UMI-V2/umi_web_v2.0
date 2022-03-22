@@ -190,8 +190,8 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function master_status_user()
+    public function MasterStatusUser()
     {
-        return $this->belongsTo(\App\Models\master_status_user::class, 'id_status_pengguna');
+        return $this->belongsTo(\App\Models\MasterStatusUser::class, 'id_status_pengguna');
     }
 }

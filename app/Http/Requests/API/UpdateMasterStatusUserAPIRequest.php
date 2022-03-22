@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
-use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_status_user;
+use App\Models\MasterStatusUser;
+use InfyOm\Generator\Request\APIRequest;
 
-class Createmaster_status_userRequest extends FormRequest
+class UpdateMasterStatusUserAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,8 @@ class Createmaster_status_userRequest extends FormRequest
      */
     public function rules()
     {
-        return master_status_user::$rules;
+        $rules = MasterStatusUser::$rules;
+        
+        return $rules;
     }
 }

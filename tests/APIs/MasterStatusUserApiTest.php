@@ -4,18 +4,18 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use App\Models\master_status_user;
+use App\Models\MasterStatusUser;
 
-class master_status_userApiTest extends TestCase
+class MasterStatusUserApiTest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
-    public function test_create_master_status_user()
+    public function test_create_MasterStatusUser()
     {
-        $masterStatusUser = master_status_user::factory()->make()->toArray();
+        $masterStatusUser = MasterStatusUser::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -28,9 +28,9 @@ class master_status_userApiTest extends TestCase
     /**
      * @test
      */
-    public function test_read_master_status_user()
+    public function test_read_MasterStatusUser()
     {
-        $masterStatusUser = master_status_user::factory()->create();
+        $masterStatusUser = MasterStatusUser::factory()->create();
 
         $this->response = $this->json(
             'GET',
@@ -43,26 +43,26 @@ class master_status_userApiTest extends TestCase
     /**
      * @test
      */
-    public function test_update_master_status_user()
+    public function test_update_MasterStatusUser()
     {
-        $masterStatusUser = master_status_user::factory()->create();
-        $editedmaster_status_user = master_status_user::factory()->make()->toArray();
+        $masterStatusUser = MasterStatusUser::factory()->create();
+        $editedMasterStatusUser = MasterStatusUser::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
             '/api/master_status_users/'.$masterStatusUser->id,
-            $editedmaster_status_user
+            $editedMasterStatusUser
         );
 
-        $this->assertApiResponse($editedmaster_status_user);
+        $this->assertApiResponse($editedMasterStatusUser);
     }
 
     /**
      * @test
      */
-    public function test_delete_master_status_user()
+    public function test_delete_MasterStatusUser()
     {
-        $masterStatusUser = master_status_user::factory()->create();
+        $masterStatusUser = MasterStatusUser::factory()->create();
 
         $this->response = $this->json(
             'DELETE',

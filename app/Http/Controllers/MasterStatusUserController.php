@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\master_status_userDataTable;
+use App\DataTables\MasterStatusUserDataTable;
 use App\Http\Requests;
-use App\Http\Requests\Createmaster_status_userRequest;
-use App\Http\Requests\Updatemaster_status_userRequest;
-use App\Repositories\master_status_userRepository;
+use App\Http\Requests\CreateMasterStatusUserRequest;
+use App\Http\Requests\UpdateMasterStatusUserRequest;
+use App\Repositories\MasterStatusUserRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
-class master_status_userController extends AppBaseController
+class MasterStatusUserController extends AppBaseController
 {
-    /** @var master_status_userRepository $masterStatusUserRepository*/
+    /** @var MasterStatusUserRepository $masterStatusUserRepository*/
     private $masterStatusUserRepository;
 
-    public function __construct(master_status_userRepository $masterStatusUserRepo)
+    public function __construct(MasterStatusUserRepository $masterStatusUserRepo)
     {
         $this->masterStatusUserRepository = $masterStatusUserRepo;
     }
 
     /**
-     * Display a listing of the master_status_user.
+     * Display a listing of the MasterStatusUser.
      *
-     * @param master_status_userDataTable $masterStatusUserDataTable
+     * @param MasterStatusUserDataTable $masterStatusUserDataTable
      *
      * @return Response
      */
-    public function index(master_status_userDataTable $masterStatusUserDataTable)
+    public function index(MasterStatusUserDataTable $masterStatusUserDataTable)
     {
         return $masterStatusUserDataTable->render('master_status_users.index');
     }
 
     /**
-     * Show the form for creating a new master_status_user.
+     * Show the form for creating a new MasterStatusUser.
      *
      * @return Response
      */
@@ -44,13 +44,13 @@ class master_status_userController extends AppBaseController
     }
 
     /**
-     * Store a newly created master_status_user in storage.
+     * Store a newly created MasterStatusUser in storage.
      *
-     * @param Createmaster_status_userRequest $request
+     * @param CreateMasterStatusUserRequest $request
      *
      * @return Response
      */
-    public function store(Createmaster_status_userRequest $request)
+    public function store(CreateMasterStatusUserRequest $request)
     {
         $input = $request->all();
 
@@ -62,7 +62,7 @@ class master_status_userController extends AppBaseController
     }
 
     /**
-     * Display the specified master_status_user.
+     * Display the specified MasterStatusUser.
      *
      * @param int $id
      *
@@ -82,7 +82,7 @@ class master_status_userController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified master_status_user.
+     * Show the form for editing the specified MasterStatusUser.
      *
      * @param int $id
      *
@@ -102,14 +102,14 @@ class master_status_userController extends AppBaseController
     }
 
     /**
-     * Update the specified master_status_user in storage.
+     * Update the specified MasterStatusUser in storage.
      *
      * @param int $id
-     * @param Updatemaster_status_userRequest $request
+     * @param UpdateMasterStatusUserRequest $request
      *
      * @return Response
      */
-    public function update($id, Updatemaster_status_userRequest $request)
+    public function update($id, UpdateMasterStatusUserRequest $request)
     {
         $masterStatusUser = $this->masterStatusUserRepository->find($id);
 
@@ -127,7 +127,7 @@ class master_status_userController extends AppBaseController
     }
 
     /**
-     * Remove the specified master_status_user from storage.
+     * Remove the specified MasterStatusUser from storage.
      *
      * @param int $id
      *

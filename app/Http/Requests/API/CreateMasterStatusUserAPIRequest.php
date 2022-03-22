@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\master_status_user;
+use App\Models\MasterStatusUser;
 use InfyOm\Generator\Request\APIRequest;
 
-class Createmaster_status_userAPIRequest extends APIRequest
+class CreateMasterStatusUserAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class Createmaster_status_userAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return master_status_user::$rules;
+        return MasterStatusUser::$rules;
     }
 }

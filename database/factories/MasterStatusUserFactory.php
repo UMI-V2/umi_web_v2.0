@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\master_status_user;
+use App\Models\MasterStatusUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class master_status_userFactory extends Factory
+class MasterStatusUserFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = master_status_user::class;
+    protected $model = MasterStatusUser::class;
 
     /**
      * Define the model's default state.

@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\master_status_user;
+use App\Models\MasterStatusUser;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class master_status_userDataTable extends DataTable
+class MasterStatusUserDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,10 +24,10 @@ class master_status_userDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\master_status_user $model
+     * @param \App\Models\MasterStatusUser $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(master_status_user $model)
+    public function query(MasterStatusUser $model)
     {
         return $model->newQuery();
     }

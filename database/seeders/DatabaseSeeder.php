@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\MasterPrivilege;
-use App\Models\master_status_user;
+use App\Models\MasterStatusUser;
 use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        master_status_user::create(
+        MasterStatusUser::create(
             [
                 'nama_status_pengguna'      => 'Aktif',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             // ],
         );
 
-        master_status_user::create(
+        MasterStatusUser::create(
             [
                 'nama_status_pengguna'      => 'Tidak Aktif',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),

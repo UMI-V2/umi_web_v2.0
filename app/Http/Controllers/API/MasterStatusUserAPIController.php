@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\Createmaster_status_userAPIRequest;
-use App\Http\Requests\API\Updatemaster_status_userAPIRequest;
-use App\Models\master_status_user;
-use App\Repositories\master_status_userRepository;
+use App\Http\Requests\API\CreateMasterStatusUserAPIRequest;
+use App\Http\Requests\API\UpdateMasterStatusUserAPIRequest;
+use App\Models\MasterStatusUser;
+use App\Repositories\MasterStatusUserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class master_status_userController
+ * Class MasterStatusUserController
  * @package App\Http\Controllers\API
  */
 
-class master_status_userAPIController extends AppBaseController
+class MasterStatusUserAPIController extends AppBaseController
 {
-    /** @var  master_status_userRepository */
+    /** @var  MasterStatusUserRepository */
     private $masterStatusUserRepository;
 
-    public function __construct(master_status_userRepository $masterStatusUserRepo)
+    public function __construct(MasterStatusUserRepository $masterStatusUserRepo)
     {
         $this->masterStatusUserRepository = $masterStatusUserRepo;
     }
@@ -32,7 +32,7 @@ class master_status_userAPIController extends AppBaseController
      * @SWG\Get(
      *      path="/masterStatusUsers",
      *      summary="Get a listing of the master_status_users.",
-     *      tags={"master_status_user"},
+     *      tags={"MasterStatusUser"},
      *      description="Get all master_status_users",
      *      produces={"application/json"},
      *      @SWG\Response(
@@ -47,7 +47,7 @@ class master_status_userAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/master_status_user")
+     *                  @SWG\Items(ref="#/definitions/MasterStatusUser")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -69,21 +69,21 @@ class master_status_userAPIController extends AppBaseController
     }
 
     /**
-     * @param Createmaster_status_userAPIRequest $request
+     * @param CreateMasterStatusUserAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
      *      path="/masterStatusUsers",
-     *      summary="Store a newly created master_status_user in storage",
-     *      tags={"master_status_user"},
-     *      description="Store master_status_user",
+     *      summary="Store a newly created MasterStatusUser in storage",
+     *      tags={"MasterStatusUser"},
+     *      description="Store MasterStatusUser",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_status_user that should be stored",
+     *          description="MasterStatusUser that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_status_user")
+     *          @SWG\Schema(ref="#/definitions/MasterStatusUser")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class master_status_userAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_status_user"
+     *                  ref="#/definitions/MasterStatusUser"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,7 +106,7 @@ class master_status_userAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(Createmaster_status_userAPIRequest $request)
+    public function store(CreateMasterStatusUserAPIRequest $request)
     {
         $input = $request->all();
 
@@ -121,13 +121,13 @@ class master_status_userAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/masterStatusUsers/{id}",
-     *      summary="Display the specified master_status_user",
-     *      tags={"master_status_user"},
-     *      description="Get master_status_user",
+     *      summary="Display the specified MasterStatusUser",
+     *      tags={"MasterStatusUser"},
+     *      description="Get MasterStatusUser",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_status_user",
+     *          description="id of MasterStatusUser",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class master_status_userAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_status_user"
+     *                  ref="#/definitions/MasterStatusUser"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,7 +155,7 @@ class master_status_userAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var master_status_user $masterStatusUser */
+        /** @var MasterStatusUser $masterStatusUser */
         $masterStatusUser = $this->masterStatusUserRepository->find($id);
 
         if (empty($masterStatusUser)) {
@@ -167,18 +167,18 @@ class master_status_userAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param Updatemaster_status_userAPIRequest $request
+     * @param UpdateMasterStatusUserAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
      *      path="/masterStatusUsers/{id}",
-     *      summary="Update the specified master_status_user in storage",
-     *      tags={"master_status_user"},
-     *      description="Update master_status_user",
+     *      summary="Update the specified MasterStatusUser in storage",
+     *      tags={"MasterStatusUser"},
+     *      description="Update MasterStatusUser",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_status_user",
+     *          description="id of MasterStatusUser",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class master_status_userAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_status_user that should be updated",
+     *          description="MasterStatusUser that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_status_user")
+     *          @SWG\Schema(ref="#/definitions/MasterStatusUser")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class master_status_userAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_status_user"
+     *                  ref="#/definitions/MasterStatusUser"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,11 +211,11 @@ class master_status_userAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, Updatemaster_status_userAPIRequest $request)
+    public function update($id, UpdateMasterStatusUserAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var master_status_user $masterStatusUser */
+        /** @var MasterStatusUser $masterStatusUser */
         $masterStatusUser = $this->masterStatusUserRepository->find($id);
 
         if (empty($masterStatusUser)) {
@@ -224,7 +224,7 @@ class master_status_userAPIController extends AppBaseController
 
         $masterStatusUser = $this->masterStatusUserRepository->update($input, $id);
 
-        return $this->sendResponse($masterStatusUser->toArray(), 'master_status_user updated successfully');
+        return $this->sendResponse($masterStatusUser->toArray(), 'MasterStatusUser updated successfully');
     }
 
     /**
@@ -233,13 +233,13 @@ class master_status_userAPIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/masterStatusUsers/{id}",
-     *      summary="Remove the specified master_status_user from storage",
-     *      tags={"master_status_user"},
-     *      description="Delete master_status_user",
+     *      summary="Remove the specified MasterStatusUser from storage",
+     *      tags={"MasterStatusUser"},
+     *      description="Delete MasterStatusUser",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_status_user",
+     *          description="id of MasterStatusUser",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,7 +267,7 @@ class master_status_userAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var master_status_user $masterStatusUser */
+        /** @var MasterStatusUser $masterStatusUser */
         $masterStatusUser = $this->masterStatusUserRepository->find($id);
 
         if (empty($masterStatusUser)) {
