@@ -1619,7 +1619,7 @@
         },
         "/masterTransactionCategories": {
             "get": {
-                "tags": ["master_transaction_category"],
+                "tags": ["MasterTransactionCategory"],
                 "summary": "Get a listing of the master_transaction_categories.",
                 "description": "Get all master_transaction_categories",
                 "produces": ["application/json"],
@@ -1634,7 +1634,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/master_transaction_category"
+                                        "$ref": "#/definitions/MasterTransactionCategory"
                                     }
                                 },
                                 "message": {
@@ -1647,18 +1647,18 @@
                 }
             },
             "post": {
-                "tags": ["master_transaction_category"],
-                "summary": "Store a newly created master_transaction_category in storage",
-                "description": "Store master_transaction_category",
+                "tags": ["MasterTransactionCategory"],
+                "summary": "Store a newly created MasterTransactionCategory in storage",
+                "description": "Store MasterTransactionCategory",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_transaction_category that should be stored",
+                        "description": "MasterTransactionCategory that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_transaction_category"
+                            "$ref": "#/definitions/MasterTransactionCategory"
                         }
                     }
                 ],
@@ -1671,7 +1671,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_transaction_category"
+                                    "$ref": "#/definitions/MasterTransactionCategory"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1685,15 +1685,15 @@
         },
         "/masterTransactionCategories/{id}": {
             "get": {
-                "tags": ["master_transaction_category"],
-                "summary": "Display the specified master_transaction_category",
-                "description": "Get master_transaction_category",
+                "tags": ["MasterTransactionCategory"],
+                "summary": "Display the specified MasterTransactionCategory",
+                "description": "Get MasterTransactionCategory",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_transaction_category",
+                        "description": "id of MasterTransactionCategory",
                         "required": true,
                         "type": "integer"
                     }
@@ -1707,7 +1707,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_transaction_category"
+                                    "$ref": "#/definitions/MasterTransactionCategory"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1719,25 +1719,25 @@
                 }
             },
             "put": {
-                "tags": ["master_transaction_category"],
-                "summary": "Update the specified master_transaction_category in storage",
-                "description": "Update master_transaction_category",
+                "tags": ["MasterTransactionCategory"],
+                "summary": "Update the specified MasterTransactionCategory in storage",
+                "description": "Update MasterTransactionCategory",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_transaction_category",
+                        "description": "id of MasterTransactionCategory",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_transaction_category that should be updated",
+                        "description": "MasterTransactionCategory that should be updated",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_transaction_category"
+                            "$ref": "#/definitions/MasterTransactionCategory"
                         }
                     }
                 ],
@@ -1750,7 +1750,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_transaction_category"
+                                    "$ref": "#/definitions/MasterTransactionCategory"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1762,15 +1762,15 @@
                 }
             },
             "delete": {
-                "tags": ["master_transaction_category"],
-                "summary": "Remove the specified master_transaction_category from storage",
-                "description": "Delete master_transaction_category",
+                "tags": ["MasterTransactionCategory"],
+                "summary": "Remove the specified MasterTransactionCategory from storage",
+                "description": "Delete MasterTransactionCategory",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_transaction_category",
+                        "description": "id of MasterTransactionCategory",
                         "required": true,
                         "type": "integer"
                     }
@@ -2269,7 +2269,7 @@
                 }
             }
         },
-        "master_transaction_category": {
+        "MasterTransactionCategory": {
             "required": [
                 "nama_kategori_transaksi",
                 "deskripsi_kategori_transaksi"

@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\master_transaction_categoryDataTable;
+use App\DataTables\MasterTransactionCategoryDataTable;
 use App\Http\Requests;
-use App\Http\Requests\Createmaster_transaction_categoryRequest;
-use App\Http\Requests\Updatemaster_transaction_categoryRequest;
-use App\Repositories\master_transaction_categoryRepository;
+use App\Http\Requests\CreateMasterTransactionCategoryRequest;
+use App\Http\Requests\UpdateMasterTransactionCategoryRequest;
+use App\Repositories\MasterTransactionCategoryRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
-class master_transaction_categoryController extends AppBaseController
+class MasterTransactionCategoryController extends AppBaseController
 {
-    /** @var master_transaction_categoryRepository $masterTransactionCategoryRepository*/
+    /** @var MasterTransactionCategoryRepository $masterTransactionCategoryRepository*/
     private $masterTransactionCategoryRepository;
 
-    public function __construct(master_transaction_categoryRepository $masterTransactionCategoryRepo)
+    public function __construct(MasterTransactionCategoryRepository $masterTransactionCategoryRepo)
     {
         $this->masterTransactionCategoryRepository = $masterTransactionCategoryRepo;
     }
 
     /**
-     * Display a listing of the master_transaction_category.
+     * Display a listing of the MasterTransactionCategory.
      *
-     * @param master_transaction_categoryDataTable $masterTransactionCategoryDataTable
+     * @param MasterTransactionCategoryDataTable $masterTransactionCategoryDataTable
      *
      * @return Response
      */
-    public function index(master_transaction_categoryDataTable $masterTransactionCategoryDataTable)
+    public function index(MasterTransactionCategoryDataTable $masterTransactionCategoryDataTable)
     {
         return $masterTransactionCategoryDataTable->render('master_transaction_categories.index');
     }
 
     /**
-     * Show the form for creating a new master_transaction_category.
+     * Show the form for creating a new MasterTransactionCategory.
      *
      * @return Response
      */
@@ -44,13 +44,13 @@ class master_transaction_categoryController extends AppBaseController
     }
 
     /**
-     * Store a newly created master_transaction_category in storage.
+     * Store a newly created MasterTransactionCategory in storage.
      *
-     * @param Createmaster_transaction_categoryRequest $request
+     * @param CreateMasterTransactionCategoryRequest $request
      *
      * @return Response
      */
-    public function store(Createmaster_transaction_categoryRequest $request)
+    public function store(CreateMasterTransactionCategoryRequest $request)
     {
         $input = $request->all();
 
@@ -62,7 +62,7 @@ class master_transaction_categoryController extends AppBaseController
     }
 
     /**
-     * Display the specified master_transaction_category.
+     * Display the specified MasterTransactionCategory.
      *
      * @param int $id
      *
@@ -82,7 +82,7 @@ class master_transaction_categoryController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified master_transaction_category.
+     * Show the form for editing the specified MasterTransactionCategory.
      *
      * @param int $id
      *
@@ -102,14 +102,14 @@ class master_transaction_categoryController extends AppBaseController
     }
 
     /**
-     * Update the specified master_transaction_category in storage.
+     * Update the specified MasterTransactionCategory in storage.
      *
      * @param int $id
-     * @param Updatemaster_transaction_categoryRequest $request
+     * @param UpdateMasterTransactionCategoryRequest $request
      *
      * @return Response
      */
-    public function update($id, Updatemaster_transaction_categoryRequest $request)
+    public function update($id, UpdateMasterTransactionCategoryRequest $request)
     {
         $masterTransactionCategory = $this->masterTransactionCategoryRepository->find($id);
 
@@ -127,7 +127,7 @@ class master_transaction_categoryController extends AppBaseController
     }
 
     /**
-     * Remove the specified master_transaction_category from storage.
+     * Remove the specified MasterTransactionCategory from storage.
      *
      * @param int $id
      *

@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\master_transaction_category;
+use App\Models\MasterTransactionCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class master_transaction_categoryFactory extends Factory
+class MasterTransactionCategoryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = master_transaction_category::class;
+    protected $model = MasterTransactionCategory::class;
 
     /**
      * Define the model's default state.

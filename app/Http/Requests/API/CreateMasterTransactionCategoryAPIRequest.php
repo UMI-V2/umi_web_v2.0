@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\master_transaction_category;
+use App\Models\MasterTransactionCategory;
 use InfyOm\Generator\Request\APIRequest;
 
-class Updatemaster_transaction_categoryAPIRequest extends APIRequest
+class CreateMasterTransactionCategoryAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class Updatemaster_transaction_categoryAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = master_transaction_category::$rules;
-        
-        return $rules;
+        return MasterTransactionCategory::$rules;
     }
 }

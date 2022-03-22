@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_transaction_category;
+use App\Models\MasterTransactionCategory;
 
-class Updatemaster_transaction_categoryRequest extends FormRequest
+class UpdateMasterTransactionCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class Updatemaster_transaction_categoryRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = master_transaction_category::$rules;
+        $rules = MasterTransactionCategory::$rules;
         
         return $rules;
     }

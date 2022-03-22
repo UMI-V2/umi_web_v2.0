@@ -4,18 +4,18 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use App\Models\master_transaction_category;
+use App\Models\MasterTransactionCategory;
 
-class master_transaction_categoryApiTest extends TestCase
+class MasterTransactionCategoryApiTest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
-    public function test_create_master_transaction_category()
+    public function test_create_MasterTransactionCategory()
     {
-        $masterTransactionCategory = master_transaction_category::factory()->make()->toArray();
+        $masterTransactionCategory = MasterTransactionCategory::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -28,9 +28,9 @@ class master_transaction_categoryApiTest extends TestCase
     /**
      * @test
      */
-    public function test_read_master_transaction_category()
+    public function test_read_MasterTransactionCategory()
     {
-        $masterTransactionCategory = master_transaction_category::factory()->create();
+        $masterTransactionCategory = MasterTransactionCategory::factory()->create();
 
         $this->response = $this->json(
             'GET',
@@ -43,26 +43,26 @@ class master_transaction_categoryApiTest extends TestCase
     /**
      * @test
      */
-    public function test_update_master_transaction_category()
+    public function test_update_MasterTransactionCategory()
     {
-        $masterTransactionCategory = master_transaction_category::factory()->create();
-        $editedmaster_transaction_category = master_transaction_category::factory()->make()->toArray();
+        $masterTransactionCategory = MasterTransactionCategory::factory()->create();
+        $editedMasterTransactionCategory = MasterTransactionCategory::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
             '/api/master_transaction_categories/'.$masterTransactionCategory->id,
-            $editedmaster_transaction_category
+            $editedMasterTransactionCategory
         );
 
-        $this->assertApiResponse($editedmaster_transaction_category);
+        $this->assertApiResponse($editedMasterTransactionCategory);
     }
 
     /**
      * @test
      */
-    public function test_delete_master_transaction_category()
+    public function test_delete_MasterTransactionCategory()
     {
-        $masterTransactionCategory = master_transaction_category::factory()->create();
+        $masterTransactionCategory = MasterTransactionCategory::factory()->create();
 
         $this->response = $this->json(
             'DELETE',

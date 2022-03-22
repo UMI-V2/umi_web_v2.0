@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\master_transaction_category;
+use App\Models\MasterTransactionCategory;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class master_transaction_categoryDataTable extends DataTable
+class MasterTransactionCategoryDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,10 +24,10 @@ class master_transaction_categoryDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\master_transaction_category $model
+     * @param \App\Models\MasterTransactionCategory $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(master_transaction_category $model)
+    public function query(MasterTransactionCategory $model)
     {
         return $model->newQuery();
     }

@@ -55,7 +55,7 @@ Route::resource('master_delivery_services', App\Http\Controllers\API\MasterDeliv
 Route::resource('master_payment_methods', App\Http\Controllers\API\MasterPaymentMethodAPIController::class);
 
 
-Route::resource('master_transaction_categories', App\Http\Controllers\API\master_transaction_categoryAPIController::class);
+Route::resource('master_transaction_categories', App\Http\Controllers\API\MasterTransactionCategoryAPIController::class);
 
 Route::resource('master_status_users', App\Http\Controllers\API\MasterStatusUserAPIController::class);
 

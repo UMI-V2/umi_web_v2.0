@@ -94,10 +94,10 @@ Route::resource('masterDeliveryServices', App\Http\Controllers\MasterDeliverySer
 Route::resource('masterPaymentMethods', App\Http\Controllers\MasterPaymentMethodController::class);
 
 
-Route::resource('masterTransactionCategories', App\Http\Controllers\master_transaction_categoryController::class);
+Route::resource('masterTransactionCategories', App\Http\Controllers\MasterTransactionCategoryController::class);
 
 
-Route::resource('masterTransactionCategories', App\Http\Controllers\master_transaction_categoryController::class);
+Route::resource('masterTransactionCategories', App\Http\Controllers\MasterTransactionCategoryController::class);
 
 Route::resource('masterStatusUsers', App\Http\Controllers\MasterStatusUserController::class);
 

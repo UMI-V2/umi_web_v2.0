@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\Createmaster_transaction_categoryAPIRequest;
-use App\Http\Requests\API\Updatemaster_transaction_categoryAPIRequest;
-use App\Models\master_transaction_category;
-use App\Repositories\master_transaction_categoryRepository;
+use App\Http\Requests\API\CreateMasterTransactionCategoryAPIRequest;
+use App\Http\Requests\API\UpdateMasterTransactionCategoryAPIRequest;
+use App\Models\MasterTransactionCategory;
+use App\Repositories\MasterTransactionCategoryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class master_transaction_categoryController
+ * Class MasterTransactionCategoryController
  * @package App\Http\Controllers\API
  */
 
-class master_transaction_categoryAPIController extends AppBaseController
+class MasterTransactionCategoryAPIController extends AppBaseController
 {
-    /** @var  master_transaction_categoryRepository */
+    /** @var  MasterTransactionCategoryRepository */
     private $masterTransactionCategoryRepository;
 
-    public function __construct(master_transaction_categoryRepository $masterTransactionCategoryRepo)
+    public function __construct(MasterTransactionCategoryRepository $masterTransactionCategoryRepo)
     {
         $this->masterTransactionCategoryRepository = $masterTransactionCategoryRepo;
     }
@@ -32,7 +32,7 @@ class master_transaction_categoryAPIController extends AppBaseController
      * @SWG\Get(
      *      path="/masterTransactionCategories",
      *      summary="Get a listing of the master_transaction_categories.",
-     *      tags={"master_transaction_category"},
+     *      tags={"MasterTransactionCategory"},
      *      description="Get all master_transaction_categories",
      *      produces={"application/json"},
      *      @SWG\Response(
@@ -47,7 +47,7 @@ class master_transaction_categoryAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/master_transaction_category")
+     *                  @SWG\Items(ref="#/definitions/MasterTransactionCategory")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -69,21 +69,21 @@ class master_transaction_categoryAPIController extends AppBaseController
     }
 
     /**
-     * @param Createmaster_transaction_categoryAPIRequest $request
+     * @param CreateMasterTransactionCategoryAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
      *      path="/masterTransactionCategories",
-     *      summary="Store a newly created master_transaction_category in storage",
-     *      tags={"master_transaction_category"},
-     *      description="Store master_transaction_category",
+     *      summary="Store a newly created MasterTransactionCategory in storage",
+     *      tags={"MasterTransactionCategory"},
+     *      description="Store MasterTransactionCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_transaction_category that should be stored",
+     *          description="MasterTransactionCategory that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_transaction_category")
+     *          @SWG\Schema(ref="#/definitions/MasterTransactionCategory")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class master_transaction_categoryAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_transaction_category"
+     *                  ref="#/definitions/MasterTransactionCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,7 +106,7 @@ class master_transaction_categoryAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(Createmaster_transaction_categoryAPIRequest $request)
+    public function store(CreateMasterTransactionCategoryAPIRequest $request)
     {
         $input = $request->all();
 
@@ -121,13 +121,13 @@ class master_transaction_categoryAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/masterTransactionCategories/{id}",
-     *      summary="Display the specified master_transaction_category",
-     *      tags={"master_transaction_category"},
-     *      description="Get master_transaction_category",
+     *      summary="Display the specified MasterTransactionCategory",
+     *      tags={"MasterTransactionCategory"},
+     *      description="Get MasterTransactionCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_transaction_category",
+     *          description="id of MasterTransactionCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class master_transaction_categoryAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_transaction_category"
+     *                  ref="#/definitions/MasterTransactionCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,7 +155,7 @@ class master_transaction_categoryAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var master_transaction_category $masterTransactionCategory */
+        /** @var MasterTransactionCategory $masterTransactionCategory */
         $masterTransactionCategory = $this->masterTransactionCategoryRepository->find($id);
 
         if (empty($masterTransactionCategory)) {
@@ -167,18 +167,18 @@ class master_transaction_categoryAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param Updatemaster_transaction_categoryAPIRequest $request
+     * @param UpdateMasterTransactionCategoryAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
      *      path="/masterTransactionCategories/{id}",
-     *      summary="Update the specified master_transaction_category in storage",
-     *      tags={"master_transaction_category"},
-     *      description="Update master_transaction_category",
+     *      summary="Update the specified MasterTransactionCategory in storage",
+     *      tags={"MasterTransactionCategory"},
+     *      description="Update MasterTransactionCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_transaction_category",
+     *          description="id of MasterTransactionCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class master_transaction_categoryAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_transaction_category that should be updated",
+     *          description="MasterTransactionCategory that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_transaction_category")
+     *          @SWG\Schema(ref="#/definitions/MasterTransactionCategory")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class master_transaction_categoryAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_transaction_category"
+     *                  ref="#/definitions/MasterTransactionCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,11 +211,11 @@ class master_transaction_categoryAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, Updatemaster_transaction_categoryAPIRequest $request)
+    public function update($id, UpdateMasterTransactionCategoryAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var master_transaction_category $masterTransactionCategory */
+        /** @var MasterTransactionCategory $masterTransactionCategory */
         $masterTransactionCategory = $this->masterTransactionCategoryRepository->find($id);
 
         if (empty($masterTransactionCategory)) {
@@ -224,7 +224,7 @@ class master_transaction_categoryAPIController extends AppBaseController
 
         $masterTransactionCategory = $this->masterTransactionCategoryRepository->update($input, $id);
 
-        return $this->sendResponse($masterTransactionCategory->toArray(), 'master_transaction_category updated successfully');
+        return $this->sendResponse($masterTransactionCategory->toArray(), 'MasterTransactionCategory updated successfully');
     }
 
     /**
@@ -233,13 +233,13 @@ class master_transaction_categoryAPIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/masterTransactionCategories/{id}",
-     *      summary="Remove the specified master_transaction_category from storage",
-     *      tags={"master_transaction_category"},
-     *      description="Delete master_transaction_category",
+     *      summary="Remove the specified MasterTransactionCategory from storage",
+     *      tags={"MasterTransactionCategory"},
+     *      description="Delete MasterTransactionCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_transaction_category",
+     *          description="id of MasterTransactionCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,7 +267,7 @@ class master_transaction_categoryAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var master_transaction_category $masterTransactionCategory */
+        /** @var MasterTransactionCategory $masterTransactionCategory */
         $masterTransactionCategory = $this->masterTransactionCategoryRepository->find($id);
 
         if (empty($masterTransactionCategory)) {

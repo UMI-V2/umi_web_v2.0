@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\master_transaction_category;
+use App\Models\MasterTransactionCategory;
 use App\Repositories\BaseRepository;
 
 /**
- * Class master_transaction_categoryRepository
+ * Class MasterTransactionCategoryRepository
  * @package App\Repositories
  * @version February 28, 2022, 5:58 pm UTC
 */
 
-class master_transaction_categoryRepository extends BaseRepository
+class MasterTransactionCategoryRepository extends BaseRepository
 {
     /**
      * @var array
@@ -36,6 +36,6 @@ class master_transaction_categoryRepository extends BaseRepository
      **/
     public function model()
     {
-        return master_transaction_category::class;
+        return MasterTransactionCategory::class;
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
- *      definition="master_transaction_category",
+ *      definition="MasterTransactionCategory",
  *      required={"nama_kategori_transaksi", "deskripsi_kategori_transaksi"},
  *      @SWG\Property(
  *          property="id",
@@ -40,7 +40,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
  * )
  */
-class master_transaction_category extends Model
+class MasterTransactionCategory extends Model
 {
 
     use HasFactory;
