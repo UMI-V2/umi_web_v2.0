@@ -1798,7 +1798,7 @@
         },
         "/masterUnits": {
             "get": {
-                "tags": ["master_unit"],
+                "tags": ["MasterUnit"],
                 "summary": "Get a listing of the master_units.",
                 "description": "Get all master_units",
                 "produces": ["application/json"],
@@ -1813,7 +1813,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/master_unit"
+                                        "$ref": "#/definitions/MasterUnit"
                                     }
                                 },
                                 "message": {
@@ -1826,18 +1826,18 @@
                 }
             },
             "post": {
-                "tags": ["master_unit"],
-                "summary": "Store a newly created master_unit in storage",
-                "description": "Store master_unit",
+                "tags": ["MasterUnit"],
+                "summary": "Store a newly created MasterUnit in storage",
+                "description": "Store MasterUnit",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_unit that should be stored",
+                        "description": "MasterUnit that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_unit"
+                            "$ref": "#/definitions/MasterUnit"
                         }
                     }
                 ],
@@ -1850,7 +1850,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_unit"
+                                    "$ref": "#/definitions/MasterUnit"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1864,15 +1864,15 @@
         },
         "/masterUnits/{id}": {
             "get": {
-                "tags": ["master_unit"],
-                "summary": "Display the specified master_unit",
-                "description": "Get master_unit",
+                "tags": ["MasterUnit"],
+                "summary": "Display the specified MasterUnit",
+                "description": "Get MasterUnit",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_unit",
+                        "description": "id of MasterUnit",
                         "required": true,
                         "type": "integer"
                     }
@@ -1886,7 +1886,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_unit"
+                                    "$ref": "#/definitions/MasterUnit"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1898,25 +1898,25 @@
                 }
             },
             "put": {
-                "tags": ["master_unit"],
-                "summary": "Update the specified master_unit in storage",
-                "description": "Update master_unit",
+                "tags": ["MasterUnit"],
+                "summary": "Update the specified MasterUnit in storage",
+                "description": "Update MasterUnit",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_unit",
+                        "description": "id of MasterUnit",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_unit that should be updated",
+                        "description": "MasterUnit that should be updated",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_unit"
+                            "$ref": "#/definitions/MasterUnit"
                         }
                     }
                 ],
@@ -1929,7 +1929,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_unit"
+                                    "$ref": "#/definitions/MasterUnit"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1941,15 +1941,15 @@
                 }
             },
             "delete": {
-                "tags": ["master_unit"],
-                "summary": "Remove the specified master_unit from storage",
-                "description": "Delete master_unit",
+                "tags": ["MasterUnit"],
+                "summary": "Remove the specified MasterUnit from storage",
+                "description": "Delete MasterUnit",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_unit",
+                        "description": "id of MasterUnit",
                         "required": true,
                         "type": "integer"
                     }
@@ -2300,7 +2300,7 @@
                 }
             }
         },
-        "master_unit": {
+        "MasterUnit": {
             "required": ["nama_satuan", "singkatan_satuan"],
             "properties": {
                 "id": {

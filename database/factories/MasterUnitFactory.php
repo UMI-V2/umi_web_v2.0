@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\master_unit;
+use App\Models\MasterUnit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class master_unitFactory extends Factory
+class MasterUnitFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = master_unit::class;
+    protected $model = MasterUnit::class;
 
     /**
      * Define the model's default state.

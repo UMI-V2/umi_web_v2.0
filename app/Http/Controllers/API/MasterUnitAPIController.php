@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\Createmaster_unitAPIRequest;
-use App\Http\Requests\API\Updatemaster_unitAPIRequest;
-use App\Models\master_unit;
-use App\Repositories\master_unitRepository;
+use App\Http\Requests\API\CreateMasterUnitAPIRequest;
+use App\Http\Requests\API\UpdateMasterUnitAPIRequest;
+use App\Models\MasterUnit;
+use App\Repositories\MasterUnitRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class master_unitController
+ * Class MasterUnitController
  * @package App\Http\Controllers\API
  */
 
-class master_unitAPIController extends AppBaseController
+class MasterUnitAPIController extends AppBaseController
 {
-    /** @var  master_unitRepository */
+    /** @var  MasterUnitRepository */
     private $masterUnitRepository;
 
-    public function __construct(master_unitRepository $masterUnitRepo)
+    public function __construct(MasterUnitRepository $masterUnitRepo)
     {
         $this->masterUnitRepository = $masterUnitRepo;
     }
@@ -32,7 +32,7 @@ class master_unitAPIController extends AppBaseController
      * @SWG\Get(
      *      path="/masterUnits",
      *      summary="Get a listing of the master_units.",
-     *      tags={"master_unit"},
+     *      tags={"MasterUnit"},
      *      description="Get all master_units",
      *      produces={"application/json"},
      *      @SWG\Response(
@@ -47,7 +47,7 @@ class master_unitAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/master_unit")
+     *                  @SWG\Items(ref="#/definitions/MasterUnit")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -69,21 +69,21 @@ class master_unitAPIController extends AppBaseController
     }
 
     /**
-     * @param Createmaster_unitAPIRequest $request
+     * @param CreateMasterUnitAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
      *      path="/masterUnits",
-     *      summary="Store a newly created master_unit in storage",
-     *      tags={"master_unit"},
-     *      description="Store master_unit",
+     *      summary="Store a newly created MasterUnit in storage",
+     *      tags={"MasterUnit"},
+     *      description="Store MasterUnit",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_unit that should be stored",
+     *          description="MasterUnit that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_unit")
+     *          @SWG\Schema(ref="#/definitions/MasterUnit")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class master_unitAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_unit"
+     *                  ref="#/definitions/MasterUnit"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,7 +106,7 @@ class master_unitAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(Createmaster_unitAPIRequest $request)
+    public function store(CreateMasterUnitAPIRequest $request)
     {
         $input = $request->all();
 
@@ -121,13 +121,13 @@ class master_unitAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/masterUnits/{id}",
-     *      summary="Display the specified master_unit",
-     *      tags={"master_unit"},
-     *      description="Get master_unit",
+     *      summary="Display the specified MasterUnit",
+     *      tags={"MasterUnit"},
+     *      description="Get MasterUnit",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_unit",
+     *          description="id of MasterUnit",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class master_unitAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_unit"
+     *                  ref="#/definitions/MasterUnit"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,7 +155,7 @@ class master_unitAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var master_unit $masterUnit */
+        /** @var MasterUnit $masterUnit */
         $masterUnit = $this->masterUnitRepository->find($id);
 
         if (empty($masterUnit)) {
@@ -167,18 +167,18 @@ class master_unitAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param Updatemaster_unitAPIRequest $request
+     * @param UpdateMasterUnitAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
      *      path="/masterUnits/{id}",
-     *      summary="Update the specified master_unit in storage",
-     *      tags={"master_unit"},
-     *      description="Update master_unit",
+     *      summary="Update the specified MasterUnit in storage",
+     *      tags={"MasterUnit"},
+     *      description="Update MasterUnit",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_unit",
+     *          description="id of MasterUnit",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class master_unitAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_unit that should be updated",
+     *          description="MasterUnit that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_unit")
+     *          @SWG\Schema(ref="#/definitions/MasterUnit")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class master_unitAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_unit"
+     *                  ref="#/definitions/MasterUnit"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,11 +211,11 @@ class master_unitAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, Updatemaster_unitAPIRequest $request)
+    public function update($id, UpdateMasterUnitAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var master_unit $masterUnit */
+        /** @var MasterUnit $masterUnit */
         $masterUnit = $this->masterUnitRepository->find($id);
 
         if (empty($masterUnit)) {
@@ -224,7 +224,7 @@ class master_unitAPIController extends AppBaseController
 
         $masterUnit = $this->masterUnitRepository->update($input, $id);
 
-        return $this->sendResponse($masterUnit->toArray(), 'master_unit updated successfully');
+        return $this->sendResponse($masterUnit->toArray(), 'MasterUnit updated successfully');
     }
 
     /**
@@ -233,13 +233,13 @@ class master_unitAPIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/masterUnits/{id}",
-     *      summary="Remove the specified master_unit from storage",
-     *      tags={"master_unit"},
-     *      description="Delete master_unit",
+     *      summary="Remove the specified MasterUnit from storage",
+     *      tags={"MasterUnit"},
+     *      description="Delete MasterUnit",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_unit",
+     *          description="id of MasterUnit",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,7 +267,7 @@ class master_unitAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var master_unit $masterUnit */
+        /** @var MasterUnit $masterUnit */
         $masterUnit = $this->masterUnitRepository->find($id);
 
         if (empty($masterUnit)) {

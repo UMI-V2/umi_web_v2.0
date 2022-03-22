@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
- *      definition="master_unit",
+ *      definition="MasterUnit",
  *      required={"nama_satuan", "singkatan_satuan"},
  *      @SWG\Property(
  *          property="id",
@@ -40,7 +40,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
  * )
  */
-class master_unit extends Model
+class MasterUnit extends Model
 {
 
     use HasFactory;

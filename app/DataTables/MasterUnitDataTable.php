@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\master_unit;
+use App\Models\MasterUnit;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class master_unitDataTable extends DataTable
+class MasterUnitDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,10 +24,10 @@ class master_unitDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\master_unit $model
+     * @param \App\Models\MasterUnit $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(master_unit $model)
+    public function query(MasterUnit $model)
     {
         return $model->newQuery();
     }

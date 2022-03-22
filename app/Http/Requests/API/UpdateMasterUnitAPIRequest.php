@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
-use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_unit;
+use App\Models\MasterUnit;
+use InfyOm\Generator\Request\APIRequest;
 
-class Createmaster_unitRequest extends FormRequest
+class UpdateMasterUnitAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,8 @@ class Createmaster_unitRequest extends FormRequest
      */
     public function rules()
     {
-        return master_unit::$rules;
+        $rules = MasterUnit::$rules;
+        
+        return $rules;
     }
 }

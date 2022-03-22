@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\master_unitDataTable;
+use App\DataTables\MasterUnitDataTable;
 use App\Http\Requests;
-use App\Http\Requests\Createmaster_unitRequest;
-use App\Http\Requests\Updatemaster_unitRequest;
-use App\Repositories\master_unitRepository;
+use App\Http\Requests\CreateMasterUnitRequest;
+use App\Http\Requests\UpdateMasterUnitRequest;
+use App\Repositories\MasterUnitRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
-class master_unitController extends AppBaseController
+class MasterUnitController extends AppBaseController
 {
-    /** @var master_unitRepository $masterUnitRepository*/
+    /** @var MasterUnitRepository $masterUnitRepository*/
     private $masterUnitRepository;
 
-    public function __construct(master_unitRepository $masterUnitRepo)
+    public function __construct(MasterUnitRepository $masterUnitRepo)
     {
         $this->masterUnitRepository = $masterUnitRepo;
     }
 
     /**
-     * Display a listing of the master_unit.
+     * Display a listing of the MasterUnit.
      *
-     * @param master_unitDataTable $masterUnitDataTable
+     * @param MasterUnitDataTable $masterUnitDataTable
      *
      * @return Response
      */
-    public function index(master_unitDataTable $masterUnitDataTable)
+    public function index(MasterUnitDataTable $masterUnitDataTable)
     {
         return $masterUnitDataTable->render('master_units.index');
     }
 
     /**
-     * Show the form for creating a new master_unit.
+     * Show the form for creating a new MasterUnit.
      *
      * @return Response
      */
@@ -44,13 +44,13 @@ class master_unitController extends AppBaseController
     }
 
     /**
-     * Store a newly created master_unit in storage.
+     * Store a newly created MasterUnit in storage.
      *
-     * @param Createmaster_unitRequest $request
+     * @param CreateMasterUnitRequest $request
      *
      * @return Response
      */
-    public function store(Createmaster_unitRequest $request)
+    public function store(CreateMasterUnitRequest $request)
     {
         $input = $request->all();
 
@@ -62,7 +62,7 @@ class master_unitController extends AppBaseController
     }
 
     /**
-     * Display the specified master_unit.
+     * Display the specified MasterUnit.
      *
      * @param int $id
      *
@@ -82,7 +82,7 @@ class master_unitController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified master_unit.
+     * Show the form for editing the specified MasterUnit.
      *
      * @param int $id
      *
@@ -102,14 +102,14 @@ class master_unitController extends AppBaseController
     }
 
     /**
-     * Update the specified master_unit in storage.
+     * Update the specified MasterUnit in storage.
      *
      * @param int $id
-     * @param Updatemaster_unitRequest $request
+     * @param UpdateMasterUnitRequest $request
      *
      * @return Response
      */
-    public function update($id, Updatemaster_unitRequest $request)
+    public function update($id, UpdateMasterUnitRequest $request)
     {
         $masterUnit = $this->masterUnitRepository->find($id);
 
@@ -127,7 +127,7 @@ class master_unitController extends AppBaseController
     }
 
     /**
-     * Remove the specified master_unit from storage.
+     * Remove the specified MasterUnit from storage.
      *
      * @param int $id
      *

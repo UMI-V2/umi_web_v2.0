@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\master_unit;
+use App\Models\MasterUnit;
 use App\Repositories\BaseRepository;
 
 /**
- * Class master_unitRepository
+ * Class MasterUnitRepository
  * @package App\Repositories
  * @version February 28, 2022, 3:04 pm UTC
 */
 
-class master_unitRepository extends BaseRepository
+class MasterUnitRepository extends BaseRepository
 {
     /**
      * @var array
@@ -36,6 +36,6 @@ class master_unitRepository extends BaseRepository
      **/
     public function model()
     {
-        return master_unit::class;
+        return MasterUnit::class;
     }
 }

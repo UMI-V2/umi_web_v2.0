@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\master_unit;
+use App\Models\MasterUnit;
 use InfyOm\Generator\Request\APIRequest;
 
-class Createmaster_unitAPIRequest extends APIRequest
+class CreateMasterUnitAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class Createmaster_unitAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return master_unit::$rules;
+        return MasterUnit::$rules;
     }
 }
