@@ -64,7 +64,7 @@ Route::resource('masterProductCategories', App\Http\Controllers\MasterProductCat
 Route::resource('masterBusinessCategories', App\Http\Controllers\MasterBusinessCategoryController::class);
 
 
-Route::resource('masterStatusBusinesses', App\Http\Controllers\master_status_businessController::class);
+Route::resource('masterStatusBusinesses', App\Http\Controllers\MasterStatusBusinessController::class);
 
 
 Route::resource('masterUnits', App\Http\Controllers\MasterUnitController::class);

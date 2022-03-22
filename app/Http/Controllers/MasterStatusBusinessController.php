@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\master_status_businessDataTable;
+use App\DataTables\MasterStatusBusinessDataTable;
 use App\Http\Requests;
-use App\Http\Requests\Createmaster_status_businessRequest;
-use App\Http\Requests\Updatemaster_status_businessRequest;
-use App\Repositories\master_status_businessRepository;
+use App\Http\Requests\CreateMasterStatusBusinessRequest;
+use App\Http\Requests\UpdateMasterStatusBusinessRequest;
+use App\Repositories\MasterStatusBusinessRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
-class master_status_businessController extends AppBaseController
+class MasterStatusBusinessController extends AppBaseController
 {
-    /** @var master_status_businessRepository $masterStatusBusinessRepository*/
+    /** @var MasterStatusBusinessRepository $masterStatusBusinessRepository*/
     private $masterStatusBusinessRepository;
 
-    public function __construct(master_status_businessRepository $masterStatusBusinessRepo)
+    public function __construct(MasterStatusBusinessRepository $masterStatusBusinessRepo)
     {
         $this->masterStatusBusinessRepository = $masterStatusBusinessRepo;
     }
 
     /**
-     * Display a listing of the master_status_business.
+     * Display a listing of the MasterStatusBusiness.
      *
-     * @param master_status_businessDataTable $masterStatusBusinessDataTable
+     * @param MasterStatusBusinessDataTable $masterStatusBusinessDataTable
      *
      * @return Response
      */
-    public function index(master_status_businessDataTable $masterStatusBusinessDataTable)
+    public function index(MasterStatusBusinessDataTable $masterStatusBusinessDataTable)
     {
         return $masterStatusBusinessDataTable->render('master_status_businesses.index');
     }
 
     /**
-     * Show the form for creating a new master_status_business.
+     * Show the form for creating a new MasterStatusBusiness.
      *
      * @return Response
      */
@@ -44,13 +44,13 @@ class master_status_businessController extends AppBaseController
     }
 
     /**
-     * Store a newly created master_status_business in storage.
+     * Store a newly created MasterStatusBusiness in storage.
      *
-     * @param Createmaster_status_businessRequest $request
+     * @param CreateMasterStatusBusinessRequest $request
      *
      * @return Response
      */
-    public function store(Createmaster_status_businessRequest $request)
+    public function store(CreateMasterStatusBusinessRequest $request)
     {
         $input = $request->all();
 
@@ -62,7 +62,7 @@ class master_status_businessController extends AppBaseController
     }
 
     /**
-     * Display the specified master_status_business.
+     * Display the specified MasterStatusBusiness.
      *
      * @param int $id
      *
@@ -82,7 +82,7 @@ class master_status_businessController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified master_status_business.
+     * Show the form for editing the specified MasterStatusBusiness.
      *
      * @param int $id
      *
@@ -102,14 +102,14 @@ class master_status_businessController extends AppBaseController
     }
 
     /**
-     * Update the specified master_status_business in storage.
+     * Update the specified MasterStatusBusiness in storage.
      *
      * @param int $id
-     * @param Updatemaster_status_businessRequest $request
+     * @param UpdateMasterStatusBusinessRequest $request
      *
      * @return Response
      */
-    public function update($id, Updatemaster_status_businessRequest $request)
+    public function update($id, UpdateMasterStatusBusinessRequest $request)
     {
         $masterStatusBusiness = $this->masterStatusBusinessRepository->find($id);
 
@@ -127,7 +127,7 @@ class master_status_businessController extends AppBaseController
     }
 
     /**
-     * Remove the specified master_status_business from storage.
+     * Remove the specified MasterStatusBusiness from storage.
      *
      * @param int $id
      *

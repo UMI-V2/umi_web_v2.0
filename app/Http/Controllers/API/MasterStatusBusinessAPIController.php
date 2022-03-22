@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\Createmaster_status_businessAPIRequest;
-use App\Http\Requests\API\Updatemaster_status_businessAPIRequest;
-use App\Models\master_status_business;
-use App\Repositories\master_status_businessRepository;
+use App\Http\Requests\API\CreateMasterStatusBusinessAPIRequest;
+use App\Http\Requests\API\UpdateMasterStatusBusinessAPIRequest;
+use App\Models\MasterStatusBusiness;
+use App\Repositories\MasterStatusBusinessRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class master_status_businessController
+ * Class MasterStatusBusinessController
  * @package App\Http\Controllers\API
  */
 
-class master_status_businessAPIController extends AppBaseController
+class MasterStatusBusinessAPIController extends AppBaseController
 {
-    /** @var  master_status_businessRepository */
+    /** @var  MasterStatusBusinessRepository */
     private $masterStatusBusinessRepository;
 
-    public function __construct(master_status_businessRepository $masterStatusBusinessRepo)
+    public function __construct(MasterStatusBusinessRepository $masterStatusBusinessRepo)
     {
         $this->masterStatusBusinessRepository = $masterStatusBusinessRepo;
     }
@@ -32,7 +32,7 @@ class master_status_businessAPIController extends AppBaseController
      * @SWG\Get(
      *      path="/masterStatusBusinesses",
      *      summary="Get a listing of the master_status_businesses.",
-     *      tags={"master_status_business"},
+     *      tags={"MasterStatusBusiness"},
      *      description="Get all master_status_businesses",
      *      produces={"application/json"},
      *      @SWG\Response(
@@ -47,7 +47,7 @@ class master_status_businessAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/master_status_business")
+     *                  @SWG\Items(ref="#/definitions/MasterStatusBusiness")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -69,21 +69,21 @@ class master_status_businessAPIController extends AppBaseController
     }
 
     /**
-     * @param Createmaster_status_businessAPIRequest $request
+     * @param CreateMasterStatusBusinessAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
      *      path="/masterStatusBusinesses",
-     *      summary="Store a newly created master_status_business in storage",
-     *      tags={"master_status_business"},
-     *      description="Store master_status_business",
+     *      summary="Store a newly created MasterStatusBusiness in storage",
+     *      tags={"MasterStatusBusiness"},
+     *      description="Store MasterStatusBusiness",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_status_business that should be stored",
+     *          description="MasterStatusBusiness that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_status_business")
+     *          @SWG\Schema(ref="#/definitions/MasterStatusBusiness")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class master_status_businessAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_status_business"
+     *                  ref="#/definitions/MasterStatusBusiness"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,7 +106,7 @@ class master_status_businessAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(Createmaster_status_businessAPIRequest $request)
+    public function store(CreateMasterStatusBusinessAPIRequest $request)
     {
         $input = $request->all();
 
@@ -121,13 +121,13 @@ class master_status_businessAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/masterStatusBusinesses/{id}",
-     *      summary="Display the specified master_status_business",
-     *      tags={"master_status_business"},
-     *      description="Get master_status_business",
+     *      summary="Display the specified MasterStatusBusiness",
+     *      tags={"MasterStatusBusiness"},
+     *      description="Get MasterStatusBusiness",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_status_business",
+     *          description="id of MasterStatusBusiness",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class master_status_businessAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_status_business"
+     *                  ref="#/definitions/MasterStatusBusiness"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,7 +155,7 @@ class master_status_businessAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var master_status_business $masterStatusBusiness */
+        /** @var MasterStatusBusiness $masterStatusBusiness */
         $masterStatusBusiness = $this->masterStatusBusinessRepository->find($id);
 
         if (empty($masterStatusBusiness)) {
@@ -167,18 +167,18 @@ class master_status_businessAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param Updatemaster_status_businessAPIRequest $request
+     * @param UpdateMasterStatusBusinessAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
      *      path="/masterStatusBusinesses/{id}",
-     *      summary="Update the specified master_status_business in storage",
-     *      tags={"master_status_business"},
-     *      description="Update master_status_business",
+     *      summary="Update the specified MasterStatusBusiness in storage",
+     *      tags={"MasterStatusBusiness"},
+     *      description="Update MasterStatusBusiness",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_status_business",
+     *          description="id of MasterStatusBusiness",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class master_status_businessAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_status_business that should be updated",
+     *          description="MasterStatusBusiness that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_status_business")
+     *          @SWG\Schema(ref="#/definitions/MasterStatusBusiness")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class master_status_businessAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_status_business"
+     *                  ref="#/definitions/MasterStatusBusiness"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,11 +211,11 @@ class master_status_businessAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, Updatemaster_status_businessAPIRequest $request)
+    public function update($id, UpdateMasterStatusBusinessAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var master_status_business $masterStatusBusiness */
+        /** @var MasterStatusBusiness $masterStatusBusiness */
         $masterStatusBusiness = $this->masterStatusBusinessRepository->find($id);
 
         if (empty($masterStatusBusiness)) {
@@ -224,7 +224,7 @@ class master_status_businessAPIController extends AppBaseController
 
         $masterStatusBusiness = $this->masterStatusBusinessRepository->update($input, $id);
 
-        return $this->sendResponse($masterStatusBusiness->toArray(), 'master_status_business updated successfully');
+        return $this->sendResponse($masterStatusBusiness->toArray(), 'MasterStatusBusiness updated successfully');
     }
 
     /**
@@ -233,13 +233,13 @@ class master_status_businessAPIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/masterStatusBusinesses/{id}",
-     *      summary="Remove the specified master_status_business from storage",
-     *      tags={"master_status_business"},
-     *      description="Delete master_status_business",
+     *      summary="Remove the specified MasterStatusBusiness from storage",
+     *      tags={"MasterStatusBusiness"},
+     *      description="Delete MasterStatusBusiness",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_status_business",
+     *          description="id of MasterStatusBusiness",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,7 +267,7 @@ class master_status_businessAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var master_status_business $masterStatusBusiness */
+        /** @var MasterStatusBusiness $masterStatusBusiness */
         $masterStatusBusiness = $this->masterStatusBusinessRepository->find($id);
 
         if (empty($masterStatusBusiness)) {

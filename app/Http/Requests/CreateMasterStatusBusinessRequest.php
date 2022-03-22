@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\API;
+namespace App\Http\Requests;
 
-use App\Models\master_status_business;
-use InfyOm\Generator\Request\APIRequest;
+use Illuminate\Foundation\Http\FormRequest;
+use App\Models\MasterStatusBusiness;
 
-class Updatemaster_status_businessAPIRequest extends APIRequest
+class CreateMasterStatusBusinessRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class Updatemaster_status_businessAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = master_status_business::$rules;
-        
-        return $rules;
+        return MasterStatusBusiness::$rules;
     }
 }

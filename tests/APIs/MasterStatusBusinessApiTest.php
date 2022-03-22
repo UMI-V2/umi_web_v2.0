@@ -4,18 +4,18 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use App\Models\master_status_business;
+use App\Models\MasterStatusBusiness;
 
-class master_status_businessApiTest extends TestCase
+class MasterStatusBusinessApiTest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
-    public function test_create_master_status_business()
+    public function test_create_MasterStatusBusiness()
     {
-        $masterStatusBusiness = master_status_business::factory()->make()->toArray();
+        $masterStatusBusiness = MasterStatusBusiness::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -28,9 +28,9 @@ class master_status_businessApiTest extends TestCase
     /**
      * @test
      */
-    public function test_read_master_status_business()
+    public function test_read_MasterStatusBusiness()
     {
-        $masterStatusBusiness = master_status_business::factory()->create();
+        $masterStatusBusiness = MasterStatusBusiness::factory()->create();
 
         $this->response = $this->json(
             'GET',
@@ -43,26 +43,26 @@ class master_status_businessApiTest extends TestCase
     /**
      * @test
      */
-    public function test_update_master_status_business()
+    public function test_update_MasterStatusBusiness()
     {
-        $masterStatusBusiness = master_status_business::factory()->create();
-        $editedmaster_status_business = master_status_business::factory()->make()->toArray();
+        $masterStatusBusiness = MasterStatusBusiness::factory()->create();
+        $editedMasterStatusBusiness = MasterStatusBusiness::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
             '/api/master_status_businesses/'.$masterStatusBusiness->id,
-            $editedmaster_status_business
+            $editedMasterStatusBusiness
         );
 
-        $this->assertApiResponse($editedmaster_status_business);
+        $this->assertApiResponse($editedMasterStatusBusiness);
     }
 
     /**
      * @test
      */
-    public function test_delete_master_status_business()
+    public function test_delete_MasterStatusBusiness()
     {
-        $masterStatusBusiness = master_status_business::factory()->create();
+        $masterStatusBusiness = MasterStatusBusiness::factory()->create();
 
         $this->response = $this->json(
             'DELETE',

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
- *      definition="master_status_business",
+ *      definition="MasterStatusBusiness",
  *      required={"nama_status_usaha"},
  *      @SWG\Property(
  *          property="id",
@@ -35,7 +35,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
  * )
  */
-class master_status_business extends Model
+class MasterStatusBusiness extends Model
 {
 
     use HasFactory;

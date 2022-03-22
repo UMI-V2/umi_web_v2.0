@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\master_status_business;
+use App\Models\MasterStatusBusiness;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class master_status_businessDataTable extends DataTable
+class MasterStatusBusinessDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,10 +24,10 @@ class master_status_businessDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\master_status_business $model
+     * @param \App\Models\MasterStatusBusiness $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(master_status_business $model)
+    public function query(MasterStatusBusiness $model)
     {
         return $model->newQuery();
     }
@@ -76,6 +76,6 @@ class master_status_businessDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'master_status_businesses_datatable_' . time();
+        return 'MasterStatusBusinesses_datatable_' . time();
     }
 }

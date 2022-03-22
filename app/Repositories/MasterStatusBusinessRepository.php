@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\master_status_business;
+use App\Models\MasterStatusBusiness;
 use App\Repositories\BaseRepository;
 
 /**
- * Class master_status_businessRepository
+ * Class MasterStatusBusinessRepository
  * @package App\Repositories
  * @version February 28, 2022, 2:34 pm UTC
 */
 
-class master_status_businessRepository extends BaseRepository
+class MasterStatusBusinessRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class master_status_businessRepository extends BaseRepository
      **/
     public function model()
     {
-        return master_status_business::class;
+        return MasterStatusBusiness::class;
     }
 }

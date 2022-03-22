@@ -1261,7 +1261,7 @@
         },
         "/masterStatusBusinesses": {
             "get": {
-                "tags": ["master_status_business"],
+                "tags": ["MasterStatusBusiness"],
                 "summary": "Get a listing of the master_status_businesses.",
                 "description": "Get all master_status_businesses",
                 "produces": ["application/json"],
@@ -1276,7 +1276,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/master_status_business"
+                                        "$ref": "#/definitions/MasterStatusBusiness"
                                     }
                                 },
                                 "message": {
@@ -1289,18 +1289,18 @@
                 }
             },
             "post": {
-                "tags": ["master_status_business"],
-                "summary": "Store a newly created master_status_business in storage",
-                "description": "Store master_status_business",
+                "tags": ["MasterStatusBusiness"],
+                "summary": "Store a newly created MasterStatusBusiness in storage",
+                "description": "Store MasterStatusBusiness",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_status_business that should be stored",
+                        "description": "MasterStatusBusiness that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_status_business"
+                            "$ref": "#/definitions/MasterStatusBusiness"
                         }
                     }
                 ],
@@ -1313,7 +1313,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_status_business"
+                                    "$ref": "#/definitions/MasterStatusBusiness"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1327,15 +1327,15 @@
         },
         "/masterStatusBusinesses/{id}": {
             "get": {
-                "tags": ["master_status_business"],
-                "summary": "Display the specified master_status_business",
-                "description": "Get master_status_business",
+                "tags": ["MasterStatusBusiness"],
+                "summary": "Display the specified MasterStatusBusiness",
+                "description": "Get MasterStatusBusiness",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_status_business",
+                        "description": "id of MasterStatusBusiness",
                         "required": true,
                         "type": "integer"
                     }
@@ -1349,7 +1349,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_status_business"
+                                    "$ref": "#/definitions/MasterStatusBusiness"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1361,25 +1361,25 @@
                 }
             },
             "put": {
-                "tags": ["master_status_business"],
-                "summary": "Update the specified master_status_business in storage",
-                "description": "Update master_status_business",
+                "tags": ["MasterStatusBusiness"],
+                "summary": "Update the specified MasterStatusBusiness in storage",
+                "description": "Update MasterStatusBusiness",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_status_business",
+                        "description": "id of MasterStatusBusiness",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_status_business that should be updated",
+                        "description": "MasterStatusBusiness that should be updated",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_status_business"
+                            "$ref": "#/definitions/MasterStatusBusiness"
                         }
                     }
                 ],
@@ -1392,7 +1392,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_status_business"
+                                    "$ref": "#/definitions/MasterStatusBusiness"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1404,15 +1404,15 @@
                 }
             },
             "delete": {
-                "tags": ["master_status_business"],
-                "summary": "Remove the specified master_status_business from storage",
-                "description": "Delete master_status_business",
+                "tags": ["MasterStatusBusiness"],
+                "summary": "Remove the specified MasterStatusBusiness from storage",
+                "description": "Delete MasterStatusBusiness",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_status_business",
+                        "description": "id of MasterStatusBusiness",
                         "required": true,
                         "type": "integer"
                     }
@@ -2221,7 +2221,7 @@
                 }
             }
         },
-        "master_status_business": {
+        "MasterStatusBusiness": {
             "required": ["nama_status_usaha"],
             "properties": {
                 "id": {
