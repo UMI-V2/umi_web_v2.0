@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_delivery_service;
+use App\Models\MasterDeliveryService;
 
-class Createmaster_delivery_serviceRequest extends FormRequest
+class CreateMasterDeliveryServiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class Createmaster_delivery_serviceRequest extends FormRequest
      */
     public function rules()
     {
-        return master_delivery_service::$rules;
+        return MasterDeliveryService::$rules;
     }
 }

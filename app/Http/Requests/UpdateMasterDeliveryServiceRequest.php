@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\API;
+namespace App\Http\Requests;
 
-use App\Models\master_delivery_service;
-use InfyOm\Generator\Request\APIRequest;
+use Illuminate\Foundation\Http\FormRequest;
+use App\Models\MasterDeliveryService;
 
-class Createmaster_delivery_serviceAPIRequest extends APIRequest
+class UpdateMasterDeliveryServiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,8 @@ class Createmaster_delivery_serviceAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return master_delivery_service::$rules;
+        $rules = MasterDeliveryService::$rules;
+        
+        return $rules;
     }
 }

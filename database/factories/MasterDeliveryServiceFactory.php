@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\master_delivery_service;
+use App\Models\MasterDeliveryService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class master_delivery_serviceFactory extends Factory
+class MasterDeliveryServiceFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = master_delivery_service::class;
+    protected $model = MasterDeliveryService::class;
 
     /**
      * Define the model's default state.

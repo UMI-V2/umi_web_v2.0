@@ -366,7 +366,7 @@
         },
         "/masterDeliveryServices": {
             "get": {
-                "tags": ["master_delivery_service"],
+                "tags": ["MasterDeliveryService"],
                 "summary": "Get a listing of the master_delivery_services.",
                 "description": "Get all master_delivery_services",
                 "produces": ["application/json"],
@@ -381,7 +381,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/master_delivery_service"
+                                        "$ref": "#/definitions/MasterDeliveryService"
                                     }
                                 },
                                 "message": {
@@ -394,18 +394,18 @@
                 }
             },
             "post": {
-                "tags": ["master_delivery_service"],
-                "summary": "Store a newly created master_delivery_service in storage",
-                "description": "Store master_delivery_service",
+                "tags": ["MasterDeliveryService"],
+                "summary": "Store a newly created MasterDeliveryService in storage",
+                "description": "Store MasterDeliveryService",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_delivery_service that should be stored",
+                        "description": "MasterDeliveryService that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_delivery_service"
+                            "$ref": "#/definitions/MasterDeliveryService"
                         }
                     }
                 ],
@@ -418,7 +418,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_delivery_service"
+                                    "$ref": "#/definitions/MasterDeliveryService"
                                 },
                                 "message": {
                                     "type": "string"
@@ -432,15 +432,15 @@
         },
         "/masterDeliveryServices/{id}": {
             "get": {
-                "tags": ["master_delivery_service"],
-                "summary": "Display the specified master_delivery_service",
-                "description": "Get master_delivery_service",
+                "tags": ["MasterDeliveryService"],
+                "summary": "Display the specified MasterDeliveryService",
+                "description": "Get MasterDeliveryService",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_delivery_service",
+                        "description": "id of MasterDeliveryService",
                         "required": true,
                         "type": "integer"
                     }
@@ -454,7 +454,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_delivery_service"
+                                    "$ref": "#/definitions/MasterDeliveryService"
                                 },
                                 "message": {
                                     "type": "string"
@@ -466,25 +466,25 @@
                 }
             },
             "put": {
-                "tags": ["master_delivery_service"],
-                "summary": "Update the specified master_delivery_service in storage",
-                "description": "Update master_delivery_service",
+                "tags": ["MasterDeliveryService"],
+                "summary": "Update the specified MasterDeliveryService in storage",
+                "description": "Update MasterDeliveryService",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_delivery_service",
+                        "description": "id of MasterDeliveryService",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_delivery_service that should be updated",
+                        "description": "MasterDeliveryService that should be updated",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_delivery_service"
+                            "$ref": "#/definitions/MasterDeliveryService"
                         }
                     }
                 ],
@@ -497,7 +497,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_delivery_service"
+                                    "$ref": "#/definitions/MasterDeliveryService"
                                 },
                                 "message": {
                                     "type": "string"
@@ -509,15 +509,15 @@
                 }
             },
             "delete": {
-                "tags": ["master_delivery_service"],
-                "summary": "Remove the specified master_delivery_service from storage",
-                "description": "Delete master_delivery_service",
+                "tags": ["MasterDeliveryService"],
+                "summary": "Remove the specified MasterDeliveryService from storage",
+                "description": "Delete MasterDeliveryService",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_delivery_service",
+                        "description": "id of MasterDeliveryService",
                         "required": true,
                         "type": "integer"
                     }
@@ -2078,7 +2078,7 @@
                 }
             }
         },
-        "master_delivery_service": {
+        "MasterDeliveryService": {
             "required": ["nama_jasa_pengiriman", "ongkir", "deskripsi"],
             "properties": {
                 "id": {

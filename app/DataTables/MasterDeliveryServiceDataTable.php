@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\master_delivery_service;
+use App\Models\MasterDeliveryService;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class master_delivery_serviceDataTable extends DataTable
+class MasterDeliveryServiceDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,10 +24,10 @@ class master_delivery_serviceDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\master_delivery_service $model
+     * @param \App\Models\MasterDeliveryService $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(master_delivery_service $model)
+    public function query(MasterDeliveryService $model)
     {
         return $model->newQuery();
     }

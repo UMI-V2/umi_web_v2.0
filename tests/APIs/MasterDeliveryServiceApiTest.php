@@ -4,18 +4,18 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use App\Models\master_delivery_service;
+use App\Models\MasterDeliveryService;
 
-class master_delivery_serviceApiTest extends TestCase
+class MasterDeliveryServiceApiTest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
-    public function test_create_master_delivery_service()
+    public function test_create_MasterDeliveryService()
     {
-        $masterDeliveryService = master_delivery_service::factory()->make()->toArray();
+        $masterDeliveryService = MasterDeliveryService::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -28,9 +28,9 @@ class master_delivery_serviceApiTest extends TestCase
     /**
      * @test
      */
-    public function test_read_master_delivery_service()
+    public function test_read_MasterDeliveryService()
     {
-        $masterDeliveryService = master_delivery_service::factory()->create();
+        $masterDeliveryService = MasterDeliveryService::factory()->create();
 
         $this->response = $this->json(
             'GET',
@@ -43,26 +43,26 @@ class master_delivery_serviceApiTest extends TestCase
     /**
      * @test
      */
-    public function test_update_master_delivery_service()
+    public function test_update_MasterDeliveryService()
     {
-        $masterDeliveryService = master_delivery_service::factory()->create();
-        $editedmaster_delivery_service = master_delivery_service::factory()->make()->toArray();
+        $masterDeliveryService = MasterDeliveryService::factory()->create();
+        $editedMasterDeliveryService = MasterDeliveryService::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
             '/api/master_delivery_services/'.$masterDeliveryService->id,
-            $editedmaster_delivery_service
+            $editedMasterDeliveryService
         );
 
-        $this->assertApiResponse($editedmaster_delivery_service);
+        $this->assertApiResponse($editedMasterDeliveryService);
     }
 
     /**
      * @test
      */
-    public function test_delete_master_delivery_service()
+    public function test_delete_MasterDeliveryService()
     {
-        $masterDeliveryService = master_delivery_service::factory()->create();
+        $masterDeliveryService = MasterDeliveryService::factory()->create();
 
         $this->response = $this->json(
             'DELETE',

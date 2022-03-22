@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\master_delivery_service;
+use App\Models\MasterDeliveryService;
 use App\Repositories\BaseRepository;
 
 /**
- * Class master_delivery_serviceRepository
+ * Class MasterDeliveryServiceRepository
  * @package App\Repositories
  * @version February 28, 2022, 5:28 pm UTC
 */
 
-class master_delivery_serviceRepository extends BaseRepository
+class MasterDeliveryServiceRepository extends BaseRepository
 {
     /**
      * @var array
@@ -38,6 +38,6 @@ class master_delivery_serviceRepository extends BaseRepository
      **/
     public function model()
     {
-        return master_delivery_service::class;
+        return MasterDeliveryService::class;
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
- *      definition="master_delivery_service",
+ *      definition="MasterDeliveryService",
  *      required={"nama_jasa_pengiriman", "ongkir", "deskripsi"},
  *      @SWG\Property(
  *          property="id",
@@ -50,7 +50,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
  * )
  */
-class master_delivery_service extends Model
+class MasterDeliveryService extends Model
 {
 
     use HasFactory;

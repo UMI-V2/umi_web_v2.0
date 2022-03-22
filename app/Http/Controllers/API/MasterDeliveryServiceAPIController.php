@@ -5,23 +5,23 @@ namespace App\Http\Controllers\API;
 use Response;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
-use App\Models\master_delivery_service;
+use App\Models\MasterDeliveryService;
 use App\Http\Controllers\AppBaseController;
-use App\Repositories\master_delivery_serviceRepository;
-use App\Http\Requests\API\Createmaster_delivery_serviceAPIRequest;
-use App\Http\Requests\API\Updatemaster_delivery_serviceAPIRequest;
+use App\Repositories\MasterDeliveryServiceRepository;
+use App\Http\Requests\API\CreateMasterDeliveryServiceAPIRequest;
+use App\Http\Requests\API\UpdateMasterDeliveryServiceAPIRequest;
 
 /**
- * Class master_delivery_serviceController
+ * Class MasterDeliveryServiceController
  * @package App\Http\Controllers\API
  */
 
-class master_delivery_serviceAPIController extends AppBaseController
+class MasterDeliveryServiceAPIController extends AppBaseController
 {
-    /** @var  master_delivery_serviceRepository */
+    /** @var  MasterDeliveryServiceRepository */
     private $masterDeliveryServiceRepository;
 
-    public function __construct(master_delivery_serviceRepository $masterDeliveryServiceRepo)
+    public function __construct(MasterDeliveryServiceRepository $masterDeliveryServiceRepo)
     {
         $this->masterDeliveryServiceRepository = $masterDeliveryServiceRepo;
     }
@@ -33,7 +33,7 @@ class master_delivery_serviceAPIController extends AppBaseController
      * @SWG\Get(
      *      path="/masterDeliveryServices",
      *      summary="Get a listing of the master_delivery_services.",
-     *      tags={"master_delivery_service"},
+     *      tags={"MasterDeliveryService"},
      *      description="Get all master_delivery_services",
      *      produces={"application/json"},
      *      @SWG\Response(
@@ -48,7 +48,7 @@ class master_delivery_serviceAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/master_delivery_service")
+     *                  @SWG\Items(ref="#/definitions/MasterDeliveryService")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -72,21 +72,21 @@ class master_delivery_serviceAPIController extends AppBaseController
     }
 
     /**
-     * @param Createmaster_delivery_serviceAPIRequest $request
+     * @param CreateMasterDeliveryServiceAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
      *      path="/masterDeliveryServices",
-     *      summary="Store a newly created master_delivery_service in storage",
-     *      tags={"master_delivery_service"},
-     *      description="Store master_delivery_service",
+     *      summary="Store a newly created MasterDeliveryService in storage",
+     *      tags={"MasterDeliveryService"},
+     *      description="Store MasterDeliveryService",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_delivery_service that should be stored",
+     *          description="MasterDeliveryService that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_delivery_service")
+     *          @SWG\Schema(ref="#/definitions/MasterDeliveryService")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -99,7 +99,7 @@ class master_delivery_serviceAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_delivery_service"
+     *                  ref="#/definitions/MasterDeliveryService"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -109,7 +109,7 @@ class master_delivery_serviceAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(Createmaster_delivery_serviceAPIRequest $request)
+    public function store(CreateMasterDeliveryServiceAPIRequest $request)
     {
         $input = $request->all();
 
@@ -124,13 +124,13 @@ class master_delivery_serviceAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/masterDeliveryServices/{id}",
-     *      summary="Display the specified master_delivery_service",
-     *      tags={"master_delivery_service"},
-     *      description="Get master_delivery_service",
+     *      summary="Display the specified MasterDeliveryService",
+     *      tags={"MasterDeliveryService"},
+     *      description="Get MasterDeliveryService",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_delivery_service",
+     *          description="id of MasterDeliveryService",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -146,7 +146,7 @@ class master_delivery_serviceAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_delivery_service"
+     *                  ref="#/definitions/MasterDeliveryService"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -158,7 +158,7 @@ class master_delivery_serviceAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var master_delivery_service $masterDeliveryService */
+        /** @var MasterDeliveryService $masterDeliveryService */
         $masterDeliveryService = $this->masterDeliveryServiceRepository->find($id);
 
         if (empty($masterDeliveryService)) {
@@ -170,18 +170,18 @@ class master_delivery_serviceAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param Updatemaster_delivery_serviceAPIRequest $request
+     * @param UpdateMasterDeliveryServiceAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
      *      path="/masterDeliveryServices/{id}",
-     *      summary="Update the specified master_delivery_service in storage",
-     *      tags={"master_delivery_service"},
-     *      description="Update master_delivery_service",
+     *      summary="Update the specified MasterDeliveryService in storage",
+     *      tags={"MasterDeliveryService"},
+     *      description="Update MasterDeliveryService",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_delivery_service",
+     *          description="id of MasterDeliveryService",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -189,9 +189,9 @@ class master_delivery_serviceAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_delivery_service that should be updated",
+     *          description="MasterDeliveryService that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_delivery_service")
+     *          @SWG\Schema(ref="#/definitions/MasterDeliveryService")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -204,7 +204,7 @@ class master_delivery_serviceAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_delivery_service"
+     *                  ref="#/definitions/MasterDeliveryService"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -214,11 +214,11 @@ class master_delivery_serviceAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, Updatemaster_delivery_serviceAPIRequest $request)
+    public function update($id, UpdateMasterDeliveryServiceAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var master_delivery_service $masterDeliveryService */
+        /** @var MasterDeliveryService $masterDeliveryService */
         $masterDeliveryService = $this->masterDeliveryServiceRepository->find($id);
 
         if (empty($masterDeliveryService)) {
@@ -227,7 +227,7 @@ class master_delivery_serviceAPIController extends AppBaseController
 
         $masterDeliveryService = $this->masterDeliveryServiceRepository->update($input, $id);
 
-        return $this->sendResponse($masterDeliveryService->toArray(), 'master_delivery_service updated successfully');
+        return $this->sendResponse($masterDeliveryService->toArray(), 'MasterDeliveryService updated successfully');
     }
 
     /**
@@ -236,13 +236,13 @@ class master_delivery_serviceAPIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/masterDeliveryServices/{id}",
-     *      summary="Remove the specified master_delivery_service from storage",
-     *      tags={"master_delivery_service"},
-     *      description="Delete master_delivery_service",
+     *      summary="Remove the specified MasterDeliveryService from storage",
+     *      tags={"MasterDeliveryService"},
+     *      description="Delete MasterDeliveryService",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_delivery_service",
+     *          description="id of MasterDeliveryService",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -270,7 +270,7 @@ class master_delivery_serviceAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var master_delivery_service $masterDeliveryService */
+        /** @var MasterDeliveryService $masterDeliveryService */
         $masterDeliveryService = $this->masterDeliveryServiceRepository->find($id);
 
         if (empty($masterDeliveryService)) {

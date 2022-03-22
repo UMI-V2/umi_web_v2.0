@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\master_delivery_serviceDataTable;
+use App\DataTables\MasterDeliveryServiceDataTable;
 use App\Http\Requests;
-use App\Http\Requests\Createmaster_delivery_serviceRequest;
-use App\Http\Requests\Updatemaster_delivery_serviceRequest;
-use App\Repositories\master_delivery_serviceRepository;
+use App\Http\Requests\CreateMasterDeliveryServiceRequest;
+use App\Http\Requests\UpdateMasterDeliveryServiceRequest;
+use App\Repositories\MasterDeliveryServiceRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
-class master_delivery_serviceController extends AppBaseController
+class MasterDeliveryServiceController extends AppBaseController
 {
-    /** @var master_delivery_serviceRepository $masterDeliveryServiceRepository*/
+    /** @var MasterDeliveryServiceRepository $masterDeliveryServiceRepository*/
     private $masterDeliveryServiceRepository;
 
-    public function __construct(master_delivery_serviceRepository $masterDeliveryServiceRepo)
+    public function __construct(MasterDeliveryServiceRepository $masterDeliveryServiceRepo)
     {
         $this->masterDeliveryServiceRepository = $masterDeliveryServiceRepo;
     }
 
     /**
-     * Display a listing of the master_delivery_service.
+     * Display a listing of the MasterDeliveryService.
      *
-     * @param master_delivery_serviceDataTable $masterDeliveryServiceDataTable
+     * @param MasterDeliveryServiceDataTable $masterDeliveryServiceDataTable
      *
      * @return Response
      */
-    public function index(master_delivery_serviceDataTable $masterDeliveryServiceDataTable)
+    public function index(MasterDeliveryServiceDataTable $masterDeliveryServiceDataTable)
     {
         return $masterDeliveryServiceDataTable->render('master_delivery_services.index');
     }
 
     /**
-     * Show the form for creating a new master_delivery_service.
+     * Show the form for creating a new MasterDeliveryService.
      *
      * @return Response
      */
@@ -44,13 +44,13 @@ class master_delivery_serviceController extends AppBaseController
     }
 
     /**
-     * Store a newly created master_delivery_service in storage.
+     * Store a newly created MasterDeliveryService in storage.
      *
-     * @param Createmaster_delivery_serviceRequest $request
+     * @param CreateMasterDeliveryServiceRequest $request
      *
      * @return Response
      */
-    public function store(Createmaster_delivery_serviceRequest $request)
+    public function store(CreateMasterDeliveryServiceRequest $request)
     {
         $input = $request->all();
 
@@ -62,7 +62,7 @@ class master_delivery_serviceController extends AppBaseController
     }
 
     /**
-     * Display the specified master_delivery_service.
+     * Display the specified MasterDeliveryService.
      *
      * @param int $id
      *
@@ -82,7 +82,7 @@ class master_delivery_serviceController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified master_delivery_service.
+     * Show the form for editing the specified MasterDeliveryService.
      *
      * @param int $id
      *
@@ -102,14 +102,14 @@ class master_delivery_serviceController extends AppBaseController
     }
 
     /**
-     * Update the specified master_delivery_service in storage.
+     * Update the specified MasterDeliveryService in storage.
      *
      * @param int $id
-     * @param Updatemaster_delivery_serviceRequest $request
+     * @param UpdateMasterDeliveryServiceRequest $request
      *
      * @return Response
      */
-    public function update($id, Updatemaster_delivery_serviceRequest $request)
+    public function update($id, UpdateMasterDeliveryServiceRequest $request)
     {
         $masterDeliveryService = $this->masterDeliveryServiceRepository->find($id);
 
@@ -127,7 +127,7 @@ class master_delivery_serviceController extends AppBaseController
     }
 
     /**
-     * Remove the specified master_delivery_service from storage.
+     * Remove the specified MasterDeliveryService from storage.
      *
      * @param int $id
      *

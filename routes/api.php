@@ -3,7 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\master_delivery_serviceAPIController;
+use App\Http\Controllers\API\MasterDeliveryServiceAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
 use App\Http\Controllers\API\UserController;
 
@@ -20,8 +20,8 @@ use App\Http\Controllers\API\UserController;
 
 Route::post('addMasterCategoryBusiness', [MasterBusinessCategoryAPIController::class, 'store']);
 Route::get('getMasterCategoryBusiness', [MasterBusinessCategoryAPIController::class, 'index']);
-// master_delivery_serviceAPIController
-Route::get('getMasterDeliveryService', [master_delivery_serviceAPIController::class, 'index']);
+// MasterDeliveryServiceAPIController
+Route::get('getMasterDeliveryService', [MasterDeliveryServiceAPIController::class, 'index']);
 
 // AUTH
 Route::post('register', [AuthController::class, 'register']);
@@ -49,7 +49,7 @@ Route::resource('master_privileges', App\Http\Controllers\API\MasterPrivilegeAPI
 Route::resource('master_provinces', App\Http\Controllers\API\MasterProvinceAPIController::class);
 
 
-Route::resource('master_delivery_services', App\Http\Controllers\API\master_delivery_serviceAPIController::class);
+Route::resource('master_delivery_services', App\Http\Controllers\API\MasterDeliveryServiceAPIController::class);
 
 
 Route::resource('master_payment_methods', App\Http\Controllers\API\master_payment_methodAPIController::class);

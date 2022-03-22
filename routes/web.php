@@ -88,7 +88,7 @@ Route::resource('masterProvinces', App\Http\Controllers\MasterProvinceController
 
 
 
-Route::resource('masterDeliveryServices', App\Http\Controllers\master_delivery_serviceController::class);
+Route::resource('masterDeliveryServices', App\Http\Controllers\MasterDeliveryServiceController::class);
 
 
 Route::resource('masterPaymentMethods', App\Http\Controllers\master_payment_methodController::class);
