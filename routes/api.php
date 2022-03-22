@@ -52,7 +52,7 @@ Route::resource('master_provinces', App\Http\Controllers\API\MasterProvinceAPICo
 Route::resource('master_delivery_services', App\Http\Controllers\API\MasterDeliveryServiceAPIController::class);
 
 
-Route::resource('master_payment_methods', App\Http\Controllers\API\master_payment_methodAPIController::class);
+Route::resource('master_payment_methods', App\Http\Controllers\API\MasterPaymentMethodAPIController::class);
 
 
 Route::resource('master_transaction_categories', App\Http\Controllers\API\master_transaction_categoryAPIController::class);

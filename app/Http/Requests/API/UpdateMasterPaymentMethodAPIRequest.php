@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\master_payment_method;
+use App\Models\MasterPaymentMethod;
 use InfyOm\Generator\Request\APIRequest;
 
-class Createmaster_payment_methodAPIRequest extends APIRequest
+class UpdateMasterPaymentMethodAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,8 @@ class Createmaster_payment_methodAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return master_payment_method::$rules;
+        $rules = MasterPaymentMethod::$rules;
+        
+        return $rules;
     }
 }

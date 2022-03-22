@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\master_payment_method;
+use App\Models\MasterPaymentMethod;
 use App\Repositories\BaseRepository;
 
 /**
- * Class master_payment_methodRepository
+ * Class MasterPaymentMethodRepository
  * @package App\Repositories
  * @version February 28, 2022, 5:40 pm UTC
 */
 
-class master_payment_methodRepository extends BaseRepository
+class MasterPaymentMethodRepository extends BaseRepository
 {
     /**
      * @var array
@@ -36,6 +36,6 @@ class master_payment_methodRepository extends BaseRepository
      **/
     public function model()
     {
-        return master_payment_method::class;
+        return MasterPaymentMethod::class;
     }
 }

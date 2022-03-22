@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\master_payment_methodDataTable;
+use App\DataTables\MasterPaymentMethodDataTable;
 use App\Http\Requests;
-use App\Http\Requests\Createmaster_payment_methodRequest;
-use App\Http\Requests\Updatemaster_payment_methodRequest;
-use App\Repositories\master_payment_methodRepository;
+use App\Http\Requests\CreateMasterPaymentMethodRequest;
+use App\Http\Requests\UpdateMasterPaymentMethodRequest;
+use App\Repositories\MasterPaymentMethodRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
-class master_payment_methodController extends AppBaseController
+class MasterPaymentMethodController extends AppBaseController
 {
-    /** @var master_payment_methodRepository $masterPaymentMethodRepository*/
+    /** @var MasterPaymentMethodRepository $masterPaymentMethodRepository*/
     private $masterPaymentMethodRepository;
 
-    public function __construct(master_payment_methodRepository $masterPaymentMethodRepo)
+    public function __construct(MasterPaymentMethodRepository $masterPaymentMethodRepo)
     {
         $this->masterPaymentMethodRepository = $masterPaymentMethodRepo;
     }
 
     /**
-     * Display a listing of the master_payment_method.
+     * Display a listing of the MasterPaymentMethod.
      *
-     * @param master_payment_methodDataTable $masterPaymentMethodDataTable
+     * @param MasterPaymentMethodDataTable $masterPaymentMethodDataTable
      *
      * @return Response
      */
-    public function index(master_payment_methodDataTable $masterPaymentMethodDataTable)
+    public function index(MasterPaymentMethodDataTable $masterPaymentMethodDataTable)
     {
         return $masterPaymentMethodDataTable->render('master_payment_methods.index');
     }
 
     /**
-     * Show the form for creating a new master_payment_method.
+     * Show the form for creating a new MasterPaymentMethod.
      *
      * @return Response
      */
@@ -44,13 +44,13 @@ class master_payment_methodController extends AppBaseController
     }
 
     /**
-     * Store a newly created master_payment_method in storage.
+     * Store a newly created MasterPaymentMethod in storage.
      *
-     * @param Createmaster_payment_methodRequest $request
+     * @param CreateMasterPaymentMethodRequest $request
      *
      * @return Response
      */
-    public function store(Createmaster_payment_methodRequest $request)
+    public function store(CreateMasterPaymentMethodRequest $request)
     {
         $input = $request->all();
 
@@ -62,7 +62,7 @@ class master_payment_methodController extends AppBaseController
     }
 
     /**
-     * Display the specified master_payment_method.
+     * Display the specified MasterPaymentMethod.
      *
      * @param int $id
      *
@@ -82,7 +82,7 @@ class master_payment_methodController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified master_payment_method.
+     * Show the form for editing the specified MasterPaymentMethod.
      *
      * @param int $id
      *
@@ -102,14 +102,14 @@ class master_payment_methodController extends AppBaseController
     }
 
     /**
-     * Update the specified master_payment_method in storage.
+     * Update the specified MasterPaymentMethod in storage.
      *
      * @param int $id
-     * @param Updatemaster_payment_methodRequest $request
+     * @param UpdateMasterPaymentMethodRequest $request
      *
      * @return Response
      */
-    public function update($id, Updatemaster_payment_methodRequest $request)
+    public function update($id, UpdateMasterPaymentMethodRequest $request)
     {
         $masterPaymentMethod = $this->masterPaymentMethodRepository->find($id);
 
@@ -127,7 +127,7 @@ class master_payment_methodController extends AppBaseController
     }
 
     /**
-     * Remove the specified master_payment_method from storage.
+     * Remove the specified MasterPaymentMethod from storage.
      *
      * @param int $id
      *

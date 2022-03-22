@@ -545,7 +545,7 @@
         },
         "/masterPaymentMethods": {
             "get": {
-                "tags": ["master_payment_method"],
+                "tags": ["MasterPaymentMethod"],
                 "summary": "Get a listing of the master_payment_methods.",
                 "description": "Get all master_payment_methods",
                 "produces": ["application/json"],
@@ -560,7 +560,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/master_payment_method"
+                                        "$ref": "#/definitions/MasterPaymentMethod"
                                     }
                                 },
                                 "message": {
@@ -573,18 +573,18 @@
                 }
             },
             "post": {
-                "tags": ["master_payment_method"],
-                "summary": "Store a newly created master_payment_method in storage",
-                "description": "Store master_payment_method",
+                "tags": ["MasterPaymentMethod"],
+                "summary": "Store a newly created MasterPaymentMethod in storage",
+                "description": "Store MasterPaymentMethod",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_payment_method that should be stored",
+                        "description": "MasterPaymentMethod that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_payment_method"
+                            "$ref": "#/definitions/MasterPaymentMethod"
                         }
                     }
                 ],
@@ -597,7 +597,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_payment_method"
+                                    "$ref": "#/definitions/MasterPaymentMethod"
                                 },
                                 "message": {
                                     "type": "string"
@@ -611,15 +611,15 @@
         },
         "/masterPaymentMethods/{id}": {
             "get": {
-                "tags": ["master_payment_method"],
-                "summary": "Display the specified master_payment_method",
-                "description": "Get master_payment_method",
+                "tags": ["MasterPaymentMethod"],
+                "summary": "Display the specified MasterPaymentMethod",
+                "description": "Get MasterPaymentMethod",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_payment_method",
+                        "description": "id of MasterPaymentMethod",
                         "required": true,
                         "type": "integer"
                     }
@@ -633,7 +633,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_payment_method"
+                                    "$ref": "#/definitions/MasterPaymentMethod"
                                 },
                                 "message": {
                                     "type": "string"
@@ -645,25 +645,25 @@
                 }
             },
             "put": {
-                "tags": ["master_payment_method"],
-                "summary": "Update the specified master_payment_method in storage",
-                "description": "Update master_payment_method",
+                "tags": ["MasterPaymentMethod"],
+                "summary": "Update the specified MasterPaymentMethod in storage",
+                "description": "Update MasterPaymentMethod",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_payment_method",
+                        "description": "id of MasterPaymentMethod",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_payment_method that should be updated",
+                        "description": "MasterPaymentMethod that should be updated",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_payment_method"
+                            "$ref": "#/definitions/MasterPaymentMethod"
                         }
                     }
                 ],
@@ -676,7 +676,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_payment_method"
+                                    "$ref": "#/definitions/MasterPaymentMethod"
                                 },
                                 "message": {
                                     "type": "string"
@@ -688,15 +688,15 @@
                 }
             },
             "delete": {
-                "tags": ["master_payment_method"],
-                "summary": "Remove the specified master_payment_method from storage",
-                "description": "Delete master_payment_method",
+                "tags": ["MasterPaymentMethod"],
+                "summary": "Remove the specified MasterPaymentMethod from storage",
+                "description": "Delete MasterPaymentMethod",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_payment_method",
+                        "description": "id of MasterPaymentMethod",
                         "required": true,
                         "type": "integer"
                     }
@@ -2114,7 +2114,7 @@
                 }
             }
         },
-        "master_payment_method": {
+        "MasterPaymentMethod": {
             "required": [
                 "nama_metode_pembayaran",
                 "deskripsi_metode_pembayaran"

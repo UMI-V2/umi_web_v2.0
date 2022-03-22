@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_payment_method;
+use App\Models\MasterPaymentMethod;
 
-class Updatemaster_payment_methodRequest extends FormRequest
+class CreateMasterPaymentMethodRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class Updatemaster_payment_methodRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = master_payment_method::$rules;
-        
-        return $rules;
+        return MasterPaymentMethod::$rules;
     }
 }

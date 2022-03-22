@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\Createmaster_payment_methodAPIRequest;
-use App\Http\Requests\API\Updatemaster_payment_methodAPIRequest;
-use App\Models\master_payment_method;
-use App\Repositories\master_payment_methodRepository;
+use App\Http\Requests\API\CreateMasterPaymentMethodAPIRequest;
+use App\Http\Requests\API\UpdateMasterPaymentMethodAPIRequest;
+use App\Models\MasterPaymentMethod;
+use App\Repositories\MasterPaymentMethodRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class master_payment_methodController
+ * Class MasterPaymentMethodController
  * @package App\Http\Controllers\API
  */
 
-class master_payment_methodAPIController extends AppBaseController
+class MasterPaymentMethodAPIController extends AppBaseController
 {
-    /** @var  master_payment_methodRepository */
+    /** @var  MasterPaymentMethodRepository */
     private $masterPaymentMethodRepository;
 
-    public function __construct(master_payment_methodRepository $masterPaymentMethodRepo)
+    public function __construct(MasterPaymentMethodRepository $masterPaymentMethodRepo)
     {
         $this->masterPaymentMethodRepository = $masterPaymentMethodRepo;
     }
@@ -32,7 +32,7 @@ class master_payment_methodAPIController extends AppBaseController
      * @SWG\Get(
      *      path="/masterPaymentMethods",
      *      summary="Get a listing of the master_payment_methods.",
-     *      tags={"master_payment_method"},
+     *      tags={"MasterPaymentMethod"},
      *      description="Get all master_payment_methods",
      *      produces={"application/json"},
      *      @SWG\Response(
@@ -47,7 +47,7 @@ class master_payment_methodAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/master_payment_method")
+     *                  @SWG\Items(ref="#/definitions/MasterPaymentMethod")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -69,21 +69,21 @@ class master_payment_methodAPIController extends AppBaseController
     }
 
     /**
-     * @param Createmaster_payment_methodAPIRequest $request
+     * @param CreateMasterPaymentMethodAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
      *      path="/masterPaymentMethods",
-     *      summary="Store a newly created master_payment_method in storage",
-     *      tags={"master_payment_method"},
-     *      description="Store master_payment_method",
+     *      summary="Store a newly created MasterPaymentMethod in storage",
+     *      tags={"MasterPaymentMethod"},
+     *      description="Store MasterPaymentMethod",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_payment_method that should be stored",
+     *          description="MasterPaymentMethod that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_payment_method")
+     *          @SWG\Schema(ref="#/definitions/MasterPaymentMethod")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class master_payment_methodAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_payment_method"
+     *                  ref="#/definitions/MasterPaymentMethod"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,7 +106,7 @@ class master_payment_methodAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(Createmaster_payment_methodAPIRequest $request)
+    public function store(CreateMasterPaymentMethodAPIRequest $request)
     {
         $input = $request->all();
 
@@ -121,13 +121,13 @@ class master_payment_methodAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/masterPaymentMethods/{id}",
-     *      summary="Display the specified master_payment_method",
-     *      tags={"master_payment_method"},
-     *      description="Get master_payment_method",
+     *      summary="Display the specified MasterPaymentMethod",
+     *      tags={"MasterPaymentMethod"},
+     *      description="Get MasterPaymentMethod",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_payment_method",
+     *          description="id of MasterPaymentMethod",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class master_payment_methodAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_payment_method"
+     *                  ref="#/definitions/MasterPaymentMethod"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,7 +155,7 @@ class master_payment_methodAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var master_payment_method $masterPaymentMethod */
+        /** @var MasterPaymentMethod $masterPaymentMethod */
         $masterPaymentMethod = $this->masterPaymentMethodRepository->find($id);
 
         if (empty($masterPaymentMethod)) {
@@ -167,18 +167,18 @@ class master_payment_methodAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param Updatemaster_payment_methodAPIRequest $request
+     * @param UpdateMasterPaymentMethodAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
      *      path="/masterPaymentMethods/{id}",
-     *      summary="Update the specified master_payment_method in storage",
-     *      tags={"master_payment_method"},
-     *      description="Update master_payment_method",
+     *      summary="Update the specified MasterPaymentMethod in storage",
+     *      tags={"MasterPaymentMethod"},
+     *      description="Update MasterPaymentMethod",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_payment_method",
+     *          description="id of MasterPaymentMethod",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class master_payment_methodAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_payment_method that should be updated",
+     *          description="MasterPaymentMethod that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_payment_method")
+     *          @SWG\Schema(ref="#/definitions/MasterPaymentMethod")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class master_payment_methodAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_payment_method"
+     *                  ref="#/definitions/MasterPaymentMethod"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,11 +211,11 @@ class master_payment_methodAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, Updatemaster_payment_methodAPIRequest $request)
+    public function update($id, UpdateMasterPaymentMethodAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var master_payment_method $masterPaymentMethod */
+        /** @var MasterPaymentMethod $masterPaymentMethod */
         $masterPaymentMethod = $this->masterPaymentMethodRepository->find($id);
 
         if (empty($masterPaymentMethod)) {
@@ -224,7 +224,7 @@ class master_payment_methodAPIController extends AppBaseController
 
         $masterPaymentMethod = $this->masterPaymentMethodRepository->update($input, $id);
 
-        return $this->sendResponse($masterPaymentMethod->toArray(), 'master_payment_method updated successfully');
+        return $this->sendResponse($masterPaymentMethod->toArray(), 'MasterPaymentMethod updated successfully');
     }
 
     /**
@@ -233,13 +233,13 @@ class master_payment_methodAPIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/masterPaymentMethods/{id}",
-     *      summary="Remove the specified master_payment_method from storage",
-     *      tags={"master_payment_method"},
-     *      description="Delete master_payment_method",
+     *      summary="Remove the specified MasterPaymentMethod from storage",
+     *      tags={"MasterPaymentMethod"},
+     *      description="Delete MasterPaymentMethod",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_payment_method",
+     *          description="id of MasterPaymentMethod",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,7 +267,7 @@ class master_payment_methodAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var master_payment_method $masterPaymentMethod */
+        /** @var MasterPaymentMethod $masterPaymentMethod */
         $masterPaymentMethod = $this->masterPaymentMethodRepository->find($id);
 
         if (empty($masterPaymentMethod)) {

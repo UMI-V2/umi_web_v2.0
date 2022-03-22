@@ -4,18 +4,18 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use App\Models\master_payment_method;
+use App\Models\MasterPaymentMethod;
 
-class master_payment_methodApiTest extends TestCase
+class MasterPaymentMethodApiTest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
-    public function test_create_master_payment_method()
+    public function test_create_MasterPaymentMethod()
     {
-        $masterPaymentMethod = master_payment_method::factory()->make()->toArray();
+        $masterPaymentMethod = MasterPaymentMethod::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -28,9 +28,9 @@ class master_payment_methodApiTest extends TestCase
     /**
      * @test
      */
-    public function test_read_master_payment_method()
+    public function test_read_MasterPaymentMethod()
     {
-        $masterPaymentMethod = master_payment_method::factory()->create();
+        $masterPaymentMethod = MasterPaymentMethod::factory()->create();
 
         $this->response = $this->json(
             'GET',
@@ -43,26 +43,26 @@ class master_payment_methodApiTest extends TestCase
     /**
      * @test
      */
-    public function test_update_master_payment_method()
+    public function test_update_MasterPaymentMethod()
     {
-        $masterPaymentMethod = master_payment_method::factory()->create();
-        $editedmaster_payment_method = master_payment_method::factory()->make()->toArray();
+        $masterPaymentMethod = MasterPaymentMethod::factory()->create();
+        $editedMasterPaymentMethod = MasterPaymentMethod::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
             '/api/master_payment_methods/'.$masterPaymentMethod->id,
-            $editedmaster_payment_method
+            $editedMasterPaymentMethod
         );
 
-        $this->assertApiResponse($editedmaster_payment_method);
+        $this->assertApiResponse($editedMasterPaymentMethod);
     }
 
     /**
      * @test
      */
-    public function test_delete_master_payment_method()
+    public function test_delete_MasterPaymentMethod()
     {
-        $masterPaymentMethod = master_payment_method::factory()->create();
+        $masterPaymentMethod = MasterPaymentMethod::factory()->create();
 
         $this->response = $this->json(
             'DELETE',

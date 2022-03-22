@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\master_payment_method;
+use App\Models\MasterPaymentMethod;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class master_payment_methodFactory extends Factory
+class MasterPaymentMethodFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = master_payment_method::class;
+    protected $model = MasterPaymentMethod::class;
 
     /**
      * Define the model's default state.

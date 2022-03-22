@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
-use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_payment_method;
+use App\Models\MasterPaymentMethod;
+use InfyOm\Generator\Request\APIRequest;
 
-class Createmaster_payment_methodRequest extends FormRequest
+class CreateMasterPaymentMethodAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class Createmaster_payment_methodRequest extends FormRequest
      */
     public function rules()
     {
-        return master_payment_method::$rules;
+        return MasterPaymentMethod::$rules;
     }
 }

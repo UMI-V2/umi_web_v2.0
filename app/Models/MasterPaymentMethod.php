@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
- *      definition="master_payment_method",
+ *      definition="MasterPaymentMethod",
  *      required={"nama_metode_pembayaran", "deskripsi_metode_pembayaran"},
  *      @SWG\Property(
  *          property="id",
@@ -40,7 +40,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
  * )
  */
-class master_payment_method extends Model
+class MasterPaymentMethod extends Model
 {
 
     use HasFactory;

@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\master_payment_method;
+use App\Models\MasterPaymentMethod;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class master_payment_methodDataTable extends DataTable
+class MasterPaymentMethodDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,10 +24,10 @@ class master_payment_methodDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\master_payment_method $model
+     * @param \App\Models\MasterPaymentMethod $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(master_payment_method $model)
+    public function query(MasterPaymentMethod $model)
     {
         return $model->newQuery();
     }
