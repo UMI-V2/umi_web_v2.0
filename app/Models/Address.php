@@ -14,7 +14,6 @@ class Address extends Model
 
     public $fillable = [
         'id_user',
-        'id_master_address_type',
         'nama',
         'no_hp',
         'id_provinsi',
@@ -23,6 +22,9 @@ class Address extends Model
         'alamat_lengkap',
         'patokan',
         'is_alamat_utama',
+        'is_rumah',
+        'is_kantor',
+        'is_usaha',
         'latitude',
         'longitude'
     ];

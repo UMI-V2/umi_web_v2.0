@@ -30,6 +30,6 @@ class CreateMasterCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_cities');
+        // Schema::dropIfExists('master_cities');
     }
 }

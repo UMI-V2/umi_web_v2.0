@@ -29,6 +29,6 @@ class CreateMasterSubDistrictsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_sub_districts');
+        // Schema::dropIfExists('master_sub_districts');
     }
 }

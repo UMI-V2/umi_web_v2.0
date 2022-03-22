@@ -16,7 +16,6 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->integer('id_user');
-            $table->integer('id_master_address_type');
 
             $table->string('nama');
             $table->string('no_hp');
@@ -25,7 +24,10 @@ class CreateAddressesTable extends Migration
             $table->integer('id_kecamatan');
             $table->string('alamat_lengkap');
             $table->string('patokan');
-            $table->boolean('is_alamat_utama')->default(true);
+            $table->boolean('is_alamat_utama')->default(false);
+            $table->boolean('is_rumah')->default(false);
+            $table->boolean('is_kantor')->default(false);
+            $table->boolean('is_usaha')->default(false);
 
             $table->string('latitude');
             $table->string('longitude');

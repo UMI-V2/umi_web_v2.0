@@ -28,6 +28,6 @@ class CreateMasterProvincesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('master_provinces');
+        // Schema::drop('master_provinces');
     }
 }

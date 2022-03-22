@@ -29,7 +29,6 @@ class AddressAPIController extends Controller
         try {
             $request->validate(
                 [
-                    'id_master_address_type' => 'required',
                     'nama' => 'required',
                     'no_hp' => 'required',
 
@@ -38,7 +37,6 @@ class AddressAPIController extends Controller
                     'id_kecamatan' => 'required',
                     'alamat_lengkap' => 'required',
                     'patokan' => 'required',
-                    'is_alamat_utama' => 'required',
                     'latitude' => 'required',
                     'longitude' => 'required',
                 ],
