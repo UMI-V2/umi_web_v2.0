@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\master_province;
+use App\Models\MasterProvince;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class master_provinceDataTable extends DataTable
+class MasterProvinceDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,10 +24,10 @@ class master_provinceDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\master_province $model
+     * @param \App\Models\MasterProvince $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(master_province $model)
+    public function query(MasterProvince $model)
     {
         return $model->newQuery();
     }

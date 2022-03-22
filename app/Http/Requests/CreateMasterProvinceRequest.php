@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\master_province;
+use App\Models\MasterProvince;
 
-class Createmaster_provinceRequest extends FormRequest
+class CreateMasterProvinceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class Createmaster_provinceRequest extends FormRequest
      */
     public function rules()
     {
-        return master_province::$rules;
+        return MasterProvince::$rules;
     }
 }

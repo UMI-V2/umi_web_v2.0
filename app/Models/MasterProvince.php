@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
- *      definition="master_province",
+ *      definition="MasterProvince",
  *      required={"nama_provinsi"},
  *      @SWG\Property(
  *          property="id",
@@ -35,7 +35,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
  * )
  */
-class master_province extends Model
+class MasterProvince extends Model
 {
 
     use HasFactory;

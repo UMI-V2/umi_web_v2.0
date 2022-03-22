@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\master_provinceDataTable;
+use App\DataTables\MasterProvinceDataTable;
 use App\Http\Requests;
-use App\Http\Requests\Createmaster_provinceRequest;
-use App\Http\Requests\Updatemaster_provinceRequest;
-use App\Repositories\master_provinceRepository;
+use App\Http\Requests\CreateMasterProvinceRequest;
+use App\Http\Requests\UpdateMasterProvinceRequest;
+use App\Repositories\MasterProvinceRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
-class master_provinceController extends AppBaseController
+class MasterProvinceController extends AppBaseController
 {
-    /** @var master_provinceRepository $masterProvinceRepository*/
+    /** @var MasterProvinceRepository $masterProvinceRepository*/
     private $masterProvinceRepository;
 
-    public function __construct(master_provinceRepository $masterProvinceRepo)
+    public function __construct(MasterProvinceRepository $masterProvinceRepo)
     {
         $this->masterProvinceRepository = $masterProvinceRepo;
     }
 
     /**
-     * Display a listing of the master_province.
+     * Display a listing of the MasterProvince.
      *
-     * @param master_provinceDataTable $masterProvinceDataTable
+     * @param MasterProvinceDataTable $masterProvinceDataTable
      *
      * @return Response
      */
-    public function index(master_provinceDataTable $masterProvinceDataTable)
+    public function index(MasterProvinceDataTable $masterProvinceDataTable)
     {
         return $masterProvinceDataTable->render('master_provinces.index');
     }
 
     /**
-     * Show the form for creating a new master_province.
+     * Show the form for creating a new MasterProvince.
      *
      * @return Response
      */
@@ -44,13 +44,13 @@ class master_provinceController extends AppBaseController
     }
 
     /**
-     * Store a newly created master_province in storage.
+     * Store a newly created MasterProvince in storage.
      *
-     * @param Createmaster_provinceRequest $request
+     * @param CreateMasterProvinceRequest $request
      *
      * @return Response
      */
-    public function store(Createmaster_provinceRequest $request)
+    public function store(CreateMasterProvinceRequest $request)
     {
         $input = $request->all();
 
@@ -62,7 +62,7 @@ class master_provinceController extends AppBaseController
     }
 
     /**
-     * Display the specified master_province.
+     * Display the specified MasterProvince.
      *
      * @param int $id
      *
@@ -82,7 +82,7 @@ class master_provinceController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified master_province.
+     * Show the form for editing the specified MasterProvince.
      *
      * @param int $id
      *
@@ -102,14 +102,14 @@ class master_provinceController extends AppBaseController
     }
 
     /**
-     * Update the specified master_province in storage.
+     * Update the specified MasterProvince in storage.
      *
      * @param int $id
-     * @param Updatemaster_provinceRequest $request
+     * @param UpdateMasterProvinceRequest $request
      *
      * @return Response
      */
-    public function update($id, Updatemaster_provinceRequest $request)
+    public function update($id, UpdateMasterProvinceRequest $request)
     {
         $masterProvince = $this->masterProvinceRepository->find($id);
 
@@ -127,7 +127,7 @@ class master_provinceController extends AppBaseController
     }
 
     /**
-     * Remove the specified master_province from storage.
+     * Remove the specified MasterProvince from storage.
      *
      * @param int $id
      *

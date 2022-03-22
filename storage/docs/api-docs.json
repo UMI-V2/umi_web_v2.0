@@ -1082,7 +1082,7 @@
         },
         "/masterProvinces": {
             "get": {
-                "tags": ["master_province"],
+                "tags": ["MasterProvince"],
                 "summary": "Get a listing of the master_provinces.",
                 "description": "Get all master_provinces",
                 "produces": ["application/json"],
@@ -1097,7 +1097,7 @@
                                 "data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/master_province"
+                                        "$ref": "#/definitions/MasterProvince"
                                     }
                                 },
                                 "message": {
@@ -1110,18 +1110,18 @@
                 }
             },
             "post": {
-                "tags": ["master_province"],
-                "summary": "Store a newly created master_province in storage",
-                "description": "Store master_province",
+                "tags": ["MasterProvince"],
+                "summary": "Store a newly created MasterProvince in storage",
+                "description": "Store MasterProvince",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_province that should be stored",
+                        "description": "MasterProvince that should be stored",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_province"
+                            "$ref": "#/definitions/MasterProvince"
                         }
                     }
                 ],
@@ -1134,7 +1134,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_province"
+                                    "$ref": "#/definitions/MasterProvince"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1148,15 +1148,15 @@
         },
         "/masterProvinces/{id}": {
             "get": {
-                "tags": ["master_province"],
-                "summary": "Display the specified master_province",
-                "description": "Get master_province",
+                "tags": ["MasterProvince"],
+                "summary": "Display the specified MasterProvince",
+                "description": "Get MasterProvince",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_province",
+                        "description": "id of MasterProvince",
                         "required": true,
                         "type": "integer"
                     }
@@ -1170,7 +1170,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_province"
+                                    "$ref": "#/definitions/MasterProvince"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1182,25 +1182,25 @@
                 }
             },
             "put": {
-                "tags": ["master_province"],
-                "summary": "Update the specified master_province in storage",
-                "description": "Update master_province",
+                "tags": ["MasterProvince"],
+                "summary": "Update the specified MasterProvince in storage",
+                "description": "Update MasterProvince",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_province",
+                        "description": "id of MasterProvince",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "master_province that should be updated",
+                        "description": "MasterProvince that should be updated",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/master_province"
+                            "$ref": "#/definitions/MasterProvince"
                         }
                     }
                 ],
@@ -1213,7 +1213,7 @@
                                     "type": "boolean"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/master_province"
+                                    "$ref": "#/definitions/MasterProvince"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1225,15 +1225,15 @@
                 }
             },
             "delete": {
-                "tags": ["master_province"],
-                "summary": "Remove the specified master_province from storage",
-                "description": "Delete master_province",
+                "tags": ["MasterProvince"],
+                "summary": "Remove the specified MasterProvince from storage",
+                "description": "Delete MasterProvince",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id of master_province",
+                        "description": "id of MasterProvince",
                         "required": true,
                         "type": "integer"
                     }
@@ -2197,7 +2197,7 @@
                 }
             }
         },
-        "master_province": {
+        "MasterProvince": {
             "required": ["nama_provinsi"],
             "properties": {
                 "id": {

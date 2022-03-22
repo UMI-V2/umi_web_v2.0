@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\master_province;
+use App\Models\MasterProvince;
 use InfyOm\Generator\Request\APIRequest;
 
-class Updatemaster_provinceAPIRequest extends APIRequest
+class CreateMasterProvinceAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class Updatemaster_provinceAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = master_province::$rules;
-        
-        return $rules;
+        return MasterProvince::$rules;
     }
 }

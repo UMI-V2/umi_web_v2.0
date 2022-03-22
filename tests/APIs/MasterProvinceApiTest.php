@@ -4,18 +4,18 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use App\Models\master_province;
+use App\Models\MasterProvince;
 
-class master_provinceApiTest extends TestCase
+class MasterProvinceApiTest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
     /**
      * @test
      */
-    public function test_create_master_province()
+    public function test_create_MasterProvince()
     {
-        $masterProvince = master_province::factory()->make()->toArray();
+        $masterProvince = MasterProvince::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -28,9 +28,9 @@ class master_provinceApiTest extends TestCase
     /**
      * @test
      */
-    public function test_read_master_province()
+    public function test_read_MasterProvince()
     {
-        $masterProvince = master_province::factory()->create();
+        $masterProvince = MasterProvince::factory()->create();
 
         $this->response = $this->json(
             'GET',
@@ -43,26 +43,26 @@ class master_provinceApiTest extends TestCase
     /**
      * @test
      */
-    public function test_update_master_province()
+    public function test_update_MasterProvince()
     {
-        $masterProvince = master_province::factory()->create();
-        $editedmaster_province = master_province::factory()->make()->toArray();
+        $masterProvince = MasterProvince::factory()->create();
+        $editedMasterProvince = MasterProvince::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
             '/api/master_provinces/'.$masterProvince->id,
-            $editedmaster_province
+            $editedMasterProvince
         );
 
-        $this->assertApiResponse($editedmaster_province);
+        $this->assertApiResponse($editedMasterProvince);
     }
 
     /**
      * @test
      */
-    public function test_delete_master_province()
+    public function test_delete_MasterProvince()
     {
-        $masterProvince = master_province::factory()->create();
+        $masterProvince = MasterProvince::factory()->create();
 
         $this->response = $this->json(
             'DELETE',

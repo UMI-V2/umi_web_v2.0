@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\master_province;
+use App\Models\MasterProvince;
 use App\Repositories\BaseRepository;
 
 /**
- * Class master_provinceRepository
+ * Class MasterProvinceRepository
  * @package App\Repositories
  * @version February 28, 2022, 4:20 pm UTC
 */
 
-class master_provinceRepository extends BaseRepository
+class MasterProvinceRepository extends BaseRepository
 {
     /**
      * @var array
@@ -36,6 +36,6 @@ class master_provinceRepository extends BaseRepository
      **/
     public function model()
     {
-        return master_province::class;
+        return MasterProvince::class;
     }
 }

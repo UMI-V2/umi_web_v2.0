@@ -79,7 +79,7 @@ Route::resource('masterUnits', App\Http\Controllers\MasterUnitController::class)
 Route::resource('masterPrivileges', App\Http\Controllers\MasterPrivilegeController::class);
 
 
-Route::resource('masterProvinces', App\Http\Controllers\master_provinceController::class);
+Route::resource('masterProvinces', App\Http\Controllers\MasterProvinceController::class);
 
 
 

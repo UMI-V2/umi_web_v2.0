@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\Createmaster_provinceAPIRequest;
-use App\Http\Requests\API\Updatemaster_provinceAPIRequest;
-use App\Models\master_province;
-use App\Repositories\master_provinceRepository;
+use App\Http\Requests\API\CreateMasterProvinceAPIRequest;
+use App\Http\Requests\API\UpdateMasterProvinceAPIRequest;
+use App\Models\MasterProvince;
+use App\Repositories\MasterProvinceRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class master_provinceController
+ * Class MasterProvinceController
  * @package App\Http\Controllers\API
  */
 
-class master_provinceAPIController extends AppBaseController
+class MasterProvinceAPIController extends AppBaseController
 {
-    /** @var  master_provinceRepository */
+    /** @var  MasterProvinceRepository */
     private $masterProvinceRepository;
 
-    public function __construct(master_provinceRepository $masterProvinceRepo)
+    public function __construct(MasterProvinceRepository $masterProvinceRepo)
     {
         $this->masterProvinceRepository = $masterProvinceRepo;
     }
@@ -32,7 +32,7 @@ class master_provinceAPIController extends AppBaseController
      * @SWG\Get(
      *      path="/masterProvinces",
      *      summary="Get a listing of the master_provinces.",
-     *      tags={"master_province"},
+     *      tags={"MasterProvince"},
      *      description="Get all master_provinces",
      *      produces={"application/json"},
      *      @SWG\Response(
@@ -47,7 +47,7 @@ class master_provinceAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/master_province")
+     *                  @SWG\Items(ref="#/definitions/MasterProvince")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -69,21 +69,21 @@ class master_provinceAPIController extends AppBaseController
     }
 
     /**
-     * @param Createmaster_provinceAPIRequest $request
+     * @param CreateMasterProvinceAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
      *      path="/masterProvinces",
-     *      summary="Store a newly created master_province in storage",
-     *      tags={"master_province"},
-     *      description="Store master_province",
+     *      summary="Store a newly created MasterProvince in storage",
+     *      tags={"MasterProvince"},
+     *      description="Store MasterProvince",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_province that should be stored",
+     *          description="MasterProvince that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_province")
+     *          @SWG\Schema(ref="#/definitions/MasterProvince")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class master_provinceAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_province"
+     *                  ref="#/definitions/MasterProvince"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,7 +106,7 @@ class master_provinceAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(Createmaster_provinceAPIRequest $request)
+    public function store(CreateMasterProvinceAPIRequest $request)
     {
         $input = $request->all();
 
@@ -121,13 +121,13 @@ class master_provinceAPIController extends AppBaseController
      *
      * @SWG\Get(
      *      path="/masterProvinces/{id}",
-     *      summary="Display the specified master_province",
-     *      tags={"master_province"},
-     *      description="Get master_province",
+     *      summary="Display the specified MasterProvince",
+     *      tags={"MasterProvince"},
+     *      description="Get MasterProvince",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_province",
+     *          description="id of MasterProvince",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class master_provinceAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_province"
+     *                  ref="#/definitions/MasterProvince"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,7 +155,7 @@ class master_provinceAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var master_province $masterProvince */
+        /** @var MasterProvince $masterProvince */
         $masterProvince = $this->masterProvinceRepository->find($id);
 
         if (empty($masterProvince)) {
@@ -167,18 +167,18 @@ class master_provinceAPIController extends AppBaseController
 
     /**
      * @param int $id
-     * @param Updatemaster_provinceAPIRequest $request
+     * @param UpdateMasterProvinceAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
      *      path="/masterProvinces/{id}",
-     *      summary="Update the specified master_province in storage",
-     *      tags={"master_province"},
-     *      description="Update master_province",
+     *      summary="Update the specified MasterProvince in storage",
+     *      tags={"MasterProvince"},
+     *      description="Update MasterProvince",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_province",
+     *          description="id of MasterProvince",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class master_provinceAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="master_province that should be updated",
+     *          description="MasterProvince that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/master_province")
+     *          @SWG\Schema(ref="#/definitions/MasterProvince")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class master_provinceAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/master_province"
+     *                  ref="#/definitions/MasterProvince"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,11 +211,11 @@ class master_provinceAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, Updatemaster_provinceAPIRequest $request)
+    public function update($id, UpdateMasterProvinceAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var master_province $masterProvince */
+        /** @var MasterProvince $masterProvince */
         $masterProvince = $this->masterProvinceRepository->find($id);
 
         if (empty($masterProvince)) {
@@ -224,7 +224,7 @@ class master_provinceAPIController extends AppBaseController
 
         $masterProvince = $this->masterProvinceRepository->update($input, $id);
 
-        return $this->sendResponse($masterProvince->toArray(), 'master_province updated successfully');
+        return $this->sendResponse($masterProvince->toArray(), 'MasterProvince updated successfully');
     }
 
     /**
@@ -233,13 +233,13 @@ class master_provinceAPIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/masterProvinces/{id}",
-     *      summary="Remove the specified master_province from storage",
-     *      tags={"master_province"},
-     *      description="Delete master_province",
+     *      summary="Remove the specified MasterProvince from storage",
+     *      tags={"MasterProvince"},
+     *      description="Delete MasterProvince",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of master_province",
+     *          description="id of MasterProvince",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,7 +267,7 @@ class master_provinceAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var master_province $masterProvince */
+        /** @var MasterProvince $masterProvince */
         $masterProvince = $this->masterProvinceRepository->find($id);
 
         if (empty($masterProvince)) {
