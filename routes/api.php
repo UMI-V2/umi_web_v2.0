@@ -55,7 +55,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::post('updateBusiness', [BusinessAPIController::class, 'store']);
     Route::get('getBusiness', [BusinessAPIController::class, 'index']);
     
-    Route::delete('logout', [AuthController::class, 'logout']);
+    Route::delete('logout', [AuthAPIController::class, 'logout']);
 });
 
 
