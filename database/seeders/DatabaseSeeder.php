@@ -34,18 +34,26 @@ class DatabaseSeeder extends Seeder
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
+            // [
+            //     'nama_status_pengguna'      => 'Tidak Aktif',
+            //     'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            //     'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            // ],
+            // [
+            //     'nama_status_pengguna'      => 'Suspend',
+            //     'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            //     'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            // ],
+            // [
+            //     'nama_status_pengguna'      => 'Banned',
+            //     'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            //     'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            // ],
+        );
+
+        master_status_user::create(
             [
                 'nama_status_pengguna'      => 'Tidak Aktif',
-                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            [
-                'nama_status_pengguna'      => 'Suspend',
-                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            [
-                'nama_status_pengguna'      => 'Banned',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
@@ -57,16 +65,29 @@ class DatabaseSeeder extends Seeder
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
+        );
+        master_privilege::create(
             [
                 'nama_hak_akses_pengguna'   => 'Admin',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
+        );
+        master_privilege::create(
+            [
+                'nama_hak_akses_pengguna'   => 'Dinas UKM',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+        master_privilege::create(
             [
                 'nama_hak_akses_pengguna'   => 'Pembeli',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
+        );
+        master_privilege::create(
             [
                 'nama_hak_akses_pengguna'   => 'Pembeli & Penjual',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
@@ -88,6 +109,8 @@ class DatabaseSeeder extends Seeder
             'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             ],
+        );
+        User::create(
             [
             'name'                  => 'Super Admin',
             'username'              => 'Super Admin',

@@ -13,6 +13,14 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
+use Exception;
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends AppBaseController
 {
     /** @var UserRepository $userRepository*/
@@ -57,8 +65,21 @@ class UserController extends AppBaseController
      */
     public function store(CreateUserRequest $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
 
+        $input = User::create([
+                'name' => $request->name,
+                'username' => $request->username,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'no_hp' => $request->no_hp,
+                'foto' => $request->foto,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'id_privilege' => $request->id_privilege,
+                'id_status_pengguna' => $request->id_status_pengguna,
+            ]);
+        
         $user = $this->userRepository->create($input);
 
         Flash::success('User saved successfully.');
@@ -96,6 +117,8 @@ class UserController extends AppBaseController
     public function edit($id)
     {
         $user = $this->userRepository->find($id);
+        $master_privileges = master_privilege::query()->pluck('nama_hak_akses_pengguna', 'id');
+        $master_status_users = master_status_user::query()->pluck('nama_status_pengguna', 'id');
 
         if (empty($user)) {
             Flash::error('User not found');
@@ -103,7 +126,7 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return view('users.edit')->with('user', $user);
+        return view('users.edit')->with('user', $user)->with('master_privileges', $master_privileges)->with('master_status_users', $master_status_users);
     }
 
     /**
@@ -124,7 +147,20 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        $user = $this->userRepository->update($request->all(), $id);
+        User::findOrFail($id)->fill(
+            [
+                'name' => $request->name,
+                'username' => $request->username,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'no_hp' => $request->no_hp,
+                'foto' => $request->foto,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'id_privilege' => $request->id_privilege,
+                'id_status_pengguna' => $request->id_status_pengguna,
+            ]
+        )->save();
 
         Flash::success('User updated successfully.');
 
