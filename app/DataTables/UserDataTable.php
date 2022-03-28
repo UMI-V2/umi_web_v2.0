@@ -29,7 +29,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->with('master_privilege')->with('master_status_user');
+        return $model->newQuery()->with('MasterPrivilege')->with('MasterStatusUser');
     }
 
     /**

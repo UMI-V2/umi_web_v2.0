@@ -72,33 +72,33 @@ Route::middleware('auth:sanctum')->group(function (){
 });
 
 
-Route::resource('master_product_categories', App\Http\Controllers\API\master_product_categoryAPIController::class);
+Route::resource('master_product_categories', App\Http\Controllers\API\MasterProductCategoryAPIController::class);
 
 
-Route::resource('master_business_categories', App\Http\Controllers\API\master_business_categoryAPIController::class);
+Route::resource('master_business_categories', App\Http\Controllers\API\MasterBusinessCategoryAPIController::class);
 
 
-Route::resource('master_status_businesses', App\Http\Controllers\API\master_status_businessAPIController::class);
+Route::resource('master_status_businesses', App\Http\Controllers\API\MasterStatusBusinessAPIController::class);
 
 
-Route::resource('master_units', App\Http\Controllers\API\master_unitAPIController::class);
+Route::resource('master_units', App\Http\Controllers\API\MasterUnitAPIController::class);
 
 
-Route::resource('master_privileges', App\Http\Controllers\API\master_privilegeAPIController::class);
+Route::resource('master_privileges', App\Http\Controllers\API\MasterPrivilegeAPIController::class);
 
 
-Route::resource('master_provinces', App\Http\Controllers\API\master_provinceAPIController::class);
+Route::resource('master_provinces', App\Http\Controllers\API\MasterProvinceAPIController::class);
 
 
-Route::resource('master_delivery_services', App\Http\Controllers\API\master_delivery_serviceAPIController::class);
+Route::resource('master_delivery_services', App\Http\Controllers\API\MasterDeliveryServiceAPIController::class);
 
 
-Route::resource('master_payment_methods', App\Http\Controllers\API\master_payment_methodAPIController::class);
+Route::resource('master_payment_methods', App\Http\Controllers\API\MasterPaymentMethodAPIController::class);
 
 
-Route::resource('master_transaction_categories', App\Http\Controllers\API\master_transaction_categoryAPIController::class);
+Route::resource('master_transaction_categories', App\Http\Controllers\API\MasterTransactionCategoryAPIController::class);
 
-Route::resource('master_status_users', App\Http\Controllers\API\master_status_userAPIController::class);
+Route::resource('master_status_users', App\Http\Controllers\API\MasterStatusUserAPIController::class);
 
 
 Route::resource('users', App\Http\Controllers\API\UserAPIController::class);

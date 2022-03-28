@@ -58,28 +58,16 @@ Route::post(
 
 
 
-Route::resource('masterProductCategories', App\Http\Controllers\master_product_categoryController::class);
+Route::resource('masterProductCategories', App\Http\Controllers\MasterProductCategoryController::class);
 
 
-Route::resource('masterBusinessCategories', App\Http\Controllers\master_business_categoryController::class);
+Route::resource('masterBusinessCategories', App\Http\Controllers\MasterBusinessCategoryController::class);
 
 
-Route::resource('masterStatusBusinesses', App\Http\Controllers\master_status_businessController::class);
+Route::resource('masterStatusBusinesses', App\Http\Controllers\MasterStatusBusinessController::class);
 
 
-Route::resource('masterUnits', App\Http\Controllers\master_unitController::class);
-
-
-
-
-
-
-
-
-Route::resource('masterPrivileges', App\Http\Controllers\master_privilegeController::class);
-
-
-Route::resource('masterProvinces', App\Http\Controllers\master_provinceController::class);
+Route::resource('masterUnits', App\Http\Controllers\MasterUnitController::class);
 
 
 
@@ -88,18 +76,30 @@ Route::resource('masterProvinces', App\Http\Controllers\master_provinceControlle
 
 
 
-Route::resource('masterDeliveryServices', App\Http\Controllers\master_delivery_serviceController::class);
+Route::resource('masterPrivileges', App\Http\Controllers\MasterPrivilegeController::class);
 
 
-Route::resource('masterPaymentMethods', App\Http\Controllers\master_payment_methodController::class);
+Route::resource('masterProvinces', App\Http\Controllers\MasterProvinceController::class);
 
 
-Route::resource('masterTransactionCategories', App\Http\Controllers\master_transaction_categoryController::class);
 
 
-Route::resource('masterTransactionCategories', App\Http\Controllers\master_transaction_categoryController::class);
 
-Route::resource('masterStatusUsers', App\Http\Controllers\master_status_userController::class);
+
+
+
+Route::resource('masterDeliveryServices', App\Http\Controllers\MasterDeliveryServiceController::class);
+
+
+Route::resource('masterPaymentMethods', App\Http\Controllers\MasterPaymentMethodController::class);
+
+
+Route::resource('masterTransactionCategories', App\Http\Controllers\MasterTransactionCategoryController::class);
+
+
+Route::resource('masterTransactionCategories', App\Http\Controllers\MasterTransactionCategoryController::class);
+
+Route::resource('masterStatusUsers', App\Http\Controllers\MasterStatusUserController::class);
 
 
 Route::resource('users', App\Http\Controllers\UserController::class);

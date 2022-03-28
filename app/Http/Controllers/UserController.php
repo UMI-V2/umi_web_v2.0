@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\master_status_user;
-use App\Models\master_privilege;
+use App\Models\MasterStatusUser;
+use App\Models\MasterPrivilege;
 use App\DataTables\UserDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateUserRequest;
@@ -50,8 +50,8 @@ class UserController extends AppBaseController
      */
     public function create()
     {
-        $master_privileges = master_privilege::query()->pluck('nama_hak_akses_pengguna', 'id');
-        $master_status_users = master_status_user::query()->pluck('nama_status_pengguna', 'id');
+        $master_privileges = MasterPrivilege::query()->pluck('nama_hak_akses_pengguna', 'id');
+        $master_status_users = MasterStatusUser::query()->pluck('nama_status_pengguna', 'id');
 
         return view('users.create')->with('master_privileges', $master_privileges)->with('master_status_users', $master_status_users);
     }
@@ -117,8 +117,8 @@ class UserController extends AppBaseController
     public function edit($id)
     {
         $user = $this->userRepository->find($id);
-        $master_privileges = master_privilege::query()->pluck('nama_hak_akses_pengguna', 'id');
-        $master_status_users = master_status_user::query()->pluck('nama_status_pengguna', 'id');
+        $master_privileges = MasterPrivilege::query()->pluck('nama_hak_akses_pengguna', 'id');
+        $master_status_users = MasterStatusUser::query()->pluck('nama_status_pengguna', 'id');
 
         if (empty($user)) {
             Flash::error('User not found');

@@ -161,6 +161,6 @@
     },
     {
         "type": "relation",
-        "relation": "mt1,master_status_user,id_status_pengguna,id"
+        "relation": "mt1,MasterStatusUser,id_status_pengguna,id"
     }
 ]
