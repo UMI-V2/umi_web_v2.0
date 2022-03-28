@@ -5,11 +5,13 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\AddressAPIController;
 use App\Http\Controllers\API\BusinessAPIController;
+use App\Http\Controllers\API\BusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterCityAPIController;
 use App\Http\Controllers\API\master_provinceAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\master_delivery_serviceAPIController;
 use App\Http\Controllers\API\master_business_categoryAPIController;
+use App\Http\Controllers\API\UserAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,14 +50,25 @@ Route::post('changePassword', [AuthAPIController::class, 'changePassword']);
 
 
 Route::middleware('auth:sanctum')->group(function (){
+    #Users
+    Route::get('getUser', [UserAPIController::class, 'get']);
+    Route::post('updateUser', [UserAPIController::class, 'updateProfile']);
+    Route::post('updatePhotoProfile', [UserAPIController::class, 'updatePhotoProfile']);
+
     #Address
     Route::post('updateAddress', [AddressAPIController::class, 'store']);
     Route::get('getAddress', [AddressAPIController::class, 'index']);
     #business
     Route::post('updateBusiness', [BusinessAPIController::class, 'store']);
     Route::get('getBusiness', [BusinessAPIController::class, 'index']);
-    
+    #Auth
     Route::delete('logout', [AuthAPIController::class, 'logout']);
+
+    #Business Category
+    Route::get('getBusinessCategory', [BusinessCategoryAPIController::class, 'index']);
+    Route::post('updateBusinessCategory', [BusinessCategoryAPIController::class, 'store']);
+    Route::delete('deleteBusinessCategory', [BusinessCategoryAPIController::class, 'destroy']);
+
 });
 
 

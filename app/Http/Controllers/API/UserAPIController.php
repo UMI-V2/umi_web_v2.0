@@ -2,280 +2,93 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateUserAPIRequest;
-use App\Http\Requests\API\UpdateUserAPIRequest;
+use Exception;
 use App\Models\User;
-use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Response;
+use App\Helpers\ResponseFormatter;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
-/**
- * Class UserController
- * @package App\Http\Controllers\API
- */
-
-class UserAPIController extends AppBaseController
+class UserAPIController extends Controller
 {
-    /** @var  UserRepository */
-    private $userRepository;
-
-    public function __construct(UserRepository $userRepo)
+    public function get(Request $request)
     {
-        $this->userRepository = $userRepo;
-    }
-
-    /**
-     * @param Request $request
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/users",
-     *      summary="Get a listing of the Users.",
-     *      tags={"User"},
-     *      description="Get all Users",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/User")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function index(Request $request)
-    {
-        $users = $this->userRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
-
-        return $this->sendResponse($users->toArray(), 'Users retrieved successfully');
-    }
-
-    /**
-     * @param CreateUserAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/users",
-     *      summary="Store a newly created User in storage",
-     *      tags={"User"},
-     *      description="Store User",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="User that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/User"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function store(CreateUserAPIRequest $request)
-    {
-        $input = $request->all();
-
-        $user = $this->userRepository->create($input);
-
-        return $this->sendResponse($user->toArray(), 'User saved successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/users/{id}",
-     *      summary="Display the specified User",
-     *      tags={"User"},
-     *      description="Get User",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of User",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/User"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function show($id)
-    {
-        /** @var User $user */
-        $user = $this->userRepository->find($id);
-
-        if (empty($user)) {
-            return $this->sendError('User not found');
+        try {
+            return ResponseFormatter::success($request->user()->load(['master_privilege', "master_status_user"]), 'Data User berhasil diambil');
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => "Update profil gagal",
+                'error' => $error,
+            ],  'Update Failed', 500);
         }
-
-        return $this->sendResponse($user->toArray(), 'User retrieved successfully');
     }
 
-    /**
-     * @param int $id
-     * @param UpdateUserAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/users/{id}",
-     *      summary="Update the specified User in storage",
-     *      tags={"User"},
-     *      description="Update User",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of User",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="User that should be updated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/User")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/User"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function update($id, UpdateUserAPIRequest $request)
+    public function updateProfile(Request $request)
     {
-        $input = $request->all();
+        try {
+            $data = $request->all();
 
-        /** @var User $user */
-        $user = $this->userRepository->find($id);
+            $user = $request->user();
+            if ($request->password) {
+                $user->update([
+                    'password' => Hash::make($request->password),
+                ]);
+                return ResponseFormatter::success(
+                    $user,
+                    'Change password Sukses',
+                );
+            }
+            $user->update($data);  
 
-        if (empty($user)) {
-            return $this->sendError('User not found');
+            return ResponseFormatter::success(
+                $user->load(['master_privilege', "master_status_user"]),
+                'Profile Updated',
+            );
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => "Update profil gagal",
+                'error' => $error,
+            ],  'Update Failed', 500);
         }
-
-        $user = $this->userRepository->update($input, $id);
-
-        return $this->sendResponse($user->toArray(), 'User updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Delete(
-     *      path="/users/{id}",
-     *      summary="Remove the specified User from storage",
-     *      tags={"User"},
-     *      description="Delete User",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of User",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function destroy($id)
+    public function updatePhotoProfile(Request $request)
     {
-        /** @var User $user */
-        $user = $this->userRepository->find($id);
-
-        if (empty($user)) {
-            return $this->sendError('User not found');
+        $validator  = Validator::make($request->all(), [
+            'file' => 'required|image'
+        ],);
+        if ($validator->fails()) {
+            return ResponseFormatter::error(
+                [
+                    'message'=>"Gagal upload file",
+                    'error' => $validator->errors()
+                ],
+                'update photo fails',
+                401
+            );
         }
+        if ($request->file('file')) {
+            
 
-        $user->delete();
+            $file = $request->file->store('assets/user', 'public');
 
-        return $this->sendSuccess('User deleted successfully');
+            
+
+            $user = $request->user();
+            $lastFile = $user->profile_photo_path;
+            $user->profile_photo_path = $file;
+            $user->update();
+
+            if($lastFile){
+                if(Storage::disk('public')->exists($lastFile)){
+                    Storage::disk('public')->delete($lastFile);
+                }
+            }
+
+            return ResponseFormatter::success($user->load(['master_privilege', "master_status_user"]), 'File successfully uploaded');
+        }
     }
 }

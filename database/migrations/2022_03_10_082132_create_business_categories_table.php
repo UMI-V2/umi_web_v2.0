@@ -15,7 +15,14 @@ class CreateBusinessCategoriesTable extends Migration
     {
         Schema::create('business_categories', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('id_usaha');
+            $table->bigInteger('id_kategori_usaha');
+
             $table->timestamps();
+
+            // $table->foreign('id_usaha')->references('id')->on('businesses');
+            // $table->foreign('id_kategori_usaha')->references('id')->on('master_business_categories');
+
         });
     }
 

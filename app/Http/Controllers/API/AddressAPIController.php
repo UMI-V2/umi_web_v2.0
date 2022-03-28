@@ -31,7 +31,6 @@ class AddressAPIController extends Controller
                 [
                     'nama' => 'required',
                     'no_hp' => 'required',
-
                     'id_provinsi' => 'required',
                     'id_kota' => 'required',
                     'id_kecamatan' => 'required',
@@ -47,8 +46,10 @@ class AddressAPIController extends Controller
 
             $result = Address::updateOrCreate(['id' => $request->id], $data);
 
+            $searchAddress = Address::where('id', $request->id)->first();
+
             return ResponseFormatter::success(
-                $result->load(['province', 'city', 'subDistrict']),
+                $searchAddress->load(['province', 'city', 'subDistrict']),
                 'Address Updated',
             );
         } catch (Exception $error) {
