@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\MasterPrivilege;
 use App\Models\MasterStatusUser;
+use App\Models\MasterBusinessCategory;
 use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,27 +29,30 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        MasterBusinessCategory::create(
+            [
+                'nama_kategori_usaha'       => 'Distro Baju',
+                'status_kategori_usaha'     => 'Barang',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        MasterBusinessCategory::create(
+            [
+                'nama_kategori_usaha'       => 'Software House',
+                'status_kategori_usaha'     => 'Jasa',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+        
         MasterStatusUser::create(
             [
                 'nama_status_pengguna'      => 'Aktif',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            // [
-            //     'nama_status_pengguna'      => 'Tidak Aktif',
-            //     'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            //     'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            // ],
-            // [
-            //     'nama_status_pengguna'      => 'Suspend',
-            //     'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            //     'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            // ],
-            // [
-            //     'nama_status_pengguna'      => 'Banned',
-            //     'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            //     'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            // ],
+            ]
         );
 
         MasterStatusUser::create(
