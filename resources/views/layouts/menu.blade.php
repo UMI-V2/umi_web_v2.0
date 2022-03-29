@@ -115,3 +115,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('businessCategories.index') }}"
+       class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
+        <p>Kategori Usaha</p>
+    </a>
+</li>
+
+

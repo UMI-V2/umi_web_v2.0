@@ -67,3 +67,6 @@ Route::resource('businesses', App\Http\Controllers\API\BusinessAPIController::cl
 
 
 Route::resource('business_files', App\Http\Controllers\API\BusinessFileAPIController::class);
+
+
+Route::resource('business_categories', App\Http\Controllers\API\BusinessCategoryAPIController::class);

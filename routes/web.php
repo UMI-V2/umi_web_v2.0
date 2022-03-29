@@ -109,3 +109,6 @@ Route::resource('businesses', App\Http\Controllers\BusinessController::class);
 
 
 Route::resource('businessFiles', App\Http\Controllers\BusinessFileController::class);
+
+
+Route::resource('businessCategories', App\Http\Controllers\BusinessCategoryController::class);
