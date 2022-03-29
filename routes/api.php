@@ -61,3 +61,6 @@ Route::resource('master_status_users', App\Http\Controllers\API\MasterStatusUser
 
 
 Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
+
+
+Route::resource('businesses', App\Http\Controllers\API\BusinessAPIController::class);

@@ -99,3 +99,11 @@
 
 
 
+<li class="nav-item">
+    <a href="{{ route('businesses.index') }}"
+       class="nav-link {{ Request::is('businesses*') ? 'active' : '' }}">
+        <p>Usaha</p>
+    </a>
+</li>
+
+
