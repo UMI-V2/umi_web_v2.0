@@ -70,3 +70,6 @@ Route::resource('business_files', App\Http\Controllers\API\BusinessFileAPIContro
 
 
 Route::resource('business_categories', App\Http\Controllers\API\BusinessCategoryAPIController::class);
+
+
+Route::resource('cities', App\Http\Controllers\API\CityAPIController::class);

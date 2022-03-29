@@ -123,3 +123,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('cities.index') }}"
+       class="nav-link {{ Request::is('cities*') ? 'active' : '' }}">
+        <p>Kota</p>
+    </a>
+</li>
+
+
