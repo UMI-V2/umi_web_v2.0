@@ -131,3 +131,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('subDistricts.index') }}"
+       class="nav-link {{ Request::is('subDistricts*') ? 'active' : '' }}">
+        <p>Kecamatan</p>
+    </a>
+</li>
+
+

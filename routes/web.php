@@ -115,3 +115,6 @@ Route::resource('businessCategories', App\Http\Controllers\BusinessCategoryContr
 
 
 Route::resource('cities', App\Http\Controllers\CityController::class);
+
+
+Route::resource('subDistricts', App\Http\Controllers\SubDistrictController::class);

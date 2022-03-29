@@ -73,3 +73,6 @@ Route::resource('business_categories', App\Http\Controllers\API\BusinessCategory
 
 
 Route::resource('cities', App\Http\Controllers\API\CityAPIController::class);
+
+
+Route::resource('sub_districts', App\Http\Controllers\API\SubDistrictAPIController::class);
