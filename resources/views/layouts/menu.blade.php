@@ -107,3 +107,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('businessFiles.index') }}"
+       class="nav-link {{ Request::is('businessFiles*') ? 'active' : '' }}">
+        <p>File Usaha</p>
+    </a>
+</li>
+
+

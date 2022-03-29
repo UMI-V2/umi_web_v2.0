@@ -64,3 +64,6 @@ Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
 
 
 Route::resource('businesses', App\Http\Controllers\API\BusinessAPIController::class);
+
+
+Route::resource('business_files', App\Http\Controllers\API\BusinessFileAPIController::class);

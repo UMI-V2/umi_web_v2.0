@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\MasterPrivilege;
 use App\Models\MasterStatusUser;
+use App\Models\MasterStatusBusiness;
 use App\Models\MasterBusinessCategory;
 use Carbon\Carbon;
 
@@ -47,6 +48,22 @@ class DatabaseSeeder extends Seeder
             ],
         );
         
+        MasterStatusBusiness::create(
+            [
+                'nama_status_usaha'         => 'Aktif',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ]
+        );
+
+        MasterStatusBusiness::create(
+            [
+                'nama_status_usaha'         => 'Tidak Aktif',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ]
+        );
+
         MasterStatusUser::create(
             [
                 'nama_status_pengguna'      => 'Aktif',
