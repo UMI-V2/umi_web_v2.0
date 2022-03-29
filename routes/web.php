@@ -103,3 +103,15 @@ Route::resource('masterStatusUsers', App\Http\Controllers\MasterStatusUserContro
 
 
 Route::resource('users', App\Http\Controllers\UserController::class);
+
+
+Route::resource('businesses', App\Http\Controllers\BusinessController::class);
+
+
+Route::resource('businessFiles', App\Http\Controllers\BusinessFileController::class);
+
+
+Route::resource('businessCategories', App\Http\Controllers\BusinessCategoryController::class);
+
+
+Route::resource('cities', App\Http\Controllers\CityController::class);

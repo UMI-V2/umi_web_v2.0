@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Eloquent as Model;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
- *      definition="BusinessCategory",
- *      required={"id_usaha", "id_master_kategori_usaha"},
+ *      definition="BusinessFile",
+ *      required={"id_usaha", "file", "is_video", "is_photo"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -22,10 +23,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="id_master_kategori_usaha",
- *          description="id_master_kategori_usaha",
- *          type="integer",
- *          format="int32"
+ *          property="file",
+ *          description="file",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="is_video",
+ *          description="is_video",
+ *          type="boolean"
+ *      ),
+ *      @SWG\Property(
+ *          property="is_photo",
+ *          description="is_photo",
+ *          type="boolean"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -41,19 +51,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
  * )
  */
-class BusinessCategory extends Model
+class BusinessFile extends Model
 {
 
     use HasFactory;
 
-    public $table = 'business_categories';
+    public $table = 'business_files';
     
 
 
 
     public $fillable = [
         'id_usaha',
-        'id_master_kategori_usaha'
+        'file',
+        'is_video',
+        'is_photo'
     ];
 
     /**
@@ -64,7 +76,9 @@ class BusinessCategory extends Model
     protected $casts = [
         'id' => 'integer',
         'id_usaha' => 'integer',
-        'id_master_kategori_usaha' => 'integer'
+        'file' => 'string',
+        'is_video' => 'boolean',
+        'is_photo' => 'boolean'
     ];
 
     /**
@@ -74,18 +88,10 @@ class BusinessCategory extends Model
      */
     public static $rules = [
         'id_usaha' => 'required',
-        'id_master_kategori_usaha' => 'required'
+        'file' => 'required',
+        'is_video' => 'required',
+        'is_photo' => 'required'
     ];
-
-    public function category()
-    {
-        return $this->belongsTo(master_business_category::class,  'id_kategori_usaha','id');
-    }
-
-    public function usaha()
-    {
-        return $this->belongsTo(Business::class,  'id_usaha','id');
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -93,13 +99,5 @@ class BusinessCategory extends Model
     public function businesses()
     {
         return $this->belongsTo(\App\Models\Business::class, 'id_usaha', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function master_business_categories()
-    {
-        return $this->belongsTo(\App\Models\MasterBusinessCategory::class, 'id_master_kategori_usaha', 'id');
     }
 }

@@ -102,3 +102,15 @@ Route::resource('master_status_users', App\Http\Controllers\API\MasterStatusUser
 
 
 Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
+
+
+Route::resource('businesses', App\Http\Controllers\API\BusinessAPIController::class);
+
+
+Route::resource('business_files', App\Http\Controllers\API\BusinessFileAPIController::class);
+
+
+Route::resource('business_categories', App\Http\Controllers\API\BusinessCategoryAPIController::class);
+
+
+Route::resource('cities', App\Http\Controllers\API\CityAPIController::class);

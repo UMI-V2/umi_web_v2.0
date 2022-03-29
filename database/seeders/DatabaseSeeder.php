@@ -4,11 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Business;
 use App\Models\MasterPrivilege;
 use App\Models\MasterBusinessCategory;
 use App\Models\MasterStatusUser;
-use Carbon\Carbon;
+use App\Models\MasterStatusBusiness;
+use App\Models\MasterBusinessCategory;
+use App\Models\MasterProvince;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -29,27 +33,54 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        MasterProvince::create(
+            [
+                'nama_provinsi'             => 'Jawa Barat',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        MasterBusinessCategory::create(
+            [
+                'nama_kategori_usaha'       => 'Distro Baju',
+                'status_kategori_usaha'     => 'Barang',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        MasterBusinessCategory::create(
+            [
+                'nama_kategori_usaha'       => 'Software House',
+                'status_kategori_usaha'     => 'Jasa',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+        
+        MasterStatusBusiness::create(
+            [
+                'nama_status_usaha'         => 'Aktif',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ]
+        );
+
+        MasterStatusBusiness::create(
+            [
+                'nama_status_usaha'         => 'Tidak Aktif',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ]
+        );
+
         MasterStatusUser::create(
             [
                 'nama_status_pengguna'      => 'Aktif',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            // [
-            //     'nama_status_pengguna'      => 'Tidak Aktif',
-            //     'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            //     'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            // ],
-            // [
-            //     'nama_status_pengguna'      => 'Suspend',
-            //     'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            //     'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            // ],
-            // [
-            //     'nama_status_pengguna'      => 'Banned',
-            //     'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            //     'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            // ],
+            ]
         );
 
         MasterStatusUser::create(
@@ -119,6 +150,7 @@ class DatabaseSeeder extends Seeder
             'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
+
         User::create(
             [
             'name'                  => 'Super Admin',
@@ -132,6 +164,16 @@ class DatabaseSeeder extends Seeder
             'password'              => bcrypt('admin1234'),
             'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        Business::create(
+            [
+            'id_user'                   => 1,
+            'id_master_status_usaha'    => 1,
+            'nama_usaha'                => 'Distro Baju',
+            'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 
