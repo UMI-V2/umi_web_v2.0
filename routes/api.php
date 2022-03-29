@@ -66,8 +66,8 @@ Route::middleware('auth:sanctum')->group(function (){
 
     #Business Category
     Route::get('getBusinessCategory', [BusinessCategoryAPIController::class, 'index']);
-    Route::post('updateBusinessCategory', [BusinessCategoryAPIController::class, 'store']);
-    Route::delete('deleteBusinessCategory', [BusinessCategoryAPIController::class, 'destroy']);
+    // Route::post('updateBusinessCategory', [BusinessCategoryAPIController::class, 'store']);
+    // Route::delete('deleteBusinessCategory', [BusinessCategoryAPIController::class, 'destroy']);
 
 });
 

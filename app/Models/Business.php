@@ -18,9 +18,12 @@ class Business extends Model
         'is_ambil_di_toko',
     ];
 
+    // public function category()
+    // {
+    //     return $this->belongsToMany(MasterBusinessCategory::class,  'id_kategori_usaha','id');
+    // }
     public function category()
     {
-        return $this->belongsTo(master_business_category::class,  'id_kategori_usaha','id');
+        return $this->hasMany(BusinessCategory::class,  'id_usaha','id');
     }
-
 }

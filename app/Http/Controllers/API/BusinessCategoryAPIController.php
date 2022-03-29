@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\BusinessCategory;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Models\Business;
 
 class BusinessCategoryAPIController extends Controller
 {
@@ -21,7 +22,7 @@ class BusinessCategoryAPIController extends Controller
                 $categories = BusinessCategory::get();
             }
 
-            return ResponseFormatter::success($categories, 'Data Alamat berhasil diambil');
+            return ResponseFormatter::success($categories, 'Data Business berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => "Get Business Category Gagal",
@@ -29,25 +30,43 @@ class BusinessCategoryAPIController extends Controller
             ],  'Get Failed', 500);
         }
     }
-    public function store(Request $request)
+    static function createDelete(Request $request, int $idUsaha)
     {
         try {
-            $request->validate(
-                [
-                    'id_kategori_usaha' => 'required|array',
-                    'id_usaha' => 'required',
-                    'id_kategori_usaha' => 'required',
-                ],
-            );
-            $data = $request->all();
+            if ($request->add_kategori_usaha) {
+                $request->validate(
+                    [
+                        'add_kategori_usaha' => 'required|array',
+                    ],
+                );
 
-            BusinessCategory::updateOrCreate(['id_usaha' => $request->id_usaha], $data);
-            $result = BusinessCategory::with(['category', 'usaha'])->where('id_usaha', $request->id_usaha)->first();
+                // dd('id Usaha'. $idUsaha);
 
-            return ResponseFormatter::success(
-                $result,
-                'Business Category Updated',
-            );
+                foreach ($request->add_kategori_usaha as $value=> $kategori) {
+                    $checkCategory = BusinessCategory::where('id_usaha', $idUsaha)->where('id_kategori_usaha', $kategori)->first();
+                    if(!$checkCategory){
+                        BusinessCategory::create([
+                            'id_usaha'=> $idUsaha,
+                            'id_kategori_usaha'=>$kategori,
+                        ]);   
+                        // dump('create='. $value);
+ 
+                    } 
+                    // // dump('no create='. $value);
+
+                }
+            }
+            if ($request->delete_kategori_usaha) {
+                $request->validate(
+                    [
+                        'delete_kategori_usaha' => 'required|array',
+                    ],
+                );
+                foreach ($request->delete_kategori_usaha as $value=> $kategori) {
+                    $checkCategory = BusinessCategory::where('id_usaha', $idUsaha)->where('id_kategori_usaha', $kategori)->delete();
+                }
+            }
+
         } catch (Exception $error) {
             return ResponseFormatter::error(
                 [

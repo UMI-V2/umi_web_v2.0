@@ -39,7 +39,6 @@ class BusinessAPIController extends Controller
         try {
             $request->validate(
                 [
-                    'id_kategori_usaha' => 'required',
                     'nama' => 'required',
                     'id_status' => 'required',
                     'deskripsi' => 'required',
@@ -50,9 +49,12 @@ class BusinessAPIController extends Controller
 
             $data['id_user'] = $request->user()->id;
 
-            Business::updateOrCreate(['id_user' => $request->id_user], $data);
-            $result = Business::with(['category'])->where('id_user', $request->user()->id)->first();
+           $result= Business::updateOrCreate(['id_user' => $data['id_user']], $data);
 
+            BusinessCategoryAPIController::createDelete($request, $result->id);
+            // dd( $result->id);
+            $result = Business::with(['category'])->where('id_user', $request->user()->id)->first();
+            // dd( $result->id);
             return ResponseFormatter::success(
                 $result,
                 'Business Updated',
@@ -62,7 +64,7 @@ class BusinessAPIController extends Controller
                 [
                     'message' => $error
                 ],
-                'Business Update fFailed',
+                'Business Update Failed',
             );
         }
     }

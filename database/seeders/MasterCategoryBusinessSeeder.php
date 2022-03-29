@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use App\Models\MasterBusinessCategory;
 use App\Models\master_business_category;
 
 class MasterCategoryBusinessSeeder extends Seeder
@@ -116,6 +117,6 @@ class MasterCategoryBusinessSeeder extends Seeder
             ],
             
         ];
-        master_business_category::insert($privileges);
+        MasterBusinessCategory::insert($privileges);
     }
 }
