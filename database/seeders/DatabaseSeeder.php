@@ -3,16 +3,20 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
-use App\Models\Business;
-use App\Models\Address;
+
 use App\Models\MasterPrivilege;
 use App\Models\MasterStatusUser;
 use App\Models\MasterStatusBusiness;
 use App\Models\MasterBusinessCategory;
 use App\Models\MasterProvince;
+use App\Models\MasterUnits;
+
+use App\Models\User;
+use App\Models\Business;
+use App\Models\Address;
 use App\Models\City;
 use App\Models\SubDistrict;
+use App\Models\Product;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,6 +38,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+
+        MasterUnits::create(
+            [
+                'nama_satuan'               => 'Kilogram',
+                'singkatan_satuan'          => 'Kg',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
 
         MasterProvince::create(
             [
@@ -206,6 +219,21 @@ class DatabaseSeeder extends Seeder
             'is_usaha'              => 0,
             'latitude'              => '123456789',
             'longitude'             => '987654321',
+            'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        Product::create(
+            [
+            'id_usaha'              => 1,
+            'id_satuan'             => 1,
+            'nama'                  => 'Baju Batik',
+            'deskripsi'             => 'Produk buatan lokal biasa dipakai untuk hajatan',
+            'harga'                 => '1000000',
+            'stok'                  => '100',
+            'kondisi'               => 'lohsalah',
+            'preorder'              => 1,
             'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             ],

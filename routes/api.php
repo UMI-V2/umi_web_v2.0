@@ -79,3 +79,6 @@ Route::resource('sub_districts', App\Http\Controllers\API\SubDistrictAPIControll
 
 
 Route::resource('addresses', App\Http\Controllers\API\AddressAPIController::class);
+
+
+Route::resource('products', App\Http\Controllers\API\ProductAPIController::class);
