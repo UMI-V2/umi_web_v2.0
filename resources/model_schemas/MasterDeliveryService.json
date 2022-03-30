@@ -24,7 +24,7 @@
         "inView": true
     },
     {
-        "name": "ongkir",
+        "name": "is_set_seller",
         "dbType": "boolean",
         "htmlType": "select,Ongkir ditentukan oleh RajaOngkir,Ongkir ditentukan oleh Penjual",
         "validations": "required",

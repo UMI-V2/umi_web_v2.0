@@ -66,7 +66,7 @@ class MasterDeliveryServiceDataTable extends DataTable
     {
         return [
             'nama_jasa_pengiriman',
-            'ongkir',
+            // 'is_set_seller',
             'deskripsi',
             'kode_rajaongkir'
         ];

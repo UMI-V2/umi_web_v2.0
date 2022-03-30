@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         MasterDeliveryService::create(
             [
                 'nama_jasa_pengiriman'      => 'JNT',
-                'ongkir'                    => 'Ongkir ditentukan oleh RajaOngkir',
+                'is_set_seller'             => 0,
                 'deskripsi'                 => 'Jasa Pengiriman dari JNT',
                 'kode_rajaongkir'           => 'JNT01',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),

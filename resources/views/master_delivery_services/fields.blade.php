@@ -6,8 +6,8 @@
 
 <!-- Ongkir Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('ongkir', 'Ongkir:') !!}
-    {!! Form::select('ongkir', ['Ongkir ditentukan oleh RajaOngkir' => 'Ongkir ditentukan oleh RajaOngkir', ' Ongkir ditentukan oleh Penjual' => ' Ongkir ditentukan oleh Penjual'], null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::label('is_set_seller', 'Ongkir:') !!}
+    {!! Form::select('is_set_seller', ['0' => 'Ongkir ditentukan oleh RajaOngkir', '1' => ' Ongkir ditentukan oleh Penjual'], null, ['class' => 'form-control custom-select']) !!}
 </div>
 
 

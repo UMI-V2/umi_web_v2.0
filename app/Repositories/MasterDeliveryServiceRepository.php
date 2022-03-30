@@ -18,7 +18,7 @@ class MasterDeliveryServiceRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'nama_jasa_pengiriman',
-        'ongkir',
+        'is_set_seller',
         'deskripsi',
         'kode_rajaongkir'
     ];

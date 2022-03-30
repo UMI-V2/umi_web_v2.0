@@ -2079,7 +2079,7 @@
             }
         },
         "MasterDeliveryService": {
-            "required": ["nama_jasa_pengiriman", "ongkir", "deskripsi"],
+            "required": ["nama_jasa_pengiriman", "is_set_seller", "deskripsi"],
             "properties": {
                 "id": {
                     "description": "id",
@@ -2090,8 +2090,8 @@
                     "description": "nama_jasa_pengiriman",
                     "type": "string"
                 },
-                "ongkir": {
-                    "description": "ongkir",
+                "is_set_seller": {
+                    "description": "is_set_seller",
                     "type": "string"
                 },
                 "deskripsi": {
