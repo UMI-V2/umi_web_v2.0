@@ -9,7 +9,7 @@ use App\Models\MasterStatusUser;
 use App\Models\MasterStatusBusiness;
 use App\Models\MasterBusinessCategory;
 use App\Models\MasterProvince;
-use App\Models\MasterUnits;
+use App\Models\MasterUnit;
 
 use App\Models\User;
 use App\Models\Business;
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        MasterUnits::create(
+        MasterUnit::create(
             [
                 'nama_satuan'               => 'Kilogram',
                 'singkatan_satuan'          => 'Kg',
@@ -232,7 +232,7 @@ class DatabaseSeeder extends Seeder
             'deskripsi'             => 'Produk buatan lokal biasa dipakai untuk hajatan',
             'harga'                 => '1000000',
             'stok'                  => '100',
-            'kondisi'               => 'lohsalah',
+            'kondisi'               => 1,
             'preorder'              => 1,
             'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),

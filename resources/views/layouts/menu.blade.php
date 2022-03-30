@@ -163,3 +163,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('openHours.index') }}"
+       class="nav-link {{ Request::is('openHours*') ? 'active' : '' }}">
+        <p>Jam Buka</p>
+    </a>
+</li>
+
+
