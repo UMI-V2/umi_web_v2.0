@@ -124,3 +124,6 @@ Route::resource('addresses', App\Http\Controllers\AddressController::class);
 
 
 Route::resource('products', App\Http\Controllers\ProductController::class);
+
+
+Route::resource('productCategories', App\Http\Controllers\ProductCategoryController::class);

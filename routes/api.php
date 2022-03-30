@@ -82,3 +82,6 @@ Route::resource('addresses', App\Http\Controllers\API\AddressAPIController::clas
 
 
 Route::resource('products', App\Http\Controllers\API\ProductAPIController::class);
+
+
+Route::resource('product_categories', App\Http\Controllers\API\ProductCategoryAPIController::class);

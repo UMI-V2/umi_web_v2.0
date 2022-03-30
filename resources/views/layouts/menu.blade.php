@@ -155,3 +155,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('productCategories.index') }}"
+       class="nav-link {{ Request::is('productCategories*') ? 'active' : '' }}">
+        <p>Kategori Produk</p>
+    </a>
+</li>
+
+
