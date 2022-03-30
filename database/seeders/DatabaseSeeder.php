@@ -10,9 +10,11 @@ use App\Models\MasterStatusBusiness;
 use App\Models\MasterBusinessCategory;
 use App\Models\MasterProvince;
 use App\Models\MasterUnit;
+use App\Models\MasterDeliveryService;
 
 use App\Models\User;
 use App\Models\Business;
+use App\Models\BusinessDeliveryService;
 use App\Models\Address;
 use App\Models\City;
 use App\Models\SubDistrict;
@@ -38,6 +40,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+
+        MasterDeliveryService::create(
+            [
+                'nama_jasa_pengiriman'      => 'JNT',
+                'ongkir'                    => 'Ongkir ditentukan oleh RajaOngkir',
+                'deskripsi'                 => 'Jasa Pengiriman dari JNT',
+                'kode_rajaongkir'           => 'JNT01',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
 
         MasterUnit::create(
             [
@@ -200,6 +213,16 @@ class DatabaseSeeder extends Seeder
             'nama_usaha'                => 'Distro Baju',
             'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        BusinessDeliveryService::create(
+            [
+            'id_usaha'                     => 1,
+            'id_master_jasa_pengiriman'    => 1,
+            'biaya'                        => 14000,
+            'created_at'                   => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'                   => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 

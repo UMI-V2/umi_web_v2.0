@@ -130,3 +130,6 @@ Route::resource('productCategories', App\Http\Controllers\ProductCategoryControl
 
 
 Route::resource('openHours', App\Http\Controllers\OpenHourController::class);
+
+
+Route::resource('businessDeliveryServices', App\Http\Controllers\BusinessDeliveryServiceController::class);

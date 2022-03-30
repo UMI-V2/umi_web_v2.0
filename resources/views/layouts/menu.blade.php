@@ -171,3 +171,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('businessDeliveryServices.index') }}"
+       class="nav-link {{ Request::is('businessDeliveryServices*') ? 'active' : '' }}">
+        <p>Jasa Pengiriman</p>
+    </a>
+</li>
+
+

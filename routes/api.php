@@ -88,3 +88,6 @@ Route::resource('product_categories', App\Http\Controllers\API\ProductCategoryAP
 
 
 Route::resource('open_hours', App\Http\Controllers\API\OpenHourAPIController::class);
+
+
+Route::resource('business_delivery_services', App\Http\Controllers\API\BusinessDeliveryServiceAPIController::class);
