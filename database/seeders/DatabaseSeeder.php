@@ -5,11 +5,14 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Business;
+use App\Models\Address;
 use App\Models\MasterPrivilege;
 use App\Models\MasterStatusUser;
 use App\Models\MasterStatusBusiness;
 use App\Models\MasterBusinessCategory;
 use App\Models\MasterProvince;
+use App\Models\City;
+use App\Models\SubDistrict;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -35,6 +38,25 @@ class DatabaseSeeder extends Seeder
         MasterProvince::create(
             [
                 'nama_provinsi'             => 'Jawa Barat',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        City::create(
+            [
+                'id_provinsi'               => 1,
+                'nama_kota'                 => 'Indramayu',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        SubDistrict::create(
+            [
+                'id_provinsi'               => 1,
+                'id_kota'                   => 1,
+                'nama_kecamatan'            => 'Lohbener',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
@@ -165,6 +187,27 @@ class DatabaseSeeder extends Seeder
             'nama_usaha'                => 'Distro Baju',
             'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        Address::create(
+            [
+            'id_users'              => 1,
+            'id_provinsi'           => 1,
+            'id_kota'               => 1,
+            'id_kecamatan'          => 1,
+            'nama'                  => 'Yoga Rizki Pratama',
+            'no_hp'                 => '081232121212',
+            'alamat_lengkap'        => 'lohsalah',
+            'patokan'               => 'depan gang',
+            'is_alamat_utama'       => 1,
+            'is_rumah'              => 1,
+            'is_kantor'             => 0,
+            'is_usaha'              => 0,
+            'latitude'              => '123456789',
+            'longitude'             => '987654321',
+            'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 

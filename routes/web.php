@@ -118,3 +118,6 @@ Route::resource('cities', App\Http\Controllers\CityController::class);
 
 
 Route::resource('subDistricts', App\Http\Controllers\SubDistrictController::class);
+
+
+Route::resource('addresses', App\Http\Controllers\AddressController::class);

@@ -139,3 +139,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('addresses.index') }}"
+       class="nav-link {{ Request::is('addresses*') ? 'active' : '' }}">
+        <p>Alamat</p>
+    </a>
+</li>
+
+
