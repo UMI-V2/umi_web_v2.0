@@ -91,3 +91,6 @@ Route::resource('open_hours', App\Http\Controllers\API\OpenHourAPIController::cl
 
 
 Route::resource('business_delivery_services', App\Http\Controllers\API\BusinessDeliveryServiceAPIController::class);
+
+
+Route::resource('shipping_cost_variables', App\Http\Controllers\API\ShippingCostVariableAPIController::class);

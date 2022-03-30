@@ -133,3 +133,6 @@ Route::resource('openHours', App\Http\Controllers\OpenHourController::class);
 
 
 Route::resource('businessDeliveryServices', App\Http\Controllers\BusinessDeliveryServiceController::class);
+
+
+Route::resource('shippingCostVariables', App\Http\Controllers\ShippingCostVariableController::class);

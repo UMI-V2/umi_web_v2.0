@@ -179,3 +179,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('shippingCostVariables.index') }}"
+       class="nav-link {{ Request::is('shippingCostVariables*') ? 'active' : '' }}">
+        <p>Variabel Biaya Pengiriman</p>
+    </a>
+</li>
+
+
