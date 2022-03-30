@@ -94,3 +94,6 @@ Route::resource('business_delivery_services', App\Http\Controllers\API\BusinessD
 
 
 Route::resource('shipping_cost_variables', App\Http\Controllers\API\ShippingCostVariableAPIController::class);
+
+
+Route::resource('shipping_useds', App\Http\Controllers\API\ShippingUsedAPIController::class);

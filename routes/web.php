@@ -136,3 +136,6 @@ Route::resource('businessDeliveryServices', App\Http\Controllers\BusinessDeliver
 
 
 Route::resource('shippingCostVariables', App\Http\Controllers\ShippingCostVariableController::class);
+
+
+Route::resource('shippingUseds', App\Http\Controllers\ShippingUsedController::class);

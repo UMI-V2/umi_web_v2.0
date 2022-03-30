@@ -187,3 +187,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('shippingUseds.index') }}"
+       class="nav-link {{ Request::is('shippingUseds*') ? 'active' : '' }}">
+        <p>Pengiriman yang digunakan</p>
+    </a>
+</li>
+
+
