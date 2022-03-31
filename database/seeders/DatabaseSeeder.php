@@ -15,7 +15,9 @@ use App\Models\MasterPaymentMethod;
 
 use App\Models\User;
 use App\Models\Business;
+use App\Models\BusinessPaymentMethod;
 use App\Models\BusinessDeliveryService;
+use App\Models\SalesDeliveryService;
 use App\Models\Address;
 use App\Models\City;
 use App\Models\SubDistrict;
@@ -184,6 +186,17 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
+        SalesDeliveryService::create(
+            [
+            'id_jasa_pengiriman'    => 1,
+            'jenis_layanan'         => 'Express',
+            'deskripsi_layanan'     => 'Paket sampai dalam waktu 1-2 hari',
+            'ongkir'                => 24000,
+            'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
         User::create(
             [
             'name'                  => 'Yoga Rizki Pratama',
@@ -221,6 +234,15 @@ class DatabaseSeeder extends Seeder
             'id_user'                   => 1,
             'id_master_status_usaha'    => 1,
             'nama_usaha'                => 'Distro Baju',
+            'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        BusinessPaymentMethod::create(
+            [
+            'id_usaha'                  => 1,
+            'id_metode_pembayaran'      => 1,
             'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
