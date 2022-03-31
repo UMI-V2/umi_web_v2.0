@@ -112,3 +112,6 @@ Route::resource('business_payment_methods', App\Http\Controllers\API\BusinessPay
 
 
 Route::resource('sales_transactions', App\Http\Controllers\API\SalesTransactionAPIController::class);
+
+
+Route::resource('ratings', App\Http\Controllers\API\RatingAPIController::class);

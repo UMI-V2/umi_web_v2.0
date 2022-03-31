@@ -235,3 +235,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('ratings.index') }}"
+       class="nav-link {{ Request::is('ratings*') ? 'active' : '' }}">
+        <p>Rating</p>
+    </a>
+</li>
+
+

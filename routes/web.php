@@ -154,3 +154,6 @@ Route::resource('businessPaymentMethods', App\Http\Controllers\BusinessPaymentMe
 
 
 Route::resource('salesTransactions', App\Http\Controllers\SalesTransactionController::class);
+
+
+Route::resource('ratings', App\Http\Controllers\RatingController::class);
