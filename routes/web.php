@@ -163,3 +163,6 @@ Route::resource('transactionStatuses', App\Http\Controllers\TransactionStatusCon
 
 
 Route::resource('transactionProducts', App\Http\Controllers\TransactionProductController::class);
+
+
+Route::resource('balances', App\Http\Controllers\BalancesController::class);

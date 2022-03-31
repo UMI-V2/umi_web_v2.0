@@ -8,6 +8,7 @@ use App\Models\MasterPrivilege;
 use App\Models\MasterStatusUser;
 use App\Models\MasterStatusBusiness;
 use App\Models\MasterBusinessCategory;
+use App\Models\MasterTransactionCategory;
 use App\Models\MasterProvince;
 use App\Models\MasterUnit;
 use App\Models\MasterDeliveryService;
@@ -22,6 +23,7 @@ use App\Models\Address;
 use App\Models\City;
 use App\Models\SubDistrict;
 use App\Models\Product;
+use App\Models\SalesTransaction;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -43,6 +45,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+
+        MasterTransactionCategory::create(
+            [
+                'nama_kategori_transaksi'       => 'Pembelian',
+                'deskripsi_kategori_transaksi'  => 'Pembelian Produk',
+                'created_at'                    => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                    => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
 
         MasterPaymentMethod::create(
             [
@@ -291,6 +302,26 @@ class DatabaseSeeder extends Seeder
             'preorder'              => 1,
             'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+        
+        SalesTransaction::create(
+            [
+            'id_user'                   => 1,
+            'id_usaha'                  => 1,
+            'id_metode_pembayaran'      => 1,
+            'id_sales_delivery_service' => 1,
+            'is_ambil_di_toko'          => 1,
+            'no_pemesanan'              => 'PSN00001',
+            'subtotal_produk'           => 100,
+            'subtotal_ongkir'           => 14000,
+            'diskon'                    => 10,
+            'biaya_penanganan'          => 1000000,
+            'link_pembayaran'           => 'https://www.yukkitabayarcuyy.com/',
+            'total_pesanan'             => 2,
+            'is_rating'                 => 1,
+            'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 

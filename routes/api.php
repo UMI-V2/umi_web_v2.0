@@ -121,3 +121,6 @@ Route::resource('transaction_statuses', App\Http\Controllers\API\TransactionStat
 
 
 Route::resource('transaction_products', App\Http\Controllers\API\TransactionProductAPIController::class);
+
+
+Route::resource('balances', App\Http\Controllers\API\BalancesAPIController::class);

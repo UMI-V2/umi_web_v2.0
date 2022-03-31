@@ -259,3 +259,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('balances.index') }}"
+       class="nav-link {{ Request::is('balances*') ? 'active' : '' }}">
+        <p>Saldo</p>
+    </a>
+</li>
+
+
