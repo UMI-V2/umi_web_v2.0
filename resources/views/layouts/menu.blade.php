@@ -203,3 +203,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('salesDeliveryServices.index') }}"
+       class="nav-link {{ Request::is('salesDeliveryServices*') ? 'active' : '' }}">
+        <p>Layanan Pengiriman</p>
+    </a>
+</li>
+
+

@@ -142,3 +142,6 @@ Route::resource('shippingUseds', App\Http\Controllers\ShippingUsedController::cl
 
 
 Route::resource('discounts', App\Http\Controllers\DiscountController::class);
+
+
+Route::resource('salesDeliveryServices', App\Http\Controllers\SalesDeliveryServiceController::class);

@@ -100,3 +100,6 @@ Route::resource('shipping_useds', App\Http\Controllers\API\ShippingUsedAPIContro
 
 
 Route::resource('discounts', App\Http\Controllers\API\DiscountAPIController::class);
+
+
+Route::resource('sales_delivery_services', App\Http\Controllers\API\SalesDeliveryServiceAPIController::class);
