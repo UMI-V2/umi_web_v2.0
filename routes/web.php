@@ -157,3 +157,6 @@ Route::resource('salesTransactions', App\Http\Controllers\SalesTransactionContro
 
 
 Route::resource('ratings', App\Http\Controllers\RatingController::class);
+
+
+Route::resource('transactionStatuses', App\Http\Controllers\TransactionStatusController::class);
