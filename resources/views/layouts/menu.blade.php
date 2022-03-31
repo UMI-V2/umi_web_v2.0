@@ -251,3 +251,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('transactionProducts.index') }}"
+       class="nav-link {{ Request::is('transactionProducts*') ? 'active' : '' }}">
+        <p>Transaksi Produk</p>
+    </a>
+</li>
+
+
