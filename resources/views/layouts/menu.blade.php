@@ -219,3 +219,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('businessPaymentMethods.index') }}"
+       class="nav-link {{ Request::is('businessPaymentMethods*') ? 'active' : '' }}">
+        <p>Metode Pembayaran Usaha</p>
+    </a>
+</li>
+
+

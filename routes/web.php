@@ -148,3 +148,6 @@ Route::resource('salesDeliveryServices', App\Http\Controllers\SalesDeliveryServi
 
 
 Route::resource('productFiles', App\Http\Controllers\ProductFileController::class);
+
+
+Route::resource('businessPaymentMethods', App\Http\Controllers\BusinessPaymentMethodController::class);

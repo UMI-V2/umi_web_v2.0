@@ -11,6 +11,7 @@ use App\Models\MasterBusinessCategory;
 use App\Models\MasterProvince;
 use App\Models\MasterUnit;
 use App\Models\MasterDeliveryService;
+use App\Models\MasterPaymentMethod;
 
 use App\Models\User;
 use App\Models\Business;
@@ -40,6 +41,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+
+        MasterPaymentMethod::create(
+            [
+                'nama_metode_pembayaran'        => 'Transfer Bank',
+                'deskripsi_metode_pembayaran'   => 'Transfer uang melalui Bank',
+                'created_at'                    => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                    => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
 
         MasterDeliveryService::create(
             [

@@ -106,3 +106,6 @@ Route::resource('sales_delivery_services', App\Http\Controllers\API\SalesDeliver
 
 
 Route::resource('product_files', App\Http\Controllers\API\ProductFileAPIController::class);
+
+
+Route::resource('business_payment_methods', App\Http\Controllers\API\BusinessPaymentMethodAPIController::class);
