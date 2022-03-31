@@ -139,3 +139,6 @@ Route::resource('shippingCostVariables', App\Http\Controllers\ShippingCostVariab
 
 
 Route::resource('shippingUseds', App\Http\Controllers\ShippingUsedController::class);
+
+
+Route::resource('discounts', App\Http\Controllers\DiscountController::class);

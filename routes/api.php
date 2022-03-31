@@ -97,3 +97,6 @@ Route::resource('shipping_cost_variables', App\Http\Controllers\API\ShippingCost
 
 
 Route::resource('shipping_useds', App\Http\Controllers\API\ShippingUsedAPIController::class);
+
+
+Route::resource('discounts', App\Http\Controllers\API\DiscountAPIController::class);

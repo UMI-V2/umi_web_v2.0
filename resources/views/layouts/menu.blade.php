@@ -195,3 +195,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('discounts.index') }}"
+       class="nav-link {{ Request::is('discounts*') ? 'active' : '' }}">
+        <p>Diskon</p>
+    </a>
+</li>
+
+
