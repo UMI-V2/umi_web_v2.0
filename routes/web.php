@@ -145,3 +145,6 @@ Route::resource('discounts', App\Http\Controllers\DiscountController::class);
 
 
 Route::resource('salesDeliveryServices', App\Http\Controllers\SalesDeliveryServiceController::class);
+
+
+Route::resource('productFiles', App\Http\Controllers\ProductFileController::class);

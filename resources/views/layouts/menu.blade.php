@@ -211,3 +211,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('productFiles.index') }}"
+       class="nav-link {{ Request::is('productFiles*') ? 'active' : '' }}">
+        <p>File Produk</p>
+    </a>
+</li>
+
+

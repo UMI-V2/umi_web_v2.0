@@ -103,3 +103,6 @@ Route::resource('discounts', App\Http\Controllers\API\DiscountAPIController::cla
 
 
 Route::resource('sales_delivery_services', App\Http\Controllers\API\SalesDeliveryServiceAPIController::class);
+
+
+Route::resource('product_files', App\Http\Controllers\API\ProductFileAPIController::class);
