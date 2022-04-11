@@ -71,13 +71,20 @@ class OpenHour extends Model
 
     public $fillable = [
         'id_usaha',
-        'senin',
-        'selasa',
-        'rabu',
-        'kamis',
-        'jumat',
-        'sabtu',
-        'minggu'
+        'senin_buka',
+        'senin_tutup',
+        'selasa_buka',
+        'selasa_tutup',
+        'rabu_buka',
+        'rabu_tutup',
+        'kamis_buka',
+        'kamis_tutup',
+        'jumat_buka',
+        'jumat_tutup',
+        'sabtu_buka',
+        'sabtu_tutup',
+        'minggu_buka',
+        'minggu_tutup'
     ];
 
     /**
@@ -88,13 +95,20 @@ class OpenHour extends Model
     protected $casts = [
         'id' => 'integer',
         'id_usaha' => 'integer',
-        'senin' => 'string',
-        'selasa' => 'string',
-        'rabu' => 'string',
-        'kamis' => 'string',
-        'jumat' => 'string',
-        'sabtu' => 'string',
-        'minggu' => 'string'
+        'senin_buka' => 'string',
+        'senin_tutup' => 'string',
+        'selasa_buka' => 'string',
+        'selasa_tutup' => 'string',
+        'rabu_buka' => 'string',
+        'rabu_tutup' => 'string',
+        'kamis_buka' => 'string',
+        'kamis_tutup' => 'string',
+        'jumat_buka' => 'string',
+        'jumat_tutup' => 'string',
+        'sabtu_buka' => 'string',
+        'sabtu_tutup' => 'string',
+        'minggu_buka' => 'string',
+        'minggu_tutup' => 'string'
     ];
 
     /**

@@ -69,13 +69,20 @@ class OpenHourDataTable extends DataTable
                 'data'  => 'businesses.nama_usaha',
                 'title' => 'Id Usaha'
             ]),
-            'senin',
-            'selasa',
-            'rabu',
-            'kamis',
-            'jumat',
-            'sabtu',
-            'minggu'
+            'senin_buka',
+            'senin_tutup',
+            'selasa_buka',
+            'selasa_tutup',
+            'rabu_buka',
+            'rabu_tutup',
+            'kamis_buka',
+            'kamis_tutup',
+            'jumat_buka',
+            'jumat_tutup',
+            'sabtu_buka',
+            'sabtu_tutup',
+            'minggu_buka',
+            'minggu_tutup'
         ];
     }
 

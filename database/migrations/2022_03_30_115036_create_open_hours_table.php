@@ -17,13 +17,20 @@ class CreateOpenHoursTable extends Migration
         Schema::create('open_hours', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_usaha')->unsigned();
-            $table->string('senin')->nullable();
-            $table->string('selasa')->nullable();
-            $table->string('rabu')->nullable();
-            $table->string('kamis')->nullable();
-            $table->string('jumat')->nullable();
-            $table->string('sabtu')->nullable();
-            $table->string('minggu')->nullable();
+            $table->string('senin_buka')->nullable();
+            $table->string('senin_tutup')->nullable();
+            $table->string('selasa_buka')->nullable();
+            $table->string('selasa_tutup')->nullable();
+            $table->string('rabu_buka')->nullable();
+            $table->string('rabu_tutup')->nullable();
+            $table->string('kamis_buka')->nullable();
+            $table->string('kamis_tutup')->nullable();
+            $table->string('jumat_buka')->nullable();
+            $table->string('jumat_tutup')->nullable();
+            $table->string('sabtu_buka')->nullable();
+            $table->string('sabtu_tutup')->nullable();
+            $table->string('minggu_buka')->nullable();
+            $table->string('minggu_tutup')->nullable();
             $table->timestamps();
             $table->foreign('id_usaha')->references('id')->on('businesses');
         });
