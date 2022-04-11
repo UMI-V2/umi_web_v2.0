@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+// Route::resource('masterProductCategories', App\Http\Controllers\MasterProductCategoryController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+    return view('frontend.dashboard');
+});
 
 
 Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');
@@ -39,25 +40,6 @@ Route::post(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::resource('masterProductCategories', App\Http\Controllers\MasterProductCategoryController::class);
 
 
@@ -70,22 +52,10 @@ Route::resource('masterStatusBusinesses', App\Http\Controllers\MasterStatusBusin
 Route::resource('masterUnits', App\Http\Controllers\MasterUnitController::class);
 
 
-
-
-
-
-
-
 Route::resource('masterPrivileges', App\Http\Controllers\MasterPrivilegeController::class);
 
 
 Route::resource('masterProvinces', App\Http\Controllers\MasterProvinceController::class);
-
-
-
-
-
-
 
 
 Route::resource('masterDeliveryServices', App\Http\Controllers\MasterDeliveryServiceController::class);
@@ -98,6 +68,7 @@ Route::resource('masterTransactionCategories', App\Http\Controllers\MasterTransa
 
 
 Route::resource('masterTransactionCategories', App\Http\Controllers\MasterTransactionCategoryController::class);
+
 
 Route::resource('masterStatusUsers', App\Http\Controllers\MasterStatusUserController::class);
 
