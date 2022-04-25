@@ -23,7 +23,7 @@ class MasterDeliveryServiceFactory extends Factory
     {
         return [
             'nama_jasa_pengiriman' => $this->faker->word,
-        'ongkir' => $this->faker->word,
+        'is_set_seller' => $this->faker->word,
         'deskripsi' => $this->faker->word,
         'kode_rajaongkir' => $this->faker->word,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),

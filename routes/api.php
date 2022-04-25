@@ -114,3 +114,54 @@ Route::resource('business_categories', App\Http\Controllers\API\BusinessCategory
 
 
 Route::resource('cities', App\Http\Controllers\API\CityAPIController::class);
+
+
+Route::resource('sub_districts', App\Http\Controllers\API\SubDistrictAPIController::class);
+
+
+Route::resource('addresses', App\Http\Controllers\API\AddressAPIController::class);
+
+
+Route::resource('products', App\Http\Controllers\API\ProductAPIController::class);
+
+
+Route::resource('product_categories', App\Http\Controllers\API\ProductCategoryAPIController::class);
+
+
+Route::resource('open_hours', App\Http\Controllers\API\OpenHourAPIController::class);
+
+
+Route::resource('business_delivery_services', App\Http\Controllers\API\BusinessDeliveryServiceAPIController::class);
+
+
+Route::resource('shipping_cost_variables', App\Http\Controllers\API\ShippingCostVariableAPIController::class);
+
+
+Route::resource('shipping_useds', App\Http\Controllers\API\ShippingUsedAPIController::class);
+
+
+Route::resource('discounts', App\Http\Controllers\API\DiscountAPIController::class);
+
+
+Route::resource('sales_delivery_services', App\Http\Controllers\API\SalesDeliveryServiceAPIController::class);
+
+
+Route::resource('product_files', App\Http\Controllers\API\ProductFileAPIController::class);
+
+
+Route::resource('business_payment_methods', App\Http\Controllers\API\BusinessPaymentMethodAPIController::class);
+
+
+Route::resource('sales_transactions', App\Http\Controllers\API\SalesTransactionAPIController::class);
+
+
+Route::resource('ratings', App\Http\Controllers\API\RatingAPIController::class);
+
+
+Route::resource('transaction_statuses', App\Http\Controllers\API\TransactionStatusAPIController::class);
+
+
+Route::resource('transaction_products', App\Http\Controllers\API\TransactionProductAPIController::class);
+
+
+Route::resource('balances', App\Http\Controllers\API\BalancesAPIController::class);

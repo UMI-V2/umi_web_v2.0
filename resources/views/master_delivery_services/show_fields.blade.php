@@ -12,8 +12,8 @@
 
 <!-- Ongkir Field -->
 <div class="col-sm-12">
-    {!! Form::label('ongkir', 'Ongkir:') !!}
-    <p>{{ $masterDeliveryService->ongkir }}</p>
+    {!! Form::label('is_set_seller', 'Ongkir:') !!}
+    <p>{{ $masterDeliveryService->is_set_seller }}</p>
 </div>
 
 <!-- Deskripsi Field -->

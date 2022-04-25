@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * @SWG\Definition(
  *      definition="MasterDeliveryService",
- *      required={"nama_jasa_pengiriman", "ongkir", "deskripsi"},
+ *      required={"nama_jasa_pengiriman", "is_set_seller", "deskripsi"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -22,8 +22,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="ongkir",
- *          description="ongkir",
+ *          property="is_set_seller",
+ *          description="is_set_seller",
  *          type="string"
  *      ),
  *      @SWG\Property(
@@ -62,7 +62,7 @@ class MasterDeliveryService extends Model
 
     public $fillable = [
         'nama_jasa_pengiriman',
-        'ongkir',
+        'is_set_seller',
         'deskripsi',
         'kode_rajaongkir'
     ];
@@ -75,7 +75,7 @@ class MasterDeliveryService extends Model
     protected $casts = [
         'id' => 'integer',
         'nama_jasa_pengiriman' => 'string',
-        'ongkir' => 'string',
+        'is_set_seller' => 'string',
         'deskripsi' => 'string',
         'kode_rajaongkir' => 'string'
     ];
@@ -87,7 +87,7 @@ class MasterDeliveryService extends Model
      */
     public static $rules = [
         'nama_jasa_pengiriman' => 'required',
-        'ongkir' => 'required',
+        'is_set_seller' => 'required',
         'deskripsi' => 'required'
     ];
 

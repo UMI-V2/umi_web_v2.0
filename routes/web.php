@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+// Route::resource('masterProductCategories', App\Http\Controllers\MasterProductCategoryController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+    return view('frontend.dashboard');
+});
 
 
 Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');
@@ -39,25 +40,6 @@ Route::post(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::resource('masterProductCategories', App\Http\Controllers\MasterProductCategoryController::class);
 
 
@@ -70,22 +52,10 @@ Route::resource('masterStatusBusinesses', App\Http\Controllers\MasterStatusBusin
 Route::resource('masterUnits', App\Http\Controllers\MasterUnitController::class);
 
 
-
-
-
-
-
-
 Route::resource('masterPrivileges', App\Http\Controllers\MasterPrivilegeController::class);
 
 
 Route::resource('masterProvinces', App\Http\Controllers\MasterProvinceController::class);
-
-
-
-
-
-
 
 
 Route::resource('masterDeliveryServices', App\Http\Controllers\MasterDeliveryServiceController::class);
@@ -98,6 +68,7 @@ Route::resource('masterTransactionCategories', App\Http\Controllers\MasterTransa
 
 
 Route::resource('masterTransactionCategories', App\Http\Controllers\MasterTransactionCategoryController::class);
+
 
 Route::resource('masterStatusUsers', App\Http\Controllers\MasterStatusUserController::class);
 
@@ -115,3 +86,54 @@ Route::resource('businessCategories', App\Http\Controllers\BusinessCategoryContr
 
 
 Route::resource('cities', App\Http\Controllers\CityController::class);
+
+
+Route::resource('subDistricts', App\Http\Controllers\SubDistrictController::class);
+
+
+Route::resource('addresses', App\Http\Controllers\AddressController::class);
+
+
+Route::resource('products', App\Http\Controllers\ProductController::class);
+
+
+Route::resource('productCategories', App\Http\Controllers\ProductCategoryController::class);
+
+
+Route::resource('openHours', App\Http\Controllers\OpenHourController::class);
+
+
+Route::resource('businessDeliveryServices', App\Http\Controllers\BusinessDeliveryServiceController::class);
+
+
+Route::resource('shippingCostVariables', App\Http\Controllers\ShippingCostVariableController::class);
+
+
+Route::resource('shippingUseds', App\Http\Controllers\ShippingUsedController::class);
+
+
+Route::resource('discounts', App\Http\Controllers\DiscountController::class);
+
+
+Route::resource('salesDeliveryServices', App\Http\Controllers\SalesDeliveryServiceController::class);
+
+
+Route::resource('productFiles', App\Http\Controllers\ProductFileController::class);
+
+
+Route::resource('businessPaymentMethods', App\Http\Controllers\BusinessPaymentMethodController::class);
+
+
+Route::resource('salesTransactions', App\Http\Controllers\SalesTransactionController::class);
+
+
+Route::resource('ratings', App\Http\Controllers\RatingController::class);
+
+
+Route::resource('transactionStatuses', App\Http\Controllers\TransactionStatusController::class);
+
+
+Route::resource('transactionProducts', App\Http\Controllers\TransactionProductController::class);
+
+
+Route::resource('balances', App\Http\Controllers\BalancesController::class);

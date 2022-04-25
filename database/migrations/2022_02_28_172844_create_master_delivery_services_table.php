@@ -17,7 +17,7 @@ class CreateMasterDeliveryServicesTable extends Migration
         Schema::create('master_delivery_services', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_jasa_pengiriman');
-            $table->string('ongkir');
+            $table->boolean('is_set_seller');
             $table->string('deskripsi');
             $table->string('kode_rajaongkir');
             $table->timestamps();

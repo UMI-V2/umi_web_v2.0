@@ -51,10 +51,10 @@ if(! defined('STDIN')) define('STDIN', fopen("php://stdin","r"));
 
 
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="dark-mode hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
     <!-- Main Header -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-black navbar-dark">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">

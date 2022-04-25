@@ -3,14 +3,28 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
-use App\Models\Business;
+
 use App\Models\MasterPrivilege;
 use App\Models\MasterBusinessCategory;
 use App\Models\MasterStatusUser;
 use App\Models\MasterStatusBusiness;
 use App\Models\MasterBusinessCategory;
+use App\Models\MasterTransactionCategory;
 use App\Models\MasterProvince;
+use App\Models\MasterUnit;
+use App\Models\MasterDeliveryService;
+use App\Models\MasterPaymentMethod;
+
+use App\Models\User;
+use App\Models\Business;
+use App\Models\BusinessPaymentMethod;
+use App\Models\BusinessDeliveryService;
+use App\Models\SalesDeliveryService;
+use App\Models\Address;
+use App\Models\City;
+use App\Models\SubDistrict;
+use App\Models\Product;
+use App\Models\SalesTransaction;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -33,9 +47,66 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        MasterTransactionCategory::create(
+            [
+                'nama_kategori_transaksi'       => 'Pembelian',
+                'deskripsi_kategori_transaksi'  => 'Pembelian Produk',
+                'created_at'                    => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                    => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        MasterPaymentMethod::create(
+            [
+                'nama_metode_pembayaran'        => 'Transfer Bank',
+                'deskripsi_metode_pembayaran'   => 'Transfer uang melalui Bank',
+                'created_at'                    => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                    => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        MasterDeliveryService::create(
+            [
+                'nama_jasa_pengiriman'      => 'JNT',
+                'is_set_seller'             => 0,
+                'deskripsi'                 => 'Jasa Pengiriman dari JNT',
+                'kode_rajaongkir'           => 'JNT01',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        MasterUnit::create(
+            [
+                'nama_satuan'               => 'Kilogram',
+                'singkatan_satuan'          => 'Kg',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
         MasterProvince::create(
             [
                 'nama_provinsi'             => 'Jawa Barat',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        City::create(
+            [
+                'id_provinsi'               => 1,
+                'nama_kota'                 => 'Indramayu',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        SubDistrict::create(
+            [
+                'id_provinsi'               => 1,
+                'id_kota'                   => 1,
+                'nama_kecamatan'            => 'Lohbener',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
@@ -135,6 +206,17 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
+        SalesDeliveryService::create(
+            [
+            'id_jasa_pengiriman'    => 1,
+            'jenis_layanan'         => 'Express',
+            'deskripsi_layanan'     => 'Paket sampai dalam waktu 1-2 hari',
+            'ongkir'                => 24000,
+            'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
         User::create(
             [
             'name'                  => 'Yoga Rizki Pratama',
@@ -172,6 +254,81 @@ class DatabaseSeeder extends Seeder
             'id_user'                   => 1,
             'id_master_status_usaha'    => 1,
             'nama_usaha'                => 'Distro Baju',
+            'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        BusinessPaymentMethod::create(
+            [
+            'id_usaha'                  => 1,
+            'id_metode_pembayaran'      => 1,
+            'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        BusinessDeliveryService::create(
+            [
+            'id_usaha'                     => 1,
+            'id_master_jasa_pengiriman'    => 1,
+            'biaya'                        => 14000,
+            'created_at'                   => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'                   => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        Address::create(
+            [
+            'id_users'              => 1,
+            'id_provinsi'           => 1,
+            'id_kota'               => 1,
+            'id_kecamatan'          => 1,
+            'nama'                  => 'Yoga Rizki Pratama',
+            'no_hp'                 => '081232121212',
+            'alamat_lengkap'        => 'lohsalah',
+            'patokan'               => 'depan gang',
+            'is_alamat_utama'       => 1,
+            'is_rumah'              => 1,
+            'is_kantor'             => 0,
+            'is_usaha'              => 0,
+            'latitude'              => '123456789',
+            'longitude'             => '987654321',
+            'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+
+        Product::create(
+            [
+            'id_usaha'              => 1,
+            'id_satuan'             => 1,
+            'nama'                  => 'Baju Batik',
+            'deskripsi'             => 'Produk buatan lokal biasa dipakai untuk hajatan',
+            'harga'                 => '1000000',
+            'stok'                  => '100',
+            'kondisi'               => 1,
+            'preorder'              => 1,
+            'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+        
+        SalesTransaction::create(
+            [
+            'id_user'                   => 1,
+            'id_usaha'                  => 1,
+            'id_metode_pembayaran'      => 1,
+            'id_sales_delivery_service' => 1,
+            'is_ambil_di_toko'          => 1,
+            'no_pemesanan'              => 'PSN00001',
+            'subtotal_produk'           => 100,
+            'subtotal_ongkir'           => 14000,
+            'diskon'                    => 10,
+            'biaya_penanganan'          => 1000000,
+            'link_pembayaran'           => 'https://www.yukkitabayarcuyy.com/',
+            'total_pesanan'             => 2,
+            'is_rating'                 => 1,
             'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
