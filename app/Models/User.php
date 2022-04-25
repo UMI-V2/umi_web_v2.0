@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\MasterPrivilege;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 /**
@@ -182,7 +183,7 @@ class User extends Authenticatable
      **/
     public function MasterPrivilege()
     {
-        return $this->belongsTo(\App\Models\MasterPrivilege::class, 'id_privilege');
+        return $this->belongsTo(MasterPrivilege::class, 'id_privilege', 'id');
     }
 
     /**
@@ -190,6 +191,6 @@ class User extends Authenticatable
      **/
     public function MasterStatusUser()
     {
-        return $this->belongsTo(\App\Models\MasterStatusUser::class, 'id_status_pengguna');
+        return $this->belongsTo(\App\Models\MasterStatusUser::class, 'id_status_pengguna', 'id');
     }
 }

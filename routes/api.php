@@ -3,15 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\AuthAPIController;
+use App\Http\Controllers\API\UserAPIController;
 use App\Http\Controllers\API\AddressAPIController;
 use App\Http\Controllers\API\BusinessAPIController;
-use App\Http\Controllers\API\BusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterCityAPIController;
-use App\Http\Controllers\API\master_provinceAPIController;
+use App\Http\Controllers\API\BusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
-use App\Http\Controllers\API\master_delivery_serviceAPIController;
-use App\Http\Controllers\API\master_business_categoryAPIController;
-use App\Http\Controllers\API\UserAPIController;
+use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
+use App\Http\Controllers\API\MasterProvinceAPIController;
+use App\Http\Controllers\MasterDeliveryServiceController;
+use App\Models\MasterProvince;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,14 +26,14 @@ use App\Http\Controllers\API\UserAPIController;
 */
 
 #Master category business
-Route::get('getMasterCategoryBusiness', [master_business_categoryAPIController::class, 'index']);
-Route::post('addMasterCategoryBusiness', [master_business_categoryAPIController::class, 'store']);
-
+Route::get('getMasterCategoryBusiness', [MasterBusinessCategoryAPIController::class, 'index']);
+Route::post('addMasterCategoryBusiness', [MasterBusinessCategoryAPIController::class, 'store']);
+Route::delete('deleteMasterCategoryBusiness/{id}', [MasterBusinessCategoryAPIController::class, 'destroy']);
 // master_delivery_serviceAPIController
-Route::get('getMasterDeliveryService', [master_delivery_serviceAPIController::class, 'index']);
+Route::get('getMasterDeliveryService', [MasterDeliveryServiceController::class, 'index']);
 
 // Master Province
-Route::get('getMasterProvince', [master_provinceAPIController::class, 'index']);
+Route::get('getMasterProvince', [MasterProvinceAPIController::class, 'index']);
 
 // Master City
 Route::get('getMasterCity', [MasterCityAPIController::class, 'index']);
@@ -53,7 +54,7 @@ Route::middleware('auth:sanctum')->group(function (){
     #Users
     Route::get('getUser', );
     Route::post('updateUser', [UserAPIController::class, 'updateProfile']);
-    // Rou[UserAPIController::class, 'get']te::post('updatePhotoProfile', [UserAPIController::class, 'updatePhotoProfile']);
+    Route::post('updatePhotoProfile', [UserAPIController::class, 'updatePhotoProfile']);
 
     #Address
     Route::post('updateAddress', [AddressAPIController::class, 'store']);

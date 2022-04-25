@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('foto')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('password');
-            $table->bigInteger('id_privilege')->unsigned()->default(2);
+            $table->bigInteger('id_privilege')->unsigned()->default(4);
             $table->bigInteger('id_status_pengguna')->unsigned()->default(1);
             $table->string('profile_photo_path', 2048)->nullable();
             $table->foreignId('current_team_id')->nullable();

@@ -123,7 +123,7 @@ class MasterBusinessCategoryAPIController extends AppBaseController
         $input = $request->all();
         // dd("Disini");
 
-        $masterBusinessCategory = $this->masterBusinessCategoryRepository->create($input);
+        $masterBusinessCategory =MasterBusinessCategory::updateOrCreate(['id'=> $input['id']], $input);
 
         // return $this->sendResponse($masterBusinessCategory->toArray(), 'Master Business Category saved successfully');
         return ResponseFormatter::success($masterBusinessCategory, 'Master Business Category saved successfully');
@@ -285,11 +285,11 @@ class MasterBusinessCategoryAPIController extends AppBaseController
         $masterBusinessCategory = $this->masterBusinessCategoryRepository->find($id);
 
         if (empty($masterBusinessCategory)) {
-            return $this->sendError('Master Business Category not found');
+            return ResponseFormatter::error(false, 'Master Business Category not found', 404);
         }
 
         $masterBusinessCategory->delete();
 
-        return $this->sendSuccess('Master Business Category deleted successfully');
+        return ResponseFormatter::success(true, 'Master Business Category deleted successfully');
     }
 }

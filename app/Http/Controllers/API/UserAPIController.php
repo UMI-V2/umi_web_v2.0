@@ -17,7 +17,7 @@ class UserAPIController extends Controller
     public function get(Request $request)
     {
         try {
-            return ResponseFormatter::success($request->user()->load(['master_privilege', "master_status_user"]), 'Data User berhasil diambil');
+            return ResponseFormatter::success($request->user()->load(['MasterPrivilege', 'MasterStatusUser']), 'Data User berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => "Update profil gagal",
@@ -44,7 +44,7 @@ class UserAPIController extends Controller
             $user->update($data);  
 
             return ResponseFormatter::success(
-                $user->load(['master_privilege', "master_status_user"]),
+                $user->load(['MasterPrivilege', 'MasterStatusUser']),
                 'Profile Updated',
             );
         } catch (Exception $error) {
@@ -73,9 +73,7 @@ class UserAPIController extends Controller
         if ($request->file('file')) {
             
 
-            $file = $request->file->store('assets/user', 'public');
-
-            
+            $file = $request->file->store('assets/user', 'public');     
 
             $user = $request->user();
             $lastFile = $user->profile_photo_path;
@@ -88,7 +86,7 @@ class UserAPIController extends Controller
                 }
             }
 
-            return ResponseFormatter::success($user->load(['master_privilege', "master_status_user"]), 'File successfully uploaded');
+            return ResponseFormatter::success($user->load(['MasterPrivilege', "MasterStatusUser"]), 'File successfully uploaded');
         }
     }
 }
