@@ -78,7 +78,7 @@ class MasterCategoryBusinessSeeder extends Seeder
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'nama_kategori_usaha'       => 'Swpatu Wanita',
+                'nama_kategori_usaha'       => 'Sepatu Wanita',
                 'status_kategori_usaha'     => "0",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),

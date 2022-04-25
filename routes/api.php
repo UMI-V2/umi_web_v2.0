@@ -51,9 +51,9 @@ Route::post('changePassword', [AuthAPIController::class, 'changePassword']);
 
 Route::middleware('auth:sanctum')->group(function (){
     #Users
-    Route::get('getUser', [UserAPIController::class, 'get']);
+    Route::get('getUser', );
     Route::post('updateUser', [UserAPIController::class, 'updateProfile']);
-    Route::post('updatePhotoProfile', [UserAPIController::class, 'updatePhotoProfile']);
+    Rou[UserAPIController::class, 'get']te::post('updatePhotoProfile', [UserAPIController::class, 'updatePhotoProfile']);
 
     #Address
     Route::post('updateAddress', [AddressAPIController::class, 'store']);
