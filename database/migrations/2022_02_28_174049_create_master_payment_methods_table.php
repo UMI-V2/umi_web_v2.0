@@ -15,7 +15,7 @@ class CreateMasterPaymentMethodsTable extends Migration
     public function up()
     {
         Schema::create('master_payment_methods', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nama_metode_pembayaran');
             $table->string('deskripsi_metode_pembayaran');
             $table->timestamps();

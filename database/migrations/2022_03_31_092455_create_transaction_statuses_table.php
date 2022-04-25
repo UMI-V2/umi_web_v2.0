@@ -15,8 +15,8 @@ class CreateTransactionStatusesTable extends Migration
     public function up()
     {
         Schema::create('transaction_statuses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_transaksi_penjualan')->unsigned();
+            $table->id();
+            $table->bigInteger('id_transaksi_penjualan')->unsigned();
             $table->date('tanggal_pesanan_dibuat');
             $table->date('tanggal_pembayaran');
             $table->date('tanggal_pesanan_dikirimkan');

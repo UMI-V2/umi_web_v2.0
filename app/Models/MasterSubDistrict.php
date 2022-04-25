@@ -9,8 +9,9 @@ class MasterSubDistrict extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'subdistrict_id';
+
     public $fillable = [
-        'subdistrict_id',
         'city_id',
         'subdistrict_name',
     ];

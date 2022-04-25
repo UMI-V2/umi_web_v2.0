@@ -15,7 +15,7 @@ class CreateMasterTransactionCategoriesTable extends Migration
     public function up()
     {
         Schema::create('master_transaction_categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nama_kategori_transaksi');
             $table->string('deskripsi_kategori_transaksi');
             $table->timestamps();

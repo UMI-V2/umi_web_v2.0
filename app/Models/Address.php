@@ -119,9 +119,9 @@ class Address extends Model
 
     public $fillable = [
         'id_users',
-        'id_provinsi',
-        'id_kota',
-        'id_kecamatan',
+        'province_id',
+        'city_id',
+        'subdistrict_id',
         'nama',
         'no_hp',
         'alamat_lengkap',

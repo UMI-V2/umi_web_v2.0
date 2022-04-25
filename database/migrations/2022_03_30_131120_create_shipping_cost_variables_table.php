@@ -15,8 +15,8 @@ class CreateShippingCostVariablesTable extends Migration
     public function up()
     {
         Schema::create('shipping_cost_variables', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_product')->unsigned();
+            $table->id();
+            $table->bigInteger('id_product')->unsigned();
             $table->boolean('is_paid_by_seller');
             $table->double('berat');
             $table->double('lebar');

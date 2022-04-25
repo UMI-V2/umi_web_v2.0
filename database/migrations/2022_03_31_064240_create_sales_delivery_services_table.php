@@ -15,8 +15,8 @@ class CreateSalesDeliveryServicesTable extends Migration
     public function up()
     {
         Schema::create('sales_delivery_services', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_jasa_pengiriman')->unsigned();
+            $table->id();
+            $table->bigInteger('id_jasa_pengiriman')->unsigned();
             $table->string('jenis_layanan');
             $table->string('deskripsi_layanan');
             $table->integer('ongkir');

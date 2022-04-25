@@ -15,9 +15,9 @@ class CreateBalancesTable extends Migration
     public function up()
     {
         Schema::create('balances', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_kategori_transaksi')->unsigned();
-            $table->integer('id_transaksi_penjualan')->unsigned();
+            $table->id();
+            $table->bigInteger('id_kategori_transaksi')->unsigned();
+            $table->bigInteger('id_transaksi_penjualan')->unsigned();
             $table->integer('pengeluaran');
             $table->integer('pemasukan');
             $table->string('deskripsi');

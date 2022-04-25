@@ -15,9 +15,9 @@ class CreateBusinessDeliveryServicesTable extends Migration
     public function up()
     {
         Schema::create('business_delivery_services', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_usaha')->unsigned();
-            $table->integer('id_master_jasa_pengiriman')->unsigned();
+            $table->id();
+            $table->bigInteger('id_usaha')->unsigned();
+            $table->bigInteger('id_master_jasa_pengiriman')->unsigned();
             $table->string('biaya');
             $table->timestamps();
             $table->foreign('id_usaha')->references('id')->on('businesses');

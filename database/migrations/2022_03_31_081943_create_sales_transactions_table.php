@@ -15,11 +15,11 @@ class CreateSalesTransactionsTable extends Migration
     public function up()
     {
         Schema::create('sales_transactions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_user')->unsigned();
-            $table->integer('id_usaha')->unsigned();
-            $table->integer('id_metode_pembayaran')->unsigned();
-            $table->integer('id_sales_delivery_service')->unsigned();
+            $table->id();
+            $table->bigInteger('id_user')->unsigned();
+            $table->bigInteger('id_usaha')->unsigned();
+            $table->bigInteger('id_metode_pembayaran')->unsigned();
+            $table->bigInteger('id_sales_delivery_service')->unsigned();
             $table->boolean('is_ambil_di_toko');
             $table->string('no_pemesanan');
             $table->integer('subtotal_produk');

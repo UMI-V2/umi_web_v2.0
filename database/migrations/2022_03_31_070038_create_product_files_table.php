@@ -15,8 +15,8 @@ class CreateProductFilesTable extends Migration
     public function up()
     {
         Schema::create('product_files', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_produk')->unsigned();
+            $table->id();
+            $table->bigInteger('id_produk')->unsigned();
             $table->string('file');
             $table->boolean('video');
             $table->boolean('photo');

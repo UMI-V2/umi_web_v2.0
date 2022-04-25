@@ -15,8 +15,8 @@ class CreateBusinessFilesTable extends Migration
     public function up()
     {
         Schema::create('business_files', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_usaha')->unsigned();
+            $table->id();
+            $table->bigInteger('id_usaha')->unsigned();
             $table->string('file');
             $table->boolean('is_video');
             $table->boolean('is_photo');

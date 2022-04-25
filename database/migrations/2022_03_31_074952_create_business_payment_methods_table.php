@@ -15,9 +15,9 @@ class CreateBusinessPaymentMethodsTable extends Migration
     public function up()
     {
         Schema::create('business_payment_methods', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_usaha')->unsigned();
-            $table->integer('id_metode_pembayaran')->unsigned();
+            $table->id();
+            $table->bigInteger('id_usaha')->unsigned();
+            $table->bigInteger('id_metode_pembayaran')->unsigned();
             $table->timestamps();
             $table->foreign('id_usaha')->references('id')->on('businesses');
             $table->foreign('id_metode_pembayaran')->references('id')->on('master_payment_methods');

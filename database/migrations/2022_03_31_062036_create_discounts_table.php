@@ -15,8 +15,8 @@ class CreateDiscountsTable extends Migration
     public function up()
     {
         Schema::create('discounts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_produk')->unsigned();
+            $table->id();
+            $table->bigInteger('id_produk')->unsigned();
             $table->string('nama_promo');
             $table->dateTime('waktu_mulai');
             $table->dateTime('waktu_berakhir');

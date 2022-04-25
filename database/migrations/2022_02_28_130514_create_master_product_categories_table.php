@@ -15,7 +15,7 @@ class CreateMasterProductCategoriesTable extends Migration
     public function up()
     {
         Schema::create('master_product_categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nama_kategori_produk');
             $table->string('status_kategori_produk');
             $table->timestamps();

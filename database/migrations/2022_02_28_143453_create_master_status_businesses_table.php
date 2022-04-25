@@ -15,7 +15,7 @@ class CreateMasterStatusBusinessesTable extends Migration
     public function up()
     {
         Schema::create('master_status_businesses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nama_status_usaha');
             $table->timestamps();
         });

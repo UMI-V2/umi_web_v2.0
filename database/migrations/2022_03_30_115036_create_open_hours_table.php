@@ -15,8 +15,8 @@ class CreateOpenHoursTable extends Migration
     public function up()
     {
         Schema::create('open_hours', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_usaha')->unsigned();
+            $table->id();
+            $table->bigInteger('id_usaha')->unsigned();
             $table->string('senin_buka')->nullable();
             $table->string('senin_tutup')->nullable();
             $table->string('selasa_buka')->nullable();

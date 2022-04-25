@@ -15,9 +15,9 @@ class CreateTransactionProductsTable extends Migration
     public function up()
     {
         Schema::create('transaction_products', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_transaksi_penjualan')->unsigned();
-            $table->integer('id_produk')->unsigned();
+            $table->id();
+            $table->bigInteger('id_transaksi_penjualan')->unsigned();
+            $table->bigInteger('id_produk')->unsigned();
             $table->integer('harga_produk');
             $table->integer('harga_diskon');
             $table->string('deskripsi_produk');

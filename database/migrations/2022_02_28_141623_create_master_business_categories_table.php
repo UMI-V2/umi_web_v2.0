@@ -15,7 +15,7 @@ class CreateMasterBusinessCategoriesTable extends Migration
     public function up()
     {
         Schema::create('master_business_categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nama_kategori_usaha');
             $table->string('status_kategori_usaha');
             $table->timestamps();

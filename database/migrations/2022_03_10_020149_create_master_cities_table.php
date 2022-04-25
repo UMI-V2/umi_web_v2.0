@@ -15,11 +15,14 @@ class CreateMasterCitiesTable extends Migration
     {
         Schema::create('master_cities', function (Blueprint $table) {
             $table->id('city_id');
-            $table->string('province_id');
+            $table->bigInteger('province_id')->unsigned();
             $table->string('city_name');
             $table->string('postal_code');
-            
+        
             $table->timestamps();
+
+            $table->foreign('province_id')->references('province_id')->on('master_provinces');
+
         });
     }
 

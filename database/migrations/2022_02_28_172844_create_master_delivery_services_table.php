@@ -15,7 +15,7 @@ class CreateMasterDeliveryServicesTable extends Migration
     public function up()
     {
         Schema::create('master_delivery_services', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nama_jasa_pengiriman');
             $table->boolean('is_set_seller');
             $table->string('deskripsi');

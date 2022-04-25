@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use App\Models\MasterBusinessCategory;
-use App\Models\master_business_category;
 
 class MasterCategoryBusinessSeeder extends Seeder
 {

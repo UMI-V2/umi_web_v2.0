@@ -15,7 +15,7 @@ class CreateMasterPrivilegesTable extends Migration
     public function up()
     {
         Schema::create('master_privileges', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nama_hak_akses_pengguna');
             $table->timestamps();
         });

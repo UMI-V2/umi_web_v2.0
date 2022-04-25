@@ -53,7 +53,7 @@ Route::middleware('auth:sanctum')->group(function (){
     #Users
     Route::get('getUser', );
     Route::post('updateUser', [UserAPIController::class, 'updateProfile']);
-    Rou[UserAPIController::class, 'get']te::post('updatePhotoProfile', [UserAPIController::class, 'updatePhotoProfile']);
+    // Rou[UserAPIController::class, 'get']te::post('updatePhotoProfile', [UserAPIController::class, 'updatePhotoProfile']);
 
     #Address
     Route::post('updateAddress', [AddressAPIController::class, 'store']);

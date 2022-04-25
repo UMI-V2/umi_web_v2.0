@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->string('username')->nullable();
             $table->string('jenis_kelamin');
@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('foto')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('password');
-            $table->integer('id_privilege')->unsigned()->default(2);
-            $table->integer('id_status_pengguna')->unsigned()->default(1);
+            $table->bigInteger('id_privilege')->unsigned()->default(2);
+            $table->bigInteger('id_status_pengguna')->unsigned()->default(1);
             $table->string('profile_photo_path', 2048)->nullable();
             $table->foreignId('current_team_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();

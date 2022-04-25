@@ -41,6 +41,8 @@ class MasterProvince extends Model
     use HasFactory;
 
     public $table = 'master_provinces';
+    protected $primaryKey = 'province_id';
+
     
 
 

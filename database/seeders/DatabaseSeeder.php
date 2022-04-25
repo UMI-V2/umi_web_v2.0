@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 use App\Models\MasterPrivilege;
-use App\Models\MasterBusinessCategory;
 use App\Models\MasterStatusUser;
 use App\Models\MasterStatusBusiness;
 use App\Models\MasterBusinessCategory;
@@ -22,6 +21,8 @@ use App\Models\BusinessDeliveryService;
 use App\Models\SalesDeliveryService;
 use App\Models\Address;
 use App\Models\City;
+use App\Models\MasterCity;
+use App\Models\MasterSubDistrict;
 use App\Models\SubDistrict;
 use App\Models\Product;
 use App\Models\SalesTransaction;
@@ -87,26 +88,28 @@ class DatabaseSeeder extends Seeder
 
         MasterProvince::create(
             [
-                'nama_provinsi'             => 'Jawa Barat',
+                'province_name'             => 'Jawa Barat',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 
-        City::create(
+        MasterCity::create(
             [
-                'id_provinsi'               => 1,
-                'nama_kota'                 => 'Indramayu',
+                'province_id'               => 1,
+                'city_name'                 => 'Indramayu',
+                'postal_code'                => "5625612",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 
-        SubDistrict::create(
+        MasterSubDistrict::create(
             [
-                'id_provinsi'               => 1,
-                'id_kota'                   => 1,
-                'nama_kecamatan'            => 'Lohbener',
+                'subdistrict_id'               => 1,
+                'city_id'                   => 1,
+                'subdistrict_name'            => 'Lohbener',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
@@ -281,9 +284,9 @@ class DatabaseSeeder extends Seeder
         Address::create(
             [
             'id_users'              => 1,
-            'id_provinsi'           => 1,
-            'id_kota'               => 1,
-            'id_kecamatan'          => 1,
+            'province_id'           => 1,
+            'city_id'               => 1,
+            'subdistrict_id'          => 1,
             'nama'                  => 'Yoga Rizki Pratama',
             'no_hp'                 => '081232121212',
             'alamat_lengkap'        => 'lohsalah',

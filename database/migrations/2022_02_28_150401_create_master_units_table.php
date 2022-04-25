@@ -15,7 +15,7 @@ class CreateMasterUnitsTable extends Migration
     public function up()
     {
         Schema::create('master_units', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nama_satuan');
             $table->string('singkatan_satuan');
             $table->timestamps();

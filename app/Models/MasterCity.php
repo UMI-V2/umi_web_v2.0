@@ -9,9 +9,7 @@ class MasterCity extends Model
 {
     use HasFactory;
 
-    // province_id
-    // city_name
-    // postal_code
+    protected $primaryKey = 'city_id';
 
     public $fillable = [
         'province_id',
