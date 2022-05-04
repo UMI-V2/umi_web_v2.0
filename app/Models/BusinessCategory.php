@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\MasterBusinessCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -77,11 +78,6 @@ class BusinessCategory extends Model
         'id_master_kategori_usaha' => 'required'
     ];
 
-    public function category()
-    {
-        return $this->belongsTo(master_business_category::class,  'id_kategori_usaha','id');
-    }
-
     public function usaha()
     {
         return $this->belongsTo(Business::class,  'id_usaha','id');
@@ -100,6 +96,6 @@ class BusinessCategory extends Model
      **/
     public function master_business_categories()
     {
-        return $this->belongsTo(\App\Models\MasterBusinessCategory::class, 'id_master_kategori_usaha', 'id');
+        return $this->belongsTo(MasterBusinessCategory::class, 'id_master_kategori_usaha', 'id');
     }
 }

@@ -19,11 +19,11 @@ class BusinessAPIController extends Controller
     public function index(Request $request)
     {
         try {
-            $address = Business::with(['category'])->where('id_user', $request->user()->id)->first();
-            return ResponseFormatter::success($address, 'Data Alamat berhasil diambil');
+            $address = Business::with(['category', 'masterStatusBusinesses'])->where('id_user', $request->user()->id)->first();
+            return ResponseFormatter::success($address, 'Data Usaha berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
-                'message' => "Get Alamat Gagal",
+                'message' => "Get Usaha Gagal",
                 'error' => $error,
             ],  'Get Failed', 500);
         }
@@ -36,11 +36,10 @@ class BusinessAPIController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        // try {
             $request->validate(
                 [
-                    'nama' => 'required',
-                    'id_status' => 'required',
+                    'nama_usaha' => 'required',
                     'deskripsi' => 'required',
                     'is_ambil_di_toko' => 'required',
                 ],
@@ -53,20 +52,20 @@ class BusinessAPIController extends Controller
 
             BusinessCategoryAPIController::createDelete($request, $result->id);
             // dd( $result->id);
-            $result = Business::with(['category'])->where('id_user', $request->user()->id)->first();
+            $result = Business::with(['category.master_business_categories','masterStatusBusinesses'])->find($result->id);
             // dd( $result->id);
             return ResponseFormatter::success(
                 $result,
                 'Business Updated',
             );
-        } catch (Exception $error) {
-            return ResponseFormatter::error(
-                [
-                    'message' => $error
-                ],
-                'Business Update Failed',
-            );
-        }
+        // } catch (Exception $error) {
+        //     return ResponseFormatter::error(
+        //         [
+        //             'message' => $error
+        //         ],
+        //         'Business Update Failed',
+        //     );
+        // }
     }
 
 }

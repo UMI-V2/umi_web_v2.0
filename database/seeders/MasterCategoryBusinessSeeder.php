@@ -17,93 +17,106 @@ class MasterCategoryBusinessSeeder extends Seeder
     {
         $privileges = [
             [
-                'nama_kategori_usaha'       => 'Makanan dan Minuman',
+                'nama_kategori_usaha'       => 'Agrobisnis',
                 'status_kategori_usaha'     => "0",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'nama_kategori_usaha'       => 'Pakaian Wanita',
+                'nama_kategori_usaha'       => 'Kuliner',
                 'status_kategori_usaha'     => "0",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'nama_kategori_usaha'       => 'Pakaian Pria',
+                'nama_kategori_usaha'       => 'Otomotif',
                 'status_kategori_usaha'     => "0",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'nama_kategori_usaha'       => 'Perawatan dan Kecantikan',
+                'nama_kategori_usaha'       => 'Fashion',
                 'status_kategori_usaha'     => "0",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'nama_kategori_usaha'       => 'Kesehatan',
+                'nama_kategori_usaha'       => 'Teknologi',
                 'status_kategori_usaha'     => "0",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'nama_kategori_usaha'       => 'Aksesoris Fashion',
+                'nama_kategori_usaha'       => 'Craft',
                 'status_kategori_usaha'     => "0",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'nama_kategori_usaha'       => 'Elektronik',
+                'nama_kategori_usaha'       => 'Aksesoris',
                 'status_kategori_usaha'     => "0",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
-            [
-                'nama_kategori_usaha'       => 'Handphone & Aksesoris',
-                'status_kategori_usaha'     => "0",
-                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            [
-                'nama_kategori_usaha'       => 'Fashion Muslim',
-                'status_kategori_usaha'     => "0",
-                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            [
-                'nama_kategori_usaha'       => 'Sepatu Pria',
-                'status_kategori_usaha'     => "0",
-                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            [
-                'nama_kategori_usaha'       => 'Sepatu Wanita',
-                'status_kategori_usaha'     => "0",
-                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-
+            
+            
 
             [
-                'nama_kategori_usaha'       => 'Perumahan',
+                'nama_kategori_usaha'       => 'Konveksi',
                 'status_kategori_usaha'     => "1",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'nama_kategori_usaha'       => 'Komunikasi',
+                'nama_kategori_usaha'       => 'Fotografi',
                 'status_kategori_usaha'     => "1",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'nama_kategori_usaha'       => 'Usaha Rumah Tangga',
+                'nama_kategori_usaha'       => 'Videografi',
+                'status_kategori_usaha'     => "1",
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'nama_kategori_usaha'       => 'Teknologi',
+                'status_kategori_usaha'     => "1",
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'nama_kategori_usaha'       => 'Pendidikan',
                 'status_kategori_usaha'     => "1",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'nama_kategori_usaha'       => 'Transfortasi',
+                'status_kategori_usaha'     => "1",
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'nama_kategori_usaha'       => 'Rumah Tangga',
+                'status_kategori_usaha'     => "1",
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'nama_kategori_usaha'       => 'Otomotif',
+                'status_kategori_usaha'     => "1",
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'nama_kategori_usaha'       => 'Penyewaan',
+                'status_kategori_usaha'     => "1",
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'nama_kategori_usaha'       => 'Servis',
                 'status_kategori_usaha'     => "1",
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),

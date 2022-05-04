@@ -115,23 +115,23 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        MasterBusinessCategory::create(
-            [
-                'nama_kategori_usaha'       => 'Distro Baju',
-                'status_kategori_usaha'     => 'Barang',
-                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-        );
+        // MasterBusinessCategory::create(
+        //     [
+        //         'nama_kategori_usaha'       => 'Distro Baju',
+        //         'status_kategori_usaha'     => 'Barang',
+        //         'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+        //         'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+        //     ],
+        // );
 
-        MasterBusinessCategory::create(
-            [
-                'nama_kategori_usaha'       => 'Software House',
-                'status_kategori_usaha'     => 'Jasa',
-                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-        );
+        // MasterBusinessCategory::create(
+        //     [
+        //         'nama_kategori_usaha'       => 'Software House',
+        //         'status_kategori_usaha'     => 'Jasa',
+        //         'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+        //         'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+        //     ],
+        // );
         
         MasterStatusBusiness::create(
             [
@@ -337,7 +337,7 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        // $this->call(UserSeeder::class);
+        $this->call(MasterCategoryBusinessSeeder::class);
         // $this->call(PrivilegeSeeder::class);
     }
 }

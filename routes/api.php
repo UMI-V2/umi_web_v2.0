@@ -26,9 +26,11 @@ use App\Models\MasterProvince;
 */
 
 #Master category business
-Route::get('getMasterCategoryBusiness', [MasterBusinessCategoryAPIController::class, 'index']);
-Route::post('addMasterCategoryBusiness', [MasterBusinessCategoryAPIController::class, 'store']);
-Route::delete('deleteMasterCategoryBusiness/{id}', [MasterBusinessCategoryAPIController::class, 'destroy']);
+Route::group(['prefix' => 'masterCategoryBusiness/'], function () {
+    Route::get('get', [MasterBusinessCategoryAPIController::class, 'index']);
+    Route::post('add', [MasterBusinessCategoryAPIController::class, 'store']);
+    Route::delete('delete/{id}', [MasterBusinessCategoryAPIController::class, 'destroy']);
+});
 // master_delivery_serviceAPIController
 Route::get('getMasterDeliveryService', [MasterDeliveryServiceController::class, 'index']);
 
@@ -44,32 +46,41 @@ Route::get('getSubDistrict', [MasterSubDistrictAPIController::class, 'index']);
 
 
 // AUTH
-Route::post('register', [AuthAPIController::class, 'register']);
-Route::post('login', [AuthAPIController::class, 'login']);
-Route::post('checkNoHp', [AuthAPIController::class, 'checkNoHp']);
-Route::post('changePassword', [AuthAPIController::class, 'changePassword']);
+
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('register', [AuthAPIController::class, 'register']);
+    Route::post('login', [AuthAPIController::class, 'login']);
+    Route::post('checkNoHp', [AuthAPIController::class, 'checkNoHp']);
+    Route::post('changePassword', [AuthAPIController::class, 'changePassword']);
+});
 
 
-Route::middleware('auth:sanctum')->group(function (){
-    #Users
-    Route::get('getUser', );
-    Route::post('updateUser', [UserAPIController::class, 'updateProfile']);
-    Route::post('updatePhotoProfile', [UserAPIController::class, 'updatePhotoProfile']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('getMyUser', [UserAPIController::class, 'getMyUser']);
+        Route::post('update', [UserAPIController::class, 'updateProfile']);
+        Route::post('updatePhotoProfile', [UserAPIController::class, 'updatePhotoProfile']);
 
-    #Address
-    Route::post('updateAddress', [AddressAPIController::class, 'store']);
-    Route::get('getAddress', [AddressAPIController::class, 'index']);
-    #business
-    Route::post('updateBusiness', [BusinessAPIController::class, 'store']);
-    Route::get('getBusiness', [BusinessAPIController::class, 'index']);
-    #Auth
-    Route::delete('logout', [AuthAPIController::class, 'logout']);
+    });
 
-    #Business Category
-    Route::get('getBusinessCategory', [BusinessCategoryAPIController::class, 'index']);
-    // Route::post('updateBusinessCategory', [BusinessCategoryAPIController::class, 'store']);
-    // Route::delete('deleteBusinessCategory', [BusinessCategoryAPIController::class, 'destroy']);
+    Route::group(['prefix' => 'address'], function () {
+        Route::post('updateAddress', [AddressAPIController::class, 'store']);
+        Route::get('getAddress', [AddressAPIController::class, 'index']);
+        Route::delete('delete', [AddressAPIController::class, 'delete']);
 
+    });
+    Route::group(['prefix' => 'business'], function () {
+        Route::get('/', [BusinessAPIController::class, 'index']);
+        Route::post('update', [BusinessAPIController::class, 'store']);
+    });
+
+    Route::group(['prefix' => 'auth'], function () {
+        Route::delete('logout', [AuthAPIController::class, 'logout']);
+    });
+
+    Route::group(['prefix' => 'businessCategory'], function () {
+        Route::get('/', [BusinessCategoryAPIController::class, 'index']);
+    });
 });
 
 

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserAPIController extends Controller
 {
-    public function get(Request $request)
+    public function getMyUser(Request $request)
     {
         try {
             return ResponseFormatter::success($request->user()->load(['MasterPrivilege', 'MasterStatusUser']), 'Data User berhasil diambil');

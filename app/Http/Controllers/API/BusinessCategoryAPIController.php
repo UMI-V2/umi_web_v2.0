@@ -43,11 +43,11 @@ class BusinessCategoryAPIController extends Controller
                 // dd('id Usaha'. $idUsaha);
 
                 foreach ($request->add_kategori_usaha as $value=> $kategori) {
-                    $checkCategory = BusinessCategory::where('id_usaha', $idUsaha)->where('id_kategori_usaha', $kategori)->first();
+                    $checkCategory = BusinessCategory::where('id_usaha', $idUsaha)->where('id_master_kategori_usaha', $kategori)->first();
                     if(!$checkCategory){
                         BusinessCategory::create([
                             'id_usaha'=> $idUsaha,
-                            'id_kategori_usaha'=>$kategori,
+                            'id_master_kategori_usaha'=>$kategori,
                         ]);   
                         // dump('create='. $value);
  
@@ -63,7 +63,7 @@ class BusinessCategoryAPIController extends Controller
                     ],
                 );
                 foreach ($request->delete_kategori_usaha as $value=> $kategori) {
-                    $checkCategory = BusinessCategory::where('id_usaha', $idUsaha)->where('id_kategori_usaha', $kategori)->delete();
+                    $checkCategory = BusinessCategory::where('id_usaha', $idUsaha)->where('id_master_kategori_usaha', $kategori)->delete();
                 }
             }
 

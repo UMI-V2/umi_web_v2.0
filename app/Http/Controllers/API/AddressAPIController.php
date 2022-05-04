@@ -13,7 +13,7 @@ class AddressAPIController extends Controller
     public function index(Request $request)
     {
         try {
-            $address = Address::with(['province', 'city', 'subDistrict'])->where('id_user', $request->user()->id)->get();
+            $address = Address::with(['master_provinces', 'cities', 'sub_districts'])->where('id_users', $request->user()->id)->get();
             return ResponseFormatter::success($address, 'Data Alamat berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
@@ -31,9 +31,9 @@ class AddressAPIController extends Controller
                 [
                     'nama' => 'required',
                     'no_hp' => 'required',
-                    'id_provinsi' => 'required',
-                    'id_kota' => 'required',
-                    'id_kecamatan' => 'required',
+                    'province_id' => 'required',
+                    'city_id' => 'required',
+                    'subdistrict_id' => 'required',
                     'alamat_lengkap' => 'required',
                     'patokan' => 'required',
                     'latitude' => 'required',
@@ -42,14 +42,34 @@ class AddressAPIController extends Controller
             );
             $data = $request->all();
 
-            $data['id_user'] = $request->user()->id;
-
+            $data['id_users'] = $request->user()->id;
+            $addreses = Address::where('id_users', $request->user()->id)->get();
+            if ($addreses->isEmpty()) {
+                $data['is_alamat_utama'] = true;
+            }
+            if ($request->is_usaha) {
+                foreach ($addreses as $key => $address) {
+                    if ($address->is_usaha == true) {
+                        $address->is_usaha = false;
+                        $address->update();
+                    }
+                }
+            }
+            if ($request->is_alamat_utama) {
+                foreach ($addreses as $key => $address) {
+                    if ($address->is_alamat_utama == true) {
+                        $address->is_alamat_utama = false;
+                        $address->update();
+                    }
+                }
+            }
             $result = Address::updateOrCreate(['id' => $request->id], $data);
 
-            $searchAddress = Address::where('id', $request->id)->first();
+            $searchAddress = Address::where('id', $result->id)->first();
+            
 
             return ResponseFormatter::success(
-                $searchAddress->load(['province', 'city', 'subDistrict']),
+                $searchAddress->load(['master_provinces', 'cities', 'sub_districts']),
                 'Address Updated',
             );
         } catch (Exception $error) {
@@ -57,12 +77,28 @@ class AddressAPIController extends Controller
                 [
                     'message' => $error
                 ],
-                'Address Update fFailed',
+                'Address Update Failed',
             );
         }
     }
 
     #business
 
-
+    public function delete(Request $request)
+    {
+        try {
+            Address::where('id', $request->id)->delete();
+            return ResponseFormatter::success(
+                true,
+                'Address Deleted',
+            );
+        } catch (Exception $error) {
+            return ResponseFormatter::error(
+                [
+                    'message' => $error
+                ],
+                'Delete Address Failed',
+            );
+        }
+    }
 }

@@ -142,9 +142,9 @@ class Address extends Model
     protected $casts = [
         'id' => 'integer',
         'id_users' => 'integer',
-        'id_provinsi' => 'integer',
-        'id_kota' => 'integer',
-        'id_kecamatan' => 'integer',
+        'province_id' => 'integer',
+        'city_id' => 'integer',
+        'subdistrict_id' => 'integer',
         'nama' => 'string',
         'no_hp' => 'string',
         'alamat_lengkap' => 'string',
@@ -164,9 +164,9 @@ class Address extends Model
      */
     public static $rules = [
         'id_users' => 'required',
-        'id_provinsi' => 'required',
-        'id_kota' => 'required',
-        'id_kecamatan' => 'required',
+        'province_id' => 'required',
+        'city_id' => 'required',
+        'subdistrict_id' => 'required',
         'nama' => 'required',
         'no_hp' => 'required',
         'alamat_lengkap' => 'required',
@@ -190,7 +190,7 @@ class Address extends Model
      **/
     public function master_provinces()
     {
-        return $this->belongsTo(\App\Models\MasterProvince::class, 'id_provinsi', 'id');
+        return $this->belongsTo(MasterProvince::class, 'province_id', 'province_id');
     }
 
     /**
@@ -198,7 +198,7 @@ class Address extends Model
      **/
     public function cities()
     {
-        return $this->belongsTo(\App\Models\City::class, 'id_kota', 'id');
+        return $this->belongsTo(MasterCity::class, 'city_id', 'city_id');
     }
 
     /**
@@ -206,6 +206,6 @@ class Address extends Model
      **/
     public function sub_districts()
     {
-        return $this->belongsTo(\App\Models\SubDistrict::class, 'id_kecamatan', 'id');
+        return $this->belongsTo(MasterSubDistrict::class, 'subdistrict_id', 'subdistrict_id');
     }
 }
