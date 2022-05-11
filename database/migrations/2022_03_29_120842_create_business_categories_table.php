@@ -20,7 +20,7 @@ class CreateBusinessCategoriesTable extends Migration
             $table->bigInteger('id_master_kategori_usaha')->unsigned();
             $table->timestamps();
             $table->foreign('id_usaha')->references('id')->on('businesses');
-            $table->foreign('id_master_kategori_usaha')->references('id')->on('master_status_businesses');
+            $table->foreign('id_master_kategori_usaha')->references('id')->on('master_business_categories');
         });
     }
 

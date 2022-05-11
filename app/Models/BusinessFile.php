@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -93,6 +94,15 @@ class BusinessFile extends Model
         'is_photo' => 'required'
     ];
 
+    public function getFileAttribute()
+    {
+        if ($this->attributes['file']) {
+            return url('') . Storage::url($this->attributes['file']);
+        } else {
+            return null;
+        }
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
@@ -100,4 +110,6 @@ class BusinessFile extends Model
     {
         return $this->belongsTo(\App\Models\Business::class, 'id_usaha', 'id');
     }
+
+    
 }

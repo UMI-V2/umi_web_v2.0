@@ -86,34 +86,34 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        MasterProvince::create(
-            [
-                'province_name'             => 'Jawa Barat',
-                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-        );
+        // MasterProvince::create(
+        //     [
+        //         'province_name'             => 'Jawa Barat',
+        //         'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+        //         'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+        //     ],
+        // );
 
-        MasterCity::create(
-            [
-                'province_id'               => 1,
-                'city_name'                 => 'Indramayu',
-                'postal_code'                => "5625612",
-                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+        // MasterCity::create(
+        //     [
+        //         'province_id'               => 1,
+        //         'city_name'                 => 'Indramayu',
+        //         'postal_code'                => "5625612",
+        //         'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
 
-                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-        );
+        //         'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+        //     ],
+        // );
 
-        MasterSubDistrict::create(
-            [
-                'subdistrict_id'               => 1,
-                'city_id'                   => 1,
-                'subdistrict_name'            => 'Lohbener',
-                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-        );
+        // MasterSubDistrict::create(
+        //     [
+        //         'subdistrict_id'               => 1,
+        //         'city_id'                   => 1,
+        //         'subdistrict_name'            => 'Lohbener',
+        //         'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+        //         'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+        //     ],
+        // );
 
         // MasterBusinessCategory::create(
         //     [
@@ -281,26 +281,26 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        Address::create(
-            [
-            'id_users'              => 1,
-            'province_id'           => 1,
-            'city_id'               => 1,
-            'subdistrict_id'          => 1,
-            'nama'                  => 'Yoga Rizki Pratama',
-            'no_hp'                 => '081232121212',
-            'alamat_lengkap'        => 'lohsalah',
-            'patokan'               => 'depan gang',
-            'is_alamat_utama'       => 1,
-            'is_rumah'              => 1,
-            'is_kantor'             => 0,
-            'is_usaha'              => 0,
-            'latitude'              => '123456789',
-            'longitude'             => '987654321',
-            'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-        );
+        // Address::create(
+        //     [
+        //     'id_users'              => 1,
+        //     'province_id'           => 1,
+        //     'city_id'               => 1,
+        //     'subdistrict_id'          => 1,
+        //     'nama'                  => 'Yoga Rizki Pratama',
+        //     'no_hp'                 => '081232121212',
+        //     'alamat_lengkap'        => 'lohsalah',
+        //     'patokan'               => 'depan gang',
+        //     'is_alamat_utama'       => 1,
+        //     'is_rumah'              => 1,
+        //     'is_kantor'             => 0,
+        //     'is_usaha'              => 0,
+        //     'latitude'              => '123456789',
+        //     'longitude'             => '987654321',
+        //     'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+        //     'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+        //     ],
+        // );
 
         Product::create(
             [

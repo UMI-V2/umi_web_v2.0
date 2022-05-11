@@ -7,6 +7,7 @@ use App\Models\cr;
 use App\Models\Business;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
+use App\Http\Controllers\BusinessFileController;
 use App\Http\Controllers\Controller;
 
 class BusinessAPIController extends Controller
@@ -19,7 +20,7 @@ class BusinessAPIController extends Controller
     public function index(Request $request)
     {
         try {
-            $address = Business::with(['category', 'masterStatusBusinesses'])->where('id_user', $request->user()->id)->first();
+            $address = Business::with(['category.master_business_categories', 'masterStatusBusinesses', 'business_file'])->where('id_user', $request->user()->id)->first();
             return ResponseFormatter::success($address, 'Data Usaha berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
@@ -36,7 +37,7 @@ class BusinessAPIController extends Controller
      */
     public function store(Request $request)
     {
-        // try {
+        try {
             $request->validate(
                 [
                     'nama_usaha' => 'required',
@@ -51,21 +52,23 @@ class BusinessAPIController extends Controller
            $result= Business::updateOrCreate(['id_user' => $data['id_user']], $data);
 
             BusinessCategoryAPIController::createDelete($request, $result->id);
+
+            BusinessFileAPIController::uploadOrDeleteFile($request, $result->id);
             // dd( $result->id);
-            $result = Business::with(['category.master_business_categories','masterStatusBusinesses'])->find($result->id);
+            $result = Business::with(['category.master_business_categories','masterStatusBusinesses', 'business_file'])->where("id",$result->id)->first();
             // dd( $result->id);
             return ResponseFormatter::success(
                 $result,
                 'Business Updated',
             );
-        // } catch (Exception $error) {
-        //     return ResponseFormatter::error(
-        //         [
-        //             'message' => $error
-        //         ],
-        //         'Business Update Failed',
-        //     );
-        // }
+        } catch (Exception $error) {
+            return ResponseFormatter::error(
+                [
+                    'message' => $error
+                ],
+                'Business Update Failed',
+            );
+        }
     }
 
 }

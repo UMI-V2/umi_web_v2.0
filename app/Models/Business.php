@@ -78,7 +78,8 @@ class Business extends Model
         'id' => 'integer',
         'id_user' => 'integer',
         'id_master_status_usaha' => 'integer',
-        'nama_usaha' => 'string'
+        'nama_usaha' => 'string',
+        'is_ambil_di_toko'=>'boolean',
     ];
 
     /**
@@ -110,6 +111,12 @@ class Business extends Model
     public function category()
     {
         return $this->hasMany(BusinessCategory::class,  'id_usaha','id');
+
+    }
+
+    public function business_file()
+    {
+        return $this->hasMany(BusinessFile::class,  'id_usaha','id');
 
     }
 

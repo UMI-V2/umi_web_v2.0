@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             [
                 'name'                  => 'Super Admin',
                 'username'              => 'Super Admin',
-                'jenis_kelamin'         => 'Pria',
+                'jenis_kelamin'         => 'P',
                 'tanggal_lahir'         => '2000-03-25',
                 'no_hp'                 => '081212121212',
                 'email'                 => 'yoga@gmail.com',

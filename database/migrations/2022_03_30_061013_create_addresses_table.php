@@ -33,9 +33,9 @@ class CreateAddressesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('id_users')->references('id')->on('users');
-            $table->foreign('province_id')->references('province_id')->on('master_provinces');
-            $table->foreign('city_id')->references('city_id')->on('master_cities');
-            $table->foreign('subdistrict_id')->references('subdistrict_id')->on('master_sub_districts');
+            // $table->foreign('province_id')->references('province_id')->on('master_provinces');
+            // $table->foreign('city_id')->references('city_id')->on('master_cities');
+            // $table->foreign('subdistrict_id')->references('subdistrict_id')->on('master_sub_districts');
         });
     }
 

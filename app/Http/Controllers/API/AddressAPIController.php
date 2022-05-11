@@ -13,7 +13,7 @@ class AddressAPIController extends Controller
     public function index(Request $request)
     {
         try {
-            $address = Address::with(['master_provinces', 'cities', 'sub_districts'])->where('id_users', $request->user()->id)->get();
+            $address = Address::with(['province', 'city', 'sub_district'])->where('id_users', $request->user()->id)->get();
             return ResponseFormatter::success($address, 'Data Alamat berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
@@ -69,7 +69,7 @@ class AddressAPIController extends Controller
             
 
             return ResponseFormatter::success(
-                $searchAddress->load(['master_provinces', 'cities', 'sub_districts']),
+                $searchAddress->load(['province', 'city', 'sub_district']),
                 'Address Updated',
             );
         } catch (Exception $error) {

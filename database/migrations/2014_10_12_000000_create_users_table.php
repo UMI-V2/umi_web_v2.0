@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->nullable();
-            $table->string('jenis_kelamin');
+            $table->string('jenis_kelamin', 2);
             $table->string('tanggal_lahir');
             $table->string('no_hp')->unique();
             $table->string('foto')->nullable();

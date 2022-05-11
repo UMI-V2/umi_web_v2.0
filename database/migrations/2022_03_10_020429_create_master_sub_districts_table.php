@@ -18,7 +18,7 @@ class CreateMasterSubDistrictsTable extends Migration
             $table->bigInteger('city_id')->unsigned();
             $table->string('subdistrict_name');
 
-            $table->timestamps();
+            // $table->timestamps();
 
             $table->foreign('city_id')->references('city_id')->on('master_cities');
 
