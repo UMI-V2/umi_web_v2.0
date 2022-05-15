@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * @SWG\Definition(
  *      definition="MasterProvince",
- *      required={"nama_provinsi"},
+ *      required={"province_name"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -17,8 +17,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="nama_provinsi",
- *          description="nama_provinsi",
+ *          property="province_name",
+ *          description="province_name",
  *          type="string"
  *      ),
  *      @SWG\Property(
@@ -67,7 +67,7 @@ class MasterProvince extends Model
      * @var array
      */
     public static $rules = [
-        'nama_provinsi' => 'required'
+        'province_name' => 'required'
     ];
 
     

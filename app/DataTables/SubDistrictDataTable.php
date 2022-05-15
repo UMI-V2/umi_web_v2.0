@@ -29,7 +29,7 @@ class SubDistrictDataTable extends DataTable
      */
     public function query(SubDistrict $model)
     {
-        return $model->newQuery()->with('master_provinces')->with('cities');
+        return $model->newQuery()->with('master_provinces')->with('master_cities');
     }
 
     /**
@@ -65,17 +65,17 @@ class SubDistrictDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id_provinsi' => new \Yajra\DataTables\Html\Column([
-                'data' => 'master_provinces.nama_provinsi',
-                'name' => 'master_provinces.nama_provinsi',
+            'province_id' => new \Yajra\DataTables\Html\Column([
+                'data' => 'master_provinces.province_name',
+                'name' => 'master_provinces.province_name',
                 'title' => 'Provinsi'
             ]),
-            'id_kota' => new \Yajra\DataTables\Html\Column([
-                'data' => 'cities.nama_kota',
-                'name' => 'cities.nama_kota',
+            'city_id' => new \Yajra\DataTables\Html\Column([
+                'data' => 'master_cities.city_name',
+                'name' => 'master_cities.city_name',
                 'title' => 'Kota'
             ]),
-            'nama_kecamatan'
+            'subdistrict_name'
         ];
     }
 

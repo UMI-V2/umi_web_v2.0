@@ -12,8 +12,8 @@
 
 <!-- Id Provinsi Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_provinsi', 'Id Provinsi:') !!}
-    <p>{{ $address->id_provinsi }}</p>
+    {!! Form::label('province_id', 'Id Provinsi:') !!}
+    <p>{{ $address->province_id }}</p>
 </div>
 
 <!-- Id Kota Field -->

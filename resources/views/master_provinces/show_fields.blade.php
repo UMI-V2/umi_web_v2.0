@@ -1,13 +1,13 @@
 <!-- Id Field -->
 <div class="col-sm-12">
-    {!! Form::label('id', 'Id:') !!}
-    <p>{{ $masterProvince->id }}</p>
+    {!! Form::label('province_id', 'Id:') !!}
+    <p>{{ $masterProvince->province_id }}</p>
 </div>
 
 <!-- Nama Provinsi Field -->
 <div class="col-sm-12">
-    {!! Form::label('nama_provinsi', 'Nama Provinsi:') !!}
-    <p>{{ $masterProvince->nama_provinsi }}</p>
+    {!! Form::label('province_name', 'Nama Provinsi:') !!}
+    <p>{{ $masterProvince->province_name }}</p>
 </div>
 
 <!-- Created At Field -->

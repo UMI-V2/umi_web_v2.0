@@ -20,7 +20,6 @@ use App\Models\BusinessPaymentMethod;
 use App\Models\BusinessDeliveryService;
 use App\Models\SalesDeliveryService;
 use App\Models\Address;
-use App\Models\City;
 use App\Models\MasterCity;
 use App\Models\MasterSubDistrict;
 use App\Models\SubDistrict;
@@ -224,7 +223,7 @@ class DatabaseSeeder extends Seeder
             [
             'name'                  => 'Yoga Rizki Pratama',
             'username'              => 'yoga',
-            'jenis_kelamin'         => 'Pria',
+            'jenis_kelamin'         => 'L',
             'tanggal_lahir'         => '2000-03-25',
             'no_hp'                 => '081232121212',
             'email'                 => 'yoga@gmail.com',
@@ -240,7 +239,7 @@ class DatabaseSeeder extends Seeder
             [
             'name'                  => 'Super Admin',
             'username'              => 'Super Admin',
-            'jenis_kelamin'         => 'Pria',
+            'jenis_kelamin'         => 'P',
             'tanggal_lahir'         => '2000-03-25',
             'no_hp'                 => '081212121212',
             'email'                 => 'admin@gmail.com',

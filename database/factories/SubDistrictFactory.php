@@ -22,9 +22,9 @@ class SubDistrictFactory extends Factory
     public function definition()
     {
         return [
-            'id_provinsi' => $this->faker->randomDigitNotNull,
+            'province_id' => $this->faker->randomDigitNotNull,
         'id_kota' => $this->faker->randomDigitNotNull,
-        'nama_kecamatan' => $this->faker->word,
+        'subdistrict_name' => $this->faker->word,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

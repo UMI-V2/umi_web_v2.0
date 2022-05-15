@@ -2198,15 +2198,15 @@
             }
         },
         "MasterProvince": {
-            "required": ["nama_provinsi"],
+            "required": ["province_name"],
             "properties": {
                 "id": {
                     "description": "id",
                     "type": "integer",
                     "format": "int32"
                 },
-                "nama_provinsi": {
-                    "description": "nama_provinsi",
+                "province_name": {
+                    "description": "province_name",
                     "type": "string"
                 },
                 "created_at": {

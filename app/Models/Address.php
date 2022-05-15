@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * @SWG\Definition(
  *      definition="Address",
- *      required={"id_users", "id_provinsi", "id_kota", "id_kecamatan", "nama", "no_hp", "alamat_lengkap", "patokan", "is_alamat_utama", "is_rumah", "is_kantor", "is_usaha"},
+ *      required={"id_users", "province_id", "id_kota", "id_kecamatan", "nama", "no_hp", "alamat_lengkap", "patokan", "is_alamat_utama", "is_rumah", "is_kantor", "is_usaha"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -23,8 +23,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="id_provinsi",
- *          description="id_provinsi",
+ *          property="province_id",
+ *          description="province_id",
  *          type="integer",
  *          format="int32"
  *      ),

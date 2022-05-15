@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\City;
+use App\Models\MasterCity;
 use InfyOm\Generator\Request\APIRequest;
 
 class UpdateCityAPIRequest extends APIRequest
@@ -24,7 +24,7 @@ class UpdateCityAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = City::$rules;
+        $rules = MasterCity::$rules;
         
         return $rules;
     }

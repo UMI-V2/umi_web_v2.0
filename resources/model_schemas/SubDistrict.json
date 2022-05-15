@@ -12,7 +12,7 @@
         "inView": true
     },
     {
-        "name": "id_provinsi",
+        "name": "province_id",
         "dbType": "integer:unsigned:foreign,master_provinces,id",
         "htmlType": "select,",
         "validations": "required",
@@ -25,7 +25,7 @@
     },
     {
         "name": "id_kota",
-        "dbType": "integer:unsigned:foreign,cities,id",
+        "dbType": "integer:unsigned:foreign,master_cities,id",
         "htmlType": "select,",
         "validations": "required",
         "searchable": true,
@@ -36,7 +36,7 @@
         "inView": true
     },
     {
-        "name": "nama_kecamatan",
+        "name": "subdistrict_name",
         "dbType": "string",
         "htmlType": "text",
         "validations": "required",
@@ -73,10 +73,10 @@
     },
     {
         "type": "relation",
-        "relation": "mt1,MasterProvince,id_provinsi,id"
+        "relation": "mt1,MasterProvince,province_id,id"
     },
     {
         "type": "relation",
-        "relation": "mt1,City,id_kota,id"
+        "relation": "mt1,MasterCity,id_kota,id"
     }
 ]

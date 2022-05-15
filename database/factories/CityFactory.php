@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\City;
+use App\Models\MasterCity;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CityFactory extends Factory
@@ -12,7 +12,7 @@ class CityFactory extends Factory
      *
      * @var string
      */
-    protected $model = City::class;
+    protected $model = MasterCity::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +22,9 @@ class CityFactory extends Factory
     public function definition()
     {
         return [
-            'id_provinsi' => $this->faker->randomDigitNotNull,
-        'nama_kota' => $this->faker->word,
+            'province_id' => $this->faker->randomDigitNotNull,
+        'city_name' => $this->faker->word,
+        'postal_code' => $this->faker->word,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

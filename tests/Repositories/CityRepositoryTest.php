@@ -1,24 +1,24 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\City;
-use App\Repositories\CityRepository;
+use App\Models\MasterCity;
+use App\Repositories\MasterCityRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
 
-class CityRepositoryTest extends TestCase
+class MasterCityRepositoryTest extends TestCase
 {
     use ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var CityRepository
+     * @var MasterCityRepository
      */
     protected $cityRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->cityRepo = \App::make(CityRepository::class);
+        $this->cityRepo = \App::make(MasterCityRepository::class);
     }
 
     /**
@@ -26,14 +26,14 @@ class CityRepositoryTest extends TestCase
      */
     public function test_create_city()
     {
-        $city = City::factory()->make()->toArray();
+        $city = MasterCity::factory()->make()->toArray();
 
         $createdCity = $this->cityRepo->create($city);
 
         $createdCity = $createdCity->toArray();
         $this->assertArrayHasKey('id', $createdCity);
-        $this->assertNotNull($createdCity['id'], 'Created City must have id specified');
-        $this->assertNotNull(City::find($createdCity['id']), 'City with given id must be in DB');
+        $this->assertNotNull($createdCity['id'], 'Created MasterCity must have id specified');
+        $this->assertNotNull(MasterCity::find($createdCity['id']), 'MasterCity with given id must be in DB');
         $this->assertModelData($city, $createdCity);
     }
 
@@ -42,7 +42,7 @@ class CityRepositoryTest extends TestCase
      */
     public function test_read_city()
     {
-        $city = City::factory()->create();
+        $city = MasterCity::factory()->create();
 
         $dbCity = $this->cityRepo->find($city->id);
 
@@ -55,8 +55,8 @@ class CityRepositoryTest extends TestCase
      */
     public function test_update_city()
     {
-        $city = City::factory()->create();
-        $fakeCity = City::factory()->make()->toArray();
+        $city = MasterCity::factory()->create();
+        $fakeCity = MasterCity::factory()->make()->toArray();
 
         $updatedCity = $this->cityRepo->update($fakeCity, $city->id);
 
@@ -70,11 +70,11 @@ class CityRepositoryTest extends TestCase
      */
     public function test_delete_city()
     {
-        $city = City::factory()->create();
+        $city = MasterCity::factory()->create();
 
         $resp = $this->cityRepo->delete($city->id);
 
         $this->assertTrue($resp);
-        $this->assertNull(City::find($city->id), 'City should not exist in DB');
+        $this->assertNull(MasterCity::find($city->id), 'MasterCity should not exist in DB');
     }
 }

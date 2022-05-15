@@ -6,14 +6,20 @@
 
 <!-- Id Provinsi Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_provinsi', 'Id Provinsi:') !!}
-    <p>{{ $city->id_provinsi }}</p>
+    {!! Form::label('province_id', 'Id Provinsi:') !!}
+    <p>{{ $city->province_id }}</p>
 </div>
 
 <!-- Nama Kota Field -->
 <div class="col-sm-12">
-    {!! Form::label('nama_kota', 'Nama Kota:') !!}
-    <p>{{ $city->nama_kota }}</p>
+    {!! Form::label('city_name', 'Nama Kota:') !!}
+    <p>{{ $city->city_name }}</p>
+</div>
+
+<!-- Kode Pos Field -->
+<div class="col-sm-12">
+    {!! Form::label('postal_code', 'Kode Pos:') !!}
+    <p>{{ $city->postal_code }}</p>
 </div>
 
 <!-- Created At Field -->

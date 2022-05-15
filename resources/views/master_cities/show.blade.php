@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
-                       href="{{ route('cities.index') }}">
+                       href="{{ route('master_cities.index') }}">
                         Back
                     </a>
                 </div>
@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    @include('cities.show_fields')
+                    @include('master_cities.show_fields')
                 </div>
             </div>
         </div>

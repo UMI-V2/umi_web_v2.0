@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\MasterProvince;
-use App\Models\City;
+use App\Models\MasterCity;
 use App\Models\SubDistrict;
 use App\DataTables\AddressDataTable;
 use App\Http\Requests;
@@ -45,10 +45,10 @@ class AddressController extends AppBaseController
     public function create()
     {
         $users = user::query()->pluck('name', 'id');
-        $master_provinces = MasterProvince::query()->pluck('nama_provinsi', 'id');
-        $cities = City::query()->pluck('nama_kota', 'id');
-        $sub_districts = SubDistrict::query()->pluck('nama_kecamatan', 'id');
-        return view('addresses.create')->with('users', $users)->with('master_provinces', $master_provinces)->with('cities', $cities)->with('sub_districts', $sub_districts);
+        $master_provinces = MasterProvince::query()->pluck('province_name', 'province_id');
+        $master_cities = MasterCity::query()->pluck('city_name', 'city_id');
+        $sub_districts = SubDistrict::query()->pluck('subdistrict_name', 'subdistrict_id');
+        return view('addresses.create')->with('users', $users)->with('master_provinces', $master_provinces)->with('master_cities', $master_cities)->with('sub_districts', $sub_districts);
     }
 
     /**
@@ -101,9 +101,9 @@ class AddressController extends AppBaseController
         $address = $this->addressRepository->find($id);
         // dd($users);
         $users = user::query()->pluck('name', 'id');
-        $master_provinces = MasterProvince::query()->pluck('nama_provinsi', 'id');
-        $cities = City::query()->pluck('nama_kota', 'id');
-        $sub_districts = SubDistrict::query()->pluck('nama_kecamatan', 'id');
+        $master_provinces = MasterProvince::query()->pluck('province_name', 'province_id');
+        $master_cities = MasterCity::query()->pluck('city_name', 'city_id');
+        $sub_districts = SubDistrict::query()->pluck('subdistrict_name', 'subdistrict_id');
 
         if (empty($address)) {
             Flash::error('Address not found');
@@ -111,7 +111,7 @@ class AddressController extends AppBaseController
             return redirect(route('addresses.index'));
         }
 
-        return view('addresses.edit')->with('address', $address)->with('users', $users)->with('master_provinces', $master_provinces)->with('cities', $cities)->with('sub_districts', $sub_districts);
+        return view('addresses.edit')->with('address', $address)->with('users', $users)->with('master_provinces', $master_provinces)->with('master_cities', $master_cities)->with('sub_districts', $sub_districts);
     }
 
     /**

@@ -17,19 +17,19 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'cities.store']) !!}
+            {!! Form::open(['route' => 'master_cities.store']) !!}
 
             <div class="card-body">
 
                 <div class="row">
-                    @include('cities.fields')
+                    @include('master_cities.fields')
                 </div>
 
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('cities.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('master_cities.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}
