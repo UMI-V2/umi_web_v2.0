@@ -37,7 +37,7 @@ Route::get('getMasterDeliveryService', [MasterDeliveryServiceController::class, 
 // Master Province
 Route::get('getMasterProvince', [MasterProvinceAPIController::class, 'index']);
 
-// Master City
+// Master MasterCity
 Route::get('getMasterCity', [MasterCityAPIController::class, 'index']);
 
 // Master Sub District
@@ -128,7 +128,7 @@ Route::resource('business_files', App\Http\Controllers\API\BusinessFileAPIContro
 Route::resource('business_categories', App\Http\Controllers\API\BusinessCategoryAPIController::class);
 
 
-Route::resource('cities', App\Http\Controllers\API\CityAPIController::class);
+Route::resource('master_cities', App\Http\Controllers\API\CityAPIController::class);
 
 
 Route::resource('sub_districts', App\Http\Controllers\API\SubDistrictAPIController::class);

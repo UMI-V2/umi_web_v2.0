@@ -25,9 +25,9 @@ class MasterCityAPIController extends Controller
             );
             $idProvince = $request->input("province_id");
 
-            $cities = MasterCity::where("province_id", $idProvince)->get();
+            $master_cities = MasterCity::where("province_id", $idProvince)->get();
             return ResponseFormatter::success(
-                $cities,
+                $master_cities,
                 'Master Cities retrieved successfully',
             );
         } catch (Exception $error) {

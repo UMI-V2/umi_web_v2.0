@@ -2,23 +2,24 @@
 
 namespace App\Repositories;
 
-use App\Models\City;
+use App\Models\MasterCity;
 use App\Repositories\BaseRepository;
 
 /**
- * Class CityRepository
+ * Class MasterCityRepository
  * @package App\Repositories
  * @version March 29, 2022, 12:52 pm UTC
 */
 
-class CityRepository extends BaseRepository
+class MasterCityRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'id_provinsi',
-        'nama_kota'
+        'province_id',
+        'city_name',
+        'postal_code'
     ];
 
     /**
@@ -36,6 +37,6 @@ class CityRepository extends BaseRepository
      **/
     public function model()
     {
-        return City::class;
+        return MasterCity::class;
     }
 }

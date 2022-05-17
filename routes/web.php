@@ -85,7 +85,7 @@ Route::resource('businessFiles', App\Http\Controllers\BusinessFileController::cl
 Route::resource('businessCategories', App\Http\Controllers\BusinessCategoryController::class);
 
 
-Route::resource('cities', App\Http\Controllers\CityController::class);
+Route::resource('master_cities', App\Http\Controllers\MasterCityController::class);
 
 
 Route::resource('subDistricts', App\Http\Controllers\SubDistrictController::class);

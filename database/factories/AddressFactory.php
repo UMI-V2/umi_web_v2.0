@@ -23,7 +23,7 @@ class AddressFactory extends Factory
     {
         return [
             'id_users' => $this->faker->randomDigitNotNull,
-        'id_provinsi' => $this->faker->randomDigitNotNull,
+        'province_id' => $this->faker->randomDigitNotNull,
         'id_kota' => $this->faker->randomDigitNotNull,
         'id_kecamatan' => $this->faker->randomDigitNotNull,
         'nama' => $this->faker->word,

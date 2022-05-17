@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterProvince;
-use App\Models\City;
+use App\Models\MasterCity;
 use App\DataTables\SubDistrictDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateSubDistrictRequest;
@@ -42,9 +42,9 @@ class SubDistrictController extends AppBaseController
      */
     public function create()
     {
-        $master_province = MasterProvince::query()->pluck('nama_provinsi', 'id');
-        $cities = City::query()->pluck('nama_kota', 'id');
-        return view('sub_districts.create')->with('master_province', $master_province)->with('cities', $cities);
+        $master_province = MasterProvince::query()->pluck('province_name', 'province_id');
+        $master_cities = MasterCity::query()->pluck('city_name', 'city_id');
+        return view('sub_districts.create')->with('master_province', $master_province)->with('master_cities', $master_cities);
     }
 
     /**
@@ -95,8 +95,8 @@ class SubDistrictController extends AppBaseController
     public function edit($id)
     {
         $subDistrict = $this->subDistrictRepository->find($id);
-        $master_province = MasterProvince::query()->pluck('nama_provinsi', 'id');
-        $cities = City::query()->pluck('nama_kota', 'id');
+        $master_province = MasterProvince::query()->pluck('province_name', 'province_id');
+        $master_cities = MasterCity::query()->pluck('city_name', 'city_id');
 
         if (empty($subDistrict)) {
             Flash::error('Sub District not found');
@@ -104,7 +104,7 @@ class SubDistrictController extends AppBaseController
             return redirect(route('subDistricts.index'));
         }
 
-        return view('sub_districts.edit')->with('subDistrict', $subDistrict)->with('master_province', $master_province)->with('cities', $cities);
+        return view('sub_districts.edit')->with('subDistrict', $subDistrict)->with('master_province', $master_province)->with('master_cities', $master_cities);
     }
 
     /**

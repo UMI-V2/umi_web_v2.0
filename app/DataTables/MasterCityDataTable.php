@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\City;
+use App\Models\MasterCity;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class CityDataTable extends DataTable
+class MasterCityDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,16 +18,16 @@ class CityDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'cities.datatables_actions');
+        return $dataTable->addColumn('action', 'master_cities.datatables_actions');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\City $model
+     * @param \App\Models\MasterCity $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(City $model)
+    public function query(MasterCity $model)
     {
         return $model->newQuery()->with('master_provinces');
     }
@@ -65,12 +65,13 @@ class CityDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id_provinsi' => new \Yajra\DataTables\Html\Column([
-                'data' => 'master_provinces.nama_provinsi',
-                'name' => 'master_provinces.nama_provinsi',
+            'province_id' => new \Yajra\DataTables\Html\Column([
+                'data' => 'master_provinces.province_name',
+                'name' => 'master_provinces.province_name',
                 'title' => 'Nama Provinsi',
             ]),
-            'nama_kota'
+            'city_name',
+            'postal_code',
         ];
     }
 
@@ -81,6 +82,6 @@ class CityDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'cities_datatable_' . time();
+        return 'master_cities_datatable_' . time();
     }
 }

@@ -18,7 +18,7 @@ class AddressRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'id_users',
-        'id_provinsi',
+        'province_id',
         'id_kota',
         'id_kecamatan',
         'nama',

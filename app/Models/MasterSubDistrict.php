@@ -15,4 +15,20 @@ class MasterSubDistrict extends Model
         'city_id',
         'subdistrict_name',
     ];
+
+     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function master_provinces()
+    {
+        return $this->belongsTo(\App\Models\MasterProvince::class, 'province_id', 'subdistrict_id');
+    }
+
+     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function master_cities()
+    {
+        return $this->belongsTo(\App\Models\MasterCity::class, 'city_id', 'subdistrict_id');
+    }
 }

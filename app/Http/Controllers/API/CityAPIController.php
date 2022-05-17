@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateCityAPIRequest;
 use App\Http\Requests\API\UpdateCityAPIRequest;
-use App\Models\City;
-use App\Repositories\CityRepository;
+use App\Models\MasterCity;
+use App\Repositories\MasterCityRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -17,10 +17,10 @@ use Response;
 
 class CityAPIController extends AppBaseController
 {
-    /** @var  CityRepository */
+    /** @var  MasterCityRepository */
     private $cityRepository;
 
-    public function __construct(CityRepository $cityRepo)
+    public function __construct(MasterCityRepository $cityRepo)
     {
         $this->cityRepository = $cityRepo;
     }
@@ -30,9 +30,9 @@ class CityAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/cities",
+     *      path="/master_cities",
      *      summary="Get a listing of the Cities.",
-     *      tags={"City"},
+     *      tags={"MasterCity"},
      *      description="Get all Cities",
      *      produces={"application/json"},
      *      @SWG\Response(
@@ -47,7 +47,7 @@ class CityAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/City")
+     *                  @SWG\Items(ref="#/definitions/MasterCity")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,13 +59,13 @@ class CityAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $cities = $this->cityRepository->all(
+        $master_cities = $this->cityRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
 
-        return $this->sendResponse($cities->toArray(), 'Cities retrieved successfully');
+        return $this->sendResponse($master_cities->toArray(), 'Cities retrieved successfully');
     }
 
     /**
@@ -73,17 +73,17 @@ class CityAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/cities",
-     *      summary="Store a newly created City in storage",
-     *      tags={"City"},
-     *      description="Store City",
+     *      path="/master_cities",
+     *      summary="Store a newly created MasterCity in storage",
+     *      tags={"MasterCity"},
+     *      description="Store MasterCity",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="City that should be stored",
+     *          description="MasterCity that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/City")
+     *          @SWG\Schema(ref="#/definitions/MasterCity")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class CityAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/City"
+     *                  ref="#/definitions/MasterCity"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -112,7 +112,7 @@ class CityAPIController extends AppBaseController
 
         $city = $this->cityRepository->create($input);
 
-        return $this->sendResponse($city->toArray(), 'City saved successfully');
+        return $this->sendResponse($city->toArray(), 'MasterCity saved successfully');
     }
 
     /**
@@ -120,14 +120,14 @@ class CityAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/cities/{id}",
-     *      summary="Display the specified City",
-     *      tags={"City"},
-     *      description="Get City",
+     *      path="/master_cities/{id}",
+     *      summary="Display the specified MasterCity",
+     *      tags={"MasterCity"},
+     *      description="Get MasterCity",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of City",
+     *          description="id of MasterCity",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class CityAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/City"
+     *                  ref="#/definitions/MasterCity"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,14 +155,14 @@ class CityAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var City $city */
+        /** @var MasterCity $city */
         $city = $this->cityRepository->find($id);
 
         if (empty($city)) {
-            return $this->sendError('City not found');
+            return $this->sendError('MasterCity not found');
         }
 
-        return $this->sendResponse($city->toArray(), 'City retrieved successfully');
+        return $this->sendResponse($city->toArray(), 'MasterCity retrieved successfully');
     }
 
     /**
@@ -171,14 +171,14 @@ class CityAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Put(
-     *      path="/cities/{id}",
-     *      summary="Update the specified City in storage",
-     *      tags={"City"},
-     *      description="Update City",
+     *      path="/master_cities/{id}",
+     *      summary="Update the specified MasterCity in storage",
+     *      tags={"MasterCity"},
+     *      description="Update MasterCity",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of City",
+     *          description="id of MasterCity",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class CityAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="City that should be updated",
+     *          description="MasterCity that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/City")
+     *          @SWG\Schema(ref="#/definitions/MasterCity")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class CityAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/City"
+     *                  ref="#/definitions/MasterCity"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -215,16 +215,16 @@ class CityAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var City $city */
+        /** @var MasterCity $city */
         $city = $this->cityRepository->find($id);
 
         if (empty($city)) {
-            return $this->sendError('City not found');
+            return $this->sendError('MasterCity not found');
         }
 
         $city = $this->cityRepository->update($input, $id);
 
-        return $this->sendResponse($city->toArray(), 'City updated successfully');
+        return $this->sendResponse($city->toArray(), 'MasterCity updated successfully');
     }
 
     /**
@@ -232,14 +232,14 @@ class CityAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/cities/{id}",
-     *      summary="Remove the specified City from storage",
-     *      tags={"City"},
-     *      description="Delete City",
+     *      path="/master_cities/{id}",
+     *      summary="Remove the specified MasterCity from storage",
+     *      tags={"MasterCity"},
+     *      description="Delete MasterCity",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of City",
+     *          description="id of MasterCity",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,15 +267,15 @@ class CityAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var City $city */
+        /** @var MasterCity $city */
         $city = $this->cityRepository->find($id);
 
         if (empty($city)) {
-            return $this->sendError('City not found');
+            return $this->sendError('MasterCity not found');
         }
 
         $city->delete();
 
-        return $this->sendSuccess('City deleted successfully');
+        return $this->sendSuccess('MasterCity deleted successfully');
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\City;
+use App\Models\MasterCity;
 
-class CreateCityRequest extends FormRequest
+class UpdateMasterCityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,8 @@ class CreateCityRequest extends FormRequest
      */
     public function rules()
     {
-        return City::$rules;
+        $rules = MasterCity::$rules;
+        
+        return $rules;
     }
 }

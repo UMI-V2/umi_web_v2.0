@@ -65,8 +65,8 @@ class MasterProvinceDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'nama_provinsi'
+            'province_id',
+            'province_name'
         ];
     }
 

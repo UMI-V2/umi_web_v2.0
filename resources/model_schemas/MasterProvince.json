@@ -12,7 +12,7 @@
         "inView": true
     },
     {
-        "name": "nama_provinsi",
+        "name": "province_name",
         "dbType": "string",
         "htmlType": "text",
         "validations": "required",

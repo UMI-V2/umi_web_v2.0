@@ -1,9 +1,9 @@
-{!! Form::open(['route' => ['masterProvinces.destroy', $id], 'method' => 'delete']) !!}
+{!! Form::open(['route' => ['masterProvinces.destroy', $province_id], 'method' => 'delete']) !!}
 <div class='btn-group'>
-    <a href="{{ route('masterProvinces.show', $id) }}" class='btn btn-default btn-xs'>
+    <a href="{{ route('masterProvinces.show', $province_id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-eye"></i>
     </a>
-    <a href="{{ route('masterProvinces.edit', $id) }}" class='btn btn-default btn-xs'>
+    <a href="{{ route('masterProvinces.edit', $province_id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-edit"></i>
     </a>
     {!! Form::button('<i class="fa fa-trash"></i>', [

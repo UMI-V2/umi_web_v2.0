@@ -17,9 +17,9 @@ class SubDistrictRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'id_provinsi',
+        'province_id',
         'id_kota',
-        'nama_kecamatan'
+        'subdistrict_name'
     ];
 
     /**

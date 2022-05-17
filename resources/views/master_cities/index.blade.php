@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
-                       href="{{ route('cities.create') }}">
+                       href="{{ route('master_cities.create') }}">
                         Add New
                     </a>
                 </div>
@@ -25,7 +25,7 @@
 
         <div class="card">
             <div class="card-body p-0">
-                @include('cities.table')
+                @include('master_cities.table')
 
                 <div class="card-footer clearfix">
                     <div class="float-right">

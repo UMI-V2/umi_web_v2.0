@@ -124,8 +124,8 @@
 
 
 <li class="nav-item">
-    <a href="{{ route('cities.index') }}"
-       class="nav-link {{ Request::is('cities*') ? 'active' : '' }}">
+    <a href="{{ route('master_cities.index') }}"
+       class="nav-link {{ Request::is('master_cities*') ? 'active' : '' }}">
         <p>Kota</p>
     </a>
 </li>

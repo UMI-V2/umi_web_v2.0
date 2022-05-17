@@ -6,8 +6,8 @@
 
 <!-- Id Provinsi Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_provinsi', 'Id Provinsi:') !!}
-    <p>{{ $subDistrict->id_provinsi }}</p>
+    {!! Form::label('province_id', 'Id Provinsi:') !!}
+    <p>{{ $subDistrict->province_id }}</p>
 </div>
 
 <!-- Id Kota Field -->
@@ -18,8 +18,8 @@
 
 <!-- Nama Kecamatan Field -->
 <div class="col-sm-12">
-    {!! Form::label('nama_kecamatan', 'Nama Kecamatan:') !!}
-    <p>{{ $subDistrict->nama_kecamatan }}</p>
+    {!! Form::label('subdistrict_name', 'Nama Kecamatan:') !!}
+    <p>{{ $subDistrict->subdistrict_name }}</p>
 </div>
 
 <!-- Created At Field -->

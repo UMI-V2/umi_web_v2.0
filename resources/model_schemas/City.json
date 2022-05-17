@@ -12,7 +12,7 @@
         "inView": true
     },
     {
-        "name": "id_provinsi",
+        "name": "province_id",
         "dbType": "integer:unsigned:foreign,master_provinces,id",
         "htmlType": "select,",
         "validations": "required",
@@ -24,7 +24,19 @@
         "inView": true
     },
     {
-        "name": "nama_kota",
+        "name": "city_name",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "postal_code",
         "dbType": "string",
         "htmlType": "text",
         "validations": "required",
@@ -61,6 +73,6 @@
     },
     {
         "type": "relation",
-        "relation": "mt1,MasterProvince,id_provinsi,id"
+        "relation": "mt1,MasterProvince,province_id,id"
     }
 ]

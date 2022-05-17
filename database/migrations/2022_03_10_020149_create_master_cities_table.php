@@ -19,7 +19,7 @@ class CreateMasterCitiesTable extends Migration
             $table->string('city_name');
             $table->string('postal_code');
         
-            // $table->timestamps();
+            $table->timestamps();
 
             $table->foreign('province_id')->references('province_id')->on('master_provinces');
 
