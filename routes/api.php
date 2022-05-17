@@ -60,7 +60,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('getMyUser', [UserAPIController::class, 'getMyUser']);
         Route::post('update', [UserAPIController::class, 'updateProfile']);
         Route::post('updatePhotoProfile', [UserAPIController::class, 'updatePhotoProfile']);
-
+        Route::post('checkUsername', [UserAPIController::class, 'checkUsername']);
+        Route::post('sendVerifikasiEmail', [UserAPIController::class, 'sendEmailVerification']);
     });
 
     Route::group(['prefix' => 'address'], function () {
@@ -82,6 +83,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', [BusinessCategoryAPIController::class, 'index']);
     });
 });
+
+// http:172.0.1:80000/api/v1/business/update
 
 
 Route::resource('master_product_categories', App\Http\Controllers\API\MasterProductCategoryAPIController::class);

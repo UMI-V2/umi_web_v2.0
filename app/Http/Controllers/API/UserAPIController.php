@@ -25,6 +25,39 @@ class UserAPIController extends Controller
             ],  'Update Failed', 500);
         }
     }
+    public function checkUsername(Request $request)
+    {
+        try {
+            $user = User::where('username', $request->username)->first();
+            if($user){
+                return ResponseFormatter::error(false, 'Username Telah Terpakai');
+            }
+            return ResponseFormatter::success(true, 'Username Dapat Digunakan');
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => "Update Usename gagal",
+                'error' => $error,
+            ],  'Update Failed', 500);
+        }
+    }
+
+    public function sendEmailVerification(Request $request)
+    {
+        try {
+            $user = User::where('username', $request->username)->first();
+            if($user){
+                return ResponseFormatter::error(false, 'Username Telah Terpakai');
+            }
+            return ResponseFormatter::success(true, 'Username Dapat Digunakan');
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => "Update Usename gagal",
+                'error' => $error,
+            ],  'Update Failed', 500);
+        }
+    }
+
+    
 
     public function updateProfile(Request $request)
     {
