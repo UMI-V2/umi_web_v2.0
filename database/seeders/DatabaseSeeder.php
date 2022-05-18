@@ -2,39 +2,40 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-
-use App\Models\MasterPrivilege;
-use App\Models\MasterStatusUser;
-use App\Models\MasterStatusBusiness;
-use App\Models\MasterBusinessCategory;
-use App\Models\MasterTransactionCategory;
-use App\Models\MasterProvince;
-use App\Models\MasterUnit;
-use App\Models\MasterDeliveryService;
-use App\Models\MasterPaymentMethod;
+use Carbon\Carbon;
 
 use App\Models\User;
-use App\Models\Business;
-use App\Models\BusinessPaymentMethod;
-use App\Models\BusinessDeliveryService;
-use App\Models\SalesDeliveryService;
 use App\Models\Address;
-use App\Models\MasterCity;
-use App\Models\MasterSubDistrict;
-use App\Models\SubDistrict;
 use App\Models\Product;
-use App\Models\SalesTransaction;
+use App\Models\Business;
+use App\Models\MasterCity;
+use App\Models\MasterUnit;
+use App\Models\SubDistrict;
+use App\Models\MasterProvince;
+use App\Models\MasterPrivilege;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Database\Seeder;
+use App\Models\MasterStatusUser;
+use App\Models\SalesTransaction;
+use App\Models\MasterSubDistrict;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\MasterPaymentMethod;
+use App\Models\MasterStatusBusiness;
+use App\Models\SalesDeliveryService;
+use App\Models\BusinessPaymentMethod;
+use App\Models\MasterDeliveryService;
+use App\Models\MasterBusinessCategory;
+
+use Laravel\Jetstream\HasProfilePhoto;
+use App\Models\BusinessDeliveryService;
+use Illuminate\Notifications\Notifiable;
+use App\Models\MasterTransactionCategory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Database\Seeders\MasterCategoryProductSeeder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class DatabaseSeeder extends Seeder
 {
@@ -338,6 +339,7 @@ class DatabaseSeeder extends Seeder
         );
 
         $this->call(MasterCategoryBusinessSeeder::class);
+        $this->call(MasterCategoryProductSeeder::class);
         // $this->call(PrivilegeSeeder::class);
     }
 }

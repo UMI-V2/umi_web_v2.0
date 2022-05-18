@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -148,4 +149,27 @@ class Product extends Model
     {
         return $this->hasMany(\App\Models\ProductCategory::class, 'id_produk', 'id');
     }
+
+    public function product_files()
+    {
+        return $this->hasMany(\App\Models\ProductFile::class, 'id_produk', 'id');
+    }
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($product) { 
+             $product->product_category()->delete();
+             $files = ProductFile::where('id_produk', $product->id)->get();
+             foreach ($files as $file) {
+                 $fileName = $file->getAttributes()['file'];
+                ProductFile::where('file', $fileName)->delete();
+                if (Storage::disk('public')->exists($fileName)) {
+                    Storage::disk('public')->delete($fileName);
+                }
+            }
+             $product->product_files()->delete();
+        });
+    }
+
 }

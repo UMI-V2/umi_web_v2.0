@@ -15,6 +15,8 @@ use App\Http\Controllers\MasterDeliveryServiceController;
 use App\Http\Controllers\API\BusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
+use App\Http\Controllers\API\MasterProductCategoryAPIController;
+use App\Http\Controllers\API\MasterUnitAPIController;
 use App\Http\Controllers\API\ProductAPIController;
 
 /*
@@ -93,7 +95,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::group(['prefix' => 'product'], function () {
         Route::get('/', [ProductAPIController::class, 'all']);
-        Route::post('update', [ProductAPIController::class, 'store']);
+        Route::post('update', [ProductAPIController::class, 'update']);
+        Route::delete('delete', [ProductAPIController::class, 'delete']);
+
+    });
+    Route::group(['prefix' => 'masterCategoryProduct'], function () {
+        Route::get('/', [MasterProductCategoryAPIController::class, 'index']);
+        // Route::post('update', [ProductAPIController::class, 'store']);
+    });
+    Route::group(['prefix' => 'masterUnit'], function () {
+        Route::get('/', [MasterUnitAPIController::class, 'all']);
+        // Route::post('update', [ProductAPIController::class, 'store']);
     });
 });
 
