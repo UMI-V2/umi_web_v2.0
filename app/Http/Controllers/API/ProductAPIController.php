@@ -43,7 +43,7 @@ class ProductAPIController extends AppBaseController
                 }
             }
 
-            $value = Product::with(['master_units', 'product_category.master_product_categories']);
+            $value = Product::with(['master_units', 'product_category.master_product_categories', 'product_files']);
 
 
             if ($id_usaha) {
@@ -76,16 +76,16 @@ class ProductAPIController extends AppBaseController
         try {
             $data = $request->all();
 
-            $result = Product::updateOrCreate(['id' => $data['id']], $data);
+            $result = Product::updateOrCreate(['id' => $request->id], $data);
 
             ProductCategoryAPIController::createDelete($request, $result->id);
 
             ProductFileAPIController::uploadOrDeleteFile($request, $result->id);
             $value = Product::find($result->id);
             if ($request->id) {
-                return ResponseFormatter::success($value->load(['master_units', 'product_category.master_product_categories']), 'Update Product Success');
+                return ResponseFormatter::success($value->load(['master_units', 'product_category.master_product_categories', 'product_files']), 'Update Product Success');
             }
-            return ResponseFormatter::success($value->load(['master_units', 'product_category.master_product_categories']), 'Add Product Success');
+            return ResponseFormatter::success($value->load(['master_units', 'product_category.master_product_categories', 'product_files']), 'Add Product Success');
 
         } catch (Exception $e) {
             return ResponseFormatter::error([
@@ -100,6 +100,7 @@ class ProductAPIController extends AppBaseController
             $this->validate($request, [
                 'id' => 'required',
             ]);
+            
             $value = Product::find($request->id)->delete();
 
             return ResponseFormatter::success($value, 'Delete Product Success');
