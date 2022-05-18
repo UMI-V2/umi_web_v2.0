@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->integer('stok');
             $table->boolean('kondisi');
             $table->boolean('preorder');
+            $table->string('jumlah_satuan');
             $table->timestamps();
             $table->foreign('id_usaha')->references('id')->on('businesses');
             $table->foreign('id_satuan')->references('id')->on('master_units');

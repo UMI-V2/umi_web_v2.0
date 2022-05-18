@@ -1,18 +1,21 @@
 <?php
 
+use App\Models\MasterProvince;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\OpenHourController;
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\UserAPIController;
 use App\Http\Controllers\API\AddressAPIController;
 use App\Http\Controllers\API\BusinessAPIController;
+use App\Http\Controllers\API\OpenHourAPIController;
 use App\Http\Controllers\API\MasterCityAPIController;
+use App\Http\Controllers\API\MasterProvinceAPIController;
+use App\Http\Controllers\MasterDeliveryServiceController;
 use App\Http\Controllers\API\BusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
-use App\Http\Controllers\API\MasterProvinceAPIController;
-use App\Http\Controllers\MasterDeliveryServiceController;
-use App\Models\MasterProvince;
+use App\Http\Controllers\API\ProductAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +84,16 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::group(['prefix' => 'businessCategory'], function () {
         Route::get('/', [BusinessCategoryAPIController::class, 'index']);
+    });
+
+    Route::group(['prefix' => 'openhours'], function () {
+        Route::get('/', [OpenHourAPIController::class, 'index']);
+        Route::post('update', [OpenHourAPIController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'product'], function () {
+        Route::get('/', [ProductAPIController::class, 'all']);
+        Route::post('update', [ProductAPIController::class, 'store']);
     });
 });
 

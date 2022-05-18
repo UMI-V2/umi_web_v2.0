@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\API;
 
+use Response;
+use Exception;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
+use App\Repositories\ProductRepository;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Controllers\ProductFileController;
 use App\Http\Requests\API\CreateProductAPIRequest;
 use App\Http\Requests\API\UpdateProductAPIRequest;
-use App\Models\Product;
-use App\Repositories\ProductRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Response;
+use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\API\ProductFileAPIController;
+use App\Http\Controllers\API\ProductCategoryAPIController;
 
 /**
  * Class ProductController
@@ -17,265 +23,90 @@ use Response;
 
 class ProductAPIController extends AppBaseController
 {
-    /** @var  ProductRepository */
-    private $productRepository;
-
-    public function __construct(ProductRepository $productRepo)
+    public function all(Request $request)
     {
-        $this->productRepository = $productRepo;
-    }
+        try {
+            $limit =  $request->input('limit', 20);
+            $id = $request->input('id');
+            $id_usaha = $request->input('id_usaha');
+            $nama = $request->input('nama');
+            $kondisi = $request->input('kondisi');
+            $price_from = $request->input('price_from');
+            $price_to = $request->input('price_to');
 
-    /**
-     * @param Request $request
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/products",
-     *      summary="Get a listing of the Products.",
-     *      tags={"Product"},
-     *      description="Get all Products",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Product")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function index(Request $request)
-    {
-        $products = $this->productRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+            if ($id) {
+                $value = Product::find($id);
+                if ($value) {
+                    return ResponseFormatter::success($value, 'Get Product Success');
+                } else {
+                    return ResponseFormatter::error(null, 'Get Product Not Found', 404);
+                }
+            }
 
-        return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
-    }
+            $value = Product::with(['master_units', 'product_category.master_product_categories']);
 
-    /**
-     * @param CreateProductAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/products",
-     *      summary="Store a newly created Product in storage",
-     *      tags={"Product"},
-     *      description="Store Product",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="Product that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Product")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Product"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function store(CreateProductAPIRequest $request)
-    {
-        $input = $request->all();
 
-        $product = $this->productRepository->create($input);
+            if ($id_usaha) {
+                $value->where('id_usaha', $id_usaha);
+            }
+            if ($nama) {
+                $value->where('nama', 'like', '%' . $nama . '%');
+            }
+            if ($kondisi) {
+                $value->where('kondisi', $kondisi);
+            }
+            if ($price_from) {
+                $value->where('harga', '>=', $price_from);
+            }
+            if ($price_to) {
+                $value->where('harga', '<=', $price_to);
+            }
 
-        return $this->sendResponse($product->toArray(), 'Product saved successfully');
-    }
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/products/{id}",
-     *      summary="Display the specified Product",
-     *      tags={"Product"},
-     *      description="Get Product",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Product",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Product"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function show($id)
-    {
-        /** @var Product $product */
-        $product = $this->productRepository->find($id);
-
-        if (empty($product)) {
-            return $this->sendError('Product not found');
+            return ResponseFormatter::success($value->paginate($limit), 'Get Products Success');
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'error' => $e,
+            ],  'Get Products Failed', 500);
         }
-
-        return $this->sendResponse($product->toArray(), 'Product retrieved successfully');
     }
 
-    /**
-     * @param int $id
-     * @param UpdateProductAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/products/{id}",
-     *      summary="Update the specified Product in storage",
-     *      tags={"Product"},
-     *      description="Update Product",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Product",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="Product that should be updated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Product")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Product"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function update($id, UpdateProductAPIRequest $request)
+    public function update(Request $request)
     {
-        $input = $request->all();
+        try {
+            $data = $request->all();
 
-        /** @var Product $product */
-        $product = $this->productRepository->find($id);
+            $result = Product::updateOrCreate(['id' => $data['id']], $data);
 
-        if (empty($product)) {
-            return $this->sendError('Product not found');
+            ProductCategoryAPIController::createDelete($request, $result->id);
+
+            ProductFileAPIController::uploadOrDeleteFile($request, $result->id);
+            $value = Product::find($result->id);
+            if ($request->id) {
+                return ResponseFormatter::success($value->load(['master_units', 'product_category.master_product_categories']), 'Update Product Success');
+            }
+            return ResponseFormatter::success($value->load(['master_units', 'product_category.master_product_categories']), 'Add Product Success');
+
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'error' => $e,
+            ],  'Update Product Failed', 500);
         }
-
-        $product = $this->productRepository->update($input, $id);
-
-        return $this->sendResponse($product->toArray(), 'Product updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Delete(
-     *      path="/products/{id}",
-     *      summary="Remove the specified Product from storage",
-     *      tags={"Product"},
-     *      description="Delete Product",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Product",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        /** @var Product $product */
-        $product = $this->productRepository->find($id);
+        try {
+            $this->validate($request, [
+                'id' => 'required',
+            ]);
+            $value = Product::find($request->id)->delete();
 
-        if (empty($product)) {
-            return $this->sendError('Product not found');
+            return ResponseFormatter::success($value, 'Delete Product Success');
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'error' => $e,
+            ],  'Delete Product Failed', 500);
         }
-
-        $product->delete();
-
-        return $this->sendSuccess('Product deleted successfully');
     }
 }

@@ -20,7 +20,7 @@ class BusinessAPIController extends Controller
     public function index(Request $request)
     {
         try {
-            $address = Business::with(['category.master_business_categories', 'masterStatusBusinesses', 'business_file'])->where('id_user', $request->user()->id)->first();
+            $address = Business::with(['category.master_business_categories', 'masterStatusBusinesses', 'business_file', 'open_hours'])->where('id_user', $request->user()->id)->first();
             return ResponseFormatter::success($address, 'Data Usaha berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
@@ -55,7 +55,7 @@ class BusinessAPIController extends Controller
 
             BusinessFileAPIController::uploadOrDeleteFile($request, $result->id);
             // dd( $result->id);
-            $result = Business::with(['category.master_business_categories','masterStatusBusinesses', 'business_file'])->where("id",$result->id)->first();
+            $result = Business::with(['category.master_business_categories','masterStatusBusinesses', 'business_file', 'open_hours'])->where("id",$result->id)->first();
             // dd( $result->id);
             return ResponseFormatter::success(
                 $result,

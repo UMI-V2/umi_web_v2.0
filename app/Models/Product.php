@@ -91,7 +91,8 @@ class Product extends Model
         'harga',
         'stok',
         'kondisi',
-        'preorder'
+        'preorder',
+        'jumlah_satuan'
     ];
 
     /**
@@ -141,5 +142,10 @@ class Product extends Model
     public function master_units()
     {
         return $this->belongsTo(\App\Models\MasterUnit::class, 'id_satuan', 'id');
+    }
+
+    public function product_category()
+    {
+        return $this->hasMany(\App\Models\ProductCategory::class, 'id_produk', 'id');
     }
 }

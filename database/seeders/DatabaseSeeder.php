@@ -131,7 +131,7 @@ class DatabaseSeeder extends Seeder
         //         'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
         //     ],
         // );
-        
+
         MasterStatusBusiness::create(
             [
                 'nama_status_usaha'         => 'Aktif',
@@ -163,7 +163,7 @@ class DatabaseSeeder extends Seeder
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
-        
+
         MasterStatusUser::create(
             [
                 'nama_status_pengguna'      => 'Tidak Aktif',
@@ -171,7 +171,7 @@ class DatabaseSeeder extends Seeder
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
-        
+
         MasterPrivilege::create(
             [
                 'nama_hak_akses_pengguna'   => 'Super Admin',
@@ -210,73 +210,73 @@ class DatabaseSeeder extends Seeder
 
         SalesDeliveryService::create(
             [
-            'id_jasa_pengiriman'    => 1,
-            'jenis_layanan'         => 'Express',
-            'deskripsi_layanan'     => 'Paket sampai dalam waktu 1-2 hari',
-            'ongkir'                => 24000,
-            'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+                'id_jasa_pengiriman'    => 1,
+                'jenis_layanan'         => 'Express',
+                'deskripsi_layanan'     => 'Paket sampai dalam waktu 1-2 hari',
+                'ongkir'                => 24000,
+                'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 
         User::create(
             [
-            'name'                  => 'Yoga Rizki Pratama',
-            'username'              => 'yoga',
-            'jenis_kelamin'         => 'L',
-            'tanggal_lahir'         => '2000-03-25',
-            'no_hp'                 => '081232121212',
-            'email'                 => 'yoga@gmail.com',
-            'id_privilege'          => 1,
-            'id_status_pengguna'    => 1,
-            'password'              => bcrypt('yoga1234'),
-            'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+                'name'                  => 'Yoga Rizki Pratama',
+                'username'              => 'yoga',
+                'jenis_kelamin'         => 'L',
+                'tanggal_lahir'         => '2000-03-25',
+                'no_hp'                 => '081232121212',
+                'email'                 => 'yoga@gmail.com',
+                'id_privilege'          => 1,
+                'id_status_pengguna'    => 1,
+                'password'              => bcrypt('yoga1234'),
+                'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 
         User::create(
             [
-            'name'                  => 'Super Admin',
-            'username'              => 'Super Admin',
-            'jenis_kelamin'         => 'P',
-            'tanggal_lahir'         => '2000-03-25',
-            'no_hp'                 => '081212121212',
-            'email'                 => 'admin@gmail.com',
-            'id_privilege'          => 1,
-            'id_status_pengguna'    => 1,
-            'password'              => bcrypt('admin1234'),
-            'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+                'name'                  => 'Super Admin',
+                'username'              => 'Super Admin',
+                'jenis_kelamin'         => 'P',
+                'tanggal_lahir'         => '2000-03-25',
+                'no_hp'                 => '081212121212',
+                'email'                 => 'admin@gmail.com',
+                'id_privilege'          => 1,
+                'id_status_pengguna'    => 1,
+                'password'              => bcrypt('admin1234'),
+                'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 
         Business::create(
             [
-            'id_user'                   => 1,
-            'id_master_status_usaha'    => 1,
-            'nama_usaha'                => 'Distro Baju',
-            'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'id_user'                   => 1,
+                'id_master_status_usaha'    => 1,
+                'nama_usaha'                => 'Distro Baju',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 
         BusinessPaymentMethod::create(
             [
-            'id_usaha'                  => 1,
-            'id_metode_pembayaran'      => 1,
-            'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'id_usaha'                  => 1,
+                'id_metode_pembayaran'      => 1,
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 
         BusinessDeliveryService::create(
             [
-            'id_usaha'                     => 1,
-            'id_master_jasa_pengiriman'    => 1,
-            'biaya'                        => 14000,
-            'created_at'                   => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'                   => Carbon::now()->format('Y-m-d H:i:s'),
+                'id_usaha'                     => 1,
+                'id_master_jasa_pengiriman'    => 1,
+                'biaya'                        => 14000,
+                'created_at'                   => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                   => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 
@@ -303,36 +303,37 @@ class DatabaseSeeder extends Seeder
 
         Product::create(
             [
-            'id_usaha'              => 1,
-            'id_satuan'             => 1,
-            'nama'                  => 'Baju Batik',
-            'deskripsi'             => 'Produk buatan lokal biasa dipakai untuk hajatan',
-            'harga'                 => '1000000',
-            'stok'                  => '100',
-            'kondisi'               => 1,
-            'preorder'              => 1,
-            'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+                'id_usaha'              => 1,
+                'id_satuan'             => 1,
+                'nama'                  => 'Baju Batik',
+                'deskripsi'             => 'Produk buatan lokal biasa dipakai untuk hajatan',
+                'harga'                 => '1000000',
+                'stok'                  => '100',
+                'jumlah_satuan'         => "3",
+                'kondisi'               => 1,
+                'preorder'              => 1,
+                'created_at'            => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'            => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
-        
+
         SalesTransaction::create(
             [
-            'id_user'                   => 1,
-            'id_usaha'                  => 1,
-            'id_metode_pembayaran'      => 1,
-            'id_sales_delivery_service' => 1,
-            'is_ambil_di_toko'          => 1,
-            'no_pemesanan'              => 'PSN00001',
-            'subtotal_produk'           => 100,
-            'subtotal_ongkir'           => 14000,
-            'diskon'                    => 10,
-            'biaya_penanganan'          => 1000000,
-            'link_pembayaran'           => 'https://www.yukkitabayarcuyy.com/',
-            'total_pesanan'             => 2,
-            'is_rating'                 => 1,
-            'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'id_user'                   => 1,
+                'id_usaha'                  => 1,
+                'id_metode_pembayaran'      => 1,
+                'id_sales_delivery_service' => 1,
+                'is_ambil_di_toko'          => 1,
+                'no_pemesanan'              => 'PSN00001',
+                'subtotal_produk'           => 100,
+                'subtotal_ongkir'           => 14000,
+                'diskon'                    => 10,
+                'biaya_penanganan'          => 1000000,
+                'link_pembayaran'           => 'https://www.yukkitabayarcuyy.com/',
+                'total_pesanan'             => 2,
+                'is_rating'                 => 1,
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
 

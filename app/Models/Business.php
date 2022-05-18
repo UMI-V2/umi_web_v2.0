@@ -120,5 +120,11 @@ class Business extends Model
 
     }
 
+    public function open_hours()
+    {
+        return $this->hasOne(OpenHour::class,  'id_usaha','id');
+
+    }
+
 
 }
