@@ -25,12 +25,12 @@ class ProductFileAPIController extends AppBaseController
         try {
             if ($request->add_file_photos) {
                 foreach ($request->file('add_file_photos') as $file) {
-                    $fileRoot = $file->store("assets/business/product/$idProduct/photos", 'public');
+                    $fileRoot = $file->store("assets/products/$idProduct/photos", 'public');
                     ProductFile::create([
                         'id_produk' => $idProduct,
                         'file' => $fileRoot,
-                        'is_video' => false,
-                        'is_photo' => true
+                        'video' => false,
+                        'photo' => true
                     ]);
                 }
             }
@@ -48,7 +48,7 @@ class ProductFileAPIController extends AppBaseController
                 [
                     'message' => $e
                 ],
-                'Upload Business File Failed',
+                'Upload Product File Failed',
             );
         }
         
