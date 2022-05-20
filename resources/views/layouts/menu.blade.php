@@ -50,14 +50,6 @@
 
 
 <li class="nav-item">
-    <a href="{{ route('businessCategories.index') }}"
-       class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
-        <p>Kategori Usaha</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
     <a href="{{ route('businesses.index') }}"
        class="nav-link {{ Request::is('businesses*') ? 'active' : '' }}">
         <p>Usaha</p>
@@ -89,6 +81,19 @@
 </li>
 
 <?php /*
+
+<li class="nav-item">
+    <a href="{{ route('businessCategories.index') }}"
+       class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
+        <p>Kategori Usaha</p>
+    </a>
+</li>
+
+
+
+
+
+
 <li class="nav-item">
     <a href="{{ route('masterProvinces.index') }}"
        class="nav-link {{ Request::is('masterProvinces*') ? 'active' : '' }}">
