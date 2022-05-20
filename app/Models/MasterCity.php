@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use Eloquent as Model;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
 
 class MasterCity extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'city_id';
+    public $table = 'master_cities';
+
+    // protected $primaryKey = 'city_id';
 
     public $fillable = [
         'province_id',
@@ -23,6 +27,7 @@ class MasterCity extends Model
      * @var array
      */
     protected $casts = [
+        'city_id' => 'integer',
         'province_id' => 'integer',
         'city_name' => 'string',
         'postal_code' => 'string',
@@ -34,7 +39,10 @@ class MasterCity extends Model
      * @var array
      */
     public static $rules = [
-        'province_id' => 'required'
+        // 'city_id' => 'required',
+        'province_id' => 'required',
+        'city_name' => 'required',
+        'postal_code' => 'required|numeric'
     ];
 
     /**

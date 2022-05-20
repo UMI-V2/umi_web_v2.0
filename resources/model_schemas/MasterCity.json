@@ -1,6 +1,6 @@
 [
     {
-        "name": "id",
+        "name": "city_id",
         "dbType": "increments",
         "htmlType": "number",
         "validations": "",
@@ -13,7 +13,7 @@
     },
     {
         "name": "province_id",
-        "dbType": "integer:unsigned:foreign,master_provinces,id",
+        "dbType": "integer:unsigned:foreign,master_provinces,province_id",
         "htmlType": "select,",
         "validations": "required",
         "searchable": true,
@@ -73,6 +73,6 @@
     },
     {
         "type": "relation",
-        "relation": "mt1,MasterProvince,province_id,id"
+        "relation": "mt1,MasterProvince,province_id,city_id"
     }
 ]

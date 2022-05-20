@@ -20,9 +20,9 @@ class CityAPIController extends AppBaseController
     /** @var  MasterCityRepository */
     private $cityRepository;
 
-    public function __construct(MasterCityRepository $cityRepo)
+    public function __construct(MasterCityRepository $masterCityRepo)
     {
-        $this->cityRepository = $cityRepo;
+        $this->cityRepository = $masterCityRepo;
     }
 
     /**
@@ -110,9 +110,9 @@ class CityAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $city = $this->cityRepository->create($input);
+        $masterCity = $this->cityRepository->create($input);
 
-        return $this->sendResponse($city->toArray(), 'MasterCity saved successfully');
+        return $this->sendResponse($masterCity->toArray(), 'MasterCity saved successfully');
     }
 
     /**
@@ -155,14 +155,14 @@ class CityAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var MasterCity $city */
-        $city = $this->cityRepository->find($id);
+        /** @var MasterCity $masterCity */
+        $masterCity = $this->cityRepository->find($id);
 
-        if (empty($city)) {
+        if (empty($masterCity)) {
             return $this->sendError('MasterCity not found');
         }
 
-        return $this->sendResponse($city->toArray(), 'MasterCity retrieved successfully');
+        return $this->sendResponse($masterCity->toArray(), 'MasterCity retrieved successfully');
     }
 
     /**
@@ -215,16 +215,16 @@ class CityAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var MasterCity $city */
-        $city = $this->cityRepository->find($id);
+        /** @var MasterCity $masterCity */
+        $masterCity = $this->cityRepository->find($id);
 
-        if (empty($city)) {
+        if (empty($masterCity)) {
             return $this->sendError('MasterCity not found');
         }
 
-        $city = $this->cityRepository->update($input, $id);
+        $masterCity = $this->cityRepository->update($input, $id);
 
-        return $this->sendResponse($city->toArray(), 'MasterCity updated successfully');
+        return $this->sendResponse($masterCity->toArray(), 'MasterCity updated successfully');
     }
 
     /**
@@ -267,14 +267,14 @@ class CityAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var MasterCity $city */
-        $city = $this->cityRepository->find($id);
+        /** @var MasterCity $masterCity */
+        $masterCity = $this->cityRepository->find($id);
 
-        if (empty($city)) {
+        if (empty($masterCity)) {
             return $this->sendError('MasterCity not found');
         }
 
-        $city->delete();
+        $masterCity->delete();
 
         return $this->sendSuccess('MasterCity deleted successfully');
     }

@@ -7,42 +7,12 @@
 </div> -->
 
 
-<li class="nav-item">
-    <a href="{{ route('users.index') }}"
-       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
-        <p>Master Pengguna</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('masterProductCategories.index') }}"
-       class="nav-link {{ Request::is('masterProductCategories*') ? 'active' : '' }}">
-        <p>Master Kategori Produk</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('masterBusinessCategories.index') }}"
-       class="nav-link {{ Request::is('masterBusinessCategories*') ? 'active' : '' }}">
-        <p>Master Kategori Usaha</p>
-    </a>
-</li>
 
 
 <li class="nav-item">
     <a href="{{ route('masterPrivileges.index') }}"
        class="nav-link {{ Request::is('masterPrivileges*') ? 'active' : '' }}">
-        <p>Master Akses Pengguna</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('masterUnits.index') }}"
-       class="nav-link {{ Request::is('masterUnits*') ? 'active' : '' }}">
-        <p>Master Satuan</p>
+        <p>Master Hak Akses Pengguna</p>
     </a>
 </li>
 
@@ -56,11 +26,72 @@
 
 
 <li class="nav-item">
+    <a href="{{ route('users.index') }}"
+       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+        <p>Pengguna</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('masterBusinessCategories.index') }}"
+       class="nav-link {{ Request::is('masterBusinessCategories*') ? 'active' : '' }}">
+        <p>Master Kategori Usaha</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
     <a href="{{ route('masterStatusBusinesses.index') }}"
        class="nav-link {{ Request::is('masterStatusBusinesses*') ? 'active' : '' }}">
         <p>Master Status Usaha</p>
     </a>
 </li>
+
+
+<li class="nav-item">
+    <a href="{{ route('businesses.index') }}"
+       class="nav-link {{ Request::is('businesses*') ? 'active' : '' }}">
+        <p>Usaha</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('masterProductCategories.index') }}"
+       class="nav-link {{ Request::is('masterProductCategories*') ? 'active' : '' }}">
+        <p>Master Kategori Produk</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('masterUnits.index') }}"
+       class="nav-link {{ Request::is('masterUnits*') ? 'active' : '' }}">
+        <p>Master Satuan</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('products.index') }}"
+       class="nav-link {{ Request::is('products*') ? 'active' : '' }}">
+        <p>Produk</p>
+    </a>
+</li>
+
+<?php /*
+
+<li class="nav-item">
+    <a href="{{ route('businessCategories.index') }}"
+       class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
+        <p>Kategori Usaha</p>
+    </a>
+</li>
+
+
+
+
 
 
 <li class="nav-item">
@@ -87,7 +118,6 @@
 </li>
 
 
-
 <li class="nav-item">
     <a href="{{ route('masterTransactionCategories.index') }}"
        class="nav-link {{ Request::is('masterTransactionCategories*') ? 'active' : '' }}">
@@ -96,29 +126,10 @@
 </li>
 
 
-
-
-
-<li class="nav-item">
-    <a href="{{ route('businesses.index') }}"
-       class="nav-link {{ Request::is('businesses*') ? 'active' : '' }}">
-        <p>Usaha</p>
-    </a>
-</li>
-
-
 <li class="nav-item">
     <a href="{{ route('businessFiles.index') }}"
        class="nav-link {{ Request::is('businessFiles*') ? 'active' : '' }}">
         <p>File Usaha</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('businessCategories.index') }}"
-       class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
-        <p>Kategori Usaha</p>
     </a>
 </li>
 
@@ -143,14 +154,6 @@
     <a href="{{ route('addresses.index') }}"
        class="nav-link {{ Request::is('addresses*') ? 'active' : '' }}">
         <p>Alamat</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('products.index') }}"
-       class="nav-link {{ Request::is('products*') ? 'active' : '' }}">
-        <p>Produk</p>
     </a>
 </li>
 
@@ -265,5 +268,4 @@
         <p>Saldo</p>
     </a>
 </li>
-
-
+ */?>
