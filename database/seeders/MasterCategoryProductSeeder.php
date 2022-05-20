@@ -31,7 +31,7 @@ class MasterCategoryProductSeeder extends Seeder
             'status_kategori_produk'=> "0",
         ]);
         MasterProductCategory::create([
-            'nama_kategori_produk'=> "Otomotif",
+            'nama_kategori_produk'=> "Teknologi",
             'status_kategori_produk'=> "0",
         ]);
         MasterProductCategory::create([

@@ -93,7 +93,8 @@ class Product extends Model
         'stok',
         'kondisi',
         'preorder',
-        'jumlah_satuan'
+        'jumlah_satuan',
+        'is_arshive'
     ];
 
     /**
@@ -110,7 +111,8 @@ class Product extends Model
         'harga' => 'string',
         'stok' => 'integer',
         'kondisi' => 'boolean',
-        'preorder' => 'boolean'
+        'preorder' => 'boolean',
+        'is_arshive' => 'boolean'
     ];
 
     /**

@@ -48,7 +48,15 @@ Route::get('getMasterCity', [MasterCityAPIController::class, 'index']);
 // Master Sub District
 Route::get('getSubDistrict', [MasterSubDistrictAPIController::class, 'index']);
 
+Route::group(['prefix' => 'masterCategoryProduct'], function () {
+    Route::get('/', [MasterProductCategoryAPIController::class, 'all']);
+    // Route::post('update', [ProductAPIController::class, 'store']);
+});
 
+Route::group(['prefix' => 'masterUnit'], function () {
+    Route::get('/', [MasterUnitAPIController::class, 'all']);
+    // Route::post('update', [ProductAPIController::class, 'store']);
+});
 
 // AUTH
 
@@ -99,14 +107,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('delete', [ProductAPIController::class, 'delete']);
 
     });
-    Route::group(['prefix' => 'masterCategoryProduct'], function () {
-        Route::get('/', [MasterProductCategoryAPIController::class, 'index']);
-        // Route::post('update', [ProductAPIController::class, 'store']);
-    });
-    Route::group(['prefix' => 'masterUnit'], function () {
-        Route::get('/', [MasterUnitAPIController::class, 'all']);
-        // Route::post('update', [ProductAPIController::class, 'store']);
-    });
+    
+    
 });
 
 // http:172.0.1:80000/api/v1/business/update

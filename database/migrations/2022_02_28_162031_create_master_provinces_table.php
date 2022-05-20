@@ -14,11 +14,11 @@ class CreateMasterProvincesTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_provinces', function (Blueprint $table) {
-            $table->id('province_id');
-            $table->string('province_name');
-            $table->timestamps();
-        });
+        // Schema::create('master_provinces', function (Blueprint $table) {
+        //     $table->id('province_id');
+        //     $table->string('province_name');
+        //     $table->timestamps();
+        // });
     }
 
     /**

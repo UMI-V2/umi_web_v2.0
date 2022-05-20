@@ -85,6 +85,30 @@ class DatabaseSeeder extends Seeder
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );
+        MasterUnit::create(
+            [
+                'nama_satuan'               => 'Gram',
+                'singkatan_satuan'          => 'gram',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+        MasterUnit::create(
+            [
+                'nama_satuan'               => 'Pieces',
+                'singkatan_satuan'          => 'pcs',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+        MasterUnit::create(
+            [
+                'nama_satuan'               => 'Paket',
+                'singkatan_satuan'          => 'pkt',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
 
         // MasterProvince::create(
         //     [
