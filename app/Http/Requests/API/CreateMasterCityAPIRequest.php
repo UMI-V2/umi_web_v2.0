@@ -5,7 +5,7 @@ namespace App\Http\Requests\API;
 use App\Models\MasterCity;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreateCityAPIRequest extends APIRequest
+class CreateMasterCityAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.

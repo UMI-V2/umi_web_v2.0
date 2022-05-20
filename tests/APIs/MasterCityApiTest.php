@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Tests\ApiTestTrait;
 use App\Models\MasterCity;
 
-class CityApiTest extends TestCase
+class MasterCityApiTest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
@@ -15,14 +15,14 @@ class CityApiTest extends TestCase
      */
     public function test_create_city()
     {
-        $city = MasterCity::factory()->make()->toArray();
+        $masterCity = MasterCity::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
-            '/api/master_cities', $city
+            '/api/master_cities', $masterCity
         );
 
-        $this->assertApiResponse($city);
+        $this->assertApiResponse($masterCity);
     }
 
     /**
@@ -30,14 +30,14 @@ class CityApiTest extends TestCase
      */
     public function test_read_city()
     {
-        $city = MasterCity::factory()->create();
+        $masterCity = MasterCity::factory()->create();
 
         $this->response = $this->json(
             'GET',
-            '/api/master_cities/'.$city->id
+            '/api/master_cities/'.$masterCity->id
         );
 
-        $this->assertApiResponse($city->toArray());
+        $this->assertApiResponse($masterCity->toArray());
     }
 
     /**
@@ -45,12 +45,12 @@ class CityApiTest extends TestCase
      */
     public function test_update_city()
     {
-        $city = MasterCity::factory()->create();
+        $masterCity = MasterCity::factory()->create();
         $editedCity = MasterCity::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
-            '/api/master_cities/'.$city->id,
+            '/api/master_cities/'.$masterCity->id,
             $editedCity
         );
 
@@ -62,17 +62,17 @@ class CityApiTest extends TestCase
      */
     public function test_delete_city()
     {
-        $city = MasterCity::factory()->create();
+        $masterCity = MasterCity::factory()->create();
 
         $this->response = $this->json(
             'DELETE',
-             '/api/master_cities/'.$city->id
+             '/api/master_cities/'.$masterCity->id
          );
 
         $this->assertApiSuccess();
         $this->response = $this->json(
             'GET',
-            '/api/master_cities/'.$city->id
+            '/api/master_cities/'.$masterCity->id
         );
 
         $this->response->assertStatus(404);

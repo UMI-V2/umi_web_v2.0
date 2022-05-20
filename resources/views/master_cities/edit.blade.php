@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::model($city, ['route' => ['master_cities.update', $city->id], 'method' => 'patch']) !!}
+            {!! Form::model($masterCity, ['route' => ['master_cities.update', $masterCity->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
                 <div class="row">

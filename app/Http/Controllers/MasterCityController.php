@@ -17,9 +17,9 @@ class MasterCityController extends AppBaseController
     /** @var MasterCityRepository $MasterCityRepository*/
     private $MasterCityRepository;
 
-    public function __construct(MasterCityRepository $cityRepo)
+    public function __construct(MasterCityRepository $masterCityRepo)
     {
-        $this->MasterCityRepository = $cityRepo;
+        $this->MasterCityRepository = $masterCityRepo;
     }
 
     /**
@@ -57,7 +57,7 @@ class MasterCityController extends AppBaseController
         $input = $request->all();
 
         // dd($input);
-        $city = $this->MasterCityRepository->create($input);
+        $master_cities = $this->MasterCityRepository->create($input);
 
         Flash::success('MasterCity saved successfully.');
 
@@ -73,15 +73,15 @@ class MasterCityController extends AppBaseController
      */
     public function show($id)
     {
-        $city = $this->MasterCityRepository->find($id);
+        $masterCity = $this->MasterCityRepository->find($id);
 
-        if (empty($city)) {
+        if (empty($masterCity)) {
             Flash::error('MasterCity not found');
 
             return redirect(route('master_cities.index'));
         }
 
-        return view('master_cities.show')->with('city', $city);
+        return view('master_cities.show')->with('city', $masterCity);
     }
 
     /**
@@ -93,16 +93,16 @@ class MasterCityController extends AppBaseController
      */
     public function edit($id)
     {
-        $city = $this->MasterCityRepository->find($id);
+        $masterCity = $this->MasterCityRepository->find($id);
         $master_provinces = MasterProvince::query()->pluck('province_name', 'province_id');
 
-        if (empty($city)) {
+        if (empty($masterCity)) {
             Flash::error('MasterCity not found');
 
             return redirect(route('master_cities.index'));
         }
 
-        return view('master_cities.edit')->with('city', $city)->with('master_provinces', $master_provinces);
+        return view('master_cities.edit')->with('city', $masterCity)->with('master_provinces', $master_provinces);
     }
 
     /**
@@ -115,15 +115,15 @@ class MasterCityController extends AppBaseController
      */
     public function update($id, UpdateCityRequest $request)
     {
-        $city = $this->MasterCityRepository->find($id);
+        $masterCity = $this->MasterCityRepository->find($id);
 
-        if (empty($city)) {
+        if (empty($masterCity)) {
             Flash::error('MasterCity not found');
 
             return redirect(route('master_cities.index'));
         }
 
-        $city = $this->MasterCityRepository->update($request->all(), $id);
+        $masterCity = $this->MasterCityRepository->update($request->all(), $id);
 
         Flash::success('MasterCity updated successfully.');
 
@@ -139,9 +139,9 @@ class MasterCityController extends AppBaseController
      */
     public function destroy($id)
     {
-        $city = $this->MasterCityRepository->find($id);
+        $masterCity = $this->MasterCityRepository->find($id);
 
-        if (empty($city)) {
+        if (empty($masterCity)) {
             Flash::error('MasterCity not found');
 
             return redirect(route('master_cities.index'));
