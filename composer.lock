@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60001274414d6666e01e85a8fd1de615",
+    "content-hash": "ec45f01e5d7f6444f52699b11eb00d31",
     "packages": [
         {
             "name": "appointer/swaggervel",
@@ -174,6 +174,43 @@
                 "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.7"
             },
             "time": "2022-03-14T02:02:36+00:00"
+        },
+        {
+            "name": "bagusindrayana/laravel-coordinate",
+            "version": "0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bagusindrayana/laravel-coordinate.git",
+                "reference": "bb59dcb8b94bc14fef09d59cb43193075693bf0f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bagusindrayana/laravel-coordinate/zipball/bb59dcb8b94bc14fef09d59cb43193075693bf0f",
+                "reference": "bb59dcb8b94bc14fef09d59cb43193075693bf0f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bagusindrayana\\LaravelCoordinate\\": "/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bagus Indrayana",
+                    "email": "bagusindrayanaindo@gmail.com"
+                }
+            ],
+            "description": "get nearby location from eloquent laravel",
+            "support": {
+                "issues": "https://github.com/bagusindrayana/laravel-coordinate/issues",
+                "source": "https://github.com/bagusindrayana/laravel-coordinate/tree/0.0.3"
+            },
+            "time": "2021-07-12T05:41:13+00:00"
         },
         {
             "name": "brick/math",

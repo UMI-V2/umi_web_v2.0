@@ -84,6 +84,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     });
     Route::group(['prefix' => 'business'], function () {
+        Route::get('/all', [BusinessAPIController::class, 'all']);
         Route::get('/', [BusinessAPIController::class, 'index']);
         Route::post('update', [BusinessAPIController::class, 'store']);
     });

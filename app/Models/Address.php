@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
 
 /**
  * @SWG\Definition(
@@ -109,6 +110,11 @@ class Address extends Model
     use SoftDeletes;
 
     use HasFactory;
+    use LaravelCoordinate;
+
+    //optional
+    public $_latitudeName = "latitude"; //default name is latitude
+    public $_longitudeName = "longitude";
 
     public $table = 'addresses';
     
@@ -207,5 +213,8 @@ class Address extends Model
     public function sub_district()
     {
         return $this->belongsTo(MasterSubDistrict::class, 'subdistrict_id', 'subdistrict_id');
+    }
+    public function business(){
+        return $this->belongsTo(Business::class, 'id_users', 'id_user');
     }
 }

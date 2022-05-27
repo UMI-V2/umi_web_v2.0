@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Address;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -123,6 +124,12 @@ class Business extends Model
     public function open_hours()
     {
         return $this->hasOne(OpenHour::class,  'id_usaha','id');
+
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class,  'id_user','id_users');
 
     }
 
