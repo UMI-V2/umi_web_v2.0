@@ -33,10 +33,21 @@
 </li>
 
 
+
+
+
 <li class="nav-item">
     <a href="{{ route('masterBusinessCategories.index') }}"
        class="nav-link {{ Request::is('masterBusinessCategories*') ? 'active' : '' }}">
         <p>Master Kategori Usaha</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('businessCategories.index') }}"
+       class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
+        <p>Kategori Usaha</p>
     </a>
 </li>
 
@@ -50,6 +61,22 @@
 
 
 <li class="nav-item">
+    <a href="{{ route('businessFiles.index') }}"
+       class="nav-link {{ Request::is('businessFiles*') ? 'active' : '' }}">
+        <p>File Usaha</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('openHours.index') }}"
+       class="nav-link {{ Request::is('openHours*') ? 'active' : '' }}">
+        <p>Jam Buka</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
     <a href="{{ route('businesses.index') }}"
        class="nav-link {{ Request::is('businesses*') ? 'active' : '' }}">
         <p>Usaha</p>
@@ -57,10 +84,21 @@
 </li>
 
 
+
+
+
 <li class="nav-item">
     <a href="{{ route('masterProductCategories.index') }}"
        class="nav-link {{ Request::is('masterProductCategories*') ? 'active' : '' }}">
         <p>Master Kategori Produk</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('productCategories.index') }}"
+       class="nav-link {{ Request::is('productCategories*') ? 'active' : '' }}">
+        <p>Kategori Produk</p>
     </a>
 </li>
 
@@ -74,21 +112,35 @@
 
 
 <li class="nav-item">
+    <a href="{{ route('productFiles.index') }}"
+       class="nav-link {{ Request::is('productFiles*') ? 'active' : '' }}">
+        <p>File Produk</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('discounts.index') }}"
+       class="nav-link {{ Request::is('discounts*') ? 'active' : '' }}">
+        <p>Diskon</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('ratings.index') }}"
+       class="nav-link {{ Request::is('ratings*') ? 'active' : '' }}">
+        <p>Rating</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
     <a href="{{ route('products.index') }}"
        class="nav-link {{ Request::is('products*') ? 'active' : '' }}">
         <p>Produk</p>
     </a>
 </li>
-
-<?php /*
-
-<li class="nav-item">
-    <a href="{{ route('businessCategories.index') }}"
-       class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
-        <p>Kategori Usaha</p>
-    </a>
-</li>
-
 
 
 
@@ -97,39 +149,7 @@
 <li class="nav-item">
     <a href="{{ route('masterProvinces.index') }}"
        class="nav-link {{ Request::is('masterProvinces*') ? 'active' : '' }}">
-        <p>Master Provinsi</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('masterDeliveryServices.index') }}"
-       class="nav-link {{ Request::is('masterDeliveryServices*') ? 'active' : '' }}">
-        <p>Master Jasa Pengiriman</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('masterPaymentMethods.index') }}"
-       class="nav-link {{ Request::is('masterPaymentMethods*') ? 'active' : '' }}">
-        <p>Master Metode Pembayaran</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('masterTransactionCategories.index') }}"
-       class="nav-link {{ Request::is('masterTransactionCategories*') ? 'active' : '' }}">
-        <p>Master Kategori Transaksi</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('businessFiles.index') }}"
-       class="nav-link {{ Request::is('businessFiles*') ? 'active' : '' }}">
-        <p>File Usaha</p>
+        <p>Provinsi</p>
     </a>
 </li>
 
@@ -158,18 +178,36 @@
 </li>
 
 
+<?php /*
+
+
+
+
+
+
+
+
+
 <li class="nav-item">
-    <a href="{{ route('productCategories.index') }}"
-       class="nav-link {{ Request::is('productCategories*') ? 'active' : '' }}">
-        <p>Kategori Produk</p>
+    <a href="{{ route('masterDeliveryServices.index') }}"
+       class="nav-link {{ Request::is('masterDeliveryServices*') ? 'active' : '' }}">
+        <p>Master Jasa Pengiriman</p>
     </a>
 </li>
 
 
 <li class="nav-item">
-    <a href="{{ route('openHours.index') }}"
-       class="nav-link {{ Request::is('openHours*') ? 'active' : '' }}">
-        <p>Jam Buka</p>
+    <a href="{{ route('masterPaymentMethods.index') }}"
+       class="nav-link {{ Request::is('masterPaymentMethods*') ? 'active' : '' }}">
+        <p>Master Metode Pembayaran</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('masterTransactionCategories.index') }}"
+       class="nav-link {{ Request::is('masterTransactionCategories*') ? 'active' : '' }}">
+        <p>Master Kategori Transaksi</p>
     </a>
 </li>
 
@@ -199,25 +237,9 @@
 
 
 <li class="nav-item">
-    <a href="{{ route('discounts.index') }}"
-       class="nav-link {{ Request::is('discounts*') ? 'active' : '' }}">
-        <p>Diskon</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
     <a href="{{ route('salesDeliveryServices.index') }}"
        class="nav-link {{ Request::is('salesDeliveryServices*') ? 'active' : '' }}">
         <p>Layanan Pengiriman</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('productFiles.index') }}"
-       class="nav-link {{ Request::is('productFiles*') ? 'active' : '' }}">
-        <p>File Produk</p>
     </a>
 </li>
 
@@ -234,14 +256,6 @@
     <a href="{{ route('salesTransactions.index') }}"
        class="nav-link {{ Request::is('salesTransactions*') ? 'active' : '' }}">
         <p>Transaksi Penjualan</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('ratings.index') }}"
-       class="nav-link {{ Request::is('ratings*') ? 'active' : '' }}">
-        <p>Rating</p>
     </a>
 </li>
 
