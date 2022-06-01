@@ -21,6 +21,8 @@ class CreateBusinessesTable extends Migration
             $table->string('nama_usaha');
             $table->string('deskripsi')->nullable();
             $table->boolean('is_ambil_di_toko')->default(true);
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('id_user')->references('id')->on('users');

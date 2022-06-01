@@ -364,6 +364,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(MasterCategoryBusinessSeeder::class);
         $this->call(MasterCategoryProductSeeder::class);
+        $this->call(AllNewSeeder::class);
+
         // $this->call(PrivilegeSeeder::class);
     }
 }

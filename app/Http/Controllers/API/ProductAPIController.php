@@ -4,9 +4,11 @@ namespace App\Http\Controllers\API;
 
 use Response;
 use Exception;
+use App\Models\Address;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
+use Illuminate\Support\Facades\DB;
 use App\Repositories\ProductRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\ProductFileController;
@@ -23,6 +25,11 @@ use App\Http\Controllers\API\ProductCategoryAPIController;
 
 class ProductAPIController extends AppBaseController
 {
+    public function __construct()
+    {
+        $this->request_only = (new Product)->getFillable();
+    }
+
     public function all(Request $request)
     {
         try {
@@ -33,6 +40,14 @@ class ProductAPIController extends AppBaseController
             $kondisi = $request->input('kondisi');
             $price_from = $request->input('price_from');
             $price_to = $request->input('price_to');
+            //Set Distance Variabel
+            $sort_distance = $request->input('sort_distance', 1);
+            $latitude = $request->input('latitude', -6.399987);
+            $longitude = $request->input('longitude', 108.284429);
+            $distance = $request->input('distance', 100);
+
+            $category_id = $request->input('category_id');
+
 
             if ($id) {
                 $value = Product::find($id);
@@ -43,14 +58,20 @@ class ProductAPIController extends AppBaseController
                 }
             }
 
-            $value = Product::with(['master_units', 'product_category.master_product_categories', 'product_files']);
+            $value = Product::query();
 
+            // dd($value->get());
 
             if ($id_usaha) {
                 $value->where('id_usaha', $id_usaha);
             }
             if ($nama) {
                 $value->where('nama', 'like', '%' . $nama . '%');
+            }
+            if($category_id){
+                $value->whereHas('category', function($q) use($category_id){
+                    $q->where('id_master_kategori_produk',$category_id );
+                });
             }
             if ($kondisi) {
                 $value->where('kondisi', $kondisi);
@@ -62,8 +83,22 @@ class ProductAPIController extends AppBaseController
                 $value->where('harga', '<=', $price_to);
             }
 
+            // dd(  $value->get());
 
-            return ResponseFormatter::success($value->paginate($limit), 'Get Products Success');
+            if($sort_distance){
+                $value->nearby([
+                    $latitude, //latitude
+                    $longitude //longitude
+                ], $distance, 2)->selectDistance($this->request_only, 'distance')->closest();
+            }else{
+                $value->nearby([
+                    $latitude, //latitude
+                    $longitude //longitude
+                ], $distance, 2)->selectDistance($this->request_only, 'distance');
+            }
+
+
+            return ResponseFormatter::success($value->with(['master_units', 'product_category.master_product_categories', 'product_files'])->paginate($limit), 'Get Products Success');
         } catch (Exception $e) {
             return ResponseFormatter::error([
                 'error' => $e,
@@ -73,8 +108,18 @@ class ProductAPIController extends AppBaseController
 
     public function update(Request $request)
     {
+        DB::beginTransaction();
+
         try {
             $data = $request->all();
+
+            if (!$request->id) {
+                //auto insert latitude katika pertama kali create produk
+                $businessAddress = Address::where('id_users', $request->user()->id)->where('is_usaha', 1)->first();
+
+                $data['latitude'] =   $businessAddress->latitude;
+                $data['longitude'] =  $businessAddress->longitude;
+            }
 
             $result = Product::updateOrCreate(['id' => $request->id], $data);
 
@@ -82,12 +127,15 @@ class ProductAPIController extends AppBaseController
 
             ProductFileAPIController::uploadOrDeleteFile($request, $result->id);
             $value = Product::find($result->id);
+            DB::commit();
+
             if ($request->id) {
                 return ResponseFormatter::success($value->load(['master_units', 'product_category.master_product_categories', 'product_files']), 'Update Product Success');
             }
             return ResponseFormatter::success($value->load(['master_units', 'product_category.master_product_categories', 'product_files']), 'Add Product Success');
-
         } catch (Exception $e) {
+            DB::rollBack();
+
             return ResponseFormatter::error([
                 'error' => $e,
             ],  'Update Product Failed', 500);
@@ -100,7 +148,7 @@ class ProductAPIController extends AppBaseController
             $this->validate($request, [
                 'id' => 'required',
             ]);
-            
+
             $value = Product::find($request->id)->delete();
 
             return ResponseFormatter::success($value, 'Delete Product Success');

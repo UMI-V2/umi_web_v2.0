@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
 
 /**
  * @SWG\Definition(
@@ -77,7 +78,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model
 {
 
-    use HasFactory;
+    use HasFactory, LaravelCoordinate;
+
+    public $_latitudeName = "latitude"; //default name is latitude
+    public $_longitudeName = "longitude";
+
 
     public $table = 'products';
     
@@ -85,6 +90,7 @@ class Product extends Model
 
 
     public $fillable = [
+        'id',
         'id_usaha',
         'id_satuan',
         'nama',
@@ -94,7 +100,12 @@ class Product extends Model
         'kondisi',
         'preorder',
         'jumlah_satuan',
-        'is_arshive'
+        'is_arshive',
+        'latitude',
+        'longitude',
+        'created_at',
+        'updated_at',
+        // 'deleted_at'
     ];
 
     /**

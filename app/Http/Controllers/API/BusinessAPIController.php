@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\Business;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\BusinessFileController;
 
@@ -18,52 +19,61 @@ class BusinessAPIController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->request_only = (new Business)->getFillable();
+    }
     public function all(Request $request)
     {
         try {
             // -6.408376, 108.281418
             $limit = $request->input('limit', 20);
-            $business_id = $request->input('business_id');
+            $id = $request->input('id');
             $nama_usaha = $request->input('nama_usaha');
-            $sort_distance = $request->input('sort_distance');
-            $latitude = $request->input('latitude', -6.408376);
-            $longitude = $request->input('longitude', 108.281418);
-            $distance = $request->input('distance', 1000);
+            $sort_distance = $request->input('sort_distance', 1);
+            $latitude = $request->input('latitude', -6.399987);
+            $longitude = $request->input('longitude', 108.284429);
+            $distance = $request->input('distance', 100);
             $category_id = $request->input('category_id');
 
-            if ($business_id) {
-                return ResponseFormatter::success(Business::with(['category.master_business_categories', 'masterStatusBusinesses', 'business_file', 'open_hours', 'address' => function ($query){
+            if ($id) {
+                $business = Business::with(['users','category.master_business_categories', 'masterStatusBusinesses', 'business_file', 'open_hours', 'address' => function ($query) {
                     return $query->where('is_usaha', 1);
-                }])->find($business_id), 'Data Usaha berhasil diambil');
+                }])->where('id', $id);
+                $business->nearby([
+                    $latitude, //latitude
+                    $longitude //longitude
+                ], $distance, 2)->selectDistance($this->request_only, 'distance');
+
+                return ResponseFormatter::success($business->first(), 'Data Usaha berhasil diambil');
             }
 
-            $addresses = Address::query();
-            $addresses->where('is_usaha', 1);
+            $business = Business::query();
+            $business->where('id_master_status_usaha', 1);
 
-            $addresses->whereHas('business', function ($q) use ($nama_usaha, $category_id) {
-                $q->where('id_master_status_usaha', 1);
-                if ($nama_usaha) {
-                    $q->where('nama_usaha', 'like', '%' . $nama_usaha . '%');
-                }     
-            });
-            if($category_id){   
-                $addresses->whereHas('business.category', function ($q) use ($category_id) {
-                    $q->where('id_master_kategori_usaha', $category_id);            
+            if($nama_usaha){
+                $business->where('nama_usaha', 'like', '%' . $nama_usaha . '%');
+            }
+            if($category_id){
+                $business->whereHas('category', function($q) use($category_id){
+                    $q->where('id_master_kategori_usaha',$category_id );
                 });
             }
-            $addresses->nearby([
-                $latitude, //latitude
-                $longitude //longitude
-            ], $distance, 2)->selectDistance([
-                'id_users',
-                'latitude',
-                'longitude'
-            ], 'distance');
-
-            if ($sort_distance) {
-                $addresses->closest();
+            if($sort_distance){
+                $business->nearby([
+                    $latitude, //latitude
+                    $longitude //longitude
+                ], $distance, 2)->selectDistance($this->request_only, 'distance')->closest();
+            }else{
+                $business->nearby([
+                    $latitude, //latitude
+                    $longitude //longitude
+                ], $distance, 2)->selectDistance($this->request_only, 'distance');
             }
-            return ResponseFormatter::success($addresses->with(['business.category'])->paginate($limit), 'Data Usaha berhasil diambil');
+
+
+            return ResponseFormatter::success($business->with(['category.master_business_categories', 'business_file','open_hours','category.master_business_categories','address'])->paginate($limit), 'Data Usaha berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => "Get Usaha Gagal",
@@ -91,6 +101,8 @@ class BusinessAPIController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
+
         try {
             $request->validate(
                 [
@@ -100,8 +112,14 @@ class BusinessAPIController extends Controller
                 ],
             );
             $data = $request->all();
-
             $data['id_user'] = $request->user()->id;
+            if (!$request->id) {
+                //auto insert latitude katika pertama kali create lapak
+                $businessAddress = Address::where('id_users', $request->user()->id)->where('is_usaha', 1)->first();
+
+                $data['latitude'] =   $businessAddress->latitude;
+                $data['longitude'] =  $businessAddress->longitude;
+            }
 
             $result = Business::updateOrCreate(['id_user' => $data['id_user']], $data);
 
@@ -111,11 +129,14 @@ class BusinessAPIController extends Controller
             // dd( $result->id);
             $result = Business::with(['category.master_business_categories', 'masterStatusBusinesses', 'business_file', 'open_hours'])->where("id", $result->id)->first();
             // dd( $result->id);
+            DB::commit();
+
             return ResponseFormatter::success(
                 $result,
                 'Business Updated',
             );
         } catch (Exception $error) {
+            DB::rollBack();
             return ResponseFormatter::error(
                 [
                     'message' => $error

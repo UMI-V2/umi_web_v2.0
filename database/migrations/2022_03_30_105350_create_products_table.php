@@ -26,6 +26,8 @@ class CreateProductsTable extends Migration
             $table->boolean('preorder');
             $table->string('jumlah_satuan');
             $table->boolean('is_arshive')->default(false);
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->timestamps();
             $table->foreign('id_usaha')->references('id')->on('businesses');
             $table->foreign('id_satuan')->references('id')->on('master_units');

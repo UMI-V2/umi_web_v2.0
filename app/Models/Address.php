@@ -113,12 +113,10 @@ class Address extends Model
     use LaravelCoordinate;
 
     //optional
+
     public $_latitudeName = "latitude"; //default name is latitude
     public $_longitudeName = "longitude";
-
     public $table = 'addresses';
-    
-
     protected $dates = ['deleted_at'];
 
 
@@ -183,6 +181,18 @@ class Address extends Model
         'is_usaha' => 'required'
     ];
 
+    // protected $appends = ['distance'];
+
+    // public function getDistanceAttribute()
+    // {
+    //     // return $this->attributes['id'];
+    //     return Address::where('id', 1)->nearby([
+    //         -6.383358, //latitude
+    //         108.292559//longitude
+    //     ], 100, 2)->selectDistance([], 'jarak')->get();
+    // }
+
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
@@ -214,7 +224,8 @@ class Address extends Model
     {
         return $this->belongsTo(MasterSubDistrict::class, 'subdistrict_id', 'subdistrict_id');
     }
-    public function business(){
+    public function business()
+    {
         return $this->belongsTo(Business::class, 'id_users', 'id_user');
     }
 }

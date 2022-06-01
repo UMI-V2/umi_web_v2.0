@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Address;
+use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -52,7 +53,11 @@ class Business extends Model
 {
     use SoftDeletes;
 
-    use HasFactory;
+    use HasFactory, LaravelCoordinate;
+
+    public $_latitudeName = "latitude"; //default name is latitude
+    public $_longitudeName = "longitude";
+
 
     public $table = 'businesses';
     
@@ -62,14 +67,20 @@ class Business extends Model
 
 
     public $fillable = [
+        'id',
         'id_user',
         'id_master_status_usaha',
         'nama_usaha',
         'deskripsi',
         'is_ambil_di_toko',
+        'latitude',
+        'longitude',
+        'created_at',
+        'updated_at',
+        'deleted_at'
 
     ];
-
+    
     /**
      * The attributes that should be casted to native types.
      *
@@ -132,6 +143,8 @@ class Business extends Model
         return $this->belongsTo(Address::class,  'id_user','id_users');
 
     }
+
+   
 
 
 }
