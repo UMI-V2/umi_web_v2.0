@@ -50,7 +50,7 @@ class ProductAPIController extends AppBaseController
 
 
             if ($id) {
-                $value = Product::find($id);
+                $value = Product::with(['master_units', 'product_category.master_product_categories', 'product_files', 'businesses'])->find($id);
                 if ($value) {
                     return ResponseFormatter::success($value, 'Get Product Success');
                 } else {
@@ -68,13 +68,13 @@ class ProductAPIController extends AppBaseController
             if ($nama) {
                 $value->where('nama', 'like', '%' . $nama . '%');
             }
+            if($kondisi){
+                $value->where('kondisi',  $kondisi );
+            }
             if($category_id){
                 $value->whereHas('category', function($q) use($category_id){
                     $q->where('id_master_kategori_produk',$category_id );
                 });
-            }
-            if ($kondisi) {
-                $value->where('kondisi', $kondisi);
             }
             if ($price_from) {
                 $value->where('harga', '>=', $price_from);
@@ -82,6 +82,7 @@ class ProductAPIController extends AppBaseController
             if ($price_to) {
                 $value->where('harga', '<=', $price_to);
             }
+
 
             // dd(  $value->get());
 
@@ -98,7 +99,7 @@ class ProductAPIController extends AppBaseController
             }
 
 
-            return ResponseFormatter::success($value->with(['master_units', 'product_category.master_product_categories', 'product_files'])->paginate($limit), 'Get Products Success');
+            return ResponseFormatter::success($value->with(['master_units', 'product_category.master_product_categories', 'product_files', 'businesses'])->paginate($limit), 'Get Products Success');
         } catch (Exception $e) {
             return ResponseFormatter::error([
                 'error' => $e,
