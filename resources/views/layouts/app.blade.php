@@ -35,7 +35,7 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
             font-size: 1.5em;
         }
     </style>
-    
+
     <style>
         body {
 
@@ -44,18 +44,16 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
 
         }
 
-        #dark-mode {
+        .dark-mode {
             background-color: black;
             color: white;
         }
-    </style>
 
-    <!-- <style>
-        #darkmode {
-            background: black;
-            color: white;
+        .light-mode {
+            background-color: white;
+            color: black;
         }
-    </style> -->
+    </style>
 
     @stack('third_party_stylesheets')
 
@@ -65,10 +63,12 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
 
 
 
-<body class="dark-mode hold-transition sidebar-mini layout-fixed">
+<!-- <body class="light-mode hold-transition sidebar-mini layout-fixed"> -->
+
+<body class="hold-transition sidebar-mini layout-fixed" id="body">
     <div class="wrapper">
         <!-- Main Header -->
-        <nav class="main-header navbar navbar-expand navbar-black navbar-dark">
+        <nav class="main-header navbar navbar-expand">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -77,7 +77,7 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
             </ul>
 
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item ml-md-auto"><a href="#" class="btn btn-primary switch" onclick="myFunction()">Switch Light/Dark</a></li>
+                <li class="nav-item ml-md-auto"><a href="#" class="btn btn-primary switch" id="btnToggle">Switch Light/Dark</a></li>
                 <!-- <li class="nav-item ml-md-auto">
                     <p>
                          🕶️👓☀️🌙🌚🌞 
@@ -141,69 +141,7 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
         </footer>
     </div>
 
-    <script>
-        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
 
-        for (i = 0; i < dropdown.length; i++) {
-            dropdown[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }
-    </script>
-
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "id": id
-            }
-        });
-    </script>
-
-    <script>
-        if (localStorage.getItem('theme') == 'dark')
-            setDarkMode(true);
-
-        function setDarkMode(isDark) {
-            document.body.setAttribute('id', 'darkmode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        } else {
-            document.body.setAttribute('id', '');
-            localStorage.removeItem('theme');
-        }
-    </script>
-
-    <script>
-        function myFunction() {
-            // if (localStorage.getItem('theme') == 'dark-mode')
-            //     setDarkMode(true);
-            
-            var element = document.body;
-            element.classList.toggle("dark-mode");
-            // localStorage.setItem('theme', 'dark-mode');
-        }
-    </script>
-
-    <script>
-        $(function() {
-            bsCustomFileInput.init();
-        });
-
-        $("input[data-bootstrap-switch]").each(function() {
-            $(this).bootstrapSwitch('state', $(this).prop('checked'));
-        });
-    </script>
 
 
 
@@ -231,6 +169,153 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
     @stack('third_party_scripts')
 
     @stack('page_scripts')
+
+    <script>
+        // create a function to toggle dark and light mode
+        // function toggleDarkLight() {
+        //     var body = document.getElementById("body");
+        //     var currentClass = body.className;
+        //     body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
+
+        //     // change nav theme
+        //     var nav = $('#nav1');
+        //     // check if the current class is dark-mode or light-mode
+        //     if (currentClass == "dark-mode") {
+        //         // if dark-mode, change to light-mode
+        //         nav.removeClass('navbar-dark');
+        //         nav.addClass('navbar-light');
+        //     } else {
+        //         // if light-mode, change to dark-mode
+        //         nav.removeClass('navbar-light');
+        //         nav.addClass('navbar-dark');
+        //     }
+
+        // }
+
+
+
+
+        // if (localStorage.getItem('theme') == 'dark')
+        //     setDarkMode(true);
+
+        // function setDarkMode(isDark) {
+        //     document.body.setAttribute('id', 'darkmode');
+        //     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        // } else {
+        //     document.body.setAttribute('id', '');
+        //     localStorage.removeItem('theme');
+        // }
+
+
+        function setDarkMode() {
+            console.log('setDarkMode');
+            $('body').removeClass('light-mode');
+            $('body').addClass('dark-mode');
+            $('nav').removeClass('navbar-light');
+            $('nav').addClass('navbar-dark');
+            $('#sidebar1').removeClass('sidebar-light-primary');
+            $('#sidebar1').addClass('sidebar-dark-primary');
+            localStorage.setItem('theme', 'dark-mode');
+        }
+
+        function setLightMode() {
+            console.log('setLightMode');
+            $('body').removeClass('dark-mode');
+            $('body').addClass('light-mode');
+            $('nav').removeClass('navbar-dark');
+            $('nav').addClass('navbar-light');
+            $('#sidebar1').removeClass('sidebar-dark-primary');
+            $('#sidebar1').addClass('sidebar-light-primary');
+            localStorage.setItem('theme', 'light-mode');
+        }
+
+        $('#btnToggle').click(function() {
+            let darkLightTheme = localStorage.getItem('theme');
+            if (darkLightTheme == 'dark-mode') {
+                setLightMode();
+            } else {
+                setDarkMode();
+            }
+        });
+
+
+        $(function() {
+            // if dark_mode is not set in localstorage
+            var bodyElement = document.body;
+
+            // how to set sidebar dark mode
+            if (localStorage.getItem('theme') == null) {
+                localStorage.setItem('theme', 'light-mode');
+            } else {
+                if (localStorage.getItem('theme') == 'dark-mode') {
+                    // $('body').addClass('dark-mode');
+                    // bodyElement.classList.toggle("dark-mode");
+                    $('body').addClass('dark-mode');
+                    $('nav').addClass('navbar-dark');
+                    $('#sidebar1').addClass('sidebar-dark-primary');
+                } else {
+                    // set body id to lightmode
+                    // bodyElement.classList.toggle("light-mode");
+                    $('body').addClass('light-mode');
+                    $('nav').addClass('navbar-light');
+                    $('#sidebar1').addClass('sidebar-light-primary');
+
+                }
+            }
+
+            // if (localStorage.getItem('theme') == null) {
+            //     localStorage.setItem('theme', 'light-mode');
+            // } else {
+            //     if (localStorage.getItem('theme') == 'dark-mode') {
+            //         // $('body').addClass('dark-mode');
+            //         bodyElement.classList.toggle("dark-mode");
+            //     } else {
+            //         // set body id to lightmode
+            //         bodyElement.classList.toggle("light-mode");
+            //     }
+            // }
+        });
+    </script>
+
+    <script>
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "id": "id"
+            }
+        });
+    </script>
+
+    <script>
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        $("input[data-bootstrap-switch]").each(function() {
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        });
+    </script>
 
 </body>
 
