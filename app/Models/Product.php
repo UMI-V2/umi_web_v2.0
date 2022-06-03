@@ -162,6 +162,10 @@ class Product extends Model
     {
         return $this->hasMany(\App\Models\ProductCategory::class, 'id_produk', 'id');
     }
+    // public function master_product_category()
+    // {
+    //     return $this->hasMany(MasterProductCategory::class, 'id_kategori', 'id');
+    // }
 
     public function product_files()
     {

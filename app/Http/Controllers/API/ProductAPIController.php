@@ -40,17 +40,25 @@ class ProductAPIController extends AppBaseController
             $kondisi = $request->input('kondisi');
             $price_from = $request->input('price_from');
             $price_to = $request->input('price_to');
+            $sort_price_low = $request->input('sort_price_low', 0);
+            $sort_price_high = $request->input('sort_price_high', 0);
+
+
             //Set Distance Variabel
-            $sort_distance = $request->input('sort_distance', 1);
+            $sort_distance = $request->input('sort_distance', 0);
+
             $latitude = $request->input('latitude', -6.399987);
             $longitude = $request->input('longitude', 108.284429);
             $distance = $request->input('distance', 100);
 
             $category_id = $request->input('category_id');
+            $is_service = $request->input('is_service');
+            $is_non_service = $request->input('is_non_service');
+
 
 
             if ($id) {
-                $value = Product::with(['master_units', 'product_category.master_product_categories', 'product_files', 'businesses'])->find($id);
+                $value = Product::with(['master_units', 'product_category.master_product_categories', 'product_files',])->find($id);
                 if ($value) {
                     return ResponseFormatter::success($value, 'Get Product Success');
                 } else {
@@ -68,12 +76,26 @@ class ProductAPIController extends AppBaseController
             if ($nama) {
                 $value->where('nama', 'like', '%' . $nama . '%');
             }
-            if($kondisi){
-                $value->where('kondisi',  $kondisi );
+            if ($kondisi != null) {
+                $value->where('kondisi',  $kondisi);
             }
-            if($category_id){
-                $value->whereHas('category', function($q) use($category_id){
-                    $q->where('id_master_kategori_produk',$category_id );
+            if ($category_id) {
+                $value->whereHas('product_category', function ($q) use ($category_id) {
+                    $q->where('id_master_kategori_produk', $category_id);
+                });
+            }
+            if ($is_service) {
+                $value->whereHas('product_category', function ($q) use ($category_id) {
+                    $q->whereHas('master_product_categories', function ($q)  {
+                        $q->where('status_kategori_produk', '1');
+                    });
+                });
+            }
+            if ($is_non_service) {
+                $value->whereHas('product_category', function ($q) use ($category_id) {
+                    $q->whereHas('master_product_categories', function ($q2)  {
+                        $q2->where('status_kategori_produk', '0');
+                    });
                 });
             }
             if ($price_from) {
@@ -83,15 +105,21 @@ class ProductAPIController extends AppBaseController
                 $value->where('harga', '<=', $price_to);
             }
 
+            if ($sort_price_low) {
+                $value->orderBy("harga", "asc");
+            }
+            if ($sort_price_high) {
+                $value->orderBy("harga", "desc");
+            }
 
             // dd(  $value->get());
 
-            if($sort_distance){
+            if ($sort_distance) {
                 $value->nearby([
                     $latitude, //latitude
                     $longitude //longitude
                 ], $distance, 2)->selectDistance($this->request_only, 'distance')->closest();
-            }else{
+            } else {
                 $value->nearby([
                     $latitude, //latitude
                     $longitude //longitude
@@ -99,7 +127,7 @@ class ProductAPIController extends AppBaseController
             }
 
 
-            return ResponseFormatter::success($value->with(['master_units', 'product_category.master_product_categories', 'product_files', 'businesses'])->paginate($limit), 'Get Products Success');
+            return ResponseFormatter::success($value->with(['master_units', 'product_category.master_product_categories', 'product_files'])->paginate($limit), 'Get Products Success');
         } catch (Exception $e) {
             return ResponseFormatter::error([
                 'error' => $e,
@@ -124,9 +152,9 @@ class ProductAPIController extends AppBaseController
 
             $result = Product::updateOrCreate(['id' => $request->id], $data);
 
-            ProductCategoryAPIController::createDelete($request, $result->id);
+            // ProductCategoryAPIController::createDelete($request, $result->id);
 
-            ProductFileAPIController::uploadOrDeleteFile($request, $result->id);
+            ProductFileAPIController::uploadOrDeleteFile($request, $result);
             $value = Product::find($result->id);
             DB::commit();
 

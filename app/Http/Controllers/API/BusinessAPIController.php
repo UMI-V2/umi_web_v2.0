@@ -38,7 +38,7 @@ class BusinessAPIController extends Controller
             $category_id = $request->input('category_id');
 
             if ($id) {
-                $business = Business::with(['users','category.master_business_categories', 'masterStatusBusinesses', 'business_file', 'open_hours', 'address' => function ($query) {
+                $business = Business::with(['users', 'category.master_business_categories', 'masterStatusBusinesses', 'business_file', 'open_hours', 'address' => function ($query) {
                     return $query->where('is_usaha', 1);
                 }])->where('id', $id);
                 $business->nearby([
@@ -46,26 +46,30 @@ class BusinessAPIController extends Controller
                     $longitude //longitude
                 ], $distance, 2)->selectDistance($this->request_only, 'distance');
 
-                return ResponseFormatter::success($business->first(), 'Data Usaha berhasil diambil');
+                $business =   $business->first();
+                if ($business) {
+                    return ResponseFormatter::success($business, 'Data Usaha berhasil diambil');
+                }
+                return ResponseFormatter::error(null, 'Data tidak ditemukan', 404);
             }
 
             $business = Business::query();
             $business->where('id_master_status_usaha', 1);
 
-            if($nama_usaha){
+            if ($nama_usaha) {
                 $business->where('nama_usaha', 'like', '%' . $nama_usaha . '%');
             }
-            if($category_id){
-                $business->whereHas('category', function($q) use($category_id){
-                    $q->where('id_master_kategori_usaha',$category_id );
+            if ($category_id) {
+                $business->whereHas('category', function ($q) use ($category_id) {
+                    $q->where('id_master_kategori_usaha', $category_id);
                 });
             }
-            if($sort_distance){
+            if ($sort_distance) {
                 $business->nearby([
                     $latitude, //latitude
                     $longitude //longitude
                 ], $distance, 2)->selectDistance($this->request_only, 'distance')->closest();
-            }else{
+            } else {
                 $business->nearby([
                     $latitude, //latitude
                     $longitude //longitude
@@ -73,7 +77,7 @@ class BusinessAPIController extends Controller
             }
 
 
-            return ResponseFormatter::success($business->with(['category.master_business_categories', 'business_file','open_hours','category.master_business_categories','address'])->paginate($limit), 'Data Usaha berhasil diambil');
+            return ResponseFormatter::success($business->with(['category.master_business_categories', 'business_file', 'open_hours', 'category.master_business_categories', 'address'])->paginate($limit), 'Data Usaha berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => "Get Usaha Gagal",

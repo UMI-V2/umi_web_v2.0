@@ -18,9 +18,10 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->bigInteger('id_usaha')->unsigned();
             $table->bigInteger('id_satuan')->unsigned();
+            // $table->bigInteger('id_kategori')->unsigned()->nullable();
             $table->string('nama');
             $table->string('deskripsi');
-            $table->string('harga');
+            $table->bigInteger('harga');
             $table->integer('stok');
             $table->boolean('kondisi');
             $table->boolean('preorder');
@@ -31,6 +32,8 @@ class CreateProductsTable extends Migration
             $table->timestamps();
             $table->foreign('id_usaha')->references('id')->on('businesses');
             $table->foreign('id_satuan')->references('id')->on('master_units');
+            // $table->foreign('id_kategori')->references('id')->on('master_product_categories');
+
         });
     }
 

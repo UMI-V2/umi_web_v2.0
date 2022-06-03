@@ -12,6 +12,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Repositories\ProductFileRepository;
 use App\Http\Requests\API\CreateProductFileAPIRequest;
 use App\Http\Requests\API\UpdateProductFileAPIRequest;
+use App\Models\Product;
 
 /**
  * Class ProductFileController
@@ -20,14 +21,14 @@ use App\Http\Requests\API\UpdateProductFileAPIRequest;
 
 class ProductFileAPIController extends AppBaseController
 {
-    static function uploadOrDeleteFile(Request $request, String $idProduct)
+    static function uploadOrDeleteFile(Request $request, Product $product, )
     {
         try {
             if ($request->add_file_photos) {
                 foreach ($request->file('add_file_photos') as $file) {
-                    $fileRoot = $file->store("assets/products/$idProduct/photos", 'public');
+                    $fileRoot = $file->store("assets/business/$product->id_usaha/products", 'public');
                     ProductFile::create([
-                        'id_produk' => $idProduct,
+                        'id_produk' => $product->id,
                         'file' => $fileRoot,
                         'video' => false,
                         'photo' => true
