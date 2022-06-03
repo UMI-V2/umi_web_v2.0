@@ -54,6 +54,16 @@ class MasterPrivilegeDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+                // 'initComplete' => "function () {
+                //     this.api().columns([0,1]).every(function () {
+                //         var column = this;
+                //         var input = document.createElement(\"input\");
+                //         $(input).appendTo($(column.header()).empty())
+                //         .on('keyup', function () {
+                //             column.search($(this).val()).draw();
+                //         });
+                //     });
+                // }",
             ]);
     }
 
@@ -66,7 +76,7 @@ class MasterPrivilegeDataTable extends DataTable
     {
         return [
             'id',
-            'nama_hak_akses_pengguna'
+            'nama_hak_akses_pengguna',
         ];
     }
 
