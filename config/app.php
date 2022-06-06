@@ -67,7 +67,11 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
+    'locale' => 'id',
+    'faker_locale' => 'id_ID',
+
+    // 'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +84,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    // 'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +110,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    // 'faker_locale' => 'en_US',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,7 +165,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        InfyOm\GeneratorBuilder\GeneratorBuilderServiceProvider::class, 
+        InfyOm\GeneratorBuilder\GeneratorBuilderServiceProvider::class,
         Yajra\DataTables\HtmlServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,

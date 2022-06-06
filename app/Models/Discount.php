@@ -81,13 +81,15 @@ class Discount extends Model
 
 
     public $fillable = [
-        'id_produk',
+        'id',
+        // 'id_product_discount',
+        'id_usaha',
         'nama_promo',
         'waktu_mulai',
         'waktu_berakhir',
-        'harga',
-        'batas_pembelian',
-        'type'
+        'potongan',
+        'type',
+        
     ];
 
     /**
@@ -97,13 +99,14 @@ class Discount extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_produk' => 'integer',
+        // 'id_product_discount' => 'integer',
+        'id_usaha' => 'integer',
         'nama_promo' => 'string',
         'waktu_mulai' => 'datetime',
         'waktu_berakhir' => 'datetime',
-        'harga' => 'integer',
-        'batas_pembelian' => 'integer',
-        'type' => 'boolean'
+        'potongan' => 'integer',
+        // 'batas_pembelian' => 'integer',
+        'type' => 'integer'
     ];
 
     /**
@@ -112,12 +115,13 @@ class Discount extends Model
      * @var array
      */
     public static $rules = [
-        'id_produk' => 'required',
+        // 'id_product_discount' => 'required',
+        'id_usaha' => 'required',
         'nama_promo' => 'required',
         'waktu_mulai' => 'required',
         'waktu_berakhir' => 'required',
-        'harga' => 'required',
-        'batas_pembelian' => 'required',
+        'potongan' => 'required',
+        // 'batas_pembelian' => 'required',
         'type' => 'required'
     ];
 
@@ -127,5 +131,18 @@ class Discount extends Model
     public function products()
     {
         return $this->belongsTo(\App\Models\Product::class, 'id_produk', 'id');
+    }
+    public function product_discounts()
+    {
+        return $this->hasMany(\App\Models\ProductDiscount::class, 'id_discount', 'id');
+    }
+
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($discount) { 
+             $discount->product_discounts()->delete();             
+        });
     }
 }

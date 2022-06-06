@@ -14,18 +14,23 @@ class CreateDiscountsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_produk')->unsigned();
+            // $table->bigInteger('id_product_discount')->unsigned();
+            $table->bigInteger('id_usaha')->unsigned();
+
             $table->string('nama_promo');
             $table->dateTime('waktu_mulai');
             $table->dateTime('waktu_berakhir');
-            $table->integer('harga');
-            $table->integer('batas_pembelian');
-            $table->boolean('type');
+            $table->integer('potongan');
+            $table->integer('type');
             $table->timestamps();
-            $table->foreign('id_produk')->references('id')->on('products');
+            // $table->foreign('id_product_discount')->references('id')->on('products');
+            $table->foreign('id_usaha')->references('id')->on('businesses');
+
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -35,6 +40,7 @@ class CreateDiscountsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::drop('discounts');
     }
 }

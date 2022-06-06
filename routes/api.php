@@ -3,21 +3,23 @@
 use App\Models\MasterProvince;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\OpenHourController;
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\UserAPIController;
 use App\Http\Controllers\API\AddressAPIController;
+use App\Http\Controllers\API\ProductAPIController;
 use App\Http\Controllers\API\BusinessAPIController;
+use App\Http\Controllers\API\DiscountAPIController;
 use App\Http\Controllers\API\OpenHourAPIController;
 use App\Http\Controllers\API\MasterCityAPIController;
+use App\Http\Controllers\API\MasterUnitAPIController;
 use App\Http\Controllers\API\MasterProvinceAPIController;
 use App\Http\Controllers\MasterDeliveryServiceController;
 use App\Http\Controllers\API\BusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
-use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
-use App\Http\Controllers\API\MasterUnitAPIController;
-use App\Http\Controllers\API\ProductAPIController;
+use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +108,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', [ProductAPIController::class, 'all']);
         Route::post('update', [ProductAPIController::class, 'update']);
         Route::delete('delete', [ProductAPIController::class, 'delete']);
+
+    });
+
+    Route::group(['prefix' => 'discount'], function () {
+        Route::get('/', [DiscountAPIController::class, 'index']);
+        Route::post('update', [DiscountAPIController::class, 'store']);
+        Route::delete('delete', [DiscountAPIController::class, 'delete']);
 
     });
     

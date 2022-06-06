@@ -135,7 +135,8 @@ class Address extends Model
         'is_kantor',
         'is_usaha',
         'latitude',
-        'longitude'
+        'longitude',
+        'updated_at'
     ];
 
     /**

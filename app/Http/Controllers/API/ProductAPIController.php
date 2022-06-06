@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Response;
 use Exception;
+use Carbon\Carbon;
 use App\Models\Address;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -55,10 +56,17 @@ class ProductAPIController extends AppBaseController
             $is_service = $request->input('is_service');
             $is_non_service = $request->input('is_non_service');
 
+            $is_show_arshive = $request->input('is_show_arshive', 0);
+            $is_ready_only = $request->input('is_ready_only');
+
 
 
             if ($id) {
-                $value = Product::with(['master_units', 'product_category.master_product_categories', 'product_files',])->find($id);
+                $value = Product::with(['master_units', 'product_category.master_product_categories', 'product_files', 'product_discount' => function ($query) {
+                    return $query->with('discount')->whereHas('discount', function ($q) {
+                        $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
+                    });
+                }])->find($id);
                 if ($value) {
                     return ResponseFormatter::success($value, 'Get Product Success');
                 } else {
@@ -70,44 +78,67 @@ class ProductAPIController extends AppBaseController
 
             // dd($value->get());
 
+            // Hanya menampilkan produk pda usaha tertentu
             if ($id_usaha) {
                 $value->where('id_usaha', $id_usaha);
             }
+
+            //Show Product Arshive
+            if ($is_show_arshive) {
+                $value->orWhere('is_arshive', 1);
+            } else {
+                // dd("MAsuk Sini");
+                $value->where('is_arshive', 0);
+            }
+            //Hanya menampilkan produk yang ready
+            if ($is_ready_only) {
+                $value->where('stok', '>=', 1);
+            }
+            //Memfilter produk berdasarkan nama
             if ($nama) {
                 $value->where('nama', 'like', '%' . $nama . '%');
             }
+            //Memfilter produk berdasarkan kondisi
             if ($kondisi != null) {
                 $value->where('kondisi',  $kondisi);
             }
+            // Memfilter produk berdasarkan kategori
             if ($category_id) {
                 $value->whereHas('product_category', function ($q) use ($category_id) {
                     $q->where('id_master_kategori_produk', $category_id);
                 });
             }
+            // Memfilter produk berasarkan kategori jasa
             if ($is_service) {
                 $value->whereHas('product_category', function ($q) use ($category_id) {
-                    $q->whereHas('master_product_categories', function ($q)  {
+                    $q->whereHas('master_product_categories', function ($q) {
                         $q->where('status_kategori_produk', '1');
                     });
                 });
             }
+            // Memfilter produk berasarkan kategori barang
             if ($is_non_service) {
                 $value->whereHas('product_category', function ($q) use ($category_id) {
-                    $q->whereHas('master_product_categories', function ($q2)  {
+                    $q->whereHas('master_product_categories', function ($q2) {
                         $q2->where('status_kategori_produk', '0');
                     });
                 });
             }
+            // Memfilter produk berasarkan range harga
             if ($price_from) {
                 $value->where('harga', '>=', $price_from);
             }
+            // Memfilter produk berasarkan range harga
             if ($price_to) {
                 $value->where('harga', '<=', $price_to);
             }
+            // Mengurutkan produk berdasarkan harga termurah
 
             if ($sort_price_low) {
                 $value->orderBy("harga", "asc");
             }
+            // Mengurutkan produk berdasarkan harga termahal
+
             if ($sort_price_high) {
                 $value->orderBy("harga", "desc");
             }
@@ -127,7 +158,11 @@ class ProductAPIController extends AppBaseController
             }
 
 
-            return ResponseFormatter::success($value->with(['master_units', 'product_category.master_product_categories', 'product_files'])->paginate($limit), 'Get Products Success');
+            return ResponseFormatter::success($value->with(['master_units', 'product_category.master_product_categories', 'product_files', 'product_discount'=> function ($query) {
+                return $query->whereHas('discount', function ($q) {
+                    $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
+                });
+            }])->paginate($limit), 'Get Products Success');
         } catch (Exception $e) {
             return ResponseFormatter::error([
                 'error' => $e,
