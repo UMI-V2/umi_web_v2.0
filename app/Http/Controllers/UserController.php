@@ -65,20 +65,23 @@ class UserController extends AppBaseController
      */
     public function store(CreateUserRequest $request)
     {
-        // $input = $request->all();
+        $input = $request->all();
 
-        $input = User::create([
-                'name' => $request->name,
-                'username' => $request->username,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'no_hp' => $request->no_hp,
-                'foto' => $request->foto,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'id_privilege' => $request->id_privilege,
-                'id_status_pengguna' => $request->id_status_pengguna,
-            ]);
+        // array merge password
+        $input['password'] = Hash::make($input['password']);
+        
+        // $input = User::create(aray_merge[
+        //         'name' => $request->name,
+        //         'username' => $request->username,
+        //         'jenis_kelamin' => $request->jenis_kelamin,
+        //         'tanggal_lahir' => $request->tanggal_lahir,
+        //         'no_hp' => $request->no_hp,
+        //         'foto' => $request->foto,
+        //         'email' => $request->email,
+        //         'password' => Hash::make($request->password),
+        //         'id_privilege' => $request->id_privilege,
+        //         'id_status_pengguna' => $request->id_status_pengguna,
+        //     ]);
         
         $user = $this->userRepository->create($input);
 

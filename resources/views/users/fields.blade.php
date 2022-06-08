@@ -14,11 +14,11 @@
 <div class="form-group col-sm-12">
     {!! Form::label('jenis_kelamin', 'Jenis Kelamin', ['class' => 'form-check-label']) !!}
     <label class="form-check">
-    {!! Form::radio('jenis_kelamin', "Pria", null, ['class' => 'form-check-input']) !!} Pria
+    {!! Form::radio('jenis_kelamin', "L", null, ['class' => 'form-check-input']) !!} Laki-laki
 </label>
 
 <label class="form-check">
-    {!! Form::radio('jenis_kelamin', "Wanita", null, ['class' => 'form-check-input']) !!} Wanita
+    {!! Form::radio('jenis_kelamin', "P", null, ['class' => 'form-check-input']) !!} Perempuan
 </label>
 
 </div>
