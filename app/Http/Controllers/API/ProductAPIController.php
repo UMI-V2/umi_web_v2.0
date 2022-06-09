@@ -187,7 +187,7 @@ class ProductAPIController extends AppBaseController
 
             $result = Product::updateOrCreate(['id' => $request->id], $data);
 
-            // ProductCategoryAPIController::createDelete($request, $result->id);
+            ProductCategoryAPIController::createDelete($request, $result->id);
 
             ProductFileAPIController::uploadOrDeleteFile($request, $result);
             $value = Product::find($result->id);
