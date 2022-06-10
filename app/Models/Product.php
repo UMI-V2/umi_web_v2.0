@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
 
 /**
  * @SWG\Definition(
@@ -76,7 +78,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model
 {
 
-    use HasFactory;
+    use HasFactory, LaravelCoordinate;
+
+    public $_latitudeName = "latitude"; //default name is latitude
+    public $_longitudeName = "longitude";
+
 
     public $table = 'products';
     
@@ -84,6 +90,7 @@ class Product extends Model
 
 
     public $fillable = [
+        'id',
         'id_usaha',
         'id_satuan',
         'nama',
@@ -91,7 +98,14 @@ class Product extends Model
         'harga',
         'stok',
         'kondisi',
-        'preorder'
+        'preorder',
+        'jumlah_satuan',
+        'is_arshive',
+        'latitude',
+        'longitude',
+        'created_at',
+        'updated_at',
+        // 'deleted_at'
     ];
 
     /**
@@ -108,7 +122,8 @@ class Product extends Model
         'harga' => 'string',
         'stok' => 'integer',
         'kondisi' => 'boolean',
-        'preorder' => 'boolean'
+        'preorder' => 'boolean',
+        'is_arshive' => 'boolean'
     ];
 
     /**
@@ -142,4 +157,41 @@ class Product extends Model
     {
         return $this->belongsTo(\App\Models\MasterUnit::class, 'id_satuan', 'id');
     }
+
+    public function product_category()
+    {
+        return $this->hasMany(\App\Models\ProductCategory::class, 'id_produk', 'id');
+    }
+    // public function master_product_category()
+    // {
+    //     return $this->hasMany(MasterProductCategory::class, 'id_kategori', 'id');
+    // }
+
+    public function product_files()
+    {
+        return $this->hasMany(\App\Models\ProductFile::class, 'id_produk', 'id');
+    }
+
+    public function product_discount()
+    {
+        return $this->belongsTo(\App\Models\ProductDiscount::class, 'id', 'id_product');
+    }
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($product) { 
+             $product->product_category()->delete();
+             $files = ProductFile::where('id_produk', $product->id)->get();
+             foreach ($files as $file) {
+                 $fileName = $file->getAttributes()['file'];
+                ProductFile::where('file', $fileName)->delete();
+                if (Storage::disk('public')->exists($fileName)) {
+                    Storage::disk('public')->delete($fileName);
+                }
+            }
+             $product->product_files()->delete();
+        });
+    }
+
 }

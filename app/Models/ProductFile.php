@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -95,6 +96,15 @@ class ProductFile extends Model
         'photo' => 'required',
         'image_url' => 'required'
     ];
+
+    public function getFileAttribute()
+    {
+        if ($this->attributes['file']) {
+            return url('') . Storage::url($this->attributes['file']);
+        } else {
+            return null;
+        }
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

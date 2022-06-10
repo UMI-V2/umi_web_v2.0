@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers\API;
 
+use Response;
+use Exception;
+use Carbon\Carbon;
+use App\Models\Address;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
+use Illuminate\Support\Facades\DB;
+use App\Repositories\ProductRepository;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Controllers\ProductFileController;
 use App\Http\Requests\API\CreateProductAPIRequest;
 use App\Http\Requests\API\UpdateProductAPIRequest;
-use App\Models\Product;
-use App\Repositories\ProductRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Response;
+use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\API\ProductFileAPIController;
+use App\Http\Controllers\API\ProductCategoryAPIController;
 
 /**
  * Class ProductController
@@ -17,265 +26,200 @@ use Response;
 
 class ProductAPIController extends AppBaseController
 {
-    /** @var  ProductRepository */
-    private $productRepository;
-
-    public function __construct(ProductRepository $productRepo)
+    public function __construct()
     {
-        $this->productRepository = $productRepo;
+        $this->request_only = (new Product)->getFillable();
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/products",
-     *      summary="Get a listing of the Products.",
-     *      tags={"Product"},
-     *      description="Get all Products",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Product")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function index(Request $request)
+    public function all(Request $request)
     {
-        $products = $this->productRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        try {
+            $limit =  $request->input('limit', 20);
+            $id = $request->input('id');
+            $id_usaha = $request->input('id_usaha');
+            $nama = $request->input('nama');
+            $kondisi = $request->input('kondisi');
+            $price_from = $request->input('price_from');
+            $price_to = $request->input('price_to');
+            $sort_price_low = $request->input('sort_price_low', 0);
+            $sort_price_high = $request->input('sort_price_high', 0);
 
-        return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
-    }
 
-    /**
-     * @param CreateProductAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/products",
-     *      summary="Store a newly created Product in storage",
-     *      tags={"Product"},
-     *      description="Store Product",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="Product that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Product")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Product"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function store(CreateProductAPIRequest $request)
-    {
-        $input = $request->all();
+            //Set Distance Variabel
+            $sort_distance = $request->input('sort_distance', 0);
 
-        $product = $this->productRepository->create($input);
+            $latitude = $request->input('latitude', -6.399987);
+            $longitude = $request->input('longitude', 108.284429);
+            $distance = $request->input('distance', 100);
 
-        return $this->sendResponse($product->toArray(), 'Product saved successfully');
-    }
+            $category_id = $request->input('category_id');
+            $is_service = $request->input('is_service');
+            $is_non_service = $request->input('is_non_service');
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/products/{id}",
-     *      summary="Display the specified Product",
-     *      tags={"Product"},
-     *      description="Get Product",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Product",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Product"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function show($id)
-    {
-        /** @var Product $product */
-        $product = $this->productRepository->find($id);
+            $is_show_arshive = $request->input('is_show_arshive', 0);
+            $is_ready_only = $request->input('is_ready_only');
 
-        if (empty($product)) {
-            return $this->sendError('Product not found');
+
+
+            if ($id) {
+                $value = Product::with(['master_units', 'product_category.master_product_categories', 'product_files', 'product_discount' => function ($query) {
+                    return $query->with('discount')->whereHas('discount', function ($q) {
+                        $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
+                    });
+                }])->find($id);
+                if ($value) {
+                    return ResponseFormatter::success($value, 'Get Product Success');
+                } else {
+                    return ResponseFormatter::error(null, 'Get Product Not Found', 404);
+                }
+            }
+
+            $value = Product::query();
+
+            // dd($value->get());
+
+            // Hanya menampilkan produk pda usaha tertentu
+            if ($id_usaha) {
+                $value->where('id_usaha', $id_usaha);
+            }
+
+            //Show Product Arshive
+            if ($is_show_arshive) {
+                $value->orWhere('is_arshive', 1);
+            } else {
+                // dd("MAsuk Sini");
+                $value->where('is_arshive', 0);
+            }
+            //Hanya menampilkan produk yang ready
+            if ($is_ready_only) {
+                $value->where('stok', '>=', 1);
+            }
+            //Memfilter produk berdasarkan nama
+            if ($nama) {
+                $value->where('nama', 'like', '%' . $nama . '%');
+            }
+            //Memfilter produk berdasarkan kondisi
+            if ($kondisi != null) {
+                $value->where('kondisi',  $kondisi);
+            }
+            // Memfilter produk berdasarkan kategori
+            if ($category_id) {
+                $value->whereHas('product_category', function ($q) use ($category_id) {
+                    $q->where('id_master_kategori_produk', $category_id);
+                });
+            }
+            // Memfilter produk berasarkan kategori jasa
+            if ($is_service) {
+                $value->whereHas('product_category', function ($q) use ($category_id) {
+                    $q->whereHas('master_product_categories', function ($q) {
+                        $q->where('status_kategori_produk', '1');
+                    });
+                });
+            }
+            // Memfilter produk berasarkan kategori barang
+            if ($is_non_service) {
+                $value->whereHas('product_category', function ($q) use ($category_id) {
+                    $q->whereHas('master_product_categories', function ($q2) {
+                        $q2->where('status_kategori_produk', '0');
+                    });
+                });
+            }
+            // Memfilter produk berasarkan range harga
+            if ($price_from) {
+                $value->where('harga', '>=', $price_from);
+            }
+            // Memfilter produk berasarkan range harga
+            if ($price_to) {
+                $value->where('harga', '<=', $price_to);
+            }
+            // Mengurutkan produk berdasarkan harga termurah
+
+            if ($sort_price_low) {
+                $value->orderBy("harga", "asc");
+            }
+            // Mengurutkan produk berdasarkan harga termahal
+
+            if ($sort_price_high) {
+                $value->orderBy("harga", "desc");
+            }
+
+            // dd(  $value->get());
+
+            if ($sort_distance) {
+                $value->nearby([
+                    $latitude, //latitude
+                    $longitude //longitude
+                ], $distance, 2)->selectDistance($this->request_only, 'distance')->closest();
+            } else {
+                $value->nearby([
+                    $latitude, //latitude
+                    $longitude //longitude
+                ], $distance, 2)->selectDistance($this->request_only, 'distance');
+            }
+
+
+            return ResponseFormatter::success($value->with(['master_units', 'product_category.master_product_categories', 'product_files', 'product_discount'=> function ($query) {
+                return $query->whereHas('discount', function ($q) {
+                    $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
+                });
+            }])->paginate($limit), 'Get Products Success');
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'error' => $e,
+            ],  'Get Products Failed', 500);
         }
-
-        return $this->sendResponse($product->toArray(), 'Product retrieved successfully');
     }
 
-    /**
-     * @param int $id
-     * @param UpdateProductAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/products/{id}",
-     *      summary="Update the specified Product in storage",
-     *      tags={"Product"},
-     *      description="Update Product",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Product",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="Product that should be updated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Product")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Product"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function update($id, UpdateProductAPIRequest $request)
+    public function update(Request $request)
     {
-        $input = $request->all();
+        DB::beginTransaction();
 
-        /** @var Product $product */
-        $product = $this->productRepository->find($id);
+        try {
+            $data = $request->all();
 
-        if (empty($product)) {
-            return $this->sendError('Product not found');
+            if (!$request->id) {
+                //auto insert latitude katika pertama kali create produk
+                $businessAddress = Address::where('id_users', $request->user()->id)->where('is_usaha', 1)->first();
+
+                $data['latitude'] =   $businessAddress->latitude;
+                $data['longitude'] =  $businessAddress->longitude;
+            }
+
+            $result = Product::updateOrCreate(['id' => $request->id], $data);
+
+            ProductCategoryAPIController::createDelete($request, $result->id);
+
+            ProductFileAPIController::uploadOrDeleteFile($request, $result);
+            $value = Product::find($result->id);
+            DB::commit();
+
+            if ($request->id) {
+                return ResponseFormatter::success($value->load(['master_units', 'product_category.master_product_categories', 'product_files']), 'Update Product Success');
+            }
+            return ResponseFormatter::success($value->load(['master_units', 'product_category.master_product_categories', 'product_files']), 'Add Product Success');
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return ResponseFormatter::error([
+                'error' => $e,
+            ],  'Update Product Failed', 500);
         }
-
-        $product = $this->productRepository->update($input, $id);
-
-        return $this->sendResponse($product->toArray(), 'Product updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Delete(
-     *      path="/products/{id}",
-     *      summary="Remove the specified Product from storage",
-     *      tags={"Product"},
-     *      description="Delete Product",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Product",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        /** @var Product $product */
-        $product = $this->productRepository->find($id);
+        try {
+            $this->validate($request, [
+                'id' => 'required',
+            ]);
 
-        if (empty($product)) {
-            return $this->sendError('Product not found');
+            $value = Product::find($request->id)->delete();
+
+            return ResponseFormatter::success($value, 'Delete Product Success');
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'error' => $e,
+            ],  'Delete Product Failed', 500);
         }
-
-        $product->delete();
-
-        return $this->sendSuccess('Product deleted successfully');
     }
 }

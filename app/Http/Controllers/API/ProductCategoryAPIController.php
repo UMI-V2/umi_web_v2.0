@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\API;
 
+use Response;
+use Exception;
+use Illuminate\Http\Request;
+use App\Models\ProductCategory;
+use App\Helpers\ResponseFormatter;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\ProductCategoryRepository;
 use App\Http\Requests\API\CreateProductCategoryAPIRequest;
 use App\Http\Requests\API\UpdateProductCategoryAPIRequest;
-use App\Models\ProductCategory;
-use App\Repositories\ProductCategoryRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 /**
  * Class ProductCategoryController
@@ -17,265 +19,94 @@ use Response;
 
 class ProductCategoryAPIController extends AppBaseController
 {
-    /** @var  ProductCategoryRepository */
-    private $productCategoryRepository;
-
-    public function __construct(ProductCategoryRepository $productCategoryRepo)
-    {
-        $this->productCategoryRepository = $productCategoryRepo;
-    }
-
-    /**
-     * @param Request $request
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/productCategories",
-     *      summary="Get a listing of the ProductCategories.",
-     *      tags={"ProductCategory"},
-     *      description="Get all ProductCategories",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/ProductCategory")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
     public function index(Request $request)
     {
-        $productCategories = $this->productCategoryRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        try {
+            $idProduct = $request->input('id_produk');
+            $categories = ProductCategory::with(['products', 'master_product_categories']);
+            if ($idProduct) {
+                $categories = ProductCategory::where('id_produk', $idProduct)->first();
+            } else {
+                $categories = ProductCategory::get();
+            }
 
-        return $this->sendResponse($productCategories->toArray(), 'Product Categories retrieved successfully');
-    }
-
-    /**
-     * @param CreateProductCategoryAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/productCategories",
-     *      summary="Store a newly created ProductCategory in storage",
-     *      tags={"ProductCategory"},
-     *      description="Store ProductCategory",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="ProductCategory that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ProductCategory")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/ProductCategory"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function store(CreateProductCategoryAPIRequest $request)
-    {
-        $input = $request->all();
-
-        $productCategory = $this->productCategoryRepository->create($input);
-
-        return $this->sendResponse($productCategory->toArray(), 'Product Category saved successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/productCategories/{id}",
-     *      summary="Display the specified ProductCategory",
-     *      tags={"ProductCategory"},
-     *      description="Get ProductCategory",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of ProductCategory",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/ProductCategory"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function show($id)
-    {
-        /** @var ProductCategory $productCategory */
-        $productCategory = $this->productCategoryRepository->find($id);
-
-        if (empty($productCategory)) {
-            return $this->sendError('Product Category not found');
+            return ResponseFormatter::success($categories, 'Data Product Category berhasil diambil');
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => "Get Product Category Gagal",
+                'error' => $error,
+            ],  'Get Failed', 500);
         }
-
-        return $this->sendResponse($productCategory->toArray(), 'Product Category retrieved successfully');
     }
-
-    /**
-     * @param int $id
-     * @param UpdateProductCategoryAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/productCategories/{id}",
-     *      summary="Update the specified ProductCategory in storage",
-     *      tags={"ProductCategory"},
-     *      description="Update ProductCategory",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of ProductCategory",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="ProductCategory that should be updated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/ProductCategory")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/ProductCategory"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function update($id, UpdateProductCategoryAPIRequest $request)
+    static function createDelete(Request $request, int $idProduct)
     {
-        $input = $request->all();
+        try {
+            if ($request->add_kategori_produk) {
+                $request->validate(
+                    [
+                        'add_kategori_produk' => 'required|array',
+                    ],
+                );
 
-        /** @var ProductCategory $productCategory */
-        $productCategory = $this->productCategoryRepository->find($id);
+                // dd('id Usaha'. $idUsaha);
 
-        if (empty($productCategory)) {
-            return $this->sendError('Product Category not found');
+                foreach ($request->add_kategori_produk as $value=> $kategori) {
+                    $checkCategory = ProductCategory::where('id_produk', $idProduct)->where('id_master_kategori_produk', $kategori)->first();
+                    if(!$checkCategory){
+                        ProductCategory::create([
+                            'id_produk'=> $idProduct,
+                            'id_master_kategori_produk'=>$kategori,
+                        ]);   
+                        // dump('create='. $value);
+ 
+                    } 
+                    // // dump('no create='. $value);
+
+                }
+            }
+            if ($request->delete_kategori_produk) {
+                $request->validate(
+                    [
+                        'delete_kategori_produk' => 'required|array',
+                    ],
+                );
+                foreach ($request->delete_kategori_produk as $value=> $kategori) {
+                    $checkCategory = ProductCategory::where('id_produk', $idProduct)->where('id_master_kategori_produk', $kategori)->delete();
+                }
+            }
+
+        } catch (Exception $error) {
+            return ResponseFormatter::error(
+                [
+                    'message' => $error
+                ],
+                'Product Category Update Failed',
+            );
         }
-
-        $productCategory = $this->productCategoryRepository->update($input, $id);
-
-        return $this->sendResponse($productCategory->toArray(), 'ProductCategory updated successfully');
     }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Delete(
-     *      path="/productCategories/{id}",
-     *      summary="Remove the specified ProductCategory from storage",
-     *      tags={"ProductCategory"},
-     *      description="Delete ProductCategory",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of ProductCategory",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        /** @var ProductCategory $productCategory */
-        $productCategory = $this->productCategoryRepository->find($id);
+        try {
+            $request->validate(
+                [
+                    'id' => 'required',
+                ],
+            );
 
-        if (empty($productCategory)) {
-            return $this->sendError('Product Category not found');
+            $result =  ProductCategory::find($request->id)->delete();
+
+            return ResponseFormatter::success(
+                $result,
+                'Product Category Updated',
+            );
+        } catch (Exception $error) {
+            return ResponseFormatter::error(
+                [
+                    'message' => $error
+                ],
+                'Product Category Success',
+            );
         }
-
-        $productCategory->delete();
-
-        return $this->sendSuccess('Product Category deleted successfully');
     }
+
 }

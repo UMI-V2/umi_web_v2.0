@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
 
 /**
  * @SWG\Definition(
@@ -109,10 +110,13 @@ class Address extends Model
     use SoftDeletes;
 
     use HasFactory;
+    use LaravelCoordinate;
 
+    //optional
+
+    public $_latitudeName = "latitude"; //default name is latitude
+    public $_longitudeName = "longitude";
     public $table = 'addresses';
-    
-
     protected $dates = ['deleted_at'];
 
 
@@ -131,7 +135,8 @@ class Address extends Model
         'is_kantor',
         'is_usaha',
         'latitude',
-        'longitude'
+        'longitude',
+        'updated_at'
     ];
 
     /**
@@ -177,6 +182,18 @@ class Address extends Model
         'is_usaha' => 'required'
     ];
 
+    // protected $appends = ['distance'];
+
+    // public function getDistanceAttribute()
+    // {
+    //     // return $this->attributes['id'];
+    //     return Address::where('id', 1)->nearby([
+    //         -6.383358, //latitude
+    //         108.292559//longitude
+    //     ], 100, 2)->selectDistance([], 'jarak')->get();
+    // }
+
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
@@ -207,5 +224,9 @@ class Address extends Model
     public function sub_district()
     {
         return $this->belongsTo(MasterSubDistrict::class, 'subdistrict_id', 'subdistrict_id');
+    }
+    public function business()
+    {
+        return $this->belongsTo(Business::class, 'id_users', 'id_user');
     }
 }

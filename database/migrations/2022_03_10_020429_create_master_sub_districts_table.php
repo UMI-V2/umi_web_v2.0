@@ -13,16 +13,16 @@ class CreateMasterSubDistrictsTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_sub_districts', function (Blueprint $table) {
-            $table->id('subdistrict_id');
-            $table->bigInteger('city_id')->unsigned();
-            $table->string('subdistrict_name');
+        // Schema::create('master_sub_districts', function (Blueprint $table) {
+        //     $table->id('subdistrict_id');
+        //     $table->bigInteger('city_id')->unsigned();
+        //     $table->string('subdistrict_name');
 
-            $table->timestamps();
+        //     $table->timestamps();
 
-            $table->foreign('city_id')->references('city_id')->on('master_cities');
+        //     $table->foreign('city_id')->references('city_id')->on('master_cities');
 
-        });
+        // });
     }
 
     /**

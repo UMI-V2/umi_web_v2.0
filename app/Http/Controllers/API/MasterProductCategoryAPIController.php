@@ -14,6 +14,7 @@ use App\Http\Requests\API\CreateMasterProductCategoryAPIRequest;
 use App\Http\Requests\API\UpdateMasterProductCategoryAPIRequest;
 use App\Http\Requests\API\Createmaster_product_categoryAPIRequest;
 use App\Http\Requests\API\Updatemaster_product_categoryAPIRequest;
+use App\Models\MasterProductCategory;
 
 /**
  * Class MasterProductCategoryController
@@ -62,18 +63,23 @@ class MasterProductCategoryAPIController extends AppBaseController
      *      )
      * )
      */
-    public function index(Request $request)
+    public function all(Request $request)
     {
         try {
-            $masterProductCategories = $this->masterProductCategoryRepository->all(
-                $request->except(['skip', 'limit']),
-                $request->get('skip'),
-                $request->get('limit')
+           
+
+            $master_category = MasterProductCategory::get();
+            return ResponseFormatter::success(
+                $master_category,
+                'Get Master Product Category successfully',
             );
-    
-            return $this->sendResponse($masterProductCategories->toArray(), 'Master Kategori Produk retrieved successfully');
-            } catch (Exception $error) {
-            
+        } catch (Exception $error) {
+            return ResponseFormatter::error(
+                [
+                    "message"=> $error
+                ],
+                'Get Master Product Category  failed',
+            );
         }
     }
 

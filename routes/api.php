@@ -1,18 +1,25 @@
 <?php
 
+use App\Models\MasterProvince;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\OpenHourController;
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\UserAPIController;
 use App\Http\Controllers\API\AddressAPIController;
+use App\Http\Controllers\API\ProductAPIController;
 use App\Http\Controllers\API\BusinessAPIController;
+use App\Http\Controllers\API\DiscountAPIController;
+use App\Http\Controllers\API\OpenHourAPIController;
 use App\Http\Controllers\API\MasterCityAPIController;
-use App\Http\Controllers\API\BusinessCategoryAPIController;
-use App\Http\Controllers\API\MasterSubDistrictAPIController;
-use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
+use App\Http\Controllers\API\MasterUnitAPIController;
 use App\Http\Controllers\API\MasterProvinceAPIController;
 use App\Http\Controllers\MasterDeliveryServiceController;
-use App\Models\MasterProvince;
+use App\Http\Controllers\API\BusinessCategoryAPIController;
+use App\Http\Controllers\API\MasterSubDistrictAPIController;
+use App\Http\Controllers\API\MasterProductCategoryAPIController;
+use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +50,15 @@ Route::get('getMasterCity', [MasterCityAPIController::class, 'index']);
 // Master Sub District
 Route::get('getSubDistrict', [MasterSubDistrictAPIController::class, 'index']);
 
+Route::group(['prefix' => 'masterCategoryProduct'], function () {
+    Route::get('/', [MasterProductCategoryAPIController::class, 'all']);
+    // Route::post('update', [ProductAPIController::class, 'store']);
+});
 
+Route::group(['prefix' => 'masterUnit'], function () {
+    Route::get('/', [MasterUnitAPIController::class, 'all']);
+    // Route::post('update', [ProductAPIController::class, 'store']);
+});
 
 // AUTH
 
@@ -60,7 +75,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('getMyUser', [UserAPIController::class, 'getMyUser']);
         Route::post('update', [UserAPIController::class, 'updateProfile']);
         Route::post('updatePhotoProfile', [UserAPIController::class, 'updatePhotoProfile']);
-
+        Route::post('checkUsername', [UserAPIController::class, 'checkUsername']);
+        Route::post('sendVerifikasiEmail', [UserAPIController::class, 'sendEmailVerification']);
     });
 
     Route::group(['prefix' => 'address'], function () {
@@ -70,6 +86,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     });
     Route::group(['prefix' => 'business'], function () {
+        Route::get('/all', [BusinessAPIController::class, 'all']);
         Route::get('/', [BusinessAPIController::class, 'index']);
         Route::post('update', [BusinessAPIController::class, 'store']);
     });
@@ -81,7 +98,30 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'businessCategory'], function () {
         Route::get('/', [BusinessCategoryAPIController::class, 'index']);
     });
+
+    Route::group(['prefix' => 'openhours'], function () {
+        Route::get('/', [OpenHourAPIController::class, 'index']);
+        Route::post('update', [OpenHourAPIController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'product'], function () {
+        Route::get('/', [ProductAPIController::class, 'all']);
+        Route::post('update', [ProductAPIController::class, 'update']);
+        Route::delete('delete', [ProductAPIController::class, 'delete']);
+
+    });
+
+    Route::group(['prefix' => 'discount'], function () {
+        Route::get('/', [DiscountAPIController::class, 'index']);
+        Route::post('update', [DiscountAPIController::class, 'store']);
+        Route::delete('delete', [DiscountAPIController::class, 'delete']);
+
+    });
+    
+    
 });
+
+// http:172.0.1:80000/api/v1/business/update
 
 
 Route::resource('master_product_categories', App\Http\Controllers\API\MasterProductCategoryAPIController::class);
