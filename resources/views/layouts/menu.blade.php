@@ -148,7 +148,7 @@
     </a>
 </li> -->
 
-
+@role('Dinas UKM')
 <li class="nav-item menu-is-closed menu-open">
     <a href="#" class="nav-link active">
         <i class="nav-icon fa fa-shopping-cart"></i>
@@ -202,7 +202,7 @@
         </li>
     </ul>
 </li>
-
+@endrole
 <!-- 
 <li class="nav-item">
     <a href="{{ route('masterProductCategories.index') }}" class="nav-link {{ Request::is('masterProductCategories*') ? 'active' : '' }}">
