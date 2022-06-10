@@ -54,19 +54,31 @@ class MasterPrivilegeDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
-                // 'initComplete' => "function () {
-                //     this.api().columns([0,1]).every(function () {
-                //         var column = this;
-                //         var input = document.createElement(\"input\");
-                //         $(input).appendTo($(column.header()).empty())
-                //         .on('keyup', function () {
-                //             column.search($(this).val()).draw();
-                //         });
-                //     });
-                // }",
+                'initComplete' => "function () {
+                    this.api().columns([0,1]).every(function (i) {
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.header()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        });
+
+                        
+                    });
+                    $('input#0').before('ID: ');
+                    $('input#0').attr('placeholder', 'Cari berdasarkan ID ');
+                    $('input#1').before('Nama Hak Akses Pengguna: ');
+                    $('input#1').attr('placeholder', 'Cari berdasarkan Nama');
+                }",
             ]);
     }
+    /*
+var tes = this.column()
+// $(input).before();
 
+console.log(this.columns().header().text);
+*/
     /**
      * Get columns.
      *
