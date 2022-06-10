@@ -65,7 +65,8 @@ class ProductFile extends Model
         'id_produk',
         'file',
         'video',
-        'photo'
+        'photo',
+        'image_url'
     ];
 
     /**
@@ -78,7 +79,8 @@ class ProductFile extends Model
         'id_produk' => 'integer',
         'file' => 'string',
         'video' => 'boolean',
-        'photo' => 'boolean'
+        'photo' => 'boolean',
+        'image_url' => 'string'
     ];
 
     /**
@@ -90,7 +92,8 @@ class ProductFile extends Model
         'id_produk' => 'required',
         'file' => 'required',
         'video' => 'required',
-        'photo' => 'required'
+        'photo' => 'required',
+        'image_url' => 'required'
     ];
 
     /**

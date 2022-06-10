@@ -18,7 +18,11 @@ class ProductFileDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'product_files.datatables_actions');
+        return $dataTable->addColumn('image_url', function($data){
+            return '<img src="'.$data->image_url.'" width="100px" height="100px">';
+        })
+        ->addColumn('action', 'product_files.datatables_actions')
+        ->rawColumns(['image_url', 'action']);
     }
 
     /**
@@ -71,6 +75,7 @@ class ProductFileDataTable extends DataTable
                 'title' => 'Produk',
             ]),
             'file',
+            'image_url',
             'video',
             'photo'
         ];
