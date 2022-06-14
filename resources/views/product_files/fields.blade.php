@@ -1,3 +1,23 @@
+<style>
+    .image__file-upload {
+        padding: 10px;
+        background: #20a8d8;
+        display: table;
+        color: white;
+        border-radius: .25rem;
+        border-color: #20a8d8;
+    }
+        .d-none {
+            display: none;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-color: #1985ac;
+            border-color: #187da0;
+        }
+</style>
+
 <!-- Id Produk Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('id_produk', 'Id Produk:') !!}
@@ -18,11 +38,20 @@
 <div class="clearfix"></div>
 
 
+<!-- Image URL Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('image_url', 'Image URL:') !!}
+    <label class="image__file-upload"> Choose
+        {!! Form::file('image_url',['class'=>'d-none']) !!}
+    </label>
+</div>
+
+
 <!-- 'bootstrap / Toggle Switch Video Field' -->
 <div class="form-group col-sm-6">
     {!! Form::label('video', 'Video:') !!}
     {!! Form::hidden('video', 0) !!}
-    {!! Form::checkbox('video', 1, null,  ['data-bootstrap-switch']) !!}
+    {!! Form::checkbox('video', 1, null, ['data-bootstrap-switch']) !!}
 </div>
 
 
@@ -30,5 +59,5 @@
 <div class="form-group col-sm-6">
     {!! Form::label('photo', 'Photo:') !!}
     {!! Form::hidden('photo', 0) !!}
-    {!! Form::checkbox('photo', 1, null,  ['data-bootstrap-switch']) !!}
+    {!! Form::checkbox('photo', 1, null, ['data-bootstrap-switch']) !!}
 </div>

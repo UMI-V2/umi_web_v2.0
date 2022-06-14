@@ -193,4 +193,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(\App\Models\MasterStatusUser::class, 'id_status_pengguna', 'id');
     }
+
+    // accessor for user role
+    public function getRoleAttribute()
+    {
+        return $this->MasterPrivilege->nama_hak_akses_pengguna;
+    }
 }

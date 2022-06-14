@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\ProductFile;
 use App\Repositories\BaseRepository;
+use Illuminate\Http\Request;
 
 /**
  * Class ProductFileRepository
@@ -39,5 +40,19 @@ class ProductFileRepository extends BaseRepository
     public function model()
     {
         return ProductFile::class;
+    }
+
+    public function createProductFile(Request $request){
+        $file = $request->file('image_url');
+        $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+
+        $path = 'storage/assets/products/'.uniqid().'.'.$extension;
+        $file->move(public_path('storage/assets/products'), $path);
+
+        $input = $request->all();
+        $input['image_url'] = $path;
+
+        return $this->create($input);
     }
 }

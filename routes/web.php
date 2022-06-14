@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,12 @@ Route::get('/linkstorage', function () {
 });
 
 
+// route group with sanctum middleware
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::get('/dashboard', function () {
+        return view('frontend.dashboard');
+    });
+});
 
 Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');
 
@@ -45,6 +52,8 @@ Route::post(
 )->name('io_generator_builder_generate_from_file');
 
 
+// route get dashboard index
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('masterProductCategories', App\Http\Controllers\MasterProductCategoryController::class);
 

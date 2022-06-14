@@ -20,13 +20,13 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="column">
 
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-12">
-                        <h1 class="m-0">Dashboard v2</h1>
+                        <h1 class="m-0">Dashboard UMKM Masa Kini</h1>
                     </div>
             <!--    <div class="col-sm-8">
                         <ol class="breadcrumb float-sm-right">
@@ -42,7 +42,7 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-12 col-sm-6 col-md-3">
+                    {{-- <div class="col-12 col-sm-6 col-md-3">
                         <div class="info-box">
                             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
                             <div class="info-box-content">
@@ -55,14 +55,14 @@
 
                         </div>
 
-                    </div>
+                    </div> --}}
 
-                    <div class="col-12 col-sm-6 col-md-3">
+                    <div class="col-12 col-sm-6 col-md-4">
                         <div class="info-box mb-3">
-                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-suitcase"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">Likes</span>
-                                <span class="info-box-number">41,410</span>
+                                <span class="info-box-text">Total Lapak</span>
+                                <span class="info-box-number">{{ $totalUsaha }}</span>
                             </div>
 
                         </div>
@@ -71,24 +71,24 @@
 
 
                     <div class="clearfix hidden-md-up"></div>
-                    <div class="col-12 col-sm-6 col-md-3">
+                    <div class="col-12 col-sm-6 col-md-4">
                         <div class="info-box mb-3">
                             <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">Sales</span>
-                                <span class="info-box-number">760</span>
+                                <span class="info-box-text">Total Produk</span>
+                                <span class="info-box-number">{{ $totalProduk }}</span>
                             </div>
 
                         </div>
 
                     </div>
 
-                    <div class="col-12 col-sm-6 col-md-3">
+                    <div class="col-12 col-sm-6 col-md-4">
                         <div class="info-box mb-3">
                             <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">New Members</span>
-                                <span class="info-box-number">2,000</span>
+                                <span class="info-box-text">Total Pengguna</span>
+                                <span class="info-box-number">{{ $totalUser }}</span>
                             </div>
 
                         </div>
@@ -97,7 +97,7 @@
 
                 </div>
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
@@ -232,14 +232,14 @@
 
                     </div>
 
-                </div>
+                </div> --}}
 
 
                 <div class="row">
 
                     <div class="col-md-8">
 
-                        <div class="card">
+                        {{-- <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">US-Visitors Report</h3>
                                 <div class="card-tools">
@@ -342,12 +342,12 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div> --}}
 
                         <div class="row">
                             <div class="col-md-6">
 
-                                <div class="card direct-chat direct-chat-warning">
+                                {{-- <div class="card direct-chat direct-chat-warning">
                                     <div class="card-header">
                                         <h3 class="card-title">Direct Chat</h3>
                                         <div class="card-tools">
@@ -533,13 +533,13 @@
                                         </form>
                                     </div>
 
-                                </div>
+                                </div> --}}
 
                             </div>
 
                             <div class="col-md-6">
 
-                                <div class="card">
+                                {{-- <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">Latest Members</h3>
                                         <div class="card-tools">
@@ -603,14 +603,14 @@
                                         <a href="javascript:">View All Users</a>
                                     </div>
 
-                                </div>
+                                </div> --}}
 
                             </div>
 
                         </div>
 
 
-                        <div class="card">
+                        {{-- <div class="card">
                             <div class="card-header border-transparent">
                                 <h3 class="card-title">Latest Orders</h3>
                                 <div class="card-tools">
@@ -702,13 +702,13 @@
                                 <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
                             </div>
 
-                        </div>
+                        </div> --}}
 
                     </div>
 
                     <div class="col-md-4">
 
-                        <div class="info-box mb-3 bg-warning">
+                        {{-- <div class="info-box mb-3 bg-warning">
                             <span class="info-box-icon"><i class="fas fa-tag"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Inventory</span>
@@ -742,9 +742,9 @@
                                 <span class="info-box-number">163,921</span>
                             </div>
 
-                        </div>
+                        </div> --}}
 
-                        <div class="card">
+                        {{-- <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Browser Usage</h3>
                                 <div class="card-tools">
@@ -818,10 +818,10 @@
                                 </ul>
                             </div>
 
-                        </div>
+                        </div> --}}
 
 
-                        <div class="card">
+                        {{-- <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Recently Added Products</h3>
                                 <div class="card-tools">
@@ -898,7 +898,7 @@
                                 <a href="javascript:void(0)" class="uppercase">View All Products</a>
                             </div>
 
-                        </div>
+                        </div> --}}
 
                     </div>
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\DataTables\ProductFileDataTable;
-use App\Http\Requests;
+// use Illuminate\Http\Request;
 use App\Http\Requests\CreateProductFileRequest;
 use App\Http\Requests\UpdateProductFileRequest;
 use App\Repositories\ProductFileRepository;
@@ -45,18 +45,12 @@ class ProductFileController extends AppBaseController
         return view('product_files.create')->with('products', $products);
     }
 
-    /**
-     * Store a newly created ProductFile in storage.
-     *
-     * @param CreateProductFileRequest $request
-     *
-     * @return Response
-     */
+    
     public function store(CreateProductFileRequest $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
 
-        $productFile = $this->productFileRepository->create($input);
+        $this->productFileRepository->createProductFile($request);
 
         Flash::success('Product File saved successfully.');
 
