@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -136,6 +137,21 @@ class Discount extends Model
     {
         return $this->hasMany(\App\Models\ProductDiscount::class, 'id_discount', 'id');
     }
+
+    public function getWaktuMulaiAttribute()
+    {
+        // return $this->attributes['waktu_mulai']->format('Y-m-d H:i:s');
+        return Carbon::parse($this->attributes['waktu_mulai'])->format('Y-m-d H:i:s');
+    }
+
+    public function getWaktuBerakhirAttribute()
+    {
+        // return $this->attributes['waktu_berakhir']->format('Y-m-d H:i:s');
+        return Carbon::parse($this->attributes['waktu_berakhir'])->format('Y-m-d H:i:s');
+
+    }
+
+
 
 
     public static function boot() {

@@ -162,6 +162,10 @@ class ProductAPIController extends AppBaseController
                 return $query->whereHas('discount', function ($q) {
                     $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
                 });
+            }, 'available_discount'=> function ($query) {
+                return $query->with('discount')->whereHas('discount', function ($q) {
+                    $q->where('waktu_berakhir', '>', Carbon::now());
+                });
             }])->paginate($limit), 'Get Products Success');
         } catch (Exception $e) {
             return ResponseFormatter::error([
