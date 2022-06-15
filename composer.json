@@ -31,6 +31,7 @@
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.2",
         "livewire/livewire": "^2.5",
+        "realrashid/sweet-alert": "^5.1",
         "yajra/laravel-datatables-buttons": "^4.13",
         "yajra/laravel-datatables-html": "^4.41",
         "yajra/laravel-datatables-oracle": "^9.19"

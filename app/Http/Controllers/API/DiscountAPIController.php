@@ -95,11 +95,11 @@ class DiscountAPIController extends AppBaseController
 
             
     
-            return ResponseFormatter::success($discount->with(['product_discounts.product.product_files'])->orderBy('created_at', 'desc')->get(), 'Data diskon berhasil diambil');
+            return ResponseFormatter::success($discount->with(['product_discounts.product.product_files'])->get(), 'Data diskon berhasil diambil');
     
         } catch (\Exception $e) {
             return ResponseFormatter::error([
-                'error'=> $e
+                'error'=> getExceptionMessage($e)
             ], "Get Discount Failed");
         }
     }
@@ -146,8 +146,9 @@ class DiscountAPIController extends AppBaseController
     {
         try {
             DB::beginTransaction();
+
             $data = $request->all();
-            
+
             $result = Discount::updateOrCreate(['id' => $request->id], $data);
 
             ProductDiscountAPIController::createDelete($request, $result->id );

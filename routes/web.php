@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -23,11 +22,6 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('frontend.dashboard');
 });
-
-Route::get('/linkstorage', function () {
-    Artisan::call('storage:link');
-});
-
 
 // route group with sanctum middleware
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {

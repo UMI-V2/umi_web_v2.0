@@ -319,6 +319,8 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
         });
     </script>
 
+    @yield('js')
+
 </body>
 
 </html>
