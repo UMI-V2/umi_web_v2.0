@@ -172,6 +172,10 @@ class Product extends Model
         return $this->hasMany(\App\Models\ProductFile::class, 'id_produk', 'id');
     }
 
+    public function available_discount()
+    {
+        return $this->belongsTo(\App\Models\ProductDiscount::class, 'id', 'id_product');
+    }
     public function product_discount()
     {
         return $this->belongsTo(\App\Models\ProductDiscount::class, 'id', 'id_product');
