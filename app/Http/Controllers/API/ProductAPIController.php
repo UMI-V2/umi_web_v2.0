@@ -10,12 +10,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use Illuminate\Support\Facades\DB;
-use App\Repositories\ProductRepository;
 use App\Http\Controllers\AppBaseController;
-use App\Http\Controllers\ProductFileController;
-use App\Http\Requests\API\CreateProductAPIRequest;
-use App\Http\Requests\API\UpdateProductAPIRequest;
-use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\API\ProductFileAPIController;
 use App\Http\Controllers\API\ProductCategoryAPIController;
 
@@ -58,6 +53,7 @@ class ProductAPIController extends AppBaseController
 
             $is_show_arshive = $request->input('is_show_arshive', 0);
             $is_ready_only = $request->input('is_ready_only');
+            $is_show_discount_only = $request->input('is_show_discount_only');
 
 
 
@@ -81,6 +77,15 @@ class ProductAPIController extends AppBaseController
             // Hanya menampilkan produk pda usaha tertentu
             if ($id_usaha) {
                 $value->where('id_usaha', $id_usaha);
+            }
+            //Filter hanya menampilkan produk diskon
+
+            if ($is_show_discount_only) {
+                $value->whereHas('product_discount', function ($q) {
+                    $q->with('discount')->whereHas('discount', function ($q) {
+                        $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
+                    });
+                });
             }
 
             //Show Product Arshive
@@ -110,7 +115,7 @@ class ProductAPIController extends AppBaseController
             }
             // Memfilter produk berasarkan kategori jasa
             if ($is_service) {
-                $value->whereHas('product_category', function ($q) use ($category_id) {
+                $value->whereHas('product_category', function ($q) {
                     $q->whereHas('master_product_categories', function ($q) {
                         $q->where('status_kategori_produk', '1');
                     });
@@ -118,7 +123,7 @@ class ProductAPIController extends AppBaseController
             }
             // Memfilter produk berasarkan kategori barang
             if ($is_non_service) {
-                $value->whereHas('product_category', function ($q) use ($category_id) {
+                $value->whereHas('product_category', function ($q) {
                     $q->whereHas('master_product_categories', function ($q2) {
                         $q2->where('status_kategori_produk', '0');
                     });
@@ -158,9 +163,13 @@ class ProductAPIController extends AppBaseController
             }
 
 
-            return ResponseFormatter::success($value->with(['master_units', 'product_category.master_product_categories', 'product_files', 'product_discount'=> function ($query) {
-                return $query->whereHas('discount', function ($q) {
+            return ResponseFormatter::success($value->with(['master_units', 'product_category.master_product_categories', 'product_files', 'product_discount' => function ($query) {
+                return $query->with('discount')->whereHas('discount', function ($q) {
                     $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
+                });
+            }, 'available_discount' => function ($query) {
+                return $query->with('discount')->whereHas('discount', function ($q) {
+                    $q->where('waktu_berakhir', '>', Carbon::now());
                 });
             }])->paginate($limit), 'Get Products Success');
         } catch (Exception $e) {
