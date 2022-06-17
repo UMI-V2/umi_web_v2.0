@@ -54,6 +54,21 @@ class MasterStatusUserDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+                'initComplete' => "function () {
+                    this.api().columns([0]).every(function (i) {
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.header()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        });
+
+                        
+                    });
+                    $('input#0').before('Status Pengguna: ');
+                    $('input#0').attr('placeholder', 'Cari berdasarkan Status');
+                }",
             ]);
     }
 
