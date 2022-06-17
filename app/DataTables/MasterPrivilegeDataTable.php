@@ -55,7 +55,7 @@ class MasterPrivilegeDataTable extends DataTable
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
                 'initComplete' => "function () {
-                    this.api().columns([0,1]).every(function (i) {
+                    this.api().columns([0]).every(function (i) {
                         var column = this;
                         var input = document.createElement(\"input\");
                         input.setAttribute('id', i);
@@ -66,10 +66,8 @@ class MasterPrivilegeDataTable extends DataTable
 
                         
                     });
-                    $('input#0').before('ID: ');
-                    $('input#0').attr('placeholder', 'Cari berdasarkan ID ');
-                    $('input#1').before('Nama Hak Akses Pengguna: ');
-                    $('input#1').attr('placeholder', 'Cari berdasarkan Nama');
+                    $('input#0').before('Hak Akses Pengguna: ');
+                    $('input#0').attr('placeholder', 'Cari berdasarkan Akses');
                 }",
             ]);
     }
@@ -87,7 +85,6 @@ console.log(this.columns().header().text);
     protected function getColumns()
     {
         return [
-            'id',
             'nama_hak_akses_pengguna',
         ];
     }

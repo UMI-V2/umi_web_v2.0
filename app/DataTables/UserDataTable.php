@@ -54,6 +54,27 @@ class UserDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+                'initComplete' => "function () {
+                    this.api().columns([0,1,2]).every(function (i) {
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.header()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        });
+
+                        
+                    });
+                    $('input#0').before('Nama: ');
+                    $('input#0').attr('placeholder', 'Cari berdasarkan Nama');
+
+                    $('input#1').before('Hak Akses Sebagai: ');
+                    $('input#1').attr('placeholder', 'Cari berdasarkan Akses');
+
+                    $('input#2').before('Status Akun: ');
+                    $('input#2').attr('placeholder', 'Cari berdasarkan Status');
+                }",
             ]);
     }
 
@@ -65,13 +86,13 @@ class UserDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'username',
-            'jenis_kelamin',
-            'tanggal_lahir',
-            'no_hp',
+            'name' => ['title' => 'Nama'],
+            // 'username',
+            // 'jenis_kelamin',
+            // 'tanggal_lahir',
+            // 'no_hp',
             // 'foto',
-            'email',
+            // 'email',
             // 'password',
             'id_privilege'=> new \Yajra\DataTables\Html\Column([
                 'data' => 'master_privilege.nama_hak_akses_pengguna',
