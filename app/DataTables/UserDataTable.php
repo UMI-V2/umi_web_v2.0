@@ -59,20 +59,20 @@ class UserDataTable extends DataTable
                         var column = this;
                         var input = document.createElement(\"input\");
                         input.setAttribute('id', i);
-                        $(input).appendTo($(column.header()).empty())
+                        $(input).appendTo($(column.footer()).empty())
                         .on('keyup', function () {
                             column.search($(this).val()).draw();
                         });
 
                         
                     });
-                    $('input#0').before('Nama: ');
+                    
                     $('input#0').attr('placeholder', 'Cari berdasarkan Nama');
 
-                    $('input#1').before('Hak Akses Sebagai: ');
+                    
                     $('input#1').attr('placeholder', 'Cari berdasarkan Akses');
 
-                    $('input#2').before('Status Akun: ');
+                    
                     $('input#2').attr('placeholder', 'Cari berdasarkan Status');
                 }",
             ]);

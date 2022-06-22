@@ -132,7 +132,7 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
         </div>
 
         <!-- Main Footer -->
-        <footer class="main-footer">
+        {{-- <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 3.1.0
             </div>
@@ -140,7 +140,7 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
                 Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.
             </strong>
             All rights reserved.
-        </footer>
+        </footer> --}}
     </div>
 
 
