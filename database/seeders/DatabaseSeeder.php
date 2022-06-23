@@ -10,7 +10,7 @@ use App\Models\Product;
 use App\Models\Business;
 use App\Models\MasterCity;
 use App\Models\MasterUnit;
-use App\Models\SubDistrict;
+use App\Models\MasterSubDistrict;
 use App\Models\MasterProvince;
 use App\Models\MasterPrivilege;
 

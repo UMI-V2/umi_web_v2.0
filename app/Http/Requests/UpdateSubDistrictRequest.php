@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\SubDistrict;
+use App\Models\MasterSubDistrict;
 
 class UpdateSubDistrictRequest extends FormRequest
 {
@@ -24,7 +24,7 @@ class UpdateSubDistrictRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = SubDistrict::$rules;
+        $rules = MasterSubDistrict::$rules;
         
         return $rules;
     }

@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\SubDistrict;
+use App\Models\MasterSubDistrict;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -24,10 +24,10 @@ class SubDistrictDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\SubDistrict $model
+     * @param \App\Models\MasterSubDistrict $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(SubDistrict $model)
+    public function query(MasterSubDistrict $model)
     {
         return $model->newQuery()->with('master_provinces')->with('master_cities');
     }

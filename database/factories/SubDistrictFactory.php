@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\SubDistrict;
+use App\Models\MasterSubDistrict;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SubDistrictFactory extends Factory
@@ -12,7 +12,7 @@ class SubDistrictFactory extends Factory
      *
      * @var string
      */
-    protected $model = SubDistrict::class;
+    protected $model = MasterSubDistrict::class;
 
     /**
      * Define the model's default state.
