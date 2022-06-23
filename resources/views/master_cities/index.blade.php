@@ -41,7 +41,7 @@
 
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 <script>
-    function swalDelete(id) {
+    function swalDelete(city_id) {
         swal({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -52,7 +52,7 @@
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.value) {
-                document.getElementById('delete-form-' + id).submit();
+                document.getElementById('delete-form-' + city_id).submit();
             }
         })
     }

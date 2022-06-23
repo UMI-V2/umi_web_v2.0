@@ -50,6 +50,6 @@ class MasterCity extends Model
      **/
     public function master_provinces()
     {
-        return $this->belongsTo(\App\Models\MasterProvince::class, 'province_id', 'city_id');
+        return $this->belongsTo(\App\Models\MasterProvince::class, 'city_id', 'province_id');
     }
 }
