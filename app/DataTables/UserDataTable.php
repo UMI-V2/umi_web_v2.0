@@ -97,12 +97,12 @@ class UserDataTable extends DataTable
             'id_privilege'=> new \Yajra\DataTables\Html\Column([
                 'data' => 'master_privilege.nama_hak_akses_pengguna',
                 'name' => 'master_privilege.nama_hak_akses_pengguna',
-                'title' => 'Master Privilege'
+                'title' => 'Hak Akses'
             ]),
             'id_status_pengguna'=> new \Yajra\DataTables\Html\Column([
                 'data' => 'master_status_user.nama_status_pengguna',
                 'name' => 'master_status_user.nama_status_pengguna',
-                'title' => 'Master Status User'
+                'title' => 'Status'
             ]),
         ];
     }

@@ -85,7 +85,7 @@ console.log(this.columns().header().text);
     protected function getColumns()
     {
         return [
-            'nama_hak_akses_pengguna',
+            'nama_hak_akses_pengguna' => ['title' => 'Hak Akses'],
         ];
     }
 

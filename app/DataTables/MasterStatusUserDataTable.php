@@ -80,7 +80,7 @@ class MasterStatusUserDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'nama_status_pengguna'
+            'nama_status_pengguna' => ['title' => 'Status Pengguna']
         ];
     }
 

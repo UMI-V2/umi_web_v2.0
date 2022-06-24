@@ -83,13 +83,6 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('businessCategories.index') }}"
-                class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kategori Usaha</p>
-            </a>
-        </li>
-        <li class="nav-item">
             <a href="{{ route('masterStatusBusinesses.index') }}"
                 class="nav-link {{ Request::is('masterStatusBusinesses*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
@@ -115,6 +108,13 @@
                 class="nav-link {{ Request::is('businesses*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Usaha</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('businessCategories.index') }}"
+                class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Kategori Usaha</p>
             </a>
         </li>
     </ul>
