@@ -28,6 +28,14 @@ class UserSeeder extends Seeder
         
         MasterPrivilege::create(
             [
+                'nama_hak_akses_pengguna'   => 'Dinas UKM',
+                'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        );
+        
+        MasterPrivilege::create(
+            [
                 'nama_hak_akses_pengguna'   => 'Pembeli',
                 'created_at'                => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'                => Carbon::now()->format('Y-m-d H:i:s'),

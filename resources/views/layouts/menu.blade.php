@@ -609,3 +609,11 @@
         </li>
     </ul>
 </li>
+<li class="nav-item">
+    <a href="{{ route('eventRegisters.index') }}"
+       class="nav-link {{ Request::is('eventRegisters*') ? 'active' : '' }}">
+        <p>Daftar Event</p>
+    </a>
+</li>
+
+
