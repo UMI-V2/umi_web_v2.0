@@ -219,3 +219,6 @@ Route::resource('transaction_products', App\Http\Controllers\API\TransactionProd
 Route::resource('balances', App\Http\Controllers\API\BalancesAPIController::class);
 
 
+
+
+Route::resource('events', App\Http\Controllers\API\EventAPIController::class);

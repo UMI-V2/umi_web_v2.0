@@ -148,3 +148,6 @@ Route::resource('transactionProducts', App\Http\Controllers\TransactionProductCo
 Route::resource('balances', App\Http\Controllers\BalancesController::class);
 
 
+
+
+Route::resource('events', App\Http\Controllers\EventController::class);

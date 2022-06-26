@@ -577,3 +577,25 @@
 </li>
 */
 ?>
+
+<li class="nav-item menu-is-closed menu-open">
+    <a href="#" class="nav-link active">
+        <i class="nav-icon fa fa-bullhorn"></i>
+        <p>
+            Pemberitahuan
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview" style="display: block;">
+        <li class="nav-item">
+    <a href="{{ route('events.index') }}"
+       class="nav-link {{ Request::is('events*') ? 'active' : '' }}">
+       <i class="far fa-circle nav-icon"></i>
+        <p>Event</p>
+    </a>
+</li>
+    </ul>
+</li>
+
+
+
