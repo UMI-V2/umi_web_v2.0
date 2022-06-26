@@ -154,3 +154,6 @@ Route::resource('events', App\Http\Controllers\EventController::class);
 
 
 Route::resource('news', App\Http\Controllers\NewsController::class);
+
+
+Route::resource('announcements', App\Http\Controllers\AnnouncementController::class);

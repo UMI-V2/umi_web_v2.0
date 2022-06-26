@@ -600,5 +600,12 @@
                 <p>Berita</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('announcements.index') }}"
+                class="nav-link {{ Request::is('announcements*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Pengumuman</p>
+            </a>
+        </li>
     </ul>
 </li>
