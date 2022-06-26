@@ -588,14 +588,17 @@
     </a>
     <ul class="nav nav-treeview" style="display: block;">
         <li class="nav-item">
-    <a href="{{ route('events.index') }}"
-       class="nav-link {{ Request::is('events*') ? 'active' : '' }}">
-       <i class="far fa-circle nav-icon"></i>
-        <p>Event</p>
-    </a>
-</li>
+            <a href="{{ route('events.index') }}"
+                class="nav-link {{ Request::is('events*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Event</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('news.index') }}" class="nav-link {{ Request::is('news*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Berita</p>
+            </a>
+        </li>
     </ul>
 </li>
-
-
-

@@ -151,3 +151,6 @@ Route::resource('balances', App\Http\Controllers\BalancesController::class);
 
 
 Route::resource('events', App\Http\Controllers\EventController::class);
+
+
+Route::resource('news', App\Http\Controllers\NewsController::class);
