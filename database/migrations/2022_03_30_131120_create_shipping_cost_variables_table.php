@@ -23,6 +23,7 @@ class CreateShippingCostVariablesTable extends Migration
             $table->double('panjang');
             $table->double('tinggi');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_product')->references('id')->on('products');
         });
     }

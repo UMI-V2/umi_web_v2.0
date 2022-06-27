@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -68,7 +69,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ShippingCostVariable extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'shipping_cost_variables';
     
@@ -112,6 +113,14 @@ class ShippingCostVariable extends Model
         'panjang' => 'required',
         'tinggi' => 'required'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+        //    ShippingUsed::where('id_shipping_cost_variable', $model->id)->delete();
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

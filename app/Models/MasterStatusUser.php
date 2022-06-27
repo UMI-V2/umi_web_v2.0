@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -38,7 +39,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class MasterStatusUser extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'master_status_users';
     
@@ -68,5 +69,11 @@ class MasterStatusUser extends Model
         'nama_status_pengguna' => 'required'
     ];
 
-    
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
+    }
 }

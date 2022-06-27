@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductDiscount extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     //     id_product
     // id_discount
@@ -18,6 +19,14 @@ class ProductDiscount extends Model
         'harga_diskon',
         'batas_pembelian',
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
+    }
 
     public function discount()
     {

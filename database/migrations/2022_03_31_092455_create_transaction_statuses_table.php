@@ -22,6 +22,7 @@ class CreateTransactionStatusesTable extends Migration
             $table->date('tanggal_pesanan_dikirimkan');
             $table->date('tanggal_pesanan_diterima');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_transaksi_penjualan')->references('id')->on('sales_transactions');
         });
     }

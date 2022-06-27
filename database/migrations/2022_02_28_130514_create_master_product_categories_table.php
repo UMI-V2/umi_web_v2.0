@@ -19,6 +19,7 @@ class CreateMasterProductCategoriesTable extends Migration
             $table->string('nama_kategori_produk');
             $table->string('status_kategori_produk');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

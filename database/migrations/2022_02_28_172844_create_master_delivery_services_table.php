@@ -21,6 +21,7 @@ class CreateMasterDeliveryServicesTable extends Migration
             $table->string('deskripsi');
             $table->string('kode_rajaongkir');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -20,6 +20,7 @@ class CreateProductDiscountsTable extends Migration
             $table->integer('harga_diskon');
             $table->integer('batas_pembelian');
             $table->timestamps();
+            $table->softDeletes();
 
             // $table->foreign('id_product')->references('id')->on('product_discounts');
             // $table->foreign('id_discount')->references('id')->on('discounts');

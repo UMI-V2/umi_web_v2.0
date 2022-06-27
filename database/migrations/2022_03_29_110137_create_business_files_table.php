@@ -22,6 +22,7 @@ class CreateBusinessFilesTable extends Migration
             $table->boolean('is_photo');
             $table->timestamps();
             $table->foreign('id_usaha')->references('id')->on('businesses');
+            $table->softDeletes();
         });
     }
 

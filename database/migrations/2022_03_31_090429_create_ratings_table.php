@@ -21,6 +21,7 @@ class CreateRatingsTable extends Migration
             $table->integer('rating');
             $table->string('ulasan');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_produk')->references('id')->on('products');
             $table->foreign('id_transaksi_penjualan')->references('id')->on('sales_transactions');
         });

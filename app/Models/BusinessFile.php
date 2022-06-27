@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -55,13 +56,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class BusinessFile extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'business_files';
     
-
-
-
     public $fillable = [
         'id_usaha',
         'file',
@@ -93,6 +91,14 @@ class BusinessFile extends Model
         'is_video' => 'required',
         'is_photo' => 'required'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
+    }
 
     public function getFileAttribute()
     {

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -43,7 +44,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class MasterUnit extends Model
 {
 
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     public $table = 'master_units';
     
@@ -76,5 +77,11 @@ class MasterUnit extends Model
         'singkatan_satuan' => 'required'
     ];
 
-    
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+            // Product::where('id_satuan', $model->id)->delete();
+        });
+    }
 }

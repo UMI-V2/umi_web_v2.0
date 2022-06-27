@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -55,12 +56,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ProductFile extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'product_files';
-    
-
-
 
     public $fillable = [
         'id_produk',
@@ -96,6 +94,14 @@ class ProductFile extends Model
         'photo' => 'required',
         'image_url' => 'required'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
+    }
 
     public function getFileAttribute()
     {

@@ -21,6 +21,7 @@ class CreateProductCategoriesTable extends Migration
             $table->timestamps();
             $table->foreign('id_produk')->references('id')->on('products');
             $table->foreign('id_master_kategori_produk')->references('id')->on('master_product_categories');
+            $table->softDeletes();
         });
     }
 

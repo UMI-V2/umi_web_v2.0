@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -50,7 +51,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class BusinessDeliveryService extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'business_delivery_services';
     
@@ -85,6 +86,14 @@ class BusinessDeliveryService extends Model
         'id_master_jasa_pengiriman' => 'required',
         'biaya' => 'required'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+            ShippingUsed::where('id_business_delivery_services', $model->id)->delete();
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

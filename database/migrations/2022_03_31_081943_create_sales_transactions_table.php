@@ -30,6 +30,7 @@ class CreateSalesTransactionsTable extends Migration
             $table->integer('total_pesanan');
             $table->boolean('is_rating');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_usaha')->references('id')->on('businesses');
             $table->foreign('id_metode_pembayaran')->references('id')->on('business_payment_methods');

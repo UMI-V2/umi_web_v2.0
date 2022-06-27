@@ -144,7 +144,19 @@ class Business extends Model
 
     }
 
-   
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           BusinessCategory::where('id_usaha', $model->id)->delete();
+           BusinessDeliveryService::where('id_usaha', $model->id)->delete();
+           BusinessFile::where('id_usaha', $model->id)->delete();
+           BusinessPaymentMethod::where('id_usaha', $model->id)->delete();
+           Discount::where('id_usaha', $model->id)->delete();
+           OpenHour::where('id_usaha', $model->id)->delete();
+           Product::where('id_usaha', $model->id)->delete();
+        });
+    }
 
 
 }

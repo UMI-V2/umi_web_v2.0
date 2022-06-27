@@ -28,11 +28,13 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->foreignId('current_team_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->text('token_notification')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('id_privilege')->references('id')->on('master_privileges');
             $table->foreign('id_status_pengguna')->references('id')->on('master_status_users');
+            $table->softDeletes();
         });
     }
 

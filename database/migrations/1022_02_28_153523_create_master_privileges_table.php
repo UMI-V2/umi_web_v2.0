@@ -18,6 +18,7 @@ class CreateMasterPrivilegesTable extends Migration
             $table->id();
             $table->string('nama_hak_akses_pengguna');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

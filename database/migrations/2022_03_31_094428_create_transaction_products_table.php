@@ -25,6 +25,7 @@ class CreateTransactionProductsTable extends Migration
             $table->boolean('preorder');
             $table->integer('ongkir');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_transaksi_penjualan')->references('id')->on('sales_transactions');
             $table->foreign('id_produk')->references('id')->on('products');
         });

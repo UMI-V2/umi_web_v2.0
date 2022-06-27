@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -78,7 +79,7 @@ use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
 class Product extends Model
 {
 
-    use HasFactory, LaravelCoordinate;
+    use HasFactory, LaravelCoordinate, SoftDeletes;
 
     public $_latitudeName = "latitude"; //default name is latitude
     public $_longitudeName = "longitude";
@@ -186,15 +187,18 @@ class Product extends Model
 
         static::deleting(function($product) { 
              $product->product_category()->delete();
-             $files = ProductFile::where('id_produk', $product->id)->get();
-             foreach ($files as $file) {
-                 $fileName = $file->getAttributes()['file'];
-                ProductFile::where('file', $fileName)->delete();
-                if (Storage::disk('public')->exists($fileName)) {
-                    Storage::disk('public')->delete($fileName);
-                }
-            }
+            //  $files = ProductFile::where('id_produk', $product->id)->get();
+            //  foreach ($files as $file) {
+            //      $fileName = $file->getAttributes()['file'];
+            //     ProductFile::where('file', $fileName)->delete();
+            //     // if (Storage::disk('public')->exists($fileName)) {
+            //     //     Storage::disk('public')->delete($fileName);
+            //     // }
+            // }
              $product->product_files()->delete();
+             $product->product_discount()->delete();
+             Rating::where('id_produk', $product->id)->delete();
+             ShippingCostVariable::where('id_produk', $product->id)->delete();
         });
     }
 

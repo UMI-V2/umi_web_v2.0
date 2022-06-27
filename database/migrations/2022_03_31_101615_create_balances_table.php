@@ -22,6 +22,7 @@ class CreateBalancesTable extends Migration
             $table->integer('pemasukan');
             $table->string('deskripsi');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_kategori_transaksi')->references('id')->on('master_transaction_categories');
             $table->foreign('id_transaksi_penjualan')->references('id')->on('sales_transactions');
         });

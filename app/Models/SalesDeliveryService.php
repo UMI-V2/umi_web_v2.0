@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -55,7 +56,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class SalesDeliveryService extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'sales_delivery_services';
     
@@ -93,6 +94,14 @@ class SalesDeliveryService extends Model
         'deskripsi_layanan' => 'required',
         'ongkir' => 'required|numeric'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

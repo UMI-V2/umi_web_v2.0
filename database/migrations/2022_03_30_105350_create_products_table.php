@@ -30,6 +30,7 @@ class CreateProductsTable extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_usaha')->references('id')->on('businesses');
             $table->foreign('id_satuan')->references('id')->on('master_units');
             // $table->foreign('id_kategori')->references('id')->on('master_product_categories');

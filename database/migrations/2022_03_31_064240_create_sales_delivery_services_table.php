@@ -21,6 +21,7 @@ class CreateSalesDeliveryServicesTable extends Migration
             $table->string('deskripsi_layanan');
             $table->integer('ongkir');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_jasa_pengiriman')->references('id')->on('master_delivery_services');
         });
     }

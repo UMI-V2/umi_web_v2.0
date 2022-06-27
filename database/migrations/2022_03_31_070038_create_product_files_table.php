@@ -21,6 +21,7 @@ class CreateProductFilesTable extends Migration
             $table->boolean('video');
             $table->boolean('photo');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_produk')->references('id')->on('products');
         });
     }

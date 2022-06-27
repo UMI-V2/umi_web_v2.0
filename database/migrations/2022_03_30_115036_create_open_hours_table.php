@@ -32,6 +32,7 @@ class CreateOpenHoursTable extends Migration
             $table->string('minggu_buka')->nullable();
             $table->string('minggu_tutup')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_usaha')->references('id')->on('businesses');
         });
     }

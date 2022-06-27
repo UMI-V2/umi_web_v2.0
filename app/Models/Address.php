@@ -193,7 +193,13 @@ class Address extends Model
     //     ], 100, 2)->selectDistance([], 'jarak')->get();
     // }
 
+    public static function boot() {
+        parent::boot();
 
+        static::deleting(function($model) { 
+           
+        });
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/

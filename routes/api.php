@@ -20,6 +20,8 @@ use App\Http\Controllers\API\BusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
+use App\Http\Controllers\API\ProductCategoryAPIController;
+use App\Models\ProductCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +54,13 @@ Route::get('getSubDistrict', [MasterSubDistrictAPIController::class, 'index']);
 
 Route::group(['prefix' => 'masterCategoryProduct'], function () {
     Route::get('/', [MasterProductCategoryAPIController::class, 'all']);
+    Route::delete('/delete/{id}', [MasterProductCategoryAPIController::class, 'destroy']);
+    // Route::post('update', [ProductAPIController::class, 'store']);
+});
+
+Route::group(['prefix' => 'categoryProduct'], function () {
+    Route::get('/', [ProductCategoryAPIController::class, 'all']);
+    Route::delete('/delete', [ProductCategoryAPIController::class, 'destroy']);
     // Route::post('update', [ProductAPIController::class, 'store']);
 });
 

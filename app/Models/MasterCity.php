@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Illuminate\Database\Eloquent\Model;
 
@@ -44,6 +44,15 @@ class MasterCity extends Model
         'city_name' => 'required',
         'postal_code' => 'required|numeric'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+            // Address::where('city_id', $model->id)->delete();
+            // MasterSubDistrict::where('city_id', $model->id)->delete();
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

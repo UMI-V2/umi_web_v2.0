@@ -18,6 +18,7 @@ class CreateMasterStatusUsersTable extends Migration
             $table->id();
             $table->string('nama_status_pengguna');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

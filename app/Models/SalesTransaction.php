@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -107,7 +108,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class SalesTransaction extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'sales_transactions';
     
@@ -172,6 +173,16 @@ class SalesTransaction extends Model
         'total_pesanan' => 'required|numeric',
         'is_rating' => 'required'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+            // Balances::where('id_transaksi_penjualan', $model->id)->delete();
+            // Rating::where('id_transaksi_penjualan', $model->id)->delete();
+            // TransactionProduct::where('id_transaksi_penjualan', $model->id)->delete();
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -19,6 +19,7 @@ class CreateShippingUsedsTable extends Migration
             $table->bigInteger('id_shipping_cost_variable')->unsigned();
             $table->bigInteger('id_business_delivery_services')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_shipping_cost_variable')->references('id')->on('shipping_cost_variables');
             $table->foreign('id_business_delivery_services')->references('id')->on('business_delivery_services');
         });

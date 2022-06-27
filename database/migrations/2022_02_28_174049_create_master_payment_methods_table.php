@@ -19,6 +19,7 @@ class CreateMasterPaymentMethodsTable extends Migration
             $table->string('nama_metode_pembayaran');
             $table->string('deskripsi_metode_pembayaran');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

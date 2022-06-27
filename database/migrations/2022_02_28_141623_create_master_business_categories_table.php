@@ -19,6 +19,7 @@ class CreateMasterBusinessCategoriesTable extends Migration
             $table->string('nama_kategori_usaha');
             $table->string('status_kategori_usaha');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
