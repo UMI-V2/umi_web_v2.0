@@ -40,7 +40,7 @@ permissions:
 
 jobs:
   Analysis:
-    runs-on: ubuntu-latest
+    runs-on: windows
     
     steps:
       - name: Analyze with SonarCloud         
