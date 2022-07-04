@@ -1,3 +1,24 @@
+<div class="card card-primary">
+    <div class="card-header">
+        <h4 class="card-title">Ekko Lightbox</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            @foreach ( $business->business_file as $file )
+                <div class="col-sm-2">
+                <a href="{{ $file->file }}" data-toggle="lightbox"
+                    data-title="sample 1 - white" data-gallery="gallery">
+                    <img src="{{ $file->file }}" class="img-fluid mb-2" alt="white sample">
+                </a>
+            </div>
+            @endforeach
+            
+        </div>
+    </div>
+</div>
+
+
+
 <!-- Id Field -->
 {{-- <div class="col-sm-12">
     {!! Form::label('id', 'Id:') !!}
@@ -11,10 +32,10 @@
 </div> --}}
 
 <!-- File Field -->
-<div class="col-sm-12">
+{{-- <div class="col-sm-12">
     {!! Form::label('file', 'File:') !!}
     <p>{{ $businessFile->file }}</p>
-</div>
+</div> --}}
 
 <!-- Is Video Field -->
 {{-- <div class="col-sm-12">
@@ -39,4 +60,3 @@
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{{ $businessFile->updated_at }}</p>
 </div> --}}
-

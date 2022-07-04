@@ -85,10 +85,12 @@ class BusinessController extends AppBaseController
         
         
         // $business = $this->businessRepository->find($id);
-        $business = Business::with(['users', 'masterStatusBusinesses'])->where('id', $id)->first();
+        $business = Business::with(['users', 'masterStatusBusinesses', 'business_file'])->where('id', $id)->first();
         $openHour = OpenHour::find($id);
-        $businessFile = BusinessFile::find($id);
         $businessCategory = BusinessCategory::with(['master_business_categories', 'businesses'])->where('id', $id)->first();
+        // return response()->json([
+        //     "data"=>$business
+        // ]);
         // $businessCategory = BusinessCategory::find($id);
         
         
@@ -98,7 +100,7 @@ class BusinessController extends AppBaseController
             return redirect(route('businesses.index'));
         }
 
-        return view('businesses.show')->with('openHour', $openHour)->with('business', $business)->with('businessFile', $businessFile)->with('businessCategory', $businessCategory);
+        return view('businesses.show')->with('openHour', $openHour)->with('business', $business)->with('businessCategory', $businessCategory);
     }
 
     /**

@@ -90,10 +90,10 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('businessFiles.index') }}"
-                class="nav-link {{ Request::is('businessFiles*') ? 'active' : '' }}">
+            <a href="{{ route('businesses.index') }}"
+                class="nav-link {{ Request::is('businesses*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>File Usaha</p>
+                <p>Usaha</p>
             </a>
         </li>
         <li class="nav-item">
@@ -104,10 +104,10 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('businesses.index') }}"
-                class="nav-link {{ Request::is('businesses*') ? 'active' : '' }}">
+            <a href="{{ route('businessFiles.index') }}"
+                class="nav-link {{ Request::is('businessFiles*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Usaha</p>
+                <p>File Usaha</p>
             </a>
         </li>
         <li class="nav-item">
@@ -180,13 +180,6 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('productCategories.index') }}"
-                class="nav-link {{ Request::is('productCategories*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kategori Produk</p>
-            </a>
-        </li>
-        <li class="nav-item">
             <a href="{{ route('masterUnits.index') }}"
                 class="nav-link {{ Request::is('masterUnits*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
@@ -194,10 +187,10 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('productFiles.index') }}"
-                class="nav-link {{ Request::is('productFiles*') ? 'active' : '' }}">
+            <a href="{{ route('products.index') }}"
+                class="nav-link {{ Request::is('products*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>File Produk</p>
+                <p>Produk</p>
             </a>
         </li>
         <li class="nav-item">
@@ -215,10 +208,17 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('products.index') }}"
-                class="nav-link {{ Request::is('products*') ? 'active' : '' }}">
+            <a href="{{ route('productFiles.index') }}"
+                class="nav-link {{ Request::is('productFiles*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Produk</p>
+                <p>File Produk</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('productCategories.index') }}"
+                class="nav-link {{ Request::is('productCategories*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Kategori Produk</p>
             </a>
         </li>
     </ul>
