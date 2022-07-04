@@ -148,3 +148,15 @@ Route::resource('transactionProducts', App\Http\Controllers\TransactionProductCo
 Route::resource('balances', App\Http\Controllers\BalancesController::class);
 
 
+
+
+Route::resource('events', App\Http\Controllers\EventController::class);
+
+
+Route::resource('news', App\Http\Controllers\NewsController::class);
+
+
+Route::resource('announcements', App\Http\Controllers\AnnouncementController::class);
+
+
+Route::resource('eventRegisters', App\Http\Controllers\EventRegisterController::class);

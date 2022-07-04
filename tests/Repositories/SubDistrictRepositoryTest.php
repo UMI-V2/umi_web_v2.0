@@ -1,6 +1,6 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\SubDistrict;
+use App\Models\MasterSubDistrict;
 use App\Repositories\SubDistrictRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -26,14 +26,14 @@ class SubDistrictRepositoryTest extends TestCase
      */
     public function test_create_sub_district()
     {
-        $subDistrict = SubDistrict::factory()->make()->toArray();
+        $subDistrict = MasterSubDistrict::factory()->make()->toArray();
 
         $createdSubDistrict = $this->subDistrictRepo->create($subDistrict);
 
         $createdSubDistrict = $createdSubDistrict->toArray();
         $this->assertArrayHasKey('id', $createdSubDistrict);
-        $this->assertNotNull($createdSubDistrict['id'], 'Created SubDistrict must have id specified');
-        $this->assertNotNull(SubDistrict::find($createdSubDistrict['id']), 'SubDistrict with given id must be in DB');
+        $this->assertNotNull($createdSubDistrict['id'], 'Created MasterSubDistrict must have id specified');
+        $this->assertNotNull(MasterSubDistrict::find($createdSubDistrict['id']), 'MasterSubDistrict with given id must be in DB');
         $this->assertModelData($subDistrict, $createdSubDistrict);
     }
 
@@ -42,7 +42,7 @@ class SubDistrictRepositoryTest extends TestCase
      */
     public function test_read_sub_district()
     {
-        $subDistrict = SubDistrict::factory()->create();
+        $subDistrict = MasterSubDistrict::factory()->create();
 
         $dbSubDistrict = $this->subDistrictRepo->find($subDistrict->id);
 
@@ -55,8 +55,8 @@ class SubDistrictRepositoryTest extends TestCase
      */
     public function test_update_sub_district()
     {
-        $subDistrict = SubDistrict::factory()->create();
-        $fakeSubDistrict = SubDistrict::factory()->make()->toArray();
+        $subDistrict = MasterSubDistrict::factory()->create();
+        $fakeSubDistrict = MasterSubDistrict::factory()->make()->toArray();
 
         $updatedSubDistrict = $this->subDistrictRepo->update($fakeSubDistrict, $subDistrict->id);
 
@@ -70,11 +70,11 @@ class SubDistrictRepositoryTest extends TestCase
      */
     public function test_delete_sub_district()
     {
-        $subDistrict = SubDistrict::factory()->create();
+        $subDistrict = MasterSubDistrict::factory()->create();
 
         $resp = $this->subDistrictRepo->delete($subDistrict->id);
 
         $this->assertTrue($resp);
-        $this->assertNull(SubDistrict::find($subDistrict->id), 'SubDistrict should not exist in DB');
+        $this->assertNull(MasterSubDistrict::find($subDistrict->id), 'MasterSubDistrict should not exist in DB');
     }
 }

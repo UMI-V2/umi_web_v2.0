@@ -18,7 +18,21 @@ class OpenHourDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'open_hours.datatables_actions');
+            return $dataTable->addColumn('senin', function ($data) {
+            return $data->senin_buka. '-' .$data->senin_tutup;
+        })->addColumn('selasa', function ($data) {
+            return $data->selasa_buka. '-' .$data->selasa_tutup;
+        })->addColumn('rabu', function ($data) {
+            return $data->rabu_buka. '-' .$data->rabu_tutup;
+        })->addColumn('kamis', function ($data) {
+            return $data->kamis_buka. '-' .$data->kamis_tutup;
+        })->addColumn('jumat', function ($data) {
+            return $data->jumat_buka. '-' .$data->jumat_tutup;
+        })->addColumn('sabtu', function ($data) {
+            return $data->sabtu_buka. '-' .$data->sabtu_tutup;
+        })->addColumn('minggu', function ($data) {
+            return $data->minggu_buka. '-' .$data->minggu_tutup;
+        })->addColumn('action', 'open_hours.datatables_actions');
     }
 
     /**
@@ -31,6 +45,7 @@ class OpenHourDataTable extends DataTable
     {
         return $model->newQuery()->with('businesses');
     }
+
 
     /**
      * Optional method if you want to use html builder.
@@ -64,25 +79,20 @@ class OpenHourDataTable extends DataTable
      */
     protected function getColumns()
     {
+
         return [
+
             'id_usaha' => new \Yajra\DataTables\Html\Column([
                 'data'  => 'businesses.nama_usaha',
                 'title' => 'Id Usaha'
             ]),
-            'senin_buka',
-            'senin_tutup',
-            'selasa_buka',
-            'selasa_tutup',
-            'rabu_buka',
-            'rabu_tutup',
-            'kamis_buka',
-            'kamis_tutup',
-            'jumat_buka',
-            'jumat_tutup',
-            'sabtu_buka',
-            'sabtu_tutup',
-            'minggu_buka',
-            'minggu_tutup'
+            'senin',
+            'selasa',
+            'rabu',
+            'kamis',
+            'jumat',
+            'sabtu',
+            'minggu',
         ];
     }
 

@@ -79,7 +79,7 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
             </ul>
 
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item ml-md-auto"><a href="#" class="btn btn-primary switch" id="btnToggle">Switch Light/Dark</a></li>
+                {{-- <li class="nav-item ml-md-auto"><a href="#" class="btn btn-primary switch" id="btnToggle">Switch Light/Dark</a></li> --}}
                 <!-- <li class="nav-item ml-md-auto">
                     <p>
                          🕶️👓☀️🌙🌚🌞 
@@ -108,7 +108,8 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                            {{-- <a href="#" class="btn btn-default btn-flat">Profile</a> --}}
+                            <a href="#" class="btn btn-primary switch" id="btnToggle">Switch Light/Dark</a>
                             <a href="#" class="btn btn-default btn-flat float-right" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Sign out
                             </a>
@@ -132,7 +133,7 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
         </div>
 
         <!-- Main Footer -->
-        <footer class="main-footer">
+        {{-- <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 3.1.0
             </div>
@@ -140,7 +141,7 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
                 Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.
             </strong>
             All rights reserved.
-        </footer>
+        </footer> --}}
     </div>
 
 

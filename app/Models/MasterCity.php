@@ -55,10 +55,10 @@ class MasterCity extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      **/
     public function master_provinces()
     {
-        return $this->belongsTo(\App\Models\MasterProvince::class, 'province_id', 'city_id');
+        return $this->hasOne(\App\Models\MasterProvince::class, 'province_id', 'city_id');
     }
 }

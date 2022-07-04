@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\SubDistrict;
+use App\Models\MasterSubDistrict;
 
 class CreateSubDistrictRequest extends FormRequest
 {
@@ -24,6 +24,6 @@ class CreateSubDistrictRequest extends FormRequest
      */
     public function rules()
     {
-        return SubDistrict::$rules;
+        return MasterSubDistrict::$rules;
     }
 }

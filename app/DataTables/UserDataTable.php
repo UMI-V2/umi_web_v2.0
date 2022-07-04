@@ -59,20 +59,20 @@ class UserDataTable extends DataTable
                         var column = this;
                         var input = document.createElement(\"input\");
                         input.setAttribute('id', i);
-                        $(input).appendTo($(column.header()).empty())
+                        $(input).appendTo($(column.footer()).empty())
                         .on('keyup', function () {
                             column.search($(this).val()).draw();
                         });
 
                         
                     });
-                    $('input#0').before('Nama: ');
+                    
                     $('input#0').attr('placeholder', 'Cari berdasarkan Nama');
 
-                    $('input#1').before('Hak Akses Sebagai: ');
+                    
                     $('input#1').attr('placeholder', 'Cari berdasarkan Akses');
 
-                    $('input#2').before('Status Akun: ');
+                    
                     $('input#2').attr('placeholder', 'Cari berdasarkan Status');
                 }",
             ]);
@@ -97,12 +97,12 @@ class UserDataTable extends DataTable
             'id_privilege'=> new \Yajra\DataTables\Html\Column([
                 'data' => 'master_privilege.nama_hak_akses_pengguna',
                 'name' => 'master_privilege.nama_hak_akses_pengguna',
-                'title' => 'Master Privilege'
+                'title' => 'Hak Akses'
             ]),
             'id_status_pengguna'=> new \Yajra\DataTables\Html\Column([
                 'data' => 'master_status_user.nama_status_pengguna',
                 'name' => 'master_status_user.nama_status_pengguna',
-                'title' => 'Master Status User'
+                'title' => 'Status'
             ]),
         ];
     }

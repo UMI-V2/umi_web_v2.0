@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\SubDistrict;
+use App\Models\MasterSubDistrict;
 use App\Repositories\BaseRepository;
 
 /**
@@ -37,6 +37,6 @@ class SubDistrictRepository extends BaseRepository
      **/
     public function model()
     {
-        return SubDistrict::class;
+        return MasterSubDistrict::class;
     }
 }

@@ -211,7 +211,7 @@ class Address extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function province()
+    public function master_provinces()
     {
         return $this->belongsTo(MasterProvince::class, 'province_id', 'province_id');
     }
@@ -219,7 +219,7 @@ class Address extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function city()
+    public function master_cities()
     {
         return $this->belongsTo(MasterCity::class, 'city_id', 'city_id');
     }
@@ -227,7 +227,7 @@ class Address extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function sub_district()
+    public function sub_districts()
     {
         return $this->belongsTo(MasterSubDistrict::class, 'subdistrict_id', 'subdistrict_id');
     }

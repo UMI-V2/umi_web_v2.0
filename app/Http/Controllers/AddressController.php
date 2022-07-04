@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\MasterProvince;
 use App\Models\MasterCity;
-use App\Models\SubDistrict;
+use App\Models\MasterSubDistrict;
 use App\DataTables\AddressDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateAddressRequest;
@@ -47,7 +47,7 @@ class AddressController extends AppBaseController
         $users = user::query()->pluck('name', 'id');
         $master_provinces = MasterProvince::query()->pluck('province_name', 'province_id');
         $master_cities = MasterCity::query()->pluck('city_name', 'city_id');
-        $sub_districts = SubDistrict::query()->pluck('subdistrict_name', 'subdistrict_id');
+        $sub_districts = MasterSubDistrict::query()->pluck('subdistrict_name', 'subdistrict_id');
         return view('addresses.create')->with('users', $users)->with('master_provinces', $master_provinces)->with('master_cities', $master_cities)->with('sub_districts', $sub_districts);
     }
 
@@ -103,7 +103,7 @@ class AddressController extends AppBaseController
         $users = user::query()->pluck('name', 'id');
         $master_provinces = MasterProvince::query()->pluck('province_name', 'province_id');
         $master_cities = MasterCity::query()->pluck('city_name', 'city_id');
-        $sub_districts = SubDistrict::query()->pluck('subdistrict_name', 'subdistrict_id');
+        $sub_districts = MasterSubDistrict::query()->pluck('subdistrict_name', 'subdistrict_id');
 
         if (empty($address)) {
             Flash::error('Address not found');

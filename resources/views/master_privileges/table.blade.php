@@ -2,8 +2,7 @@
 @include('layouts.datatables_css')
 @endpush
 
-{!! $dataTable->table(['width' => '100%', 'class' => 'table table-striped table-bordered']) !!}
-<!-- {!! $dataTable->table(['width' => '100%', 'class' => 'table table-striped table-bordered'], false, true) !!} -->
+{!! $dataTable->table(['width' => '100%', 'class' => 'table table-striped table-bordered'],true) !!}
 
 @push('third_party_scripts')
 @include('layouts.datatables_js')

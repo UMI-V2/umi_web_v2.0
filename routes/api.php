@@ -235,3 +235,15 @@ Route::resource('transaction_products', App\Http\Controllers\API\TransactionProd
 Route::resource('balances', App\Http\Controllers\API\BalancesAPIController::class);
 
 
+
+
+Route::resource('events', App\Http\Controllers\API\EventAPIController::class);
+
+
+Route::resource('news', App\Http\Controllers\API\NewsAPIController::class);
+
+
+Route::resource('announcements', App\Http\Controllers\API\AnnouncementAPIController::class);
+
+
+Route::resource('event_registers', App\Http\Controllers\API\EventRegisterAPIController::class);
