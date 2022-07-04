@@ -1,11 +1,14 @@
 <?php
 
 use App\Models\MasterProvince;
+use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\OpenHourController;
 use App\Http\Controllers\API\AuthAPIController;
+use App\Http\Controllers\API\CartAPIController;
 use App\Http\Controllers\API\UserAPIController;
 use App\Http\Controllers\API\AddressAPIController;
 use App\Http\Controllers\API\ProductAPIController;
@@ -16,12 +19,11 @@ use App\Http\Controllers\API\MasterCityAPIController;
 use App\Http\Controllers\API\MasterUnitAPIController;
 use App\Http\Controllers\API\MasterProvinceAPIController;
 use App\Http\Controllers\MasterDeliveryServiceController;
+use App\Http\Controllers\API\ProductCategoryAPIController;
 use App\Http\Controllers\API\BusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
-use App\Http\Controllers\API\ProductCategoryAPIController;
-use App\Models\ProductCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,7 +126,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', [DiscountAPIController::class, 'index']);
         Route::post('update', [DiscountAPIController::class, 'store']);
         Route::delete('delete', [DiscountAPIController::class, 'delete']);
+    });
 
+    Route::group(['prefix' => 'cart'], function () {
+        Route::get('/getMyCart', [CartAPIController::class, 'getMyCart']);
+        Route::post('/update', [CartAPIController::class, 'update']);
+        Route::delete('/delete', [CartAPIController::class, 'delete']);
     });
     
     
