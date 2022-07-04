@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\OpenHour;
 use App\DataTables\OpenHourDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateOpenHourRequest;
@@ -73,6 +74,8 @@ class OpenHourController extends AppBaseController
     public function show($id)
     {
         $openHour = $this->openHourRepository->find($id);
+
+        // $openHour = OpenHour::with(['users', 'masterStatusBusinesses'])->where('id', $id)->first();
 
         if (empty($openHour)) {
             Flash::error('Open Hour not found');

@@ -1,14 +1,14 @@
 <!-- Id Field -->
-<div class="col-sm-12">
+{{-- <div class="col-sm-12">
     {!! Form::label('id', 'Id:') !!}
     <p>{{ $openHour->id }}</p>
-</div>
+</div> --}}
 
 <!-- Id Usaha Field -->
-<div class="col-sm-12">
-    {!! Form::label('id_usaha', 'Id Usaha:') !!}
-    <p>{{ $openHour->id_usaha }}</p>
-</div>
+{{-- <div class="col-sm-12">
+    {!! Form::label('id_usaha', 'Nama Usaha:') !!}
+    <p>{{ $openHour->businesses->nama_usaha }}</p>
+</div> --}}
 
 <!-- Senin Field -->
 <div class="col-sm-12">

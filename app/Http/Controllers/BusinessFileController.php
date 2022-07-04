@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\BusinessFile;
 use App\DataTables\BusinessFileDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateBusinessFileRequest;

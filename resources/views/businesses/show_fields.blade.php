@@ -1,19 +1,19 @@
 <!-- Id Field -->
-<div class="col-sm-12">
+{{-- <div class="col-sm-12">
     {!! Form::label('id', 'Id:') !!}
     <p>{{ $business->id }}</p>
-</div>
+</div> --}}
 
 <!-- Id User Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_user', 'Id User:') !!}
-    <p>{{ $business->id_user }}</p>
+    {!! Form::label('id_user', 'Nama Pemilik:') !!}
+    <p>{{ $business->users->name }}</p>
 </div>
 
 <!-- Id Master Status Usaha Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_master_status_usaha', 'Id Master Status Usaha:') !!}
-    <p>{{ $business->id_master_status_usaha }}</p>
+    {!! Form::label('id_master_status_usaha', 'Status Usaha:') !!}
+    <p>{{ $business->masterStatusBusinesses->nama_status_usaha }}</p>
 </div>
 
 <!-- Nama Usaha Field -->

@@ -1,19 +1,19 @@
 <!-- Id Field -->
-<div class="col-sm-12">
+{{-- <div class="col-sm-12">
     {!! Form::label('id', 'Id:') !!}
     <p>{{ $businessCategory->id }}</p>
-</div>
+</div> --}}
 
 <!-- Id Usaha Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_usaha', 'Id Usaha:') !!}
-    <p>{{ $businessCategory->id_usaha }}</p>
+    {!! Form::label('id_usaha', 'Kategori:') !!}
+    <p>{{ $businessCategory->businesses->nama_usaha }}</p>
 </div>
 
 <!-- Id Master Kategori Usaha Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_master_kategori_usaha', 'Id Master Kategori Usaha:') !!}
-    <p>{{ $businessCategory->id_master_kategori_usaha }}</p>
+    {!! Form::label('id_master_kategori_usaha', 'Nama Master Kategori:') !!}
+    <p>{{ $businessCategory->master_business_categories->nama_kategori_usaha }}</p>
 </div>
 
 <!-- Created At Field -->
