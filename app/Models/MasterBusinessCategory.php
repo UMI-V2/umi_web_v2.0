@@ -81,7 +81,7 @@ class MasterBusinessCategory extends Model
         parent::boot();
 
         static::deleting(function($model) { 
-            BusinessCategory::where('id_master_kategori_usaha', $model->id)->delete();
+            // BusinessCategory::where('id_master_kategori_usaha', $model->id)->delete();
                 
         });
     }

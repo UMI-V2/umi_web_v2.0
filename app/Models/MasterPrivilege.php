@@ -41,8 +41,7 @@ class MasterPrivilege extends Model
 
     use HasFactory, SoftDeletes;
 
-    public $table = 'master_privileges';
-    
+    public $table = 'master_privileges';    
 
 
 

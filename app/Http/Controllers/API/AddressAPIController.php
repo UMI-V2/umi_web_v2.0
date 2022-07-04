@@ -16,7 +16,7 @@ class AddressAPIController extends Controller
     public function index(Request $request)
     {
         try {
-            $address = Address::with(['province', 'city', 'sub_district'])->where('id_users', $request->user()->id)->orderBy("updated_at", "desc")->get();
+            $address = Address::with(['master_provinces', 'master_cities', 'sub_districts'])->where('id_users', $request->user()->id)->orderBy("updated_at", "desc")->get();
             return ResponseFormatter::success($address, 'Data Alamat berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
@@ -92,7 +92,7 @@ class AddressAPIController extends Controller
             DB::commit();
 
             return ResponseFormatter::success(
-                $searchAddress->load(['province', 'city', 'sub_district']),
+                $searchAddress->load(['master_provinces', 'master_cities', 'sub_districts']),
                 'Address Updated',
             );
         } catch (Exception $error) {

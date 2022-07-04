@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\MasterPrivilegeDataTable;
+use Flash;
+use Response;
+use App\Models\User;
 use App\Http\Requests;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Controllers\AppBaseController;
+use App\DataTables\MasterPrivilegeDataTable;
+use App\Repositories\MasterPrivilegeRepository;
 use App\Http\Requests\CreateMasterPrivilegeRequest;
 use App\Http\Requests\UpdateMasterPrivilegeRequest;
-use App\Repositories\MasterPrivilegeRepository;
-use Flash;
-use App\Http\Controllers\AppBaseController;
-use Response;
+use App\Models\Product;
 
 class MasterPrivilegeController extends AppBaseController
 {
@@ -135,18 +138,36 @@ class MasterPrivilegeController extends AppBaseController
      */
     public function destroy($id)
     {
-        $masterPrivilege = $this->masterPrivilegeRepository->find($id);
+        $users = User::where('id_privilege', $id)->get();
+        if ($users->isEmpty()) {
+            $masterPrivilege = $this->masterPrivilegeRepository->find($id);
 
-        if (empty($masterPrivilege)) {
-            Flash::error('Master Privilege not found');
+            if (empty($masterPrivilege)) {
+                Flash::error('Master Privilege not found');
+
+                return redirect(route('masterPrivileges.index'));
+            }
+
+            $this->masterPrivilegeRepository->delete($id);
+
+            Flash::success('Master Privilege deleted successfully.');
 
             return redirect(route('masterPrivileges.index'));
+        } else {
+
+            Flash::warning('Anda tidak dapat menghapus data ini, karena telah digunakan. Anda hanya dapat mengubahnya.');
+            return redirect(route('masterPrivileges.index'));
         }
+    }
 
-        $this->masterPrivilegeRepository->delete($id);
 
-        Flash::success('Master Privilege deleted successfully.');
-
-        return redirect(route('masterPrivileges.index'));
+    public function checkRelation($id)
+    {
+        $users = User::where('id_privilege', $id)->get();
+        if (empty($users)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
