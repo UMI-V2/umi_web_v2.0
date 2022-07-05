@@ -65,7 +65,7 @@ class ProductFile extends Model
         'file',
         'video',
         'photo',
-        'image_url'
+        // 'image_url'
     ];
 
     /**
@@ -79,7 +79,7 @@ class ProductFile extends Model
         'file' => 'string',
         'video' => 'boolean',
         'photo' => 'boolean',
-        'image_url' => 'string'
+        // 'image_url' => 'string'
     ];
 
     /**
@@ -92,7 +92,7 @@ class ProductFile extends Model
         'file' => 'required',
         'video' => 'required',
         'photo' => 'required',
-        'image_url' => 'required'
+        // 'image_url' => 'required'
     ];
 
     public static function boot() {
