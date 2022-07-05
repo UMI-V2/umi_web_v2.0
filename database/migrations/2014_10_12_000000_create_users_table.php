@@ -34,7 +34,6 @@ return new class extends Migration
             $table->softDeletes();
             $table->foreign('id_privilege')->references('id')->on('master_privileges');
             $table->foreign('id_status_pengguna')->references('id')->on('master_status_users');
-            $table->softDeletes();
         });
     }
 

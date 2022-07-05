@@ -25,7 +25,6 @@ class CreateBusinessesTable extends Migration
             $table->boolean('is_manual_payment')->default(true);
             $table->boolean('is_delivery')->default(false);
 
-            $table->string('deskripsi')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->timestamps();
