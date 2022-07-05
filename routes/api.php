@@ -24,6 +24,7 @@ use App\Http\Controllers\API\BusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
+use App\Http\Controllers\API\SalesTransactionAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,6 +134,18 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/update', [CartAPIController::class, 'update']);
         Route::delete('/delete', [CartAPIController::class, 'delete']);
     });
+
+    Route::group(['prefix' => 'transaction'], function () {
+        Route::get('/getMyTransaction', [SalesTransactionAPIController::class, 'all']);
+        
+        Route::post('/checkout', [SalesTransactionAPIController::class, 'checkout']);
+        Route::post('/confirmation', [SalesTransactionAPIController::class, 'confirmation']);
+        Route::post('/payment', [SalesTransactionAPIController::class, 'payment']);
+        Route::post('/changeStatus', [SalesTransactionAPIController::class, 'changeStatus']);
+        Route::delete('/delete', [SalesTransactionAPIController::class, 'destroy']);
+    });
+
+
     
     
 });

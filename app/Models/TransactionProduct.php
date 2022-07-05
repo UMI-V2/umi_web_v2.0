@@ -82,19 +82,23 @@ class TransactionProduct extends Model
     use HasFactory, SoftDeletes;
 
     public $table = 'transaction_products';
-    
+
 
 
 
     public $fillable = [
         'id_transaksi_penjualan',
         'id_produk',
+        'nama_produk',
+        'photo_url_produk',
+        'deskripsi_produk',
         'harga_produk',
         'harga_diskon',
-        'deskripsi_produk',
+        'jumlah_satuan',
+        'nama_satuan',
+        'kuantitas',
         'kondisi',
         'preorder',
-        'ongkir'
     ];
 
     /**
@@ -111,7 +115,6 @@ class TransactionProduct extends Model
         'deskripsi_produk' => 'string',
         'kondisi' => 'boolean',
         'preorder' => 'boolean',
-        'ongkir' => 'integer'
     ];
 
     /**
@@ -127,14 +130,13 @@ class TransactionProduct extends Model
         'deskripsi_produk' => 'required',
         'kondisi' => 'required',
         'preorder' => 'required',
-        'ongkir' => 'required|numeric'
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($model) { 
-           
+        static::deleting(function ($model) {
         });
     }
 

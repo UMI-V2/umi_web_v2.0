@@ -17,10 +17,16 @@ class CreateTransactionStatusesTable extends Migration
         Schema::create('transaction_statuses', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_transaksi_penjualan')->unsigned();
-            $table->date('tanggal_pesanan_dibuat');
-            $table->date('tanggal_pembayaran');
-            $table->date('tanggal_pesanan_dikirimkan');
-            $table->date('tanggal_pesanan_diterima');
+            $table->enum('status', array('Menunggu Konfirmasi', 'Menunggu Pembayaran','Sedang Disiapkan', 'Telah Dikirimkan', 'Telah Diterima', 'Dibatalkan'))->nullable();
+            $table->dateTime('tanggal_pesanan_dibuat')->nullable();
+            $table->dateTime('tanggal_pesanan_disetujui')->nullable();
+            $table->dateTime('tanggal_pembayaran')->nullable();
+            $table->dateTime('tanggal_pesanan_disiapkan')->nullable();
+            $table->dateTime('tanggal_pesanan_dikirimkan')->nullable();
+            $table->dateTime('tanggal_pesanan_diterima')->nullable();
+            $table->dateTime('tanggal_pesanan_dibatalkan')->nullable();
+            $table->string('reason_pembatalan_penjual')->nullable();
+            $table->string('reason_pembatalan_pembeli')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('id_transaksi_penjualan')->references('id')->on('sales_transactions');
