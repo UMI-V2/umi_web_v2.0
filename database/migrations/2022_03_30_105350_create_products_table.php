@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->integer('stok');
             $table->boolean('kondisi');
             $table->boolean('preorder');
-            $table->string('jumlah_satuan');
+            $table->string('jumlah_satuan')->nullable();;
             $table->boolean('is_arshive')->default(false);
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
