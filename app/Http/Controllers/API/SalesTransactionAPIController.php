@@ -27,6 +27,22 @@ class SalesTransactionAPIController extends AppBaseController
 
     public function all(Request $request)
     {
+
+    }
+    public function getMyTransaction(Request $request)
+    {
+        try {
+            $transaction= SalesTransaction::where('id_user',$request->user()->id )->get();
+            return ResponseFormatter::success(
+                $transaction->load(['users', 'transaction_status', 'products_detail']),
+                "Get Transaksi Saya Berhasil",
+            );
+        } catch (Exception $e) {
+            return ResponseFormatter::error(
+                $e->getMessage(),
+                "Get Transaksi Saya Gagal",
+            );
+        }
     }
     public function update(Request $request)
     {
@@ -49,19 +65,6 @@ class SalesTransactionAPIController extends AppBaseController
             'products' => 'raquired|array',
         ]);
 
-        // $request->validate([
-        //     'id_usaha' => 'required|exists:businesses,id',
-        //     'subtotal_produk' => 'required',
-        //     'subtotal_ongkir' => 'required',
-        //     'diskon' => 'required',
-        //     'biaya_penanganan' => 'required',
-        //     'total_pesanan' => 'required',
-        //     'is_delivery' => 'required',
-        //     'is_manual_payment' => 'required',
-        //     'is_auto_payment' => 'required',
-        //     'products' => 'raquired|array',
-        // ]);
-
 
 
         $transaction = SalesTransaction::create([
@@ -83,7 +86,7 @@ class SalesTransactionAPIController extends AppBaseController
 
         $transaction = SalesTransaction::with(['users'])->find($transaction->id);
         // dd($transaction);
-        $no_pesanan = Carbon::now()->timestamp . "$transaction->id";
+        $no_pesanan = Carbon::now()->getPreciseTimestamp(3) . "$transaction->id";
 
         try {
             TransactionProductAPIController::addProduct($request,  $transaction->id);
@@ -130,7 +133,6 @@ class SalesTransactionAPIController extends AppBaseController
                     Config::$isProduction = config('services.midtrans.isProduction');
                     Config::$isSanitized = config('services.midtrans.isSanitized');
                     Config::$is3ds = config('services.midtrans.is3ds');
-
                     $midtrans = [
                         'transaction_details' => [
                             'order_id'    =>  $transaction->no_pemesanan,
@@ -178,7 +180,7 @@ class SalesTransactionAPIController extends AppBaseController
             DB::commit();
 
             return ResponseFormatter::success(
-                $transaction->load(['users', 'transaction_status']),
+                $transaction->load(['users', 'transaction_status',  'products_detail']),
                 "Confirmation Success",
             );
         } catch (Exception $e) {
@@ -192,24 +194,6 @@ class SalesTransactionAPIController extends AppBaseController
         }
     }
 
-    public function payment(Request $request)
-    {
-        try {
-            DB::beginTransaction();
-            $request->validate([
-                'id' => 'required',
-                'confirmation' => 'required|boolean|in:1,0',
-            ]);
-        } catch (Exception $e) {
-            DB::rollBack();
-            return ResponseFormatter::error(
-                [
-                    'message' => $e->getMessage()
-                ],
-                "Confirmation Failed",
-            );
-        }
-    }
 
     public function changeStatus(Request $request)
     {
@@ -220,7 +204,7 @@ class SalesTransactionAPIController extends AppBaseController
 
             $request->validate([
                 'id' => 'required',
-                'status' => 'required|boolean|in:Menunggu Konfirmasi, Menunggu Pembayaran,Sedang Disiapkan, Telah Dikirimkan, Telah Diterima, Dibatalkan',
+                'status' => 'required|in:Menunggu Konfirmasi, Menunggu Pembayaran,Sedang Disiapkan, Telah Dikirimkan, Telah Diterima, Dibatalkan',
             ]);
 
             switch ($request->status) {

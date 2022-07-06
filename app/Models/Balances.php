@@ -70,6 +70,7 @@ class Balances extends Model
 
 
     public $fillable = [
+        'id_user',
         'id_kategori_transaksi',
         'id_transaksi_penjualan',
         'pengeluaran',
@@ -99,8 +100,8 @@ class Balances extends Model
     public static $rules = [
         'id_kategori_transaksi' => 'required',
         'id_transaksi_penjualan' => 'required',
-        'pengeluaran' => 'required|numeric',
-        'pemasukan' => 'required|numeric'
+        // 'pengeluaran' => 'required|numeric',
+        // 'pemasukan' => 'required|numeric'
     ];
 
     /**

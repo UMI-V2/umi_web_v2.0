@@ -24,6 +24,7 @@ use App\Http\Controllers\API\BusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
+use App\Http\Controllers\API\MidtransAPIController;
 use App\Http\Controllers\API\SalesTransactionAPIController;
 
 /*
@@ -70,6 +71,10 @@ Route::group(['prefix' => 'categoryProduct'], function () {
 Route::group(['prefix' => 'masterUnit'], function () {
     Route::get('/', [MasterUnitAPIController::class, 'all']);
     // Route::post('update', [ProductAPIController::class, 'store']);
+});
+
+Route::group(['prefix' => 'midtrans'], function () {
+    Route::post('/callback', [MidtransAPIController::class, 'callback']);
 });
 
 // AUTH
@@ -136,7 +141,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::group(['prefix' => 'transaction'], function () {
-        Route::get('/getMyTransaction', [SalesTransactionAPIController::class, 'all']);
+        Route::get('/getMyTransaction', [SalesTransactionAPIController::class, 'getMyTransaction']);
         
         Route::post('/checkout', [SalesTransactionAPIController::class, 'checkout']);
         Route::post('/confirmation', [SalesTransactionAPIController::class, 'confirmation']);
