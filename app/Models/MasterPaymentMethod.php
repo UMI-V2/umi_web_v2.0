@@ -63,7 +63,7 @@ class MasterPaymentMethod extends Model
     protected $casts = [
         'id' => 'integer',
         'nama_metode_pembayaran' => 'string',
-        'deskripsi_metode_pembayaran' => 'string'
+        'deskripsi_metode_pembayaran' => 'longtext'
     ];
 
     /**

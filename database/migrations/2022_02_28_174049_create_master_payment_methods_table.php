@@ -17,7 +17,7 @@ class CreateMasterPaymentMethodsTable extends Migration
         Schema::create('master_payment_methods', function (Blueprint $table) {
             $table->id();
             $table->string('nama_metode_pembayaran');
-            $table->string('deskripsi_metode_pembayaran');
+            $table->longText('deskripsi_metode_pembayaran');
             $table->timestamps();
         });
     }

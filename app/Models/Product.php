@@ -85,7 +85,7 @@ class Product extends Model
 
 
     public $table = 'products';
-    
+
 
 
 
@@ -118,7 +118,7 @@ class Product extends Model
         'id_usaha' => 'integer',
         'id_satuan' => 'integer',
         'nama' => 'string',
-        'deskripsi' => 'string',
+        'deskripsi' => 'longtext',
         'harga' => 'string',
         'stok' => 'integer',
         'kondisi' => 'boolean',
@@ -177,21 +177,21 @@ class Product extends Model
         return $this->belongsTo(\App\Models\ProductDiscount::class, 'id', 'id_product');
     }
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($product) { 
-             $product->product_category()->delete();
-             $files = ProductFile::where('id_produk', $product->id)->get();
-             foreach ($files as $file) {
-                 $fileName = $file->getAttributes()['file'];
+        static::deleting(function ($product) {
+            $product->product_category()->delete();
+            $files = ProductFile::where('id_produk', $product->id)->get();
+            foreach ($files as $file) {
+                $fileName = $file->getAttributes()['file'];
                 ProductFile::where('file', $fileName)->delete();
                 if (Storage::disk('public')->exists($fileName)) {
                     Storage::disk('public')->delete($fileName);
                 }
             }
-             $product->product_files()->delete();
+            $product->product_files()->delete();
         });
     }
-
 }

@@ -88,7 +88,7 @@ class Balances extends Model
         'id_transaksi_penjualan' => 'integer',
         'pengeluaran' => 'integer',
         'pemasukan' => 'integer',
-        'deskripsi' => 'string'
+        'deskripsi' => 'longtext'
     ];
 
     /**

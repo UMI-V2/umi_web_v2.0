@@ -63,7 +63,7 @@ class MasterTransactionCategory extends Model
     protected $casts = [
         'id' => 'integer',
         'nama_kategori_transaksi' => 'string',
-        'deskripsi_kategori_transaksi' => 'string'
+        'deskripsi_kategori_transaksi' => 'longtext'
     ];
 
     /**

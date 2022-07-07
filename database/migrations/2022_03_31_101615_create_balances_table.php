@@ -20,7 +20,7 @@ class CreateBalancesTable extends Migration
             $table->bigInteger('id_transaksi_penjualan')->unsigned();
             $table->integer('pengeluaran');
             $table->integer('pemasukan');
-            $table->string('deskripsi');
+            $table->longText('deskripsi');
             $table->timestamps();
             $table->foreign('id_kategori_transaksi')->references('id')->on('master_transaction_categories');
             $table->foreign('id_transaksi_penjualan')->references('id')->on('sales_transactions');

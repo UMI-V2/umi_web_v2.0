@@ -81,7 +81,7 @@ class TransactionProduct extends Model
     use HasFactory;
 
     public $table = 'transaction_products';
-    
+
 
 
 
@@ -107,7 +107,7 @@ class TransactionProduct extends Model
         'id_produk' => 'integer',
         'harga_produk' => 'integer',
         'harga_diskon' => 'integer',
-        'deskripsi_produk' => 'string',
+        'deskripsi_produk' => 'longtext',
         'kondisi' => 'boolean',
         'preorder' => 'boolean',
         'ongkir' => 'integer'

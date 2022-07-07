@@ -76,7 +76,7 @@ class MasterDeliveryService extends Model
         'id' => 'integer',
         'nama_jasa_pengiriman' => 'string',
         'is_set_seller' => 'string',
-        'deskripsi' => 'string',
+        'deskripsi' => 'longtext',
         'kode_rajaongkir' => 'string'
     ];
 

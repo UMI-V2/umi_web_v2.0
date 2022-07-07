@@ -58,7 +58,7 @@ class SalesDeliveryService extends Model
     use HasFactory;
 
     public $table = 'sales_delivery_services';
-    
+
 
 
 
@@ -78,7 +78,7 @@ class SalesDeliveryService extends Model
         'id' => 'integer',
         'id_jasa_pengiriman' => 'integer',
         'jenis_layanan' => 'string',
-        'deskripsi_layanan' => 'string',
+        'deskripsi_layanan' => 'longtext',
         'ongkir' => 'integer'
     ];
 

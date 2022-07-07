@@ -20,7 +20,7 @@ class CreateTransactionProductsTable extends Migration
             $table->bigInteger('id_produk')->unsigned();
             $table->integer('harga_produk');
             $table->integer('harga_diskon');
-            $table->string('deskripsi_produk');
+            $table->longText('deskripsi_produk');
             $table->boolean('kondisi');
             $table->boolean('preorder');
             $table->integer('ongkir');
