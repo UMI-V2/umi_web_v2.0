@@ -56,7 +56,7 @@ class MasterDeliveryService extends Model
     use HasFactory;
 
     public $table = 'master_delivery_services';
-    
+
 
 
 
@@ -76,7 +76,7 @@ class MasterDeliveryService extends Model
         'id' => 'integer',
         'nama_jasa_pengiriman' => 'string',
         'is_set_seller' => 'string',
-        'deskripsi' => 'longtext',
+        'deskripsi' => 'string',
         'kode_rajaongkir' => 'string'
     ];
 
@@ -90,6 +90,4 @@ class MasterDeliveryService extends Model
         'is_set_seller' => 'required',
         'deskripsi' => 'required'
     ];
-
-    
 }

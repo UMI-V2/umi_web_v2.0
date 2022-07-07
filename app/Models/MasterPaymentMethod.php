@@ -46,7 +46,7 @@ class MasterPaymentMethod extends Model
     use HasFactory;
 
     public $table = 'master_payment_methods';
-    
+
 
 
 
@@ -63,7 +63,7 @@ class MasterPaymentMethod extends Model
     protected $casts = [
         'id' => 'integer',
         'nama_metode_pembayaran' => 'string',
-        'deskripsi_metode_pembayaran' => 'longtext'
+        'deskripsi_metode_pembayaran' => 'string'
     ];
 
     /**
@@ -75,6 +75,4 @@ class MasterPaymentMethod extends Model
         'nama_metode_pembayaran' => 'required',
         'deskripsi_metode_pembayaran' => 'required'
     ];
-
-    
 }

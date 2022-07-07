@@ -107,7 +107,7 @@ class TransactionProduct extends Model
         'id_produk' => 'integer',
         'harga_produk' => 'integer',
         'harga_diskon' => 'integer',
-        'deskripsi_produk' => 'longtext',
+        'deskripsi_produk' => 'string',
         'kondisi' => 'boolean',
         'preorder' => 'boolean',
         'ongkir' => 'integer'

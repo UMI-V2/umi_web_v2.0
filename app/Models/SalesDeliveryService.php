@@ -78,7 +78,7 @@ class SalesDeliveryService extends Model
         'id' => 'integer',
         'id_jasa_pengiriman' => 'integer',
         'jenis_layanan' => 'string',
-        'deskripsi_layanan' => 'longtext',
+        'deskripsi_layanan' => 'string',
         'ongkir' => 'integer'
     ];
 

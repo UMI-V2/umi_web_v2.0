@@ -65,7 +65,7 @@ class Balances extends Model
     use HasFactory;
 
     public $table = 'balances';
-    
+
 
 
 
@@ -88,7 +88,7 @@ class Balances extends Model
         'id_transaksi_penjualan' => 'integer',
         'pengeluaran' => 'integer',
         'pemasukan' => 'integer',
-        'deskripsi' => 'longtext'
+        'deskripsi' => 'string'
     ];
 
     /**

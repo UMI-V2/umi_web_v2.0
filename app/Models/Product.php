@@ -118,7 +118,7 @@ class Product extends Model
         'id_usaha' => 'integer',
         'id_satuan' => 'integer',
         'nama' => 'string',
-        'deskripsi' => 'longtext',
+        'deskripsi' => 'string',
         'harga' => 'string',
         'stok' => 'integer',
         'kondisi' => 'boolean',

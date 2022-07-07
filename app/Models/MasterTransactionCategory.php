@@ -46,7 +46,7 @@ class MasterTransactionCategory extends Model
     use HasFactory;
 
     public $table = 'master_transaction_categories';
-    
+
 
 
 
@@ -63,7 +63,7 @@ class MasterTransactionCategory extends Model
     protected $casts = [
         'id' => 'integer',
         'nama_kategori_transaksi' => 'string',
-        'deskripsi_kategori_transaksi' => 'longtext'
+        'deskripsi_kategori_transaksi' => 'string'
     ];
 
     /**
@@ -75,6 +75,4 @@ class MasterTransactionCategory extends Model
         'nama_kategori_transaksi' => 'required',
         'deskripsi_kategori_transaksi' => 'required'
     ];
-
-    
 }
