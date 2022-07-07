@@ -18,7 +18,9 @@ class DiscountDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'discounts.datatables_actions');
+        return $dataTable->addColumn('action', 'discounts.datatables_actions')->addColumn('nama_usaha', function ($data) {
+            return $data->businesses->nama_usaha;
+        });
     }
 
     /**
@@ -29,7 +31,7 @@ class DiscountDataTable extends DataTable
      */
     public function query(Discount $model)
     {
-        return $model->newQuery()->with('products');
+        return $model->newQuery()->with('businesses');
     }
 
     /**
@@ -65,16 +67,17 @@ class DiscountDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id_produk' => new \Yajra\DataTables\Html\Column([
-                'data' => 'products.nama',
-                'name' => 'products.nama',
-                'title' => 'Produk',
-            ]),
+            'nama_usaha',
+            // 'id_usaha' => new \Yajra\DataTables\Html\Column([
+            //     'data' => 'businesses.nama_usaha',
+            //     'name' => 'businesses.nama_usaha',
+            //     'title' => 'Nama Usaha',
+            // ]),
             'nama_promo',
             'waktu_mulai',
             'waktu_berakhir',
-            'harga',
-            'batas_pembelian',
+            'potongan',
+            // 'batas_pembelian',
             'type'
         ];
     }

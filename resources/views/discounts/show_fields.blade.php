@@ -1,13 +1,13 @@
 <!-- Id Field -->
-<div class="col-sm-12">
+{{-- <div class="col-sm-12">
     {!! Form::label('id', 'Id:') !!}
     <p>{{ $discount->id }}</p>
-</div>
+</div> --}}
 
 <!-- Id Produk Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_produk', 'Id Produk:') !!}
-    <p>{{ $discount->id_produk }}</p>
+    {!! Form::label('id_usaha', 'Nama Usaha:') !!}
+    <p>{{ $discount->businesses->nama_usaha }}</p>
 </div>
 
 <!-- Nama Promo Field -->
@@ -30,15 +30,15 @@
 
 <!-- Harga Field -->
 <div class="col-sm-12">
-    {!! Form::label('harga', 'Harga:') !!}
-    <p>{{ $discount->harga }}</p>
+    {!! Form::label('potongan', 'Potongan Harga:') !!}
+    <p>{{ $discount->potongan }}</p>
 </div>
 
 <!-- Batas Pembelian Field -->
-<div class="col-sm-12">
+{{-- <div class="col-sm-12">
     {!! Form::label('batas_pembelian', 'Batas Pembelian:') !!}
     <p>{{ $discount->batas_pembelian }}</p>
-</div>
+</div> --}}
 
 <!-- Type Field -->
 <div class="col-sm-12">

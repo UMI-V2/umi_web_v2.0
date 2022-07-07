@@ -21,7 +21,7 @@ class DiscountRepository extends BaseRepository
         'nama_promo',
         'waktu_mulai',
         'waktu_berakhir',
-        'harga',
+        'potongan',
         'batas_pembelian',
         'type'
     ];

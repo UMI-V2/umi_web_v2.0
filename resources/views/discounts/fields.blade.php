@@ -1,7 +1,7 @@
 <!-- Id Produk Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('id_produk', 'Id Produk:') !!}
-    {!! Form::select('id_produk', $products, null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::label('id_usaha', 'Nama Usaha:') !!}
+    {!! Form::select('id_usaha', $businesses, null, ['class' => 'form-control custom-select']) !!}
 </div>
 
 
@@ -45,15 +45,15 @@
 
 <!-- Harga Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('harga', 'Harga:') !!}
-    {!! Form::text('harga', null, ['class' => 'form-control']) !!}
+    {!! Form::label('potongan', 'Potongan Harga:') !!}
+    {!! Form::text('potongan', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Batas Pembelian Field -->
-<div class="form-group col-sm-6">
+{{-- <div class="form-group col-sm-6">
     {!! Form::label('batas_pembelian', 'Batas Pembelian:') !!}
     {!! Form::number('batas_pembelian', null, ['class' => 'form-control']) !!}
-</div>
+</div> --}}
 
 <!-- Type Field -->
 <div class="form-group col-sm-12">
