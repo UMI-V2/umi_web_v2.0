@@ -181,7 +181,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      **/
-    public function MasterPrivilege()
+    public function master_privileges()
     {
         return $this->belongsTo(MasterPrivilege::class, 'id_privilege', 'id');
     }
@@ -189,7 +189,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function MasterStatusUser()
+    public function master_status_users()
     {
         return $this->belongsTo(\App\Models\MasterStatusUser::class, 'id_status_pengguna', 'id');
     }

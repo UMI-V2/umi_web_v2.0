@@ -18,7 +18,14 @@ class UserDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'users.datatables_actions');
+        return $dataTable->addColumn('action', 'users.datatables_actions')->addColumn(
+            'nama_hak_akses_pengguna',
+            function ($data) {
+                return $data->master_privileges->nama_hak_akses_pengguna;
+            }
+        )->addColumn('nama_status_pengguna', function ($data) {
+            return $data->master_status_users->nama_status_pengguna;
+        });
     }
 
     /**
@@ -29,7 +36,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->with('MasterPrivilege')->with('MasterStatusUser');
+        return $model->newQuery()->with('master_privileges')->with('master_status_users');
     }
 
     /**
@@ -45,7 +52,7 @@ class UserDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
-                'stateSave' => true,
+                'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -55,7 +62,12 @@ class UserDataTable extends DataTable
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
                 'initComplete' => "function () {
-                    this.api().columns([0,1,2]).every(function (i) {
+                    var kolom = this.api().columns();
+                    kolom.every(function (i) {
+
+                        if(i === kolom['0'].length - 1){
+                            return false;
+                        }
                         var column = this;
                         var input = document.createElement(\"input\");
                         input.setAttribute('id', i);
@@ -68,12 +80,11 @@ class UserDataTable extends DataTable
                     });
                     
                     $('input#0').attr('placeholder', 'Cari berdasarkan Nama');
-
                     
                     $('input#1').attr('placeholder', 'Cari berdasarkan Akses');
-
                     
                     $('input#2').attr('placeholder', 'Cari berdasarkan Status');
+                    
                 }",
             ]);
     }
@@ -87,6 +98,11 @@ class UserDataTable extends DataTable
     {
         return [
             'name' => ['title' => 'Nama'],
+            // 'nama_hak_akses_pengguna' => ['title' => 'Akses Sebagai'],
+            // 'nama_status_pengguna' => [
+            //     'title' => 'Status Akun',
+            //     'data' => 'master_privileges.nama_hak_akses_pengguna',
+            // ],
             // 'username',
             // 'jenis_kelamin',
             // 'tanggal_lahir',
@@ -94,14 +110,14 @@ class UserDataTable extends DataTable
             // 'foto',
             // 'email',
             // 'password',
-            'id_privilege'=> new \Yajra\DataTables\Html\Column([
-                'data' => 'master_privilege.nama_hak_akses_pengguna',
-                'name' => 'master_privilege.nama_hak_akses_pengguna',
+            'nama_hak_akses_pengguna' => ([
+                'data' => 'master_privileges.nama_hak_akses_pengguna',
+                'name' => 'master_privileges.nama_hak_akses_pengguna',
                 'title' => 'Hak Akses'
             ]),
-            'id_status_pengguna'=> new \Yajra\DataTables\Html\Column([
-                'data' => 'master_status_user.nama_status_pengguna',
-                'name' => 'master_status_user.nama_status_pengguna',
+            'nama_status_pengguna' => ([
+                'data' => 'master_status_users.nama_status_pengguna',
+                'name' => 'master_status_users.nama_status_pengguna',
                 'title' => 'Status'
             ]),
         ];
