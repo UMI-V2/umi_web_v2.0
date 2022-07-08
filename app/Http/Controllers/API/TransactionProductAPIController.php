@@ -40,7 +40,8 @@ class TransactionProductAPIController extends AppBaseController
                 ]);
             }
         } catch (Exception $error) {
-            dd($error->getMessage());
+            throw new Exception("add product Transaction- $error->getMessage()", 1);
+            
             return ResponseFormatter::error(
                 [
                     'message' => $error->getMessage(),

@@ -59,7 +59,7 @@ class ProductAPIController extends AppBaseController
 
             if ($id) {
                 $value = Product::with(['master_units', 'product_category.master_product_categories', 'product_files', 'product_discount' => function ($query) {
-                    return $query->with('discount')->whereHas('discount', function ($q) {
+                    return $query->with('discounts')->whereHas('discounts', function ($q) {
                         $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
                     });
                 }])->find($id);
@@ -82,7 +82,7 @@ class ProductAPIController extends AppBaseController
 
             if ($is_show_discount_only) {
                 $value->whereHas('product_discount', function ($q) {
-                    $q->with('discount')->whereHas('discount', function ($q) {
+                    $q->with('discounts')->whereHas('discounts', function ($q) {
                         $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
                     });
                 });
@@ -164,11 +164,11 @@ class ProductAPIController extends AppBaseController
 
 
             return ResponseFormatter::success($value->with(['master_units', 'product_category.master_product_categories', 'product_files', 'product_discount' => function ($query) {
-                return $query->with('discount')->whereHas('discount', function ($q) {
+                return $query->with('discounts')->whereHas('discounts', function ($q) {
                     $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
                 });
             }, 'available_discount' => function ($query) {
-                return $query->with('discount')->whereHas('discount', function ($q) {
+                return $query->with('discounts')->whereHas('discounts', function ($q) {
                     $q->where('waktu_berakhir', '>', Carbon::now());
                 });
             }])->paginate($limit), 'Get Products Success');
