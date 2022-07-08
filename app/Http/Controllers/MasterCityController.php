@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateMasterCityRequest;
 use App\Http\Requests\UpdateMasterCityRequest;
 use App\Repositories\MasterCityRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

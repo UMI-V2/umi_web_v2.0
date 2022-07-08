@@ -160,3 +160,6 @@ Route::resource('announcements', App\Http\Controllers\AnnouncementController::cl
 
 
 Route::resource('eventRegisters', App\Http\Controllers\EventRegisterController::class);
+
+
+Route::resource('productDiscounts', App\Http\Controllers\ProductDiscountController::class);

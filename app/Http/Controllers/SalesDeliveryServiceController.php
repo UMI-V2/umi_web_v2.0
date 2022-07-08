@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateSalesDeliveryServiceRequest;
 use App\Http\Requests\UpdateSalesDeliveryServiceRequest;
 use App\Repositories\SalesDeliveryServiceRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

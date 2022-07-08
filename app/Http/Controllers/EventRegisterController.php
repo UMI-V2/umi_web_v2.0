@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateEventRegisterRequest;
 use App\Http\Requests\UpdateEventRegisterRequest;
 use App\Repositories\EventRegisterRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use App\Models\Event;
@@ -98,7 +98,7 @@ class EventRegisterController extends AppBaseController
         $eventRegister = $this->eventRegisterRepository->find($id);
         $events = Event::query()->pluck('title', 'id');
         $users = User::query()->pluck('name', 'id');
-        
+
         if (empty($eventRegister)) {
             Flash::error('Event Register not found');
 

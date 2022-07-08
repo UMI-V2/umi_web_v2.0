@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateMasterProvinceRequest;
 use App\Http\Requests\UpdateMasterProvinceRequest;
 use App\Repositories\MasterProvinceRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

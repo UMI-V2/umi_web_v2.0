@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateTransactionStatusRequest;
 use App\Http\Requests\UpdateTransactionStatusRequest;
 use App\Repositories\TransactionStatusRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Flash;
 use Response;
 use App\Http\Requests;
 use App\Models\Business;
 use App\Models\Discount;
+use Laracasts\Flash\Flash;
+use App\Models\ProductDiscount;
 use App\DataTables\DiscountDataTable;
 use App\Repositories\DiscountRepository;
 use App\Http\Controllers\AppBaseController;
@@ -79,6 +80,7 @@ class DiscountController extends AppBaseController
             'businesses'
         ])->where('id', $id)->first();
 
+        $productDiscount = ProductDiscount::find($id);
         // dd($id);
         // $discount = Discount::where('id', $id)->first();
 
@@ -86,7 +88,7 @@ class DiscountController extends AppBaseController
         //     "data"=>$discount
         // ]);
 
-        
+
 
         if (empty($discount)) {
             Flash::error('Discount not found');
@@ -94,7 +96,7 @@ class DiscountController extends AppBaseController
             return redirect(route('discounts.index'));
         }
 
-        return view('discounts.show')->with('discount', $discount);
+        return view('discounts.show')->with('discount', $discount)->with('productDiscount', $productDiscount);
     }
 
     /**

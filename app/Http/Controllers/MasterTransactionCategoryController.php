@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateMasterTransactionCategoryRequest;
 use App\Http\Requests\UpdateMasterTransactionCategoryRequest;
 use App\Repositories\MasterTransactionCategoryRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\UserRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
@@ -69,7 +69,7 @@ class UserController extends AppBaseController
 
         // array merge password
         $input['password'] = Hash::make($input['password']);
-        
+
         // $input = User::create(aray_merge[
         //         'name' => $request->name,
         //         'username' => $request->username,
@@ -82,7 +82,7 @@ class UserController extends AppBaseController
         //         'id_privilege' => $request->id_privilege,
         //         'id_status_pengguna' => $request->id_status_pengguna,
         //     ]);
-        
+
         $user = $this->userRepository->create($input);
 
         Flash::success('User saved successfully.');

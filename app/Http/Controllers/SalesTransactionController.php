@@ -11,7 +11,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateSalesTransactionRequest;
 use App\Http\Requests\UpdateSalesTransactionRequest;
 use App\Repositories\SalesTransactionRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

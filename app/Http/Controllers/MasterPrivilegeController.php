@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateMasterPrivilegeRequest;
 use App\Http\Requests\UpdateMasterPrivilegeRequest;
 use App\Repositories\MasterPrivilegeRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

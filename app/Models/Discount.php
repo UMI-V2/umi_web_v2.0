@@ -132,10 +132,10 @@ class Discount extends Model
     {
         return $this->belongsTo(\App\Models\Business::class, 'id_usaha');
     }
-    // public function product_discounts()
-    // {
-    //     return $this->hasMany(\App\Models\ProductDiscount::class, 'id_discount', 'id');
-    // }
+    public function product_discounts()
+    {
+        return $this->hasMany(\App\Models\ProductDiscount::class, 'id_discount', 'id');
+    }
 
 
     public static function boot() {

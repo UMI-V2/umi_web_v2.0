@@ -201,6 +201,13 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="{{ route('productDiscounts.index') }}"
+                class="nav-link {{ Request::is('productDiscounts*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Diskon Produk</p>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('ratings.index') }}"
                 class="nav-link {{ Request::is('ratings*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
@@ -607,13 +614,12 @@
                 <p>Pengumuman</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('eventRegisters.index') }}"
+                class="nav-link {{ Request::is('eventRegisters*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Daftar Event</p>
+            </a>
+        </li>
     </ul>
 </li>
-<li class="nav-item">
-    <a href="{{ route('eventRegisters.index') }}"
-       class="nav-link {{ Request::is('eventRegisters*') ? 'active' : '' }}">
-        <p>Daftar Event</p>
-    </a>
-</li>
-
-

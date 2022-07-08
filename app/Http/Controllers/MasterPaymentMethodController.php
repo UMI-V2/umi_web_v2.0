@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateMasterPaymentMethodRequest;
 use App\Http\Requests\UpdateMasterPaymentMethodRequest;
 use App\Repositories\MasterPaymentMethodRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

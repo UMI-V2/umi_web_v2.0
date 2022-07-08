@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateShippingCostVariableRequest;
 use App\Http\Requests\UpdateShippingCostVariableRequest;
 use App\Repositories\ShippingCostVariableRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
