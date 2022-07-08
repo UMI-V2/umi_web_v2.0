@@ -23,7 +23,7 @@ class ProductDiscount extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public $table = 'discount_products';
+    public $table = 'product_discounts';
 
     public $fillable = [
         'id_product',
