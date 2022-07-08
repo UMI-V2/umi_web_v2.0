@@ -27,13 +27,44 @@ class SalesTransactionAPIController extends AppBaseController
 
     public function all(Request $request)
     {
+        try {
+            $id = $request->input('id');
+            $id_user = $request->input('id_user');
+            $id_usaha = $request->input('id_usaha');
+
+            if ($id) {
+                $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail'])->find($id);
+                return ResponseFormatter::success(
+                    $transaction,
+                    "Get Transaksi Berhasil",
+                );
+            }
+            $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail']);
+
+            if ($id_user) {
+                $transaction->where('id_user', $id_user);
+            } 
+             if ($id_usaha) {
+                $transaction->where('id_usaha', $id_usaha);
+            }
+
+            return ResponseFormatter::success(
+                $transaction->orderBy('updated_at', 'desc')->get(),
+                "Get All Transaksi Saya Berhasil",
+            );
+        } catch (Exception $e) {
+            return ResponseFormatter::error(
+                $e->getMessage(),
+                "Get All Transaksi Gagal",
+            );
+        }
     }
     public function getMyTransaction(Request $request)
     {
         try {
-            $transaction = SalesTransaction::where('id_user', $request->user()->id)->orderBy('updated_at', 'desc')->get();
+            $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail'])->where('id_user', $request->user()->id)->orderBy('updated_at', 'desc')->get();
             return ResponseFormatter::success(
-                $transaction->load(['users', 'businesses.users', 'transaction_status', 'products_detail']),
+                $transaction,
                 "Get Transaksi Saya Berhasil",
             );
         } catch (Exception $e) {
@@ -44,25 +75,6 @@ class SalesTransactionAPIController extends AppBaseController
         }
     }
 
-    public function getMyBusinessTransaction(Request $request)
-    {
-        try {
-            Validator::make($request->all(), [
-                'id_usaha' => 'required|exists:businesses,id',
-
-            ]);
-            $transaction = SalesTransaction::where('id_usaha', $request->id_usaha)->orderBy('updated_at', 'desc')->get();
-            return ResponseFormatter::success(
-                $transaction->load(['users', 'businesses.users', 'transaction_status', 'products_detail']),
-                "Get Transaksi Saya Berhasil",
-            );
-        } catch (Exception $e) {
-            return ResponseFormatter::error(
-                $e->getMessage(),
-                "Get Transaksi Saya Gagal",
-            );
-        }
-    }
     public function update(Request $request)
     {
     }
@@ -190,6 +202,7 @@ class SalesTransactionAPIController extends AppBaseController
                     'id_transaksi_penjualan' => $transaction->id,
                 ], [
                     'tanggal_pesanan_dibatalkan' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'status' => 'Dibatalkan',
                     'reason_pembatalan_penjual' => $request->reason_pembatalan_penjual,
                     'reason_pembatalan_pembeli' => $request->reason_pembatalan_pembeli,
 
