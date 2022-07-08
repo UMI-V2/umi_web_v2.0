@@ -173,7 +173,6 @@ class SalesTransaction extends Model
         'is_ambil_di_toko' => 'required',
         'no_pemesanan' => 'required',
         'subtotal_produk' => 'required|numeric',
-        'subtotal_ongkir' => 'required|numeric',
         'diskon' => 'required|numeric',
         'biaya_penanganan' => 'required|numeric',
         'link_pembayaran' => 'nullable',

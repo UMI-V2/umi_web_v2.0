@@ -39,8 +39,13 @@ class TransactionProductAPIController extends AppBaseController
                     'preorder' => $product['preorder'],
                 ]);
             }
+            
         } catch (Exception $error) {
+
+            
+            throw new Exception("Error Processing Request =>".$error->getMessage(), 1);
             dd($error->getMessage());
+
             return ResponseFormatter::error(
                 [
                     'message' => $error->getMessage(),
