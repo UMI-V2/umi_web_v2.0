@@ -18,7 +18,7 @@ class CreateMasterDeliveryServicesTable extends Migration
             $table->id();
             $table->string('nama_jasa_pengiriman');
             $table->boolean('is_set_seller');
-            $table->string('deskripsi');
+            $table->longText('deskripsi');
             $table->string('kode_rajaongkir');
             $table->timestamps();
             $table->softDeletes();

@@ -86,7 +86,7 @@ class Product extends Model
 
 
     public $table = 'products';
-    
+
 
 
 
@@ -182,7 +182,8 @@ class Product extends Model
         return $this->belongsTo(\App\Models\ProductDiscount::class, 'id', 'id_product');
     }
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
         static::deleting(function($product) { 
@@ -202,5 +203,4 @@ class Product extends Model
              ShippingCostVariable::where('id_produk', $product->id)->delete();
         });
     }
-
 }

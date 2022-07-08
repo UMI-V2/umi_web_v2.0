@@ -8,7 +8,7 @@ use App\DataTables\ProductFileDataTable;
 use App\Http\Requests\CreateProductFileRequest;
 use App\Http\Requests\UpdateProductFileRequest;
 use App\Repositories\ProductFileRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
@@ -45,7 +45,7 @@ class ProductFileController extends AppBaseController
         return view('product_files.create')->with('products', $products);
     }
 
-    
+
     public function store(CreateProductFileRequest $request)
     {
         // $input = $request->all();

@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\Discount;
+use App\Models\ProductDiscount;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class DiscountDataTable extends DataTable
+class ProductDiscountDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,20 +18,22 @@ class DiscountDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'discounts.datatables_actions')->addColumn('nama_usaha', function ($data) {
-            return $data->businesses->nama_usaha;
-        });
+        return $dataTable->addColumn('action', 'product_discounts.datatables_actions')->addColumn(
+            'nama',
+            function ($data) {
+                return $data->products->nama;})->addColumn('nama_promo', function ($data) {
+            return $data->discounts->nama_promo;});
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Discount $model
+     * @param \App\Models\ProductDiscount $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Discount $model)
+    public function query(ProductDiscount $model)
     {
-        return $model->newQuery()->with('businesses');
+        return $model->newQuery()->with('products')->with('discounts');
     }
 
     /**
@@ -67,18 +69,10 @@ class DiscountDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'nama_usaha',
-            // 'id_usaha' => new \Yajra\DataTables\Html\Column([
-            //     'data' => 'businesses.nama_usaha',
-            //     'name' => 'businesses.nama_usaha',
-            //     'title' => 'Nama Usaha',
-            // ]),
+            'nama',
             'nama_promo',
-            'waktu_mulai',
-            'waktu_berakhir',
-            'potongan',
-            // 'batas_pembelian',
-            'type'
+            'harga_diskon',
+            'batas_pembelian'
         ];
     }
 
@@ -89,6 +83,6 @@ class DiscountDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'discounts_datatable_' . time();
+        return 'product_discounts_datatable_' . time();
     }
 }

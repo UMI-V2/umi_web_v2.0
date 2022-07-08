@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateProductCategoryRequest;
 use App\Http\Requests\UpdateProductCategoryRequest;
 use App\Repositories\ProductCategoryRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

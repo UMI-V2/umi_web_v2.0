@@ -18,7 +18,7 @@ class CreateSalesDeliveryServicesTable extends Migration
             $table->id();
             $table->bigInteger('id_jasa_pengiriman')->unsigned();
             $table->string('jenis_layanan');
-            $table->string('deskripsi_layanan');
+            $table->longText('deskripsi_layanan');
             $table->integer('ongkir');
             $table->timestamps();
             $table->softDeletes();

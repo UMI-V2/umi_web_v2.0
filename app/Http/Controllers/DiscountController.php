@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\DataTables\DiscountDataTable;
+use Response;
 use App\Http\Requests;
+use App\Models\Business;
+use App\Models\Discount;
+use Laracasts\Flash\Flash;
+use App\Models\ProductDiscount;
+use App\DataTables\DiscountDataTable;
+use App\Repositories\DiscountRepository;
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateDiscountRequest;
 use App\Http\Requests\UpdateDiscountRequest;
-use App\Repositories\DiscountRepository;
-use Flash;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 class DiscountController extends AppBaseController
 {
@@ -41,8 +43,8 @@ class DiscountController extends AppBaseController
      */
     public function create()
     {
-        $products = Product::query()->pluck('nama', 'id');
-        return view('discounts.create')->with('products', $products);
+        $businesses = Business::query()->pluck('nama_usaha', 'id');
+        return view('discounts.create')->with('businesses', $businesses);
     }
 
     /**
@@ -72,7 +74,21 @@ class DiscountController extends AppBaseController
      */
     public function show($id)
     {
-        $discount = $this->discountRepository->find($id);
+        // $discount = $this->discountRepository->find($id);
+
+        $discount = Discount::with([
+            'businesses'
+        ])->where('id', $id)->first();
+
+        $productDiscount = ProductDiscount::find($id);
+        // dd($id);
+        // $discount = Discount::where('id', $id)->first();
+
+        // return response()->json([
+        //     "data"=>$discount
+        // ]);
+
+
 
         if (empty($discount)) {
             Flash::error('Discount not found');
@@ -80,7 +96,7 @@ class DiscountController extends AppBaseController
             return redirect(route('discounts.index'));
         }
 
-        return view('discounts.show')->with('discount', $discount);
+        return view('discounts.show')->with('discount', $discount)->with('productDiscount', $productDiscount);
     }
 
     /**
@@ -93,7 +109,7 @@ class DiscountController extends AppBaseController
     public function edit($id)
     {
         $discount = $this->discountRepository->find($id);
-        $products = Product::query()->pluck('nama', 'id');
+        $businesses = Business::query()->pluck('nama_usaha', 'id');
 
         if (empty($discount)) {
             Flash::error('Discount not found');
@@ -101,7 +117,7 @@ class DiscountController extends AppBaseController
             return redirect(route('discounts.index'));
         }
 
-        return view('discounts.edit')->with('discount', $discount)->with('products', $products);
+        return view('discounts.edit')->with('discount', $discount)->with('businesses', $businesses);
     }
 
     /**

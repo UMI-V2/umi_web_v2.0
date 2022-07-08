@@ -14,7 +14,7 @@ use App\Http\Requests\CreateBusinessRequest;
 use App\Http\Requests\UpdateBusinessRequest;
 use App\Repositories\BusinessRepository;
 use App\Repositories\OpenHourRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
@@ -23,12 +23,11 @@ class BusinessController extends AppBaseController
     /** @var BusinessRepository $businessRepository*/
     private $businessRepository;
 
-    
+
 
     public function __construct(BusinessRepository $businessRepo)
     {
         $this->businessRepository = $businessRepo;
-        
     }
 
     /**
@@ -82,8 +81,8 @@ class BusinessController extends AppBaseController
      */
     public function show($id)
     {
-        
-        
+
+
         // $business = $this->businessRepository->find($id);
         $business = Business::with(['users', 'masterStatusBusinesses', 'business_file'])->where('id', $id)->first();
         $openHour = OpenHour::find($id);
@@ -92,8 +91,8 @@ class BusinessController extends AppBaseController
         //     "data"=>$business
         // ]);
         // $businessCategory = BusinessCategory::find($id);
-        
-        
+
+
         if (empty($business)) {
             Flash::error('Business not found');
 

@@ -128,9 +128,9 @@ class Discount extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function products()
+    public function businesses()
     {
-        return $this->belongsTo(\App\Models\Product::class, 'id_produk', 'id');
+        return $this->belongsTo(\App\Models\Business::class, 'id_usaha');
     }
     public function product_discounts()
     {

@@ -11,7 +11,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
 use App\Repositories\AddressRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

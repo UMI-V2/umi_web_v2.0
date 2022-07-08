@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateMasterStatusUserRequest;
 use App\Http\Requests\UpdateMasterStatusUserRequest;
 use App\Repositories\MasterStatusUserRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

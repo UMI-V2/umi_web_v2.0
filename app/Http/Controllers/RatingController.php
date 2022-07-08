@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateRatingRequest;
 use App\Http\Requests\UpdateRatingRequest;
 use App\Repositories\RatingRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

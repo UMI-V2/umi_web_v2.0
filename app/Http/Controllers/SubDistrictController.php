@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateSubDistrictRequest;
 use App\Http\Requests\UpdateSubDistrictRequest;
 use App\Repositories\SubDistrictRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

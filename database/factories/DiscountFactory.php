@@ -26,7 +26,7 @@ class DiscountFactory extends Factory
         'nama_promo' => $this->faker->word,
         'waktu_mulai' => $this->faker->word,
         'waktu_berakhir' => $this->faker->word,
-        'harga' => $this->faker->randomDigitNotNull,
+        'potongan' => $this->faker->randomDigitNotNull,
         'batas_pembelian' => $this->faker->randomDigitNotNull,
         'type' => $this->faker->word,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),

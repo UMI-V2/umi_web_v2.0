@@ -1,24 +1,24 @@
 <!-- Id Field -->
-<div class="col-sm-12">
+{{-- <div class="col-sm-12">
     {!! Form::label('id', 'Id:') !!}
     <p>{{ $product->id }}</p>
-</div>
+</div> --}}
 
 <!-- Id Usaha Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_usaha', 'Id Usaha:') !!}
-    <p>{{ $product->id_usaha }}</p>
+    {!! Form::label('id_usaha', 'Nama Toko:') !!}
+    <p>{{ $product->businesses->nama_usaha }}</p>
 </div>
 
 <!-- Id Satuan Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_satuan', 'Id Satuan:') !!}
-    <p>{{ $product->id_satuan }}</p>
+    {!! Form::label('id_satuan', 'Satuan:') !!}
+    <p>{{ $product->master_units->nama_satuan }}</p>
 </div>
 
 <!-- Nama Field -->
 <div class="col-sm-12">
-    {!! Form::label('nama', 'Nama:') !!}
+    {!! Form::label('nama', 'Nama Produk:') !!}
     <p>{{ $product->nama }}</p>
 </div>
 

@@ -12,7 +12,10 @@ use App\DataTables\MasterPrivilegeDataTable;
 use App\Repositories\MasterPrivilegeRepository;
 use App\Http\Requests\CreateMasterPrivilegeRequest;
 use App\Http\Requests\UpdateMasterPrivilegeRequest;
-use App\Models\Product;
+use App\Repositories\MasterPrivilegeRepository;
+use Laracasts\Flash\Flash;
+use App\Http\Controllers\AppBaseController;
+use Response;
 
 class MasterPrivilegeController extends AppBaseController
 {

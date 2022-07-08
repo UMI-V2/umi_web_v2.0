@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateBusinessDeliveryServiceRequest;
 use App\Http\Requests\UpdateBusinessDeliveryServiceRequest;
 use App\Repositories\BusinessDeliveryServiceRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

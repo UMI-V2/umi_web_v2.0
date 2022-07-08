@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateMasterStatusBusinessRequest;
 use App\Http\Requests\UpdateMasterStatusBusinessRequest;
 use App\Repositories\MasterStatusBusinessRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

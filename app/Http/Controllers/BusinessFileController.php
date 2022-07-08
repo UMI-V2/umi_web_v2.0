@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateBusinessFileRequest;
 use App\Http\Requests\UpdateBusinessFileRequest;
 use App\Repositories\BusinessFileRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

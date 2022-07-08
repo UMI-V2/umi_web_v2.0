@@ -57,7 +57,7 @@ class MasterDeliveryService extends Model
     use HasFactory, SoftDeletes;
 
     public $table = 'master_delivery_services';
-    
+
 
 
 

@@ -59,7 +59,7 @@ class SalesDeliveryService extends Model
     use HasFactory, SoftDeletes;
 
     public $table = 'sales_delivery_services';
-    
+
 
 
 

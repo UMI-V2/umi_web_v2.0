@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateShippingUsedRequest;
 use App\Http\Requests\UpdateShippingUsedRequest;
 use App\Repositories\ShippingUsedRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

@@ -17,7 +17,7 @@ class CreateMasterTransactionCategoriesTable extends Migration
         Schema::create('master_transaction_categories', function (Blueprint $table) {
             $table->id();
             $table->string('nama_kategori_transaksi');
-            $table->string('deskripsi_kategori_transaksi');
+            $table->longText('deskripsi_kategori_transaksi');
             $table->timestamps();
             $table->softDeletes();
         });

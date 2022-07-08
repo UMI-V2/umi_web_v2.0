@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateMasterDeliveryServiceRequest;
 use App\Http\Requests\UpdateMasterDeliveryServiceRequest;
 use App\Repositories\MasterDeliveryServiceRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

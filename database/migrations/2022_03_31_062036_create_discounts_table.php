@@ -18,12 +18,12 @@ class CreateDiscountsTable extends Migration
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
             // $table->bigInteger('id_product_discount')->unsigned();
-            $table->bigInteger('id_usaha')->unsigned();
+            $table->bigInteger('id_usaha')->unsigned()->nullable();
 
             $table->string('nama_promo');
             $table->dateTime('waktu_mulai');
             $table->dateTime('waktu_berakhir');
-            $table->integer('potongan');
+            $table->integer('potongan')->nullable();
             $table->integer('type');
             $table->timestamps();
             $table->softDeletes();

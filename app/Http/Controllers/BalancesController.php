@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateBalancesRequest;
 use App\Http\Requests\UpdateBalancesRequest;
 use App\Repositories\BalancesRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

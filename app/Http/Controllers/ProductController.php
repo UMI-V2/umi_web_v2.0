@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\Product;
 use App\Models\MasterUnit;
 use App\DataTables\ProductDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Repositories\ProductRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
@@ -74,7 +75,8 @@ class ProductController extends AppBaseController
      */
     public function show($id)
     {
-        $product = $this->productRepository->find($id);
+        // $product = $this->productRepository->find($id);
+        $product = Product::with(['businesses', 'master_units'])->where('id', $id)->first();
 
         if (empty($product)) {
             Flash::error('Product not found');

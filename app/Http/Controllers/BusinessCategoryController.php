@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateBusinessCategoryRequest;
 use App\Http\Requests\UpdateBusinessCategoryRequest;
 use App\Repositories\BusinessCategoryRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

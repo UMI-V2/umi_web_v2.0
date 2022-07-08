@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateOpenHourRequest;
 use App\Http\Requests\UpdateOpenHourRequest;
 use App\Repositories\OpenHourRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

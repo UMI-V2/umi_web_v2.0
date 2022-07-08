@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateTransactionProductRequest;
 use App\Http\Requests\UpdateTransactionProductRequest;
 use App\Repositories\TransactionProductRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

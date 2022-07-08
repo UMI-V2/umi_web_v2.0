@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateBusinessPaymentMethodRequest;
 use App\Http\Requests\UpdateBusinessPaymentMethodRequest;
 use App\Repositories\BusinessPaymentMethodRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

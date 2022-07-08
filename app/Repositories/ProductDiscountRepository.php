@@ -2,28 +2,25 @@
 
 namespace App\Repositories;
 
-use App\Models\Discount;
+use App\Models\ProductDiscount;
 use App\Repositories\BaseRepository;
 
 /**
- * Class DiscountRepository
+ * Class ProductDiscountRepository
  * @package App\Repositories
- * @version March 31, 2022, 6:20 am UTC
-*/
+ * @version July 8, 2022, 12:23 am WIB
+ */
 
-class DiscountRepository extends BaseRepository
+class ProductDiscountRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'id_produk',
-        'nama_promo',
-        'waktu_mulai',
-        'waktu_berakhir',
-        'potongan',
-        'batas_pembelian',
-        'type'
+        'id_product',
+        'id_discount',
+        'harga_diskon',
+        'batas_pembelian'
     ];
 
     /**
@@ -41,6 +38,6 @@ class DiscountRepository extends BaseRepository
      **/
     public function model()
     {
-        return Discount::class;
+        return ProductDiscount::class;
     }
 }

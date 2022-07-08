@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('id_satuan')->unsigned();
             // $table->bigInteger('id_kategori')->unsigned()->nullable();
             $table->string('nama');
-            $table->string('deskripsi');
+            $table->longText('deskripsi');
             $table->bigInteger('harga');
             $table->integer('stok');
             $table->boolean('kondisi');

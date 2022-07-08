@@ -47,7 +47,7 @@ class MasterTransactionCategory extends Model
     use HasFactory, SoftDeletes;
 
     public $table = 'master_transaction_categories';
-    
+
 
 
 

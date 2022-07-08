@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateMasterUnitRequest;
 use App\Http\Requests\UpdateMasterUnitRequest;
 use App\Repositories\MasterUnitRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 

@@ -66,7 +66,7 @@ class Balances extends Model
     use HasFactory, SoftDeletes;
 
     public $table = 'balances';
-    
+
 
 
     public $fillable = [

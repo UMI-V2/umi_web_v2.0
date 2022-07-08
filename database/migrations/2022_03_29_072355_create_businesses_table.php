@@ -19,7 +19,7 @@ class CreateBusinessesTable extends Migration
             $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('id_master_status_usaha')->default(1)->unsigned();
             $table->string('nama_usaha');
-            $table->string('deskripsi')->nullable();
+            $table->longText('deskripsi')->nullable();
             $table->boolean('is_ambil_di_toko')->default(true);
             $table->boolean('is_auto_payment')->default(false);
             $table->boolean('is_manual_payment')->default(true);
