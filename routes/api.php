@@ -142,7 +142,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::group(['prefix' => 'transaction'], function () {
         Route::get('/getMyTransaction', [SalesTransactionAPIController::class, 'getMyTransaction']);
-        Route::get('/getMyBusinessTransaction', [SalesTransactionAPIController::class, 'getMyBusinessTransaction']);
+        
         Route::post('/checkout', [SalesTransactionAPIController::class, 'checkout']);
         Route::post('/confirmation', [SalesTransactionAPIController::class, 'confirmation']);
         Route::post('/payment', [SalesTransactionAPIController::class, 'payment']);

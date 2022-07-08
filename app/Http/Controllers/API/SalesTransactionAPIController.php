@@ -23,37 +23,18 @@ use App\Http\Controllers\AppBaseController;
 
 class SalesTransactionAPIController extends AppBaseController
 {
-    // 'Menunggu Konfirmasi', 'Menunggu Pembayaran','Sedang Disiapkan', 'Telah Dikirimkan', 'Telah Diterima', 'Dibatalkan'
+    // 'Menunggu Konfirmasi', 'Menunggu Pembayaran','Sedang Disiapkan', 'Telah Dikirimkan', 'Talah Diterima', 'Dibatalkan'
 
     public function all(Request $request)
     {
+
     }
     public function getMyTransaction(Request $request)
     {
         try {
-            $transaction = SalesTransaction::where('id_user', $request->user()->id)->orderBy('updated_at', 'desc')->get();
+            $transaction= SalesTransaction::where('id_user',$request->user()->id )->get();
             return ResponseFormatter::success(
-                $transaction->load(['users', 'businesses.users', 'transaction_status', 'products_detail']),
-                "Get Transaksi Saya Berhasil",
-            );
-        } catch (Exception $e) {
-            return ResponseFormatter::error(
-                $e->getMessage(),
-                "Get Transaksi Saya Gagal",
-            );
-        }
-    }
-
-    public function getMyBusinessTransaction(Request $request)
-    {
-        try {
-            Validator::make($request->all(), [
-                'id_usaha' => 'required|exists:businesses,id',
-
-            ]);
-            $transaction = SalesTransaction::where('id_usaha', $request->id_usaha)->orderBy('updated_at', 'desc')->get();
-            return ResponseFormatter::success(
-                $transaction->load(['users', 'businesses.users', 'transaction_status', 'products_detail']),
+                $transaction->load(['users', 'transaction_status', 'products_detail']),
                 "Get Transaksi Saya Berhasil",
             );
         } catch (Exception $e) {
@@ -122,7 +103,7 @@ class SalesTransactionAPIController extends AppBaseController
             DB::commit();
 
             return ResponseFormatter::success(
-                $transaction->load(['businesses.users', 'users', 'transaction_status', 'products_detail']),
+                $transaction->load(['users', 'transaction_status', 'products_detail']),
                 "Transaksi Berhasil",
             );
         } catch (Exception $e) {
@@ -199,7 +180,7 @@ class SalesTransactionAPIController extends AppBaseController
             DB::commit();
 
             return ResponseFormatter::success(
-                $transaction->load(['businesses.users', 'users', 'transaction_status',  'products_detail']),
+                $transaction->load(['users', 'transaction_status',  'products_detail']),
                 "Confirmation Success",
             );
         } catch (Exception $e) {
@@ -220,11 +201,11 @@ class SalesTransactionAPIController extends AppBaseController
 
         try {
             DB::beginTransaction();
-            Validator::make($request->all(), [
-                'id' => 'required',
-                'status' => 'required|in:Menunggu Konfirmasi, Menunggu Pembayaran, Sedang Disiapkan, Telah Dikirimkan, Telah Diterima, Dibatalkan',
-            ]);
 
+            $request->validate([
+                'id' => 'required',
+                'status' => 'required|in:Menunggu Konfirmasi, Menunggu Pembayaran,Sedang Disiapkan, Telah Dikirimkan, Telah Diterima, Dibatalkan',
+            ]);
 
             switch ($request->status) {
                 case 'Menunggu Konfirmasi':
@@ -272,7 +253,6 @@ class SalesTransactionAPIController extends AppBaseController
                         'id_transaksi_penjualan' => $transaction->id,
                     ], [
                         'tanggal_pesanan_dibatalkan' => Carbon::now()->format('Y-m-d H:i:s'),
-                        'status' => 'Dibatalkan',
                         'reason_pembatalan_penjual' => $request->reason_pembatalan_penjual,
                         'reason_pembatalan_pembeli' => $request->reason_pembatalan_pembeli,
 
@@ -286,7 +266,7 @@ class SalesTransactionAPIController extends AppBaseController
 
             DB::commit();
             return ResponseFormatter::success(
-                $transaction->load(['users', 'businesses.users', 'transaction_status', 'products_detail']),
+                $transaction->load(['users', 'transaction_status']),
                 "Change Status Success",
             );
         } catch (Exception $e) {

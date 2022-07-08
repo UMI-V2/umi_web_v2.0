@@ -23,7 +23,7 @@ class CreateSalesTransactionsTable extends Migration
             $table->boolean('is_ambil_di_toko')->nullable();
             $table->string('no_pemesanan');
             $table->integer('subtotal_produk');
-            $table->integer('subtotal_ongkir')->nullable();
+            $table->integer('subtotal_ongkir');
             $table->integer('diskon');
             $table->integer('biaya_penanganan');
             $table->string('link_pembayaran')->nullable();
