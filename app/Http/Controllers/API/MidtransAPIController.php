@@ -40,25 +40,27 @@ class MidtransAPIController extends Controller
                 } else {
 
                     $transactionStatus->status = 'Sedang Disiapkan';
+                    $transactionStatus->status_auto_payment = 'Telah Dibayar';
                     $transactionStatus->tanggal_pembayaran = Carbon::now()->format('Y-m-d H:i:s');
                     Balances::create([
                         'id_user' =>  $transaction->id_user,
-                        'id_kategori_transaksi'=> 1,
-                        'id_transaksi_penjualan'=>$transaction->id,
-                        'pemasukan'=> $transaction->subtotal_produk +$transaction->subtotal_ongkir,
-                        'deskripsi'=> "Pembayaran untuk pesanan $order_id telah berhasil"
+                        'id_kategori_transaksi' => 1,
+                        'id_transaksi_penjualan' => $transaction->id,
+                        'pemasukan' => $transaction->subtotal_produk + $transaction->subtotal_ongkir,
+                        'deskripsi' => "Pembayaran untuk pesanan $order_id telah berhasil"
                     ]);
                 }
             }
         } else if ($status == 'settlement') {
             $transactionStatus->status = 'Sedang Disiapkan';
+            $transactionStatus->status_auto_payment = 'Telah Dibayar';
             $transactionStatus->tanggal_pembayaran = Carbon::now()->format('Y-m-d H:i:s');
             Balances::create([
                 'id_user' =>  $transaction->id_user,
-                'id_kategori_transaksi'=> 1,
-                'id_transaksi_penjualan'=>$transaction->id,
-                'pemasukan'=> $transaction->subtotal_produk +$transaction->subtotal_ongkir,
-                'deskripsi'=> "Pembayaran untuk pesanan $order_id telah berhasil"
+                'id_kategori_transaksi' => 1,
+                'id_transaksi_penjualan' => $transaction->id,
+                'pemasukan' => $transaction->subtotal_produk + $transaction->subtotal_ongkir,
+                'deskripsi' => "Pembayaran untuk pesanan $order_id telah berhasil"
             ]);
         } else if ($status == 'pending') {
             $transactionStatus->status = 'Menunggu Pembayaran';
@@ -67,14 +69,17 @@ class MidtransAPIController extends Controller
             $transactionStatus->status = 'Dibatalkan';
             $transactionStatus->tanggal_pesanan_dibatalkan = Carbon::now()->format('Y-m-d H:i:s');
             $transactionStatus->reason_pembatalan_penjual = "Pembayaran ditolak oleh sistem";
+            $transactionStatus->status_auto_payment = 'Pembayaran gagal';
         } else if ($status == 'expire') {
             $transactionStatus->status = 'Dibatalkan';
             $transactionStatus->tanggal_pesanan_dibatalkan = Carbon::now()->format('Y-m-d H:i:s');
             $transactionStatus->reason_pembatalan_penjual = "Waktu pembayaran telah berakhir, anda dapat mengulangi pemesanan untuk melakukan pembayaran.";
+            $transactionStatus->status_auto_payment = 'Pembayaran gagal';
         } else if ($status == 'cancel') {
             $transactionStatus->status = 'Dibatalkan';
             $transactionStatus->tanggal_pesanan_dibatalkan = Carbon::now()->format('Y-m-d H:i:s');
             $transactionStatus->reason_pembatalan_penjual = "Pembayaran dibatalkan oleh sistem";
+            $transactionStatus->status_auto_payment = 'Pembayaran gagal';
         }
 
         $transactionStatus->save();

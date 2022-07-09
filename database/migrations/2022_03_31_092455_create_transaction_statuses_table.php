@@ -18,6 +18,7 @@ class CreateTransactionStatusesTable extends Migration
             $table->id();
             $table->bigInteger('id_transaksi_penjualan')->unsigned();
             $table->enum('status', array('Menunggu Konfirmasi', 'Menunggu Pembayaran','Sedang Disiapkan','Telah Siap', 'Telah Dikirimkan', 'Telah Diterima', 'Dibatalkan'))->nullable();
+            $table->string('status_auto_payment', 20)->nullable();
             $table->dateTime('tanggal_pesanan_dibuat')->nullable();
             $table->dateTime('tanggal_pesanan_disetujui')->nullable();
             $table->dateTime('tanggal_pembayaran')->nullable();

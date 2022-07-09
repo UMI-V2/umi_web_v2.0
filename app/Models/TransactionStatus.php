@@ -74,6 +74,7 @@ class TransactionStatus extends Model
     public $fillable = [
         'id_transaksi_penjualan',
         'status',
+        'status_auto_payment',
         'tanggal_pesanan_dibuat',
         'tanggal_pesanan_disetujui',
         'tanggal_pembayaran',

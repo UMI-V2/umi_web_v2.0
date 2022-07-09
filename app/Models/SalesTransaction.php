@@ -127,6 +127,7 @@ class SalesTransaction extends Model
         'diskon',
         'biaya_penanganan',
         'link_pembayaran',
+        'batas_waktu_pembayaran',
         'total_pesanan',
         'is_delivery',
         'is_manual_payment',

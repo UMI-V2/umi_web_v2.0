@@ -16,6 +16,10 @@ class CreateAddressDeliveriesTable extends Migration
         Schema::create('address_deliveries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_transaksi_penjualan');
+            $table->bigInteger('province_id')->unsigned();
+            $table->bigInteger('city_id')->unsigned();
+            $table->bigInteger('subdistrict_id')->unsigned();
+
             $table->string('nama');
             $table->string('no_hp');
             $table->string('alamat_lengkap');
