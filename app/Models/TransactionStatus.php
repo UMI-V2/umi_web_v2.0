@@ -78,6 +78,7 @@ class TransactionStatus extends Model
         'tanggal_pesanan_disetujui',
         'tanggal_pembayaran',
         'tanggal_pesanan_disiapkan',
+        'tanggal_pesanan_telah_siap',
         'tanggal_pesanan_dikirimkan',
         'tanggal_pesanan_diterima',
         'tanggal_pesanan_dibatalkan',

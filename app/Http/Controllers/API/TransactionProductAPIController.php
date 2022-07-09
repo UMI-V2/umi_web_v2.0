@@ -11,6 +11,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Repositories\TransactionProductRepository;
 use App\Http\Requests\API\CreateTransactionProductAPIRequest;
 use App\Http\Requests\API\UpdateTransactionProductAPIRequest;
+use App\Models\Cart;
 
 /**
  * Class TransactionProductController
@@ -24,7 +25,8 @@ class TransactionProductAPIController extends AppBaseController
         try {
             foreach ($request->products as $value => $product) {
                 // dd($product['id_produk']);
-               $transactionProduct= TransactionProduct::create([
+                Cart::where('id', $product['id_cart'])->delete();
+                TransactionProduct::create([
                     'id_transaksi_penjualan' => $idTransaction,
                     'id_produk' => $product['id_produk'],
                     'nama_produk' => $product['nama_produk'],
@@ -41,7 +43,7 @@ class TransactionProductAPIController extends AppBaseController
             }
         } catch (Exception $error) {
             throw new Exception("add product Transaction- $error->getMessage()", 1);
-            
+
             return ResponseFormatter::error(
                 [
                     'message' => $error->getMessage(),

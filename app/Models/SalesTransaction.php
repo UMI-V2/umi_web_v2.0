@@ -231,4 +231,9 @@ class SalesTransaction extends Model
     {
         return $this->hasMany(\App\Models\TransactionProduct::class, 'id_transaksi_penjualan', 'id');
     }
+
+    public function address_delivery()
+    {
+        return $this->belongsTo(\App\Models\AddressDelivery::class, 'id', 'id_transaksi_penjualan');
+    }
 }
