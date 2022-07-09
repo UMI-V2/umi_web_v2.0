@@ -54,7 +54,7 @@ class CartAPIController extends Controller
 
             $cartResult = Cart::with(['product'=> function ($query) {
                 $query->with(['businesses.users','master_units', 'product_category.master_product_categories', 'product_files', 'product_discount' => function ($query) {
-                    return $query->with('discount')->whereHas('discount', function ($q) {
+                    return $query->with('discounts')->whereHas('discounts', function ($q) {
                         $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
                     });
                 }]);
