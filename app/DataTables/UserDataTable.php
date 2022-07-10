@@ -74,18 +74,18 @@ class UserDataTable extends DataTable
                         $(input).appendTo($(column.footer()).empty())
                         .on('keyup', function () {
                             column.search($(this).val()).draw();
-                        });
+                        }).attr('placeholder', 'Search');
 
                         
                     });
                     
-                    $('input#0').attr('placeholder', 'Cari berdasarkan Nama');
-                    
-                    $('input#1').attr('placeholder', 'Cari berdasarkan Akses');
-                    
-                    $('input#2').attr('placeholder', 'Cari berdasarkan Status');
                     
                 }",
+                // $('input#0').attr('placeholder', 'Cari berdasarkan Nama');
+                
+                // $('input#1').attr('placeholder', 'Cari berdasarkan Akses');
+                
+                // $('input#2').attr('placeholder', 'Cari berdasarkan Status');
             ]);
     }
 
