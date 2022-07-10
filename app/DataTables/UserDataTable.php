@@ -78,7 +78,7 @@ class UserDataTable extends DataTable
 
                         
                     });
-                    
+                
                     
                 }",
                 // $('input#0').attr('placeholder', 'Cari berdasarkan Nama');
