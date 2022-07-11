@@ -18,14 +18,7 @@ class BusinessCategoryDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'business_categories.datatables_actions')->addColumn(
-            'nama_usaha', 
-            function ($data) {
-                return $data->businesses->nama_usaha;
-            }
-        )->addColumn('nama_kategori_usaha', function ($data) {
-            return $data->master_business_categories->nama_kategori_usaha;
-        });
+        return $dataTable->addColumn('action', 'business_categories.datatables_actions');
     }
 
     /**
@@ -88,12 +81,12 @@ class BusinessCategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'nama_usaha' => ([
+            'id_usaha' => new \Yajra\DataTables\Html\Column([
                 'data' => 'businesses.nama_usaha',
                 'name' => 'businesses.nama_usaha',
                 'title' => 'Nama Usaha',
             ]),
-            'nama_kategori_usaha' => ([
+            'id_master_kategori_usaha' => new \Yajra\DataTables\Html\Column([
                 'data' => 'master_business_categories.nama_kategori_usaha',
                 'name' => 'master_business_categories.nama_kategori_usaha',
                 'title' => 'Nama Kategori Usaha',
