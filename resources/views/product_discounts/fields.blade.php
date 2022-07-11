@@ -7,7 +7,7 @@
 
 <!-- Id Discount Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('id_discount', 'Diskon Produk:') !!}
+    {!! Form::label('id_discount', 'Nama Diskon:') !!}
     {!! Form::select('id_discount', $discounts, null, ['class' => 'form-control custom-select']) !!}
 </div>
 
