@@ -25,7 +25,7 @@ class BusinessCategoryDataTable extends DataTable
             }
         )->addColumn('nama_kategori_usaha', function ($data) {
             return $data->master_business_categories->nama_kategori_usaha;
-        });;
+        });
     }
 
     /**
