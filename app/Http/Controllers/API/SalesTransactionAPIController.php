@@ -35,7 +35,7 @@ class SalesTransactionAPIController extends AppBaseController
             $id_usaha = $request->input('id_usaha');
 
             if ($id) {
-                $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail','address_delivery'])->find($id);
+                $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail', 'address_delivery'])->find($id);
                 return ResponseFormatter::success(
                     $transaction,
                     "Get Transaksi Berhasil",
@@ -206,16 +206,26 @@ class SalesTransactionAPIController extends AppBaseController
                     ];
                     $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
                     $transaction->link_pembayaran = $paymentUrl;
-                    $transaction->batas_waktu_pembayaran =Carbon::now()->addMinute(30)->format('Y-m-d H:i:s');
+                    $transaction->batas_waktu_pembayaran = Carbon::now()->addMinute(30)->format('Y-m-d H:i:s');
+                    if ($request->subtotal_ongkir) {
+                        $transaction->subtotal_ongkir = $request->subtotal_ongkir;
+                        $transaction->total_pesanan = $transaction->total_pesanan + $request->subtotal_ongkir;
+                    }
                     $transaction->save();
                     TransactionStatus::updateOrCreate([
                         'id_transaksi_penjualan' => $transaction->id,
                     ], [
                         'status' => 'Menunggu Pembayaran',
-                        'status_auto_payment'=>'Belum Dibayar',
+                        'status_auto_payment' => 'Belum Dibayar',
                         'tanggal_pesanan_disetujui' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]);
                 } else {
+                    if ($request->subtotal_ongkir) {
+                        $transaction->subtotal_ongkir = $request->subtotal_ongkir;
+                        $transaction->total_pesanan = $transaction->total_pesanan + $request->subtotal_ongkir;
+                        $transaction->save();
+                    }
+
                     TransactionStatus::updateOrCreate([
                         'id_transaksi_penjualan' => $transaction->id,
                     ], [
@@ -239,7 +249,7 @@ class SalesTransactionAPIController extends AppBaseController
             DB::commit();
 
             return ResponseFormatter::success(
-                $transaction->load(['businesses.users', 'users', 'transaction_status',  'products_detail','address_delivery']),
+                $transaction->load(['businesses.users', 'users', 'transaction_status',  'products_detail', 'address_delivery']),
                 "Confirmation Success",
             );
         } catch (Exception $e) {
@@ -333,7 +343,7 @@ class SalesTransactionAPIController extends AppBaseController
 
             DB::commit();
             return ResponseFormatter::success(
-                $transaction->load(['users', 'businesses.users', 'transaction_status', 'products_detail','address_delivery']),
+                $transaction->load(['users', 'businesses.users', 'transaction_status', 'products_detail', 'address_delivery']),
                 "Change Status Success",
             );
         } catch (Exception $e) {

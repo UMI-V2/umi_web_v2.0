@@ -132,7 +132,6 @@ class SalesTransaction extends Model
         'is_delivery',
         'is_manual_payment',
         'is_auto_payment',
-        'is_rating',
         'message',
     ];
 

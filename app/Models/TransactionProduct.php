@@ -99,6 +99,7 @@ class TransactionProduct extends Model
         'kuantitas',
         'kondisi',
         'preorder',
+        'is_rating'
     ];
 
     /**

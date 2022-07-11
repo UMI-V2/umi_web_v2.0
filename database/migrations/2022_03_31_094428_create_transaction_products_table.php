@@ -29,6 +29,8 @@ class CreateTransactionProductsTable extends Migration
             $table->longText('deskripsi_produk');
             $table->boolean('kondisi');
             $table->boolean('preorder');
+            $table->boolean('is_rating')->default(false);
+
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('id_transaksi_penjualan')->references('id')->on('sales_transactions');

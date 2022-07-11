@@ -32,7 +32,6 @@ class CreateSalesTransactionsTable extends Migration
             $table->boolean('is_delivery')->default(false);
             $table->boolean('is_manual_payment')->default(false);
             $table->boolean('is_auto_payment')->default(false);
-            $table->boolean('is_rating')->default(false);
             $table->longText('message')->nullable();
             $table->timestamps();
             $table->softDeletes();
