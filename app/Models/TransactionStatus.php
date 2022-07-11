@@ -67,6 +67,7 @@ class TransactionStatus extends Model
     use HasFactory, SoftDeletes;
 
     public $table = 'transaction_statuses';
+    // 'Menunggu Konfirmasi', 'Menunggu Pembayaran','Sedang Disiapkan','Telah Siap', 'Telah Dikirimkan', 'Telah Diterima', 'Dibatalkan'
 
 
 
