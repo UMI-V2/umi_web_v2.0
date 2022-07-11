@@ -30,6 +30,14 @@ class SalesTransactionAPIController extends AppBaseController
     public function all(Request $request)
     {
         try {
+            // $transaction = SalesTransaction::where('is_auto_payment', 1)->whereHas('transaction_status', function ($q) {
+            //     $q->whereNotNull('tanggal_pesanan_diterima');
+            // })->sum('total_pesanan');
+            // return ResponseFormatter::success(
+            //     $transaction,
+            //     "Get All Transaksi SUM",
+            // );
+
             $id = $request->input('id');
             $id_user = $request->input('id_user');
             $id_usaha = $request->input('id_usaha');
