@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Flash;
 use Response;
 use App\Models\User;
 use App\Http\Requests;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Http\Controllers\AppBaseController;
 use App\DataTables\MasterPrivilegeDataTable;
-use App\Repositories\MasterPrivilegeRepository;
 use App\Http\Requests\CreateMasterPrivilegeRequest;
 use App\Http\Requests\UpdateMasterPrivilegeRequest;
 use App\Repositories\MasterPrivilegeRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class MasterPrivilegeController extends AppBaseController
 {

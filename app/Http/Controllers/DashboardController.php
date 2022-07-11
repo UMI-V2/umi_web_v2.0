@@ -17,8 +17,9 @@ class DashboardController extends Controller
         $totalUser = \App\Models\User::count();
         $totalUsaha = \App\Models\Business::count();
         $totalProduk = \App\Models\Product::count();
+        $totalTransaksi = \App\Models\SalesTransaction::count();
 
-        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk'));
+        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi'));
     }
 
     /** 
