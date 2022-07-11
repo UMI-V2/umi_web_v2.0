@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -43,10 +44,6 @@ class MasterProvince extends Model
     public $table = 'master_provinces';
     protected $primaryKey = 'province_id';
 
-    
-
-
-
     public $fillable = [
         'province_name'
     ];
@@ -70,5 +67,12 @@ class MasterProvince extends Model
         'province_name' => 'required'
     ];
 
-    
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+            // Address::where('province_id', $model->id)->delete();
+            // MasterCity::where('province_id', $model->id)->delete();
+        });
+    }
 }

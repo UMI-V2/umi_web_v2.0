@@ -115,7 +115,8 @@ class User extends Authenticatable
         'email',
         'password',
         'id_privilege',
-        'id_status_pengguna'
+        'id_status_pengguna',
+        'token_notification'
     ];
 
     /**
@@ -198,5 +199,15 @@ class User extends Authenticatable
     public function getRoleAttribute()
     {
         return $this->MasterPrivilege->nama_hak_akses_pengguna;
+    }
+
+
+    public static function boot() {
+        parent::boot();
+        static::deleting(function($user) { 
+            Business::where('id_user', $user->id)->delete();
+            Address::where('id_users', $user->id)->delete();
+            
+        });
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -73,13 +74,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Discount extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'discounts';
     
-
-
-
     public $fillable = [
         'id',
         // 'id_product_discount',
@@ -124,6 +122,8 @@ class Discount extends Model
         // 'batas_pembelian' => 'required',
         'type' => 'required'
     ];
+
+    
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

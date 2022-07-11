@@ -21,6 +21,7 @@ class CreateBusinessCategoriesTable extends Migration
             $table->timestamps();
             $table->foreign('id_usaha')->references('id')->on('businesses');
             $table->foreign('id_master_kategori_usaha')->references('id')->on('master_business_categories');
+            $table->softDeletes();
         });
     }
 

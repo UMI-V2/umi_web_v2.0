@@ -1,11 +1,14 @@
 <?php
 
 use App\Models\MasterProvince;
+use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\OpenHourController;
 use App\Http\Controllers\API\AuthAPIController;
+use App\Http\Controllers\API\CartAPIController;
 use App\Http\Controllers\API\UserAPIController;
 use App\Http\Controllers\API\AddressAPIController;
 use App\Http\Controllers\API\ProductAPIController;
@@ -16,10 +19,13 @@ use App\Http\Controllers\API\MasterCityAPIController;
 use App\Http\Controllers\API\MasterUnitAPIController;
 use App\Http\Controllers\API\MasterProvinceAPIController;
 use App\Http\Controllers\MasterDeliveryServiceController;
+use App\Http\Controllers\API\ProductCategoryAPIController;
 use App\Http\Controllers\API\BusinessCategoryAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
+use App\Http\Controllers\API\MidtransAPIController;
+use App\Http\Controllers\API\SalesTransactionAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,12 +58,23 @@ Route::get('getSubDistrict', [MasterSubDistrictAPIController::class, 'index']);
 
 Route::group(['prefix' => 'masterCategoryProduct'], function () {
     Route::get('/', [MasterProductCategoryAPIController::class, 'all']);
+    Route::delete('/delete/{id}', [MasterProductCategoryAPIController::class, 'destroy']);
+    // Route::post('update', [ProductAPIController::class, 'store']);
+});
+
+Route::group(['prefix' => 'categoryProduct'], function () {
+    Route::get('/', [ProductCategoryAPIController::class, 'all']);
+    Route::delete('/delete', [ProductCategoryAPIController::class, 'destroy']);
     // Route::post('update', [ProductAPIController::class, 'store']);
 });
 
 Route::group(['prefix' => 'masterUnit'], function () {
     Route::get('/', [MasterUnitAPIController::class, 'all']);
     // Route::post('update', [ProductAPIController::class, 'store']);
+});
+
+Route::group(['prefix' => 'midtrans'], function () {
+    Route::post('/callback', [MidtransAPIController::class, 'callback']);
 });
 
 // AUTH
@@ -115,8 +132,25 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', [DiscountAPIController::class, 'index']);
         Route::post('update', [DiscountAPIController::class, 'store']);
         Route::delete('delete', [DiscountAPIController::class, 'delete']);
-
     });
+
+    Route::group(['prefix' => 'cart'], function () {
+        Route::get('/getMyCart', [CartAPIController::class, 'getMyCart']);
+        Route::post('/update', [CartAPIController::class, 'update']);
+        Route::delete('/delete', [CartAPIController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'transaction'], function () {
+        Route::get('/getMyTransaction', [SalesTransactionAPIController::class, 'getMyTransaction']);
+        Route::get('/all', [SalesTransactionAPIController::class, 'all']);
+        Route::post('/checkout', [SalesTransactionAPIController::class, 'checkout']);
+        Route::post('/confirmation', [SalesTransactionAPIController::class, 'confirmation']);
+        Route::post('/payment', [SalesTransactionAPIController::class, 'payment']);
+        Route::post('/changeStatus', [SalesTransactionAPIController::class, 'changeStatus']);
+        Route::delete('/delete', [SalesTransactionAPIController::class, 'destroy']);
+    });
+
+
     
     
 });

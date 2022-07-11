@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -43,7 +44,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class MasterTransactionCategory extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'master_transaction_categories';
 
@@ -75,4 +76,14 @@ class MasterTransactionCategory extends Model
         'nama_kategori_transaksi' => 'required',
         'deskripsi_kategori_transaksi' => 'required'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+        //    Balances::where('id_kategori_transaksi', $model->id)->delete();
+        });
+    }
+
+    
 }

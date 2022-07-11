@@ -10,14 +10,12 @@ use App\Models\Product;
 use App\Models\Business;
 use App\Models\MasterCity;
 use App\Models\MasterUnit;
-use App\Models\MasterSubDistrict;
 use App\Models\MasterProvince;
 use App\Models\MasterPrivilege;
 
 use Illuminate\Database\Seeder;
 use App\Models\MasterStatusUser;
 use App\Models\SalesTransaction;
-use App\Models\MasterSubDistrict;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\MasterPaymentMethod;
 use App\Models\MasterStatusBusiness;

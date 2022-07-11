@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -45,13 +46,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class BusinessPaymentMethod extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'business_payment_methods';
     
-
-
-
     public $fillable = [
         'id_usaha',
         'id_metode_pembayaran'
@@ -77,6 +75,14 @@ class BusinessPaymentMethod extends Model
         'id_usaha' => 'required',
         'id_metode_pembayaran' => 'required'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -21,6 +21,10 @@ class CreateBusinessesTable extends Migration
             $table->string('nama_usaha');
             $table->longText('deskripsi')->nullable();
             $table->boolean('is_ambil_di_toko')->default(true);
+            $table->boolean('is_auto_payment')->default(false);
+            $table->boolean('is_manual_payment')->default(true);
+            $table->boolean('is_delivery')->default(false);
+
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->timestamps();

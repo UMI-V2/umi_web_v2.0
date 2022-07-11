@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateSalesTransactionAPIRequest;
-use App\Http\Requests\API\UpdateSalesTransactionAPIRequest;
-use App\Models\SalesTransaction;
-use App\Repositories\SalesTransactionRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
+use Exception;
+use Carbon\Carbon;
+use Midtrans\Snap;
+use Midtrans\Config;
+use Midtrans\Transaction;
+use Illuminate\Http\Request;
+use App\Models\SalesTransaction;
+use App\Models\TransactionStatus;
+use App\Helpers\ResponseFormatter;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\AppBaseController;
+use App\Models\Address;
+use App\Models\AddressDelivery;
 
 /**
  * Class SalesTransactionController
@@ -17,265 +25,344 @@ use Response;
 
 class SalesTransactionAPIController extends AppBaseController
 {
-    /** @var  SalesTransactionRepository */
-    private $salesTransactionRepository;
+    // 'Menunggu Konfirmasi', 'Menunggu Pembayaran','Sedang Disiapkan','Telah Siap', 'Telah Dikirimkan', 'Telah Diterima', 'Dibatalkan'
 
-    public function __construct(SalesTransactionRepository $salesTransactionRepo)
+    public function all(Request $request)
     {
-        $this->salesTransactionRepository = $salesTransactionRepo;
-    }
+        try {
+            $id = $request->input('id');
+            $id_user = $request->input('id_user');
+            $id_usaha = $request->input('id_usaha');
 
-    /**
-     * @param Request $request
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/salesTransactions",
-     *      summary="Get a listing of the SalesTransactions.",
-     *      tags={"SalesTransaction"},
-     *      description="Get all SalesTransactions",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/SalesTransaction")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function index(Request $request)
-    {
-        $salesTransactions = $this->salesTransactionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+            if ($id) {
+                $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail', 'address_delivery'])->find($id);
+                return ResponseFormatter::success(
+                    $transaction,
+                    "Get Transaksi Berhasil",
+                );
+            }
+            $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail', 'address_delivery']);
 
-        return $this->sendResponse($salesTransactions->toArray(), 'Sales Transactions retrieved successfully');
-    }
+            if ($id_user) {
+                $transaction->where('id_user', $id_user);
+            }
+            if ($id_usaha) {
+                $transaction->where('id_usaha', $id_usaha);
+            }
 
-    /**
-     * @param CreateSalesTransactionAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/salesTransactions",
-     *      summary="Store a newly created SalesTransaction in storage",
-     *      tags={"SalesTransaction"},
-     *      description="Store SalesTransaction",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="SalesTransaction that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SalesTransaction")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/SalesTransaction"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function store(CreateSalesTransactionAPIRequest $request)
-    {
-        $input = $request->all();
-
-        $salesTransaction = $this->salesTransactionRepository->create($input);
-
-        return $this->sendResponse($salesTransaction->toArray(), 'Sales Transaction saved successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/salesTransactions/{id}",
-     *      summary="Display the specified SalesTransaction",
-     *      tags={"SalesTransaction"},
-     *      description="Get SalesTransaction",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of SalesTransaction",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/SalesTransaction"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function show($id)
-    {
-        /** @var SalesTransaction $salesTransaction */
-        $salesTransaction = $this->salesTransactionRepository->find($id);
-
-        if (empty($salesTransaction)) {
-            return $this->sendError('Sales Transaction not found');
+            return ResponseFormatter::success(
+                $transaction->orderBy('updated_at', 'desc')->get(),
+                "Get All Transaksi Saya Berhasil",
+            );
+        } catch (Exception $e) {
+            return ResponseFormatter::error(
+                $e->getMessage(),
+                "Get All Transaksi Gagal",
+            );
         }
-
-        return $this->sendResponse($salesTransaction->toArray(), 'Sales Transaction retrieved successfully');
     }
-
-    /**
-     * @param int $id
-     * @param UpdateSalesTransactionAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/salesTransactions/{id}",
-     *      summary="Update the specified SalesTransaction in storage",
-     *      tags={"SalesTransaction"},
-     *      description="Update SalesTransaction",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of SalesTransaction",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="SalesTransaction that should be updated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SalesTransaction")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/SalesTransaction"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function update($id, UpdateSalesTransactionAPIRequest $request)
+    public function getMyTransaction(Request $request)
     {
-        $input = $request->all();
-
-        /** @var SalesTransaction $salesTransaction */
-        $salesTransaction = $this->salesTransactionRepository->find($id);
-
-        if (empty($salesTransaction)) {
-            return $this->sendError('Sales Transaction not found');
+        try {
+            $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail', 'address_delivery'])->where('id_user', $request->user()->id)->orderBy('updated_at', 'desc')->get();
+            return ResponseFormatter::success(
+                $transaction,
+                "Get Transaksi Saya Berhasil",
+            );
+        } catch (Exception $e) {
+            return ResponseFormatter::error(
+                $e->getMessage(),
+                "Get Transaksi Saya Gagal",
+            );
         }
-
-        $salesTransaction = $this->salesTransactionRepository->update($input, $id);
-
-        return $this->sendResponse($salesTransaction->toArray(), 'SalesTransaction updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Delete(
-     *      path="/salesTransactions/{id}",
-     *      summary="Remove the specified SalesTransaction from storage",
-     *      tags={"SalesTransaction"},
-     *      description="Delete SalesTransaction",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of SalesTransaction",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
+    public function update(Request $request)
+    {
+    }
+
+    public function checkout(Request $request)
+    {
+
+        DB::beginTransaction();
+        Validator::make($request->all(), [
+            'id_usaha' => 'required|exists:businesses,id',
+            'id_address' => 'exists:addresses,id',
+            'subtotal_produk' => 'required',
+            'subtotal_ongkir' => 'required',
+            'diskon' => 'required',
+            'biaya_penanganan' => 'required',
+            'total_pesanan' => 'required',
+            'is_delivery' => 'required',
+            'is_manual_payment' => 'required',
+            'is_auto_payment' => 'required',
+            'products' => 'raquired|array',
+
+        ]);
+
+
+
+        $transaction = SalesTransaction::create([
+            'id_user' => $request->user()->id,
+            'id_usaha' => $request->id_usaha,
+            'no_pemesanan' => '',
+            'subtotal_produk' => $request->subtotal_produk,
+            'subtotal_ongkir' => $request->subtotal_ongkir,
+            'diskon' => $request->diskon,
+            'biaya_penanganan' => $request->biaya_penanganan,
+            'total_pesanan' => $request->total_pesanan,
+            'is_delivery' => $request->is_delivery,
+            'is_manual_payment' => $request->is_manual_payment,
+            'is_auto_payment' => $request->is_auto_payment,
+            'message' => $request->message
+        ]);
+
+
+
+        $transaction = SalesTransaction::with(['users'])->find($transaction->id);
+        // dd($transaction);
+        $no_pesanan = Carbon::now()->getPreciseTimestamp(3) . "$transaction->id";
+
+        try {
+            TransactionProductAPIController::addProduct($request,  $transaction->id);
+            TransactionStatus::updateOrCreate([
+                'id_transaksi_penjualan' => $transaction->id,
+            ], [
+                'status' => 'Menunggu Konfirmasi',
+                'tanggal_pesanan_dibuat' => Carbon::now()->format('Y-m-d H:i:s'),
+
+            ]);
+            if ($request->id_address) {
+                $address = Address::find($request->id_address);
+                AddressDelivery::updateOrCreate([
+                    'id_transaksi_penjualan' => $transaction->id,
+                ], [
+                    'province_id' => $address->province_id,
+                    'city_id' => $address->city_id,
+                    'subdistrict_id' => $address->subdistrict_id,
+                    'nama' => $address->nama,
+                    'no_hp' => $address->no_hp,
+                    'alamat_lengkap' => $address->alamat_lengkap,
+                    'patokan' => $address->patokan,
+                    'is_alamat_utama' => $address->is_alamat_utama,
+                    'is_rumah' => $address->is_rumah,
+                    'is_kantor' => $address->is_kantor,
+                    'is_usaha' => $address->is_usaha,
+                    'latitude' => $address->latitude,
+                    'longitude' => $address->longitude,
+                ]);
+            }
+            $transaction->no_pemesanan = $no_pesanan;
+            $transaction->save();
+
+            DB::commit();
+
+            return ResponseFormatter::success(
+                $transaction->load(['businesses.users', 'users', 'transaction_status', 'products_detail']),
+                "Transaksi Berhasil",
+            );
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return ResponseFormatter::error(
+                $e->getMessage(),
+                "Transaksi Gagal",
+            );
+        }
+    }
+
+    public function confirmation(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $request->validate([
+                'id' => 'required',
+                'confirmation' => 'required',
+            ]);
+            $transaction =  SalesTransaction::with('users')->find($request->id);
+
+            if ($request->confirmation) {
+                if ($transaction->is_auto_payment) {
+                    Config::$serverKey = config('services.midtrans.serverKey');
+                    Config::$clientKey = config('services.midtrans.clientKey');
+                    Config::$isProduction = config('services.midtrans.isProduction');
+                    Config::$isSanitized = config('services.midtrans.isSanitized');
+                    Config::$is3ds = config('services.midtrans.is3ds');
+                    $midtrans = [
+                        'transaction_details' => [
+                            'order_id'    =>  $transaction->no_pemesanan,
+                            'gross_amount'  => (int) $transaction->total_pesanan
+                        ],
+                        'customer_details' => [
+                            'first_name' => $transaction->users->name,
+                            'email' => $transaction->users->email,
+                        ],
+                        'vtweb' => [],
+                        "expiry" => [
+                            "start_time" => Carbon::now()->format('Y-m-d H:i:s') . "+0700",
+                            "unit" => "minutes",
+                            "duration" => 30,
+                        ]
+                    ];
+                    $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
+                    $transaction->link_pembayaran = $paymentUrl;
+                    $transaction->batas_waktu_pembayaran = Carbon::now()->addMinute(30)->format('Y-m-d H:i:s');
+                    if ($request->subtotal_ongkir) {
+                        $transaction->subtotal_ongkir = $request->subtotal_ongkir;
+                        $transaction->total_pesanan = $transaction->total_pesanan + $request->subtotal_ongkir;
+                    }
+                    $transaction->save();
+                    TransactionStatus::updateOrCreate([
+                        'id_transaksi_penjualan' => $transaction->id,
+                    ], [
+                        'status' => 'Menunggu Pembayaran',
+                        'status_auto_payment' => 'Belum Dibayar',
+                        'tanggal_pesanan_disetujui' => Carbon::now()->format('Y-m-d H:i:s'),
+                    ]);
+                } else {
+                    if ($request->subtotal_ongkir) {
+                        $transaction->subtotal_ongkir = $request->subtotal_ongkir;
+                        $transaction->total_pesanan = $transaction->total_pesanan + $request->subtotal_ongkir;
+                        $transaction->save();
+                    }
+
+                    TransactionStatus::updateOrCreate([
+                        'id_transaksi_penjualan' => $transaction->id,
+                    ], [
+                        'status' => 'Sedang Disiapkan',
+                        'tanggal_pesanan_disetujui' => Carbon::now()->format('Y-m-d H:i:s'),
+                        'tanggal_pesanan_disiapkan' => Carbon::now()->format('Y-m-d H:i:s'),
+                    ]);
+                }
+            } else {
+                TransactionStatus::updateOrCreate([
+                    'id_transaksi_penjualan' => $transaction->id,
+                ], [
+                    'tanggal_pesanan_dibatalkan' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'status' => 'Dibatalkan',
+                    'reason_pembatalan_penjual' => $request->reason_pembatalan_penjual,
+                    'reason_pembatalan_pembeli' => $request->reason_pembatalan_pembeli,
+
+                ]);
+            }
+
+            DB::commit();
+
+            return ResponseFormatter::success(
+                $transaction->load(['businesses.users', 'users', 'transaction_status',  'products_detail', 'address_delivery']),
+                "Confirmation Success",
+            );
+        } catch (Exception $e) {
+            DB::rollBack();
+            return ResponseFormatter::error(
+                [
+                    'message' => $e->getMessage()
+                ],
+                "Confirmation Failed",
+            );
+        }
+    }
+
+
+    public function changeStatus(Request $request)
+    {
+        $transaction =  SalesTransaction::with('users')->find($request->id);
+
+        try {
+            DB::beginTransaction();
+            Validator::make($request->all(), [
+                'id' => 'required',
+                'status' => 'required|in:Menunggu Konfirmasi, Menunggu Pembayaran, Sedang Disiapkan,Telah Siap, Telah Dikirimkan, Telah Diterima, Dibatalkan',
+            ]);
+
+
+            switch ($request->status) {
+                case 'Menunggu Konfirmasi':
+                    TransactionStatus::updateOrCreate([
+                        'id_transaksi_penjualan' => $transaction->id,
+                    ], [
+                        'status' => 'Menunggu Konfirmasi',
+                        // 'tanggal_pesanan_dibatalkan' => Carbon::now()->format('Y-m-d H:i:s'),
+                    ]);
+                    break;
+                case 'Menunggu Pembayaran':
+                    TransactionStatus::updateOrCreate([
+                        'id_transaksi_penjualan' => $transaction->id,
+                    ], [
+                        'status' => 'Menunggu Pembayaran',
+                        // 'tanggal_pesanan_dibatalkan' => Carbon::now()->format('Y-m-d H:i:s'),
+                    ]);
+                    break;
+                case 'Sedang Disiapkan':
+                    TransactionStatus::updateOrCreate([
+                        'id_transaksi_penjualan' => $transaction->id,
+                    ], [
+                        'status' => 'Sedang Disiapkan',
+                        'tanggal_pesanan_disiapkan' => Carbon::now()->format('Y-m-d H:i:s'),
+                    ]);
+                    break;
+                case 'Telah Siap':
+                    TransactionStatus::updateOrCreate([
+                        'id_transaksi_penjualan' => $transaction->id,
+                    ], [
+                        'status' => 'Telah Siap',
+                        'tanggal_pesanan_telah_siap' => Carbon::now()->format('Y-m-d H:i:s'),
+                    ]);
+                    break;
+                case 'Telah Dikirimkan':
+                    TransactionStatus::updateOrCreate([
+                        'id_transaksi_penjualan' => $transaction->id,
+                    ], [
+                        'status' => 'Telah Dikirimkan',
+                        'tanggal_pesanan_dikirimkan' => Carbon::now()->format('Y-m-d H:i:s'),
+                    ]);
+                    break;
+                case 'Telah Diterima':
+                    TransactionStatus::updateOrCreate([
+                        'id_transaksi_penjualan' => $transaction->id,
+                    ], [
+                        'status' => 'Telah Diterima',
+                        'tanggal_pesanan_diterima' => Carbon::now()->format('Y-m-d H:i:s'),
+                    ]);
+                    break;
+                case 'Dibatalkan':
+                    TransactionStatus::updateOrCreate([
+                        'id_transaksi_penjualan' => $transaction->id,
+                    ], [
+                        'tanggal_pesanan_dibatalkan' => Carbon::now()->format('Y-m-d H:i:s'),
+                        'status' => 'Dibatalkan',
+                        'reason_pembatalan_penjual' => $request->reason_pembatalan_penjual,
+                        'reason_pembatalan_pembeli' => $request->reason_pembatalan_pembeli,
+                    ]);
+                    break;
+
+                default:
+                    //   dd("tidak terdeteksi");
+                    break;
+            }
+
+            DB::commit();
+            return ResponseFormatter::success(
+                $transaction->load(['users', 'businesses.users', 'transaction_status', 'products_detail', 'address_delivery']),
+                "Change Status Success",
+            );
+        } catch (Exception $e) {
+            DB::rollBack();
+            return ResponseFormatter::error(
+                [
+                    'message' => $e->getMessage()
+                ],
+                "Change Status Failed",
+            );
+        }
+    }
+
+
+
+
+
+
     public function destroy($id)
     {
-        /** @var SalesTransaction $salesTransaction */
-        $salesTransaction = $this->salesTransactionRepository->find($id);
-
-        if (empty($salesTransaction)) {
-            return $this->sendError('Sales Transaction not found');
-        }
-
-        $salesTransaction->delete();
-
-        return $this->sendSuccess('Sales Transaction deleted successfully');
     }
 }

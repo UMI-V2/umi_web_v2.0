@@ -19,6 +19,7 @@ class CreateBusinessPaymentMethodsTable extends Migration
             $table->bigInteger('id_usaha')->unsigned();
             $table->bigInteger('id_metode_pembayaran')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_usaha')->references('id')->on('businesses');
             $table->foreign('id_metode_pembayaran')->references('id')->on('master_payment_methods');
         });

@@ -20,11 +20,19 @@ class CreateTransactionProductsTable extends Migration
             $table->bigInteger('id_produk')->unsigned();
             $table->integer('harga_produk');
             $table->integer('harga_diskon');
+            $table->string('nama_produk');
+            $table->string('jumlah_satuan');
+            $table->string('nama_satuan');
+            $table->integer('kuantitas');
+
+            $table->string('photo_url_produk');
             $table->longText('deskripsi_produk');
             $table->boolean('kondisi');
             $table->boolean('preorder');
-            $table->integer('ongkir');
+            $table->boolean('is_rating')->default(false);
+
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_transaksi_penjualan')->references('id')->on('sales_transactions');
             $table->foreign('id_produk')->references('id')->on('products');
         });

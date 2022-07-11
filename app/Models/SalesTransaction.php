@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -107,10 +108,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class SalesTransaction extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'sales_transactions';
-    
+
 
 
 
@@ -126,8 +127,12 @@ class SalesTransaction extends Model
         'diskon',
         'biaya_penanganan',
         'link_pembayaran',
+        'batas_waktu_pembayaran',
         'total_pesanan',
-        'is_rating'
+        'is_delivery',
+        'is_manual_payment',
+        'is_auto_payment',
+        'message',
     ];
 
     /**
@@ -149,6 +154,9 @@ class SalesTransaction extends Model
         'biaya_penanganan' => 'integer',
         'link_pembayaran' => 'string',
         'total_pesanan' => 'integer',
+        'is_delivery'=> 'boolean',
+        'is_manual_payment'=> 'boolean',
+        'is_auto_payment'=> 'boolean',
         'is_rating' => 'boolean'
     ];
 
@@ -168,10 +176,21 @@ class SalesTransaction extends Model
         'subtotal_ongkir' => 'required|numeric',
         'diskon' => 'required|numeric',
         'biaya_penanganan' => 'required|numeric',
-        'link_pembayaran' => 'required',
+        'link_pembayaran' => 'nullable',
         'total_pesanan' => 'required|numeric',
         'is_rating' => 'required'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            // Balances::where('id_transaksi_penjualan', $model->id)->delete();
+            // Rating::where('id_transaksi_penjualan', $model->id)->delete();
+            // TransactionProduct::where('id_transaksi_penjualan', $model->id)->delete();
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -203,5 +222,18 @@ class SalesTransaction extends Model
     public function sales_delivery_services()
     {
         return $this->belongsTo(\App\Models\SalesDeliveryService::class, 'id_sales_delivery_service', 'id');
+    }
+    public function transaction_status()
+    {
+        return $this->belongsTo(\App\Models\TransactionStatus::class, 'id', 'id_transaksi_penjualan');
+    }
+    public function products_detail()
+    {
+        return $this->hasMany(\App\Models\TransactionProduct::class, 'id_transaksi_penjualan', 'id');
+    }
+
+    public function address_delivery()
+    {
+        return $this->belongsTo(\App\Models\AddressDelivery::class, 'id', 'id_transaksi_penjualan');
     }
 }

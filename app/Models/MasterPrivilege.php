@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -38,10 +39,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class MasterPrivilege extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    public $table = 'master_privileges';
-    
+    public $table = 'master_privileges';    
 
 
 
@@ -68,5 +68,11 @@ class MasterPrivilege extends Model
         'nama_hak_akses_pengguna' => 'required'
     ];
 
-    
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
+    }
 }

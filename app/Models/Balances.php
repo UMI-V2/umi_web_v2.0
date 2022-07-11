@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -62,14 +63,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Balances extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'balances';
 
 
 
-
     public $fillable = [
+        'id_user',
         'id_kategori_transaksi',
         'id_transaksi_penjualan',
         'pengeluaran',
@@ -99,8 +100,8 @@ class Balances extends Model
     public static $rules = [
         'id_kategori_transaksi' => 'required',
         'id_transaksi_penjualan' => 'required',
-        'pengeluaran' => 'required|numeric',
-        'pemasukan' => 'required|numeric'
+        // 'pengeluaran' => 'required|numeric',
+        // 'pemasukan' => 'required|numeric'
     ];
 
     /**
@@ -117,5 +118,13 @@ class Balances extends Model
     public function sales_transactions()
     {
         return $this->belongsTo(\App\Models\SalesTransaction::class, 'id_transaksi_penjualan', 'id');
+    }
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
     }
 }

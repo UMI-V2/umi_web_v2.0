@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\MasterBusinessCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -45,7 +46,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class BusinessCategory extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'business_categories';
     
@@ -78,6 +79,14 @@ class BusinessCategory extends Model
         'id_master_kategori_usaha' => 'required'
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
+    }
+
     public function usaha()
     {
         return $this->belongsTo(Business::class,  'id_usaha','id');
@@ -98,4 +107,5 @@ class BusinessCategory extends Model
     {
         return $this->belongsTo(MasterBusinessCategory::class, 'id_master_kategori_usaha', 'id');
     }
+
 }

@@ -19,6 +19,7 @@ class CreateMasterUnitsTable extends Migration
             $table->string('nama_satuan');
             $table->string('singkatan_satuan');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

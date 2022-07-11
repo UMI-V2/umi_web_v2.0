@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -75,6 +76,22 @@ class MasterProductCategory extends Model
         'nama_kategori_produk' => 'required',
         'status_kategori_produk' => 'required'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+        //    ProductCategory::where('id_master_kategori_produk', $model->id)->delete();
+        });
+    }
+
+    // public static function boot() {
+    //     parent::boot();
+
+    //     static::deleting(function($masterCategory) { 
+    //         ProductCategory::where('id_master_kategori_produk', $masterCategory->id)->delete();
+    //     });
+    // }
 
     
 }

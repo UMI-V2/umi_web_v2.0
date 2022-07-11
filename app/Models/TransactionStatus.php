@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -63,19 +64,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class TransactionStatus extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'transaction_statuses';
-    
+
 
 
 
     public $fillable = [
         'id_transaksi_penjualan',
+        'status',
+        'status_auto_payment',
         'tanggal_pesanan_dibuat',
+        'tanggal_pesanan_disetujui',
         'tanggal_pembayaran',
+        'tanggal_pesanan_disiapkan',
+        'tanggal_pesanan_telah_siap',
         'tanggal_pesanan_dikirimkan',
-        'tanggal_pesanan_diterima'
+        'tanggal_pesanan_diterima',
+        'tanggal_pesanan_dibatalkan',
+        'reason_pembatalan_penjual',
+        'reason_pembatalan_pembeli'
     ];
 
     /**
@@ -86,10 +95,15 @@ class TransactionStatus extends Model
     protected $casts = [
         'id' => 'integer',
         'id_transaksi_penjualan' => 'integer',
-        'tanggal_pesanan_dibuat' => 'date',
-        'tanggal_pembayaran' => 'date',
-        'tanggal_pesanan_dikirimkan' => 'date',
-        'tanggal_pesanan_diterima' => 'date'
+        'tanggal_pesanan_dibuat' => 'datetime',
+        'tanggal_pesanan_disetujui' => 'datetime',
+        'tanggal_pembayaran' => 'datetime',
+        'tanggal_pesanan_disiapkan' => 'datetime',
+        'tanggal_pesanan_dikirimkan' => 'datetime',
+        'tanggal_pesanan_diterima' => 'datetime',
+        'tanggal_pesanan_dibatalkan' => 'datetime',
+        'reason_pembatalan_penjual' => 'string',
+        'reason_pembatalan_pembeli' => 'string'
     ];
 
     /**
@@ -99,11 +113,19 @@ class TransactionStatus extends Model
      */
     public static $rules = [
         'id_transaksi_penjualan' => 'required',
-        'tanggal_pesanan_dibuat' => 'required',
-        'tanggal_pembayaran' => 'required',
-        'tanggal_pesanan_dikirimkan' => 'required',
-        'tanggal_pesanan_diterima' => 'required'
+        'tanggal_pesanan_dibuat' => 'nullable',
+        'tanggal_pembayaran' => 'nullable',
+        'tanggal_pesanan_dikirimkan' => 'nullable',
+        'tanggal_pesanan_diterima' => 'nullable'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

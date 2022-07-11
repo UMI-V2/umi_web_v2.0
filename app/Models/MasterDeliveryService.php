@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -53,7 +54,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class MasterDeliveryService extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'master_delivery_services';
 
@@ -90,4 +91,13 @@ class MasterDeliveryService extends Model
         'is_set_seller' => 'required',
         'deskripsi' => 'required'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+            // BusinessDeliveryService::where('id_master_jasa_pengiriman', $model->id)->delete();
+        });
+    }
+    
 }

@@ -16,14 +16,18 @@ class CreateBalancesTable extends Migration
     {
         Schema::create('balances', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('id_kategori_transaksi')->unsigned();
             $table->bigInteger('id_transaksi_penjualan')->unsigned();
-            $table->integer('pengeluaran');
-            $table->integer('pemasukan');
-            $table->longText('deskripsi');
+            $table->integer('pengeluaran')->nullable();
+            $table->integer('pemasukan')->nullable();
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_kategori_transaksi')->references('id')->on('master_transaction_categories');
             $table->foreign('id_transaksi_penjualan')->references('id')->on('sales_transactions');
+            $table->foreign('id_user')->references('id')->on('users');
+
         });
     }
 

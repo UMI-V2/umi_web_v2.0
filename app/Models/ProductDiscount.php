@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 /**
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProductDiscount extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'product_discounts';
 
@@ -55,6 +56,14 @@ class ProductDiscount extends Model
         'harga_diskon' => 'required',
         'batas_pembelian' => 'required'
     ];
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
+    }
+
 
     public function discounts()
     {

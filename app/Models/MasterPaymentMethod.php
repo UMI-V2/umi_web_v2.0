@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -43,7 +44,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class MasterPaymentMethod extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'master_payment_methods';
 
@@ -75,4 +76,13 @@ class MasterPaymentMethod extends Model
         'nama_metode_pembayaran' => 'required',
         'deskripsi_metode_pembayaran' => 'required'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            // BusinessPaymentMethod::where('id_metode_pembayaran', $model->id)->delete();
+        });
+    }
 }

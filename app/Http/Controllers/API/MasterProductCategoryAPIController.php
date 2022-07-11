@@ -284,7 +284,6 @@ class MasterProductCategoryAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var MasterProductCategory $masterProductCategory */
         $masterProductCategory = $this->masterProductCategoryRepository->find($id);
 
         if (empty($masterProductCategory)) {

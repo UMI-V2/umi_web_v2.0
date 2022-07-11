@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\NotificationManager;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class UserAPIController extends Controller
     public function getMyUser(Request $request)
     {
         try {
-            return ResponseFormatter::success($request->user()->load(['MasterPrivilege', 'MasterStatusUser']), 'Data User berhasil diambil');
+            // NotificationManager::sendNotification("ini test", "ini test juga","eODOZzLZQYaE7-F35QDxLH:APA91bHyHfE8MdqtGk4V97Nd9UcMBj6igtVwvENFGJGGXL16J35iZOzeddkJzoJ4rF_h39zBdtfg_N38ftFLIhDBFwiZJCDBYe6ZUGdGYwMZZ1zvSKfl4qn1Ix8KvSyflN4sAmZZJAAQ");
+            return ResponseFormatter::success($request->user()->load(['master_status_users', 'master_status_users']), 'Data User berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => "Update profil gagal",
@@ -77,7 +79,7 @@ class UserAPIController extends Controller
             $user->update($data);  
 
             return ResponseFormatter::success(
-                $user->load(['MasterPrivilege', 'MasterStatusUser']),
+                $user->load(['master_status_users', 'master_status_users']),
                 'Profile Updated',
             );
         } catch (Exception $error) {
@@ -119,7 +121,7 @@ class UserAPIController extends Controller
                 }
             }
 
-            return ResponseFormatter::success($user->load(['MasterPrivilege', "MasterStatusUser"]), 'File successfully uploaded');
+            return ResponseFormatter::success($user->load(['master_status_users', 'master_status_users']), 'File successfully uploaded');
         }
     }
 }

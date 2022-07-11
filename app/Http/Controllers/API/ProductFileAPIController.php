@@ -27,7 +27,8 @@ class ProductFileAPIController extends AppBaseController
             if ($request->add_file_photos) {
                 foreach ($request->file('add_file_photos') as $file) {
                     $fileRoot = $file->store("assets/business/$product->id_usaha/products", 'public');
-                    ProductFile::create([
+                    // dd($fileRoot);
+                   $productFile= ProductFile::create([
                         'id_produk' => $product->id,
                         'file' => $fileRoot,
                         'video' => false,

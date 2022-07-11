@@ -20,6 +20,7 @@ class CreateBusinessDeliveryServicesTable extends Migration
             $table->bigInteger('id_master_jasa_pengiriman')->unsigned();
             $table->string('biaya');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_usaha')->references('id')->on('businesses');
             $table->foreign('id_master_jasa_pengiriman')->references('id')->on('master_delivery_services');
         });

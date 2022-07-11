@@ -31,6 +31,10 @@ class AuthAPIController extends Controller
             }
 
             $user = User::where('no_hp', $request->no_hp)->first();
+            if($request->token_notification){
+                $user->token_notification = $request->token_notification;
+                $user->update();
+            }
 
             $tokenResult = $user->createToken('authToken')->plainTextToken;
 
@@ -65,17 +69,18 @@ class AuthAPIController extends Controller
                 'password' => ['required', 'string'],
             ]);
             // dd($request->nama);
-          $user=  User::create([
+            $user =  User::create([
                 'name' => $request->name,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'no_hp' => $request->no_hp,
+                'token_notification' => $request->token_notification,
                 'password' => Hash::make($request->password),
             ]);
 
 
             $user->update([
-                'username' => "user-".$user->id.rand(10,100),
+                'username' => "user-" . $user->id . rand(10, 100),
             ]);
             $user = User::where('no_hp', $request->no_hp)->first();
 
@@ -153,8 +158,6 @@ class AuthAPIController extends Controller
                     'Password Berhasil Diubah',
                 );
             }
-
-           
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => "Ubah Passowrd gagal",

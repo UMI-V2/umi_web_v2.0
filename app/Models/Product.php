@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -78,7 +79,7 @@ use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
 class Product extends Model
 {
 
-    use HasFactory, LaravelCoordinate;
+    use HasFactory, LaravelCoordinate, SoftDeletes;
 
     public $_latitudeName = "latitude"; //default name is latitude
     public $_longitudeName = "longitude";
@@ -172,6 +173,10 @@ class Product extends Model
         return $this->hasMany(\App\Models\ProductFile::class, 'id_produk', 'id');
     }
 
+    public function available_discount()
+    {
+        return $this->belongsTo(\App\Models\ProductDiscount::class, 'id', 'id_product');
+    }
     public function product_discount()
     {
         return $this->belongsTo(\App\Models\ProductDiscount::class, 'id', 'id_product');
@@ -181,17 +186,21 @@ class Product extends Model
     {
         parent::boot();
 
-        static::deleting(function ($product) {
-            $product->product_category()->delete();
-            $files = ProductFile::where('id_produk', $product->id)->get();
-            foreach ($files as $file) {
-                $fileName = $file->getAttributes()['file'];
-                ProductFile::where('file', $fileName)->delete();
-                if (Storage::disk('public')->exists($fileName)) {
-                    Storage::disk('public')->delete($fileName);
-                }
-            }
-            $product->product_files()->delete();
+        static::deleting(function($product) { 
+             $product->product_category()->delete();
+            //  $files = ProductFile::where('id_produk', $product->id)->get();
+            //  foreach ($files as $file) {
+            //      $fileName = $file->getAttributes()['file'];
+            //     ProductFile::where('file', $fileName)->delete();
+            //     // if (Storage::disk('public')->exists($fileName)) {
+            //     //     Storage::disk('public')->delete($fileName);
+            //     // }
+            // }
+             $product->product_files()->delete();
+             $product->product_discount()->delete();
+             Cart::where('id_produk', $product->id)->delete();
+             Rating::where('id_produk', $product->id)->delete();
+             ShippingCostVariable::where('id_produk', $product->id)->delete();
         });
     }
 }

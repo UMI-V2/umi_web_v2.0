@@ -39,7 +39,7 @@ class BusinessAPIController extends Controller
 
             if ($id) {
                 $business = Business::with(['users', 'category.master_business_categories', 'masterStatusBusinesses', 'business_file', 'open_hours', 'address' => function ($query) {
-                    return $query->where('is_usaha', 1);
+                    return $query->with('sub_districts')->where('is_usaha', 1);
                 }])->where('id', $id);
                 $business->nearby([
                     $latitude, //latitude
@@ -77,7 +77,7 @@ class BusinessAPIController extends Controller
             }
 
 
-            return ResponseFormatter::success($business->with(['category.master_business_categories', 'business_file', 'open_hours', 'category.master_business_categories', 'address'])->paginate($limit), 'Data Usaha berhasil diambil');
+            return ResponseFormatter::success($business->with(['users', 'business_file', 'open_hours', 'category.master_business_categories', 'address.sub_districts'])->paginate($limit), 'Data Usaha berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => "Get Usaha Gagal",

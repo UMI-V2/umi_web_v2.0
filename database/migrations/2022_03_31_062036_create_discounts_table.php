@@ -26,6 +26,7 @@ class CreateDiscountsTable extends Migration
             $table->integer('potongan')->nullable();
             $table->integer('type');
             $table->timestamps();
+            $table->softDeletes();
             // $table->foreign('id_product_discount')->references('id')->on('products');
             $table->foreign('id_usaha')->references('id')->on('businesses');
 

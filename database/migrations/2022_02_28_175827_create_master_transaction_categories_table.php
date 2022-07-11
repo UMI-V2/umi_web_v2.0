@@ -19,6 +19,7 @@ class CreateMasterTransactionCategoriesTable extends Migration
             $table->string('nama_kategori_transaksi');
             $table->longText('deskripsi_kategori_transaksi');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -62,7 +63,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class OpenHour extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'open_hours';
     
@@ -120,6 +121,14 @@ class OpenHour extends Model
         'id_usaha' => 'required'
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
@@ -127,4 +136,6 @@ class OpenHour extends Model
     {
         return $this->belongsTo(\App\Models\Business::class, 'id_usaha', 'id');
     }
+
+
 }

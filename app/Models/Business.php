@@ -60,7 +60,7 @@ class Business extends Model
 
 
     public $table = 'businesses';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -73,6 +73,9 @@ class Business extends Model
         'nama_usaha',
         'deskripsi',
         'is_ambil_di_toko',
+        'is_auto_payment',
+        'is_manual_payment',
+        'is_delivery',
         'latitude',
         'longitude',
         'created_at',
@@ -80,7 +83,7 @@ class Business extends Model
         'deleted_at'
 
     ];
-    
+
     /**
      * The attributes that should be casted to native types.
      *
@@ -91,7 +94,10 @@ class Business extends Model
         'id_user' => 'integer',
         'id_master_status_usaha' => 'integer',
         'nama_usaha' => 'string',
-        'is_ambil_di_toko'=>'boolean',
+        'is_ambil_di_toko' => 'boolean',
+        'is_auto_payment' => 'boolean',
+        'is_manual_payment' => 'boolean',
+        'is_delivery' => 'boolean',
     ];
 
     /**
@@ -126,29 +132,36 @@ class Business extends Model
     }
     public function category()
     {
-        return $this->hasMany(BusinessCategory::class,  'id_usaha','id');
-
+        return $this->hasMany(BusinessCategory::class,  'id_usaha', 'id');
     }
 
     public function business_file()
     {
-        return $this->hasMany(BusinessFile::class,  'id_usaha','id');
-
+        return $this->hasMany(BusinessFile::class,  'id_usaha', 'id');
     }
 
     public function open_hours()
     {
-        return $this->hasOne(OpenHour::class,  'id_usaha','id');
-
+        return $this->hasOne(OpenHour::class,  'id_usaha', 'id');
     }
 
     public function address()
     {
-        return $this->belongsTo(Address::class,  'id_user','id_users');
-
+        return $this->belongsTo(Address::class,  'id_user', 'id_users');
     }
 
-   
+    public static function boot()
+    {
+        parent::boot();
 
-
+        static::deleting(function ($model) {
+            BusinessCategory::where('id_usaha', $model->id)->delete();
+            BusinessDeliveryService::where('id_usaha', $model->id)->delete();
+            BusinessFile::where('id_usaha', $model->id)->delete();
+            BusinessPaymentMethod::where('id_usaha', $model->id)->delete();
+            Discount::where('id_usaha', $model->id)->delete();
+            OpenHour::where('id_usaha', $model->id)->delete();
+            Product::where('id_usaha', $model->id)->delete();
+        });
+    }
 }

@@ -18,6 +18,7 @@ class CreateMasterStatusBusinessesTable extends Migration
             $table->id();
             $table->string('nama_status_usaha');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

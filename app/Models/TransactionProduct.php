@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -78,7 +79,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class TransactionProduct extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'transaction_products';
 
@@ -88,12 +89,17 @@ class TransactionProduct extends Model
     public $fillable = [
         'id_transaksi_penjualan',
         'id_produk',
+        'nama_produk',
+        'photo_url_produk',
+        'deskripsi_produk',
         'harga_produk',
         'harga_diskon',
-        'deskripsi_produk',
+        'jumlah_satuan',
+        'nama_satuan',
+        'kuantitas',
         'kondisi',
         'preorder',
-        'ongkir'
+        'is_rating'
     ];
 
     /**
@@ -110,7 +116,6 @@ class TransactionProduct extends Model
         'deskripsi_produk' => 'string',
         'kondisi' => 'boolean',
         'preorder' => 'boolean',
-        'ongkir' => 'integer'
     ];
 
     /**
@@ -126,8 +131,15 @@ class TransactionProduct extends Model
         'deskripsi_produk' => 'required',
         'kondisi' => 'required',
         'preorder' => 'required',
-        'ongkir' => 'required|numeric'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

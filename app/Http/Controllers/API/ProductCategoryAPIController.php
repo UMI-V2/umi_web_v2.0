@@ -19,6 +19,25 @@ use App\Http\Requests\API\UpdateProductCategoryAPIRequest;
 
 class ProductCategoryAPIController extends AppBaseController
 {
+    public function all(Request $request)
+    {
+        try {
+           
+
+            $category = ProductCategory::get();
+            return ResponseFormatter::success(
+                $category,
+                'Get Product Category successfully',
+            );
+        } catch (Exception $error) {
+            return ResponseFormatter::error(
+                [
+                    "message"=> $error
+                ],
+                'Get Product Category  failed',
+            );
+        }
+    }
     public function index(Request $request)
     {
         try {

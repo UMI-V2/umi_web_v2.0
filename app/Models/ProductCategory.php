@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
@@ -45,13 +46,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ProductCategory extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $table = 'product_categories';
     
-
-
-
     public $fillable = [
         'id_produk',
         'id_master_kategori_produk'
@@ -77,6 +75,14 @@ class ProductCategory extends Model
         'id_produk' => 'required',
         'id_master_kategori_produk' => 'required'
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) { 
+           
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\MidtransAPIController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -14,9 +16,21 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+    echo("Storage Link Success");
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Midtrans Relation
+Route::get('midtrans/success', [MidtransAPIController::class, 'success']);
+Route::get('midtrans/unfinish', [MidtransAPIController::class, 'unfinish']);
+Route::get('midtrans/error', [MidtransAPIController::class, 'error']);
+
+
 // Route::resource('masterProductCategories', App\Http\Controllers\MasterProductCategoryController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
