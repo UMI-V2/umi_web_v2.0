@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
 
 class DashboardController extends Controller
 {
@@ -19,7 +20,20 @@ class DashboardController extends Controller
         $totalProduk = \App\Models\Product::count();
         $totalTransaksi = \App\Models\SalesTransaction::count();
 
-        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi'));
+        $transaksiAutoPayment = \App\Models\SalesTransaction::where('is_auto_payment', 1)->whereHas('transaction_status', function ($q) {
+            $q->whereNotNull('tanggal_pesanan_diterima');
+        })->sum('total_pesanan');
+                
+        $transaksiManualPayment = \App\Models\SalesTransaction::where('is_manual_payment', 1)->whereHas('transaction_status', function ($q) {
+            $q->whereNotNull('tanggal_pesanan_diterima');
+        })->sum('total_pesanan');
+
+        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment'));
+    }
+
+    public function popularPaymentMethod()
+    {
+        
     }
 
     /** 
@@ -29,7 +43,7 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        //
+        // 
     }
 
     /**

@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\StatusTransaction;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
@@ -147,6 +148,10 @@ class TransactionProduct extends Model
     public function sales_transactions()
     {
         return $this->belongsTo(\App\Models\SalesTransaction::class, 'id_transaksi_penjualan', 'id');
+    }
+    public function status_transactions()
+    {
+        return $this->belongsTo(TransactionStatus::class, 'id_transaksi_penjualan', 'id_transaksi_penjualan');
     }
 
     /**

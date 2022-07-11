@@ -106,6 +106,30 @@
                         </div>
 
                     </div>
+                    
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Nominal Transaksi Auto Payment</span>
+                                <span class="info-box-number">{{ $transaksiAutoPayment }}</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Nominal Transaksi Manual Payment</span>
+                                <span class="info-box-number">{{ $transaksiManualPayment }}</span>
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -621,10 +645,11 @@
 
                         </div>
 
+                    {{-- <div class="col-md-48"> --}}
 
-                        {{-- <div class="card">
+                        <div class="card">
                             <div class="card-header border-transparent">
-                                <h3 class="card-title">Latest Orders</h3>
+                                <h3 class="card-title">History Transaksi</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -640,13 +665,16 @@
                                     <table class="table m-0">
                                         <thead>
                                             <tr>
-                                                <th>Order ID</th>
-                                                <th>Item</th>
+                                                <th>No Pemesanan</th>
+                                                <th>Nama Produk</th>
                                                 <th>Status</th>
-                                                <th>Popularity</th>
+                                                <th>Kepopuleran</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {{-- @foreach (  as )
+                                                
+                                            @endforeach --}}
                                             <tr>
                                                 <td><a href="pages/examples/invoice.html">OR9842</a></td>
                                                 <td>Call of Duty IV</td>
@@ -687,22 +715,6 @@
                                                     <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                <td>iPhone 6 Plus</td>
-                                                <td><span class="badge badge-danger">Delivered</span></td>
-                                                <td>
-                                                    <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                <td>Call of Duty IV</td>
-                                                <td><span class="badge badge-success">Shipped</span></td>
-                                                <td>
-                                                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -714,7 +726,7 @@
                                 <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
                             </div>
 
-                        </div> --}}
+                        </div>
 
                     </div>
 
@@ -755,10 +767,12 @@
                             </div>
 
                         </div> --}}
+@push('chartjs_css')
 
-                        {{-- <div class="card">
+@endpush
+                        <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Browser Usage</h3>
+                                <h3 class="card-title">Produk Terpopuler</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -830,7 +844,87 @@
                                 </ul>
                             </div>
 
-                        </div> --}}
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Lapak Terpopuler</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="chart-responsive">
+                                            <div class="chartjs-size-monitor">
+                                                <div class="chartjs-size-monitor-expand">
+                                                    <div class=""></div>
+                                                </div>
+                                                <div class="chartjs-size-monitor-shrink">
+                                                    <div class=""></div>
+                                                </div>
+                                            </div>
+                                            <canvas id="pieChart" height="99" width="199" style="display: block; width: 199px; height: 99px;" class="chartjs-render-monitor"></canvas>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <ul class="chart-legend clearfix">
+                                            <li><i class="far fa-circle text-danger"></i> Chrome</li>
+                                            <li><i class="far fa-circle text-success"></i> IE</li>
+                                            <li><i class="far fa-circle text-warning"></i> FireFox</li>
+                                            <li><i class="far fa-circle text-info"></i> Safari</li>
+                                            <li><i class="far fa-circle text-primary"></i> Opera</li>
+                                            <li><i class="far fa-circle text-secondary"></i> Navigator</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer p-0">
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            United States of America
+                                            <span class="float-right text-danger">
+                                                <i class="fas fa-arrow-down text-sm"></i>
+                                                12%</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            India
+                                            <span class="float-right text-success">
+                                                <i class="fas fa-arrow-up text-sm"></i> 4%
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            China
+                                            <span class="float-right text-warning">
+                                                <i class="fas fa-arrow-left text-sm"></i> 0%
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        @push('chartjs_scripts')
+                        <script src="plugins/chart.js/Chart.min.js"></script>
+                        @endpush
 
 
                         {{-- <div class="card">

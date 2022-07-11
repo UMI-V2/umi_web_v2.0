@@ -61,6 +61,8 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
 
     @stack('page_css')
 
+    {{-- @stack('chartjs_css') --}}
+
 </head>
 
 
@@ -172,6 +174,8 @@ if (!defined('STDIN')) define('STDIN', fopen("php://stdin", "r"));
     @stack('third_party_scripts')
 
     @stack('page_scripts')
+
+    @stack('chartjs_scripts')
 
     <script>
         // create a function to toggle dark and light mode
