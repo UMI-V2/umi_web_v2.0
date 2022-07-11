@@ -45,7 +45,7 @@ class BusinessDeliveryServiceDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
-                'stateSave' => true,
+                'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -54,6 +54,22 @@ class BusinessDeliveryServiceDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+'initComplete' => "function () {
+                    var kolom = this.api().columns();
+                    kolom.every(function (i) {
+
+                        if(i === kolom['0'].length - 1){
+                            return false;
+                        }
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        }).attr('placeholder', 'Search');                        
+                    }); 
+                }",
             ]);
     }
 
@@ -65,11 +81,11 @@ class BusinessDeliveryServiceDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id_usaha' => new \Yajra\DataTables\Html\Column([
+            'id_usaha' => ([
                 'data'  => 'businesses.nama_usaha',
                 'title' => 'Usaha'
             ]),
-            'id_master_jasa_pengiriman' => new \Yajra\DataTables\Html\Column([
+            'id_master_jasa_pengiriman' => ([
                 'data'  => 'master_delivery_services.nama_jasa_pengiriman',
                 'title' => 'Jasa Pengiriman'
             ]),

@@ -45,7 +45,7 @@ class BalancesDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
-                'stateSave' => true,
+                'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -54,6 +54,22 @@ class BalancesDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+'initComplete' => "function () {
+                    var kolom = this.api().columns();
+                    kolom.every(function (i) {
+
+                        if(i === kolom['0'].length - 1){
+                            return false;
+                        }
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        }).attr('placeholder', 'Search');                        
+                    }); 
+                }",
             ]);
     }
 
@@ -65,12 +81,12 @@ class BalancesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id_kategori_transaksi' => new \Yajra\DataTables\Html\Column([ 
+            'id_kategori_transaksi' => ([ 
                 'data' => 'master_transaction_categories.nama_kategori_transaksi', 
                 'name' => 'master_transaction_categories.nama_kategori_transaksi', 
                 'title' => 'Kategori Transaksi' 
             ]),
-            'id_transaksi_penjualan' => new \Yajra\DataTables\Html\Column([ 
+            'id_transaksi_penjualan' => ([ 
                 'data' => 'sales_transactions.no_pemesanan', 
                 'name' => 'sales_transactions.no_pemesanan', 
                 'title' => 'Transaksi Penjualan' 

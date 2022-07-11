@@ -22,7 +22,7 @@ class ProductDiscount extends Model
 {
     use HasFactory;
 
-    public $table = 'discount_products';
+    public $table = 'product_discounts';
 
     public $fillable = [
         'id_product',

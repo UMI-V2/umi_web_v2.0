@@ -17,20 +17,22 @@ class OpenHourDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
-        return $dataTable->addColumn('senin', function ($data) {
-            return $data->senin_buka . '-' . $data->senin_tutup;
+        return $dataTable->addColumn('nama_usaha', function ($data) {
+            return $data->businesses->nama_usaha;
+        })->addColumn('senin', function ($data) {
+            return $data->senin_buka . ' - ' . $data->senin_tutup;
         })->addColumn('selasa', function ($data) {
-            return $data->selasa_buka . '-' . $data->selasa_tutup;
+            return $data->selasa_buka . ' - ' . $data->selasa_tutup;
         })->addColumn('rabu', function ($data) {
-            return $data->rabu_buka . '-' . $data->rabu_tutup;
+            return $data->rabu_buka . ' - ' . $data->rabu_tutup;
         })->addColumn('kamis', function ($data) {
-            return $data->kamis_buka . '-' . $data->kamis_tutup;
+            return $data->kamis_buka . ' - ' . $data->kamis_tutup;
         })->addColumn('jumat', function ($data) {
-            return $data->jumat_buka . '-' . $data->jumat_tutup;
+            return $data->jumat_buka . ' - ' . $data->jumat_tutup;
         })->addColumn('sabtu', function ($data) {
-            return $data->sabtu_buka . '-' . $data->sabtu_tutup;
+            return $data->sabtu_buka . ' - ' . $data->sabtu_tutup;
         })->addColumn('minggu', function ($data) {
-            return $data->minggu_buka . '-' . $data->minggu_tutup;
+            return $data->minggu_buka . ' - ' . $data->minggu_tutup;
         })->addColumn('action', 'open_hours.datatables_actions');
     }
 
@@ -59,7 +61,7 @@ class OpenHourDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
-                'stateSave' => true,
+                'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -68,6 +70,22 @@ class OpenHourDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+                'initComplete' => "function () {
+                    var kolom = this.api().columns();
+                    kolom.every(function (i) {
+
+                        if(i === kolom['0'].length - 1){
+                            return false;
+                        }
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        }).attr('placeholder', 'Search');                        
+                    }); 
+                }",
             ]);
     }
 
@@ -81,17 +99,17 @@ class OpenHourDataTable extends DataTable
 
         return [
 
-            'id_usaha' => new \Yajra\DataTables\Html\Column([
+            'nama_usaha' => ([
                 'data'  => 'businesses.nama_usaha',
-                'title' => 'Id Usaha'
+                'title' => 'Nama Toko'
             ]),
             'senin',
             'selasa',
             'rabu',
             'kamis',
-            'jumat',
-            'sabtu',
-            'minggu',
+            // 'jumat',
+            // 'sabtu',
+            // 'minggu',
         ];
     }
 

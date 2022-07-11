@@ -18,7 +18,14 @@ class ProductCategoryDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'product_categories.datatables_actions');
+        return $dataTable->addColumn('action', 'product_categories.datatables_actions')->addColumn(
+            'nama',
+            function ($data) {
+                return $data->products->nama;
+            }
+        )->addColumn('nama_kategori_produk', function ($data) {
+            return $data->master_product_categories->nama_kategori_produk;
+        });
     }
 
     /**
@@ -45,7 +52,7 @@ class ProductCategoryDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
-                'stateSave' => true,
+                'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -54,6 +61,22 @@ class ProductCategoryDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+                'initComplete' => "function () {
+                    var kolom = this.api().columns();
+                    kolom.every(function (i) {
+
+                        if(i === kolom['0'].length - 1){
+                            return false;
+                        }
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        }).attr('placeholder', 'Search');                        
+                    }); 
+                }",
             ]);
     }
 
@@ -65,12 +88,12 @@ class ProductCategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id_produk' => new \Yajra\DataTables\Html\Column([
+            'nama' => ([
                 'data' => 'products.nama',
                 'name' => 'products.nama',
                 'title' => 'Produk',
             ]),
-            'id_master_kategori_produk' => new \Yajra\DataTables\Html\Column([
+            'nama_kategori_produk' => ([
                 'data' => 'master_product_categories.nama_kategori_produk',
                 'name' => 'master_product_categories.nama_kategori_produk',
                 'title' => 'Kategori',

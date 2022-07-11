@@ -45,7 +45,7 @@ class ShippingUsedDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
-                'stateSave' => true,
+                'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -54,6 +54,22 @@ class ShippingUsedDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+'initComplete' => "function () {
+                    var kolom = this.api().columns();
+                    kolom.every(function (i) {
+
+                        if(i === kolom['0'].length - 1){
+                            return false;
+                        }
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        }).attr('placeholder', 'Search');                        
+                    }); 
+                }",
             ]);
     }
 
@@ -65,12 +81,12 @@ class ShippingUsedDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id_shipping_cost_variable' => new \Yajra\DataTables\Html\Column([
+            'id_shipping_cost_variable' => ([
                 'data'  => 'shipping_cost_variables.is_paid_by_seller',
                 'name'  => 'shipping_cost_variables.is_paid_by_seller',
                 'title' => 'Apakah Biaya Pengiriman dibayar oleh penjual?',
             ]),
-            'id_business_delivery_services' => new \Yajra\DataTables\Html\Column([
+            'id_business_delivery_services' => ([
                 'data'  => 'business_delivery_services.biaya',
                 'name'  => 'business_delivery_services.biaya',
                 'title' => 'Biaya Pengiriman',

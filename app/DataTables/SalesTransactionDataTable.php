@@ -45,7 +45,7 @@ class SalesTransactionDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
-                'stateSave' => true,
+                'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -54,6 +54,22 @@ class SalesTransactionDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+'initComplete' => "function () {
+                    var kolom = this.api().columns();
+                    kolom.every(function (i) {
+
+                        if(i === kolom['0'].length - 1){
+                            return false;
+                        }
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        }).attr('placeholder', 'Search');                        
+                    }); 
+                }",
             ]);
     }
 
@@ -65,19 +81,19 @@ class SalesTransactionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id_user' => new \Yajra\DataTables\Html\Column([
+            'id_user' => ([
                 'data'  => 'users.name',
                 'title' => 'User',
             ]),
-            'id_usaha' => new \Yajra\DataTables\Html\Column([
+            'id_usaha' => ([
                 'data'  => 'businesses.nama_usaha',
                 'title' => 'Usaha',
             ]),
-            // 'id_metode_pembayaran' => new \Yajra\DataTables\Html\Column([
+            // 'id_metode_pembayaran' => ([
             //     'data'  => 'business_payment_methods.id_metode_pembayaran',
             //     'title' => 'Metode Pembayaran',
             // ]),
-            'id_sales_delivery_service' => new \Yajra\DataTables\Html\Column([
+            'id_sales_delivery_service' => ([
                 'data'  => 'sales_delivery_services.jenis_layanan',
                 'title' => 'Sales Delivery Service',
             ]),

@@ -76,13 +76,6 @@
     </a>
     <ul class="nav nav-treeview" style="display: block;">
         <li class="nav-item">
-            <a href="{{ route('masterBusinessCategories.index') }}"
-                class="nav-link {{ Request::is('masterBusinessCategories*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Master Kategori Usaha</p>
-            </a>
-        </li>
-        <li class="nav-item">
             <a href="{{ route('masterStatusBusinesses.index') }}"
                 class="nav-link {{ Request::is('masterStatusBusinesses*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
@@ -97,6 +90,20 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="{{ route('masterBusinessCategories.index') }}"
+                class="nav-link {{ Request::is('masterBusinessCategories*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Kategori Usaha</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('businessCategories.index') }}"
+                class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Kategori Usaha</p>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('openHours.index') }}"
                 class="nav-link {{ Request::is('openHours*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
@@ -108,13 +115,6 @@
                 class="nav-link {{ Request::is('businessFiles*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>File Usaha</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('businessCategories.index') }}"
-                class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kategori Usaha</p>
             </a>
         </li>
     </ul>
@@ -173,13 +173,6 @@
     </a>
     <ul class="nav nav-treeview" style="display: block;">
         <li class="nav-item">
-            <a href="{{ route('masterProductCategories.index') }}"
-                class="nav-link {{ Request::is('masterProductCategories*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Master Kategori</p>
-            </a>
-        </li>
-        <li class="nav-item">
             <a href="{{ route('masterUnits.index') }}"
                 class="nav-link {{ Request::is('masterUnits*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
@@ -191,6 +184,20 @@
                 class="nav-link {{ Request::is('products*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Produk</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('masterProductCategories.index') }}"
+                class="nav-link {{ Request::is('masterProductCategories*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Kategori</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('productCategories.index') }}"
+                class="nav-link {{ Request::is('productCategories*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Kategori Produk</p>
             </a>
         </li>
         <li class="nav-item">
@@ -219,13 +226,6 @@
                 class="nav-link {{ Request::is('productFiles*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>File Produk</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('productCategories.index') }}"
-                class="nav-link {{ Request::is('productCategories*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kategori Produk</p>
             </a>
         </li>
     </ul>

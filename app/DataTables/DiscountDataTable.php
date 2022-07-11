@@ -47,7 +47,7 @@ class DiscountDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
-                'stateSave' => true,
+                'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -56,6 +56,22 @@ class DiscountDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+                'initComplete' => "function () {
+                    var kolom = this.api().columns();
+                    kolom.every(function (i) {
+
+                        if(i === kolom['0'].length - 1){
+                            return false;
+                        }
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        }).attr('placeholder', 'Search');                        
+                    }); 
+                }",
             ]);
     }
 
@@ -67,15 +83,19 @@ class DiscountDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'nama_usaha',
-            // 'id_usaha' => new \Yajra\DataTables\Html\Column([
+            'nama_usaha' => ([
+                'data' => 'businesses.nama_usaha',
+                'name' => 'businesses.nama_usaha',
+                'title' => 'Nama Toko',
+            ]),
+            // 'id_usaha' => ([
             //     'data' => 'businesses.nama_usaha',
             //     'name' => 'businesses.nama_usaha',
             //     'title' => 'Nama Usaha',
             // ]),
             'nama_promo',
-            'waktu_mulai',
-            'waktu_berakhir',
+            // 'waktu_mulai',
+            // 'waktu_berakhir',
             'potongan',
             // 'batas_pembelian',
             'type'

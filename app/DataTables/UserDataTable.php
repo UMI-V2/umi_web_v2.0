@@ -19,7 +19,7 @@ class UserDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable->addColumn('action', 'users.datatables_actions')->addColumn(
-            'nama_hak_akses_pengguna',
+            'nama_hak_akses_pengguna', 
             function ($data) {
                 return $data->master_privileges->nama_hak_akses_pengguna;
             }
@@ -74,12 +74,8 @@ class UserDataTable extends DataTable
                         $(input).appendTo($(column.footer()).empty())
                         .on('keyup', function () {
                             column.search($(this).val()).draw();
-                        }).attr('placeholder', 'Search');
-
-                        
-                    });
-                
-                    
+                        }).attr('placeholder', 'Search');                        
+                    }); 
                 }",
                 // $('input#0').attr('placeholder', 'Cari berdasarkan Nama');
                 

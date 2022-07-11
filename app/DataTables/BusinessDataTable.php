@@ -18,7 +18,14 @@ class BusinessDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'businesses.datatables_actions');
+        return $dataTable->addColumn('action', 'businesses.datatables_actions')->addColumn(
+            'name', 
+            function ($data) {
+                return $data->users->name;
+            }
+        )->addColumn('nama_status_usaha', function ($data) {
+            return $data->master_status_businesses->nama_status_usaha;
+        });
     }
 
     /**
@@ -29,7 +36,7 @@ class BusinessDataTable extends DataTable
      */
     public function query(Business $model)
     {
-        return $model->newQuery()->with('masterStatusBusinesses')->with('users');
+        return $model->newQuery()->with('master_status_businesses')->with('users');
     }
 
     /**
@@ -45,7 +52,7 @@ class BusinessDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
-                'stateSave' => true,
+                'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -54,6 +61,22 @@ class BusinessDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+                'initComplete' => "function () {
+                    var kolom = this.api().columns();
+                    kolom.every(function (i) {
+
+                        if(i === kolom['0'].length - 1){
+                            return false;
+                        }
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        }).attr('placeholder', 'Search');                        
+                    }); 
+                }",
             ]);
     }
 
@@ -65,12 +88,12 @@ class BusinessDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id_user' => new \Yajra\DataTables\Html\Column([
+            'name' => ([
                 'data' => 'users.name',
                 'name' => 'users.name',
                 'title' => 'Name',
             ]),
-            'id_master_status_usaha' => new \Yajra\DataTables\Html\Column([
+            'nama_status_usaha' => ([
                 'data' => 'master_status_businesses.nama_status_usaha',
                 'name' => 'master_status_businesses.nama_status_usaha',
                 'title' => 'Nama Status Usaha',

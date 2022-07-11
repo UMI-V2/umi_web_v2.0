@@ -18,7 +18,14 @@ class ProductDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'products.datatables_actions');
+        return $dataTable->addColumn('action', 'products.datatables_actions')->addColumn(
+            'nama_usaha', 
+            function ($data) {
+                return $data->businesses->nama_usaha;
+            }
+        )->addColumn('nama_satuan', function ($data) {
+            return $data->master_units->nama_satuan;
+        });
     }
 
     /**
@@ -45,7 +52,7 @@ class ProductDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
-                'stateSave' => true,
+                'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -54,6 +61,22 @@ class ProductDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+'initComplete' => "function () {
+                    var kolom = this.api().columns();
+                    kolom.every(function (i) {
+
+                        if(i === kolom['0'].length - 1){
+                            return false;
+                        }
+                        var column = this;
+                        var input = document.createElement(\"input\");
+                        input.setAttribute('id', i);
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('keyup', function () {
+                            column.search($(this).val()).draw();
+                        }).attr('placeholder', 'Search');                        
+                    }); 
+                }",
             ]);
     }
 
@@ -65,20 +88,24 @@ class ProductDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id_usaha' => new \Yajra\DataTables\Html\Column([
+            'nama_usaha' => ([
                 'data'  => 'businesses.nama_usaha',
-                'title' => 'Usaha',
+                'title' => 'Nama Toko',
             ]),
-            'id_satuan' => new \Yajra\DataTables\Html\Column([
+            'nama_satuan' => ([
                 'data'  => 'master_units.nama_satuan',
                 'title' => 'Satuan',
             ]),
-            'nama',
-            'deskripsi',
+            'nama' => ([
+                'title' => 'Nama Produk',
+            ]),
+            // 'deskripsi' => ([
+            //     'title' => 'Deskripsi Produk',
+            // ]),
             'harga',
             'stok',
-            'kondisi',
-            'preorder'
+            // 'kondisi',
+            // 'preorder'
         ];
     }
 
