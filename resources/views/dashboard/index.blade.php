@@ -111,7 +111,7 @@
                         <div class="info-box mb-3">
                             <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">Total Nominal Transaksi Auto Payment</span>
+                                <span class="info-box-text">Auto Payment</span>
                                 <span class="info-box-number">{{ $transaksiAutoPayment }}</span>
                             </div>
 
@@ -123,7 +123,7 @@
                         <div class="info-box mb-3">
                             <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">Total Nominal Transaksi Manual Payment</span>
+                                <span class="info-box-text">Manual Payment</span>
                                 <span class="info-box-number">{{ $transaksiManualPayment }}</span>
                             </div>
 
@@ -725,8 +725,25 @@
                                 <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
                                 <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
                             </div>
-
                         </div>
+                        
+                        <div class="card card-danger">
+                            <div class="card-header">
+                            <h3 class="card-title">Donut Chart</h3>
+                            <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                            </button>
+                            </div>
+                            </div>
+                            <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                            <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 419px;" width="523" height="312" class="chartjs-render-monitor"></canvas>
+                            </div>
+                            
+                            </div>
 
                     </div>
 
@@ -773,6 +790,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Produk Terpopuler</h3>
+                                {{ $totalProduk }}
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -795,7 +813,7 @@
                                                     <div class=""></div>
                                                 </div>
                                             </div>
-                                            <canvas id="pieChart" height="99" width="199" style="display: block; width: 199px; height: 99px;" class="chartjs-render-monitor"></canvas>
+                                            <canvas id="produkPopulerChart" height="99" width="199" style="display: block; width: 199px; height: 99px;" class="chartjs-render-monitor"></canvas>
                                         </div>
 
                                     </div>
@@ -923,7 +941,34 @@
                         </div>
 
                         @push('chartjs_scripts')
-                        <script src="plugins/chart.js/Chart.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+                        <script>
+                            const ctx = document.getElementById('produkPopulerChart').getContext('2d');
+                            const data = {
+  labels: [
+    'Red',
+    'Blue',
+    'Yellow'
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [300, 50, 100],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+    ],
+    hoverOffset: 4
+  }]
+};
+                            const produkPopulerChart = new Chart(
+                                ctx,
+                                {
+                                    type: 'doughnut',
+                                    data: data
+                                }
+                            )
+                        </script>
                         @endpush
 
 
