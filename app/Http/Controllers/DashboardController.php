@@ -28,7 +28,18 @@ class DashboardController extends Controller
             $q->whereNotNull('tanggal_pesanan_diterima');
         })->sum('total_pesanan');
 
-        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment'));
+        /**$transactionProduct = \App\Models\TransactionProduct::whereHas('transaction_status', function ($q) {
+            $q->whereNotNull('tanggal_pesanan_diterima');
+        })->get();
+        */
+
+        $transactionProduct = \App\Models\TransactionProduct::query()
+        ->with('transaction_status')
+        ->whereNotNull('tanggal_pesanan_diterima')
+        ->get();
+        //return dd($transactionProduct);
+
+        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment', 'transactionProduct'));
     }
 
     public function popularPaymentMethod()

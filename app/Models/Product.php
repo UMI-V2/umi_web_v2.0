@@ -126,6 +126,13 @@ class Product extends Model
             })->count();
             return  $totalTransaction;
     }
+    public function getPopularOrderAttribute()
+    {
+          $totalTransaction = TransactionProduct::where('id_produk',$this->id)->whereHas('transaction_status', function ($q) {
+                $q->whereNotNull('tanggal_pesanan_diterima');
+            });
+            return  $totalTransaction;
+    }
 
     /**
      * The attributes that should be casted to native types.

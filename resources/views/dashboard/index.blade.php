@@ -790,7 +790,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Produk Terpopuler</h3>
-                                {{ $totalProduk }}
+                                @foreach ($transactionProduct as $transaction)
+                                    {{ $transaction->nama_produk . $transaction->transaction_status->tanggal_pesanan_diterima}}
+                                @endforeach
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
