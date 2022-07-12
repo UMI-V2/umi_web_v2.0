@@ -115,9 +115,9 @@ class Product extends Model
         $ratingLength = Rating::where('id_produk',$this->id)->count();
         $totalRating = Rating::where('id_produk',$this->id)->sum('rating');
         if($totalRating==0 &&$ratingLength==0){
-            return 0;
+            return  (float) 0;
         }
-        return $totalRating/$ratingLength;
+        return (float) $totalRating/$ratingLength;
     }
     public function getTotalOrderAttribute()
     {
@@ -149,7 +149,9 @@ class Product extends Model
         'stok' => 'integer',
         'kondisi' => 'boolean',
         'preorder' => 'boolean',
-        'is_arshive' => 'boolean'
+        'is_arshive' => 'boolean',
+        'rating' =>'double',
+        'total_order'=>'integer'
     ];
 
     /**
