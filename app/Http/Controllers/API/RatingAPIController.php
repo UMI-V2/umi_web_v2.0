@@ -2,280 +2,110 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateRatingAPIRequest;
-use App\Http\Requests\API\UpdateRatingAPIRequest;
-use App\Models\Rating;
-use App\Repositories\RatingRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use Response;
+use Exception;
+use App\Models\Rating;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
+use App\Models\TransactionProduct;
 
 /**
  * Class RatingController
  * @package App\Http\Controllers\API
  */
 
-class RatingAPIController extends AppBaseController
+class RatingAPIController extends Controller
 {
-    /** @var  RatingRepository */
-    private $ratingRepository;
-
-    public function __construct(RatingRepository $ratingRepo)
+    public function all(Request $request)
     {
-        $this->ratingRepository = $ratingRepo;
-    }
+        try {
+            $limit = $request->input('limit', 10);
+            $id = $request->input('id');
+            $id_produk = $request->input('id_produk');
+            $id_user = $request->input('id_user');
 
-    /**
-     * @param Request $request
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/ratings",
-     *      summary="Get a listing of the Ratings.",
-     *      tags={"Rating"},
-     *      description="Get all Ratings",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Rating")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function index(Request $request)
-    {
-        $ratings = $this->ratingRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
-
-        return $this->sendResponse($ratings->toArray(), 'Ratings retrieved successfully');
-    }
-
-    /**
-     * @param CreateRatingAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/ratings",
-     *      summary="Store a newly created Rating in storage",
-     *      tags={"Rating"},
-     *      description="Store Rating",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="Rating that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Rating")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Rating"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function store(CreateRatingAPIRequest $request)
-    {
-        $input = $request->all();
-
-        $rating = $this->ratingRepository->create($input);
-
-        return $this->sendResponse($rating->toArray(), 'Rating saved successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/ratings/{id}",
-     *      summary="Display the specified Rating",
-     *      tags={"Rating"},
-     *      description="Get Rating",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Rating",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Rating"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function show($id)
-    {
-        /** @var Rating $rating */
-        $rating = $this->ratingRepository->find($id);
-
-        if (empty($rating)) {
-            return $this->sendError('Rating not found');
+            if ($id) {
+                $rating = Rating::with('user_author')->find($id);
+                if ($rating) {
+                    return ResponseFormatter::success($rating, "Get specific rating Success");
+                } else {
+                    return ResponseFormatter::error([
+                        'message' => "Data rating tidak ditemukan"
+                    ], "Get specific rating failed");
+                }
+            }
+            $rating = Rating::with('user_author');
+            if ($id_produk) {
+                $rating->where('id_produk', $id_produk);
+            }
+            if ($id_user) {
+                $rating->where('id_user_author', $id_user);
+            }
+            return ResponseFormatter::success($rating->paginate($limit), "Get Rating Success");
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'error' => $e->getMessage(),
+            ], "Get Rating Failed");
         }
-
-        return $this->sendResponse($rating->toArray(), 'Rating retrieved successfully');
     }
 
-    /**
-     * @param int $id
-     * @param UpdateRatingAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/ratings/{id}",
-     *      summary="Update the specified Rating in storage",
-     *      tags={"Rating"},
-     *      description="Update Rating",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Rating",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="Rating that should be updated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Rating")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Rating"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function update($id, UpdateRatingAPIRequest $request)
+    public function update(Request $request)
     {
-        $input = $request->all();
 
-        /** @var Rating $rating */
-        $rating = $this->ratingRepository->find($id);
+        try {
+            DB::beginTransaction();
 
-        if (empty($rating)) {
-            return $this->sendError('Rating not found');
+            Validator::make($request->all(), [
+                'id_produk' => 'required',
+                'id_transaksi_penjualan' => 'required',
+                'id_transaksi_produk'=>'required',
+                'is_show_name_author' => 'required',
+                'rating' => 'required',
+            ]);
+
+            $data = $request->all();
+            $data['id_user_author'] = $request->user()->id;
+
+            $ratingResult =  Rating::updateOrCreate([
+                'id_produk' => $request->id_produk,
+                'id_transaksi_penjualan' => $request->id_transaksi_penjualan,
+                'id_user_author'=>$request->user()->id,
+            ], $data);
+
+           $searchTransaction= TransactionProduct::where('id_transaksi_penjualan',  $request->id_transaksi_penjualan)->where('id_produk', $request->id_produk)->first();
+
+           $searchTransaction->is_rating=true;
+           $searchTransaction->save();
+
+            $ratingResult = Rating::with(['user_author', 'transaction_product'])->find( $ratingResult->id);
+            DB::commit();
+
+            return ResponseFormatter::success($ratingResult, "Update Rating Success");
+        } catch (Exception $e) {
+            DB::rollBack();
+            return ResponseFormatter::error([
+                'error' => $e->getMessage(),
+            ], "Update Rating Failed");
         }
-
-        $rating = $this->ratingRepository->update($input, $id);
-
-        return $this->sendResponse($rating->toArray(), 'Rating updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Delete(
-     *      path="/ratings/{id}",
-     *      summary="Remove the specified Rating from storage",
-     *      tags={"Rating"},
-     *      description="Delete Rating",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Rating",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        /** @var Rating $rating */
-        $rating = $this->ratingRepository->find($id);
+        try {
+            $request->validate([
+                'id' => 'required',
+            ]);
 
-        if (empty($rating)) {
-            return $this->sendError('Rating not found');
+            $ratingResult = Rating::where('id', $request->id)->delete();
+
+            return ResponseFormatter::success($ratingResult, "Delete Rating Success");
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'error' => $e->getMessage(),
+            ], "Delete Rating Failed");
         }
-
-        $rating->delete();
-
-        return $this->sendSuccess('Rating deleted successfully');
     }
 }

@@ -25,6 +25,7 @@ use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
 use App\Http\Controllers\API\MidtransAPIController;
+use App\Http\Controllers\API\RatingAPIController;
 use App\Http\Controllers\API\SalesTransactionAPIController;
 
 /*
@@ -151,7 +152,11 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-    
+    Route::group(['prefix' => 'rating'], function () {
+        Route::get('/all', [RatingAPIController::class, 'all']);
+        Route::post('/update', [RatingAPIController::class, 'update']);
+        Route::delete('/delete', [RatingAPIController::class, 'delete']);
+    });
     
 });
 

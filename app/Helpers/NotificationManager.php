@@ -49,7 +49,8 @@ class NotificationManager
                  
         $response = curl_exec($ch);
 
-        dd($response);
+        // dd($response);
+        return ResponseFormatter::success( $response, "Send Notification Success");
         
         // return back()->with('success', 'Notification send successfully.');
     }

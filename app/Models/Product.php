@@ -87,7 +87,7 @@ class Product extends Model
 
     public $table = 'products';
 
-
+    protected $appends = ['rating', 'total_order'];
 
 
     public $fillable = [
@@ -108,6 +108,24 @@ class Product extends Model
         'updated_at',
         // 'deleted_at'
     ];
+
+    public function getRatingAttribute()
+    {
+        
+        $ratingLength = Rating::where('id_produk',$this->id)->count();
+        $totalRating = Rating::where('id_produk',$this->id)->sum('rating');
+        if($totalRating==0 &&$ratingLength==0){
+            return 0;
+        }
+        return $totalRating/$ratingLength;
+    }
+    public function getTotalOrderAttribute()
+    {
+          $totalTransaction = TransactionProduct::where('id_produk',$this->id)->whereHas('transaction_status', function ($q) {
+                $q->whereNotNull('tanggal_pesanan_diterima');
+            })->count();
+            return  $totalTransaction;
+    }
 
     /**
      * The attributes that should be casted to native types.

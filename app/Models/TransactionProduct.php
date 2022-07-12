@@ -88,6 +88,7 @@ class TransactionProduct extends Model
 
 
     public $fillable = [
+        'id',
         'id_transaksi_penjualan',
         'id_produk',
         'nama_produk',
@@ -117,6 +118,7 @@ class TransactionProduct extends Model
         'deskripsi_produk' => 'string',
         'kondisi' => 'boolean',
         'preorder' => 'boolean',
+        'is_rating'=>'boolean'
     ];
 
     /**
@@ -161,4 +163,14 @@ class TransactionProduct extends Model
     {
         return $this->belongsTo(\App\Models\Product::class, 'id_produk', 'id');
     }
+    public function rating()
+    {
+        return $this->belongsTo(\App\Models\Rating::class, 'id', 'id_transaksi_produk');
+    }
+
+    public function transaction_status()
+    {
+        return $this->belongsTo(\App\Models\TransactionStatus::class, 'id_transaksi_penjualan', 'id_transaksi_penjualan');
+    }
+    
 }
