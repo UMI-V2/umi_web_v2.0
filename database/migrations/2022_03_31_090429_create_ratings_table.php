@@ -18,8 +18,11 @@ class CreateRatingsTable extends Migration
             $table->id();
             $table->bigInteger('id_produk')->unsigned();
             $table->bigInteger('id_transaksi_penjualan')->unsigned();
+            $table->unsignedBigInteger('id_user_author');
+            $table->unsignedBigInteger('id_transaksi_produk');
+            $table->boolean('is_show_name_author');
             $table->integer('rating');
-            $table->string('ulasan');
+            $table->string('ulasan')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('id_produk')->references('id')->on('products');

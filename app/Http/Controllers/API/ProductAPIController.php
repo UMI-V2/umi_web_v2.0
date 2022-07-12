@@ -174,7 +174,7 @@ class ProductAPIController extends AppBaseController
             }])->paginate($limit), 'Get Products Success');
         } catch (Exception $e) {
             return ResponseFormatter::error([
-                'error' => $e,
+                'error' => $e->getMessage(),
             ],  'Get Products Failed', 500);
         }
     }

@@ -43,13 +43,13 @@ class SalesTransactionAPIController extends AppBaseController
             $id_usaha = $request->input('id_usaha');
 
             if ($id) {
-                $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail', 'address_delivery'])->find($id);
+                $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail.rating', 'address_delivery'])->find($id);
                 return ResponseFormatter::success(
                     $transaction,
                     "Get Transaksi Berhasil",
                 );
             }
-            $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail', 'address_delivery']);
+            $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail.rating', 'address_delivery']);
 
             if ($id_user) {
                 $transaction->where('id_user', $id_user);
@@ -72,7 +72,7 @@ class SalesTransactionAPIController extends AppBaseController
     public function getMyTransaction(Request $request)
     {
         try {
-            $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail', 'address_delivery'])->where('id_user', $request->user()->id)->orderBy('updated_at', 'desc')->get();
+            $transaction = SalesTransaction::with(['users', 'businesses.users', 'transaction_status', 'products_detail.rating', 'address_delivery'])->where('id_user', $request->user()->id)->orderBy('updated_at', 'desc')->get();
             return ResponseFormatter::success(
                 $transaction,
                 "Get Transaksi Saya Berhasil",
@@ -166,7 +166,7 @@ class SalesTransactionAPIController extends AppBaseController
             DB::commit();
 
             return ResponseFormatter::success(
-                $transaction->load(['businesses.users', 'users', 'transaction_status', 'products_detail']),
+                $transaction->load(['businesses.users', 'users', 'transaction_status', 'products_detail.rating']),
                 "Transaksi Berhasil",
             );
         } catch (Exception $e) {
@@ -257,7 +257,7 @@ class SalesTransactionAPIController extends AppBaseController
             DB::commit();
 
             return ResponseFormatter::success(
-                $transaction->load(['businesses.users', 'users', 'transaction_status',  'products_detail', 'address_delivery']),
+                $transaction->load(['businesses.users', 'users', 'transaction_status',  'products_detail.rating', 'address_delivery']),
                 "Confirmation Success",
             );
         } catch (Exception $e) {
@@ -334,6 +334,28 @@ class SalesTransactionAPIController extends AppBaseController
                     ]);
                     break;
                 case 'Dibatalkan':
+                    //  'Telah Siap', 'Telah Dikirimkan', 'Telah Diterima',
+                    $statusTransaction = TransactionStatus::where('id_transaksi_penjualan', $transaction->id)->first();
+                    if ($transaction->is_delivery) {
+                        if($statusTransaction->status=='Sedang Disiapkan'||$statusTransaction->status=='Telah Dikirimkan'||$statusTransaction->status=='Telah Diterima'){
+                            return ResponseFormatter::error(
+                                [
+                                    'message' => "Pesanan tidak dapat dibatalkan, karena status pesanan sekarang $statusTransaction->status"
+                                ],
+                                "Change Status Failed",
+                            );
+                        }
+                    } else {
+                        if ($statusTransaction->status == 'Telah Diterima') {
+                            return ResponseFormatter::error(
+                                [
+                                    'message' => "Pesanan tidak dapat dibatalkan, karena status pesanan sekarang $statusTransaction->status"
+                                ],
+                                "Change Status Failed",
+                            );
+                        }
+                    }
+
                     TransactionStatus::updateOrCreate([
                         'id_transaksi_penjualan' => $transaction->id,
                     ], [
@@ -351,7 +373,7 @@ class SalesTransactionAPIController extends AppBaseController
 
             DB::commit();
             return ResponseFormatter::success(
-                $transaction->load(['users', 'businesses.users', 'transaction_status', 'products_detail', 'address_delivery']),
+                $transaction->load(['users', 'businesses.users', 'transaction_status', 'products_detail.rating', 'address_delivery']),
                 "Change Status Success",
             );
         } catch (Exception $e) {

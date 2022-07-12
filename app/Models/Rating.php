@@ -60,15 +60,15 @@ class Rating extends Model
     use HasFactory, SoftDeletes;
 
     public $table = 'ratings';
-    
-
-
 
     public $fillable = [
         'id_produk',
         'id_transaksi_penjualan',
+        'id_transaksi_produk',
+        'id_user_author',
+        'is_show_name_author',
         'rating',
-        'ulasan'
+        'ulasan',
     ];
 
     /**
@@ -80,6 +80,8 @@ class Rating extends Model
         'id' => 'integer',
         'id_produk' => 'integer',
         'id_transaksi_penjualan' => 'integer',
+        'id_user_author' => 'integer',
+        'is_show_name_author' => 'boolean',
         'rating' => 'integer',
         'ulasan' => 'string'
     ];
@@ -96,11 +98,11 @@ class Rating extends Model
         'ulasan' => 'required'
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($model) { 
-           
+        static::deleting(function ($model) {
         });
     }
 
@@ -110,6 +112,15 @@ class Rating extends Model
     public function products()
     {
         return $this->belongsTo(\App\Models\Product::class, 'id_produk', 'id');
+    }
+    public function transaction_product()
+    {
+        return $this->belongsTo(\App\Models\TransactionProduct::class, 'id_transaksi_produk', 'id');
+    }
+
+    public function user_author()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'id_user_author', 'id');
     }
 
     /**
