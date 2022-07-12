@@ -46,13 +46,15 @@ class DashboardController extends Controller
         $totalLapakPopuler = $totalLapakPopuler->sortByDesc(function($business){
             return $business->total_order;
         })->take(5);
+        
+        $historiTransaksi = SalesTransaction::all()->take(5);
 
         // return dd(Product::find(3)->total_order);
 
         //
 
 
-        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment', 'transactionProduct', 'totalLapakPopuler'));
+        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment', 'transactionProduct', 'totalLapakPopuler', 'historiTransaksi'));
     }
 
     public function popularPaymentMethod()
