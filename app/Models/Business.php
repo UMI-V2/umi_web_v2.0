@@ -61,6 +61,8 @@ class Business extends Model
 
     public $table = 'businesses';
 
+    protected $appends = ['total_business'];
+
 
     protected $dates = ['deleted_at'];
 
@@ -97,6 +99,7 @@ class Business extends Model
         'is_auto_payment' => 'boolean',
         'is_manual_payment' => 'boolean',
         'is_delivery' => 'boolean',
+        'total_business'=>'integer'
     ];
 
     /**
@@ -147,6 +150,12 @@ class Business extends Model
     public function address()
     {
         return $this->belongsTo(Address::class,  'id_user', 'id_users');
+    }
+
+    public function getTotalBusinessAttribute()
+    {
+          $totalBusiness = SalesTransaction::where('id_usaha',$this->id)->count();
+            return  $totalBusiness;
     }
 
     public static function boot()

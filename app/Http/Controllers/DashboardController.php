@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Product;
+use App\Models\Business;
 use Illuminate\Http\Request;
+use App\Models\SalesTransaction;
 use App\Helpers\ResponseFormatter;
 
 class DashboardController extends Controller
@@ -15,16 +19,16 @@ class DashboardController extends Controller
     public function index()
     {
         // show total user
-        $totalUser = \App\Models\User::count();
-        $totalUsaha = \App\Models\Business::count();
-        $totalProduk = \App\Models\Product::count();
-        $totalTransaksi = \App\Models\SalesTransaction::count();
+        $totalUser = User::count();
+        $totalUsaha = Business::count();
+        $totalProduk = Product::count();
+        $totalTransaksi = SalesTransaction::count();
 
-        $transaksiAutoPayment = \App\Models\SalesTransaction::where('is_auto_payment', 1)->whereHas('transaction_status', function ($q) {
+        $transaksiAutoPayment = SalesTransaction::where('is_auto_payment', 1)->whereHas('transaction_status', function ($q) {
             $q->whereNotNull('tanggal_pesanan_diterima');
         })->sum('total_pesanan');
                 
-        $transaksiManualPayment = \App\Models\SalesTransaction::where('is_manual_payment', 1)->whereHas('transaction_status', function ($q) {
+        $transaksiManualPayment = SalesTransaction::where('is_manual_payment', 1)->whereHas('transaction_status', function ($q) {
             $q->whereNotNull('tanggal_pesanan_diterima');
         })->sum('total_pesanan');
 
@@ -33,13 +37,22 @@ class DashboardController extends Controller
         })->get();
         */
 
-        $transactionProduct = \App\Models\TransactionProduct::query()
-        ->with('transaction_status')
-        ->whereNotNull('tanggal_pesanan_diterima')
-        ->get();
-        //return dd($transactionProduct);
+        $transactionProduct = Product::all();
+        $transactionProduct = $transactionProduct->sortByDesc(function($product){
+            return $product->total_order;
+        })->take(5);
+        
+        $totalLapakPopuler = Business::all();
+        $totalLapakPopuler = $totalLapakPopuler->sortByDesc(function($business){
+            return $business->total_order;
+        })->take(5);
 
-        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment', 'transactionProduct'));
+        // return dd(Product::find(3)->total_order);
+
+        //
+
+
+        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment', 'transactionProduct', 'totalLapakPopuler'));
     }
 
     public function popularPaymentMethod()

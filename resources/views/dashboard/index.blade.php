@@ -726,6 +726,96 @@
                                 <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
                             </div>
                         </div>
+
+                        <div class="card">
+                            <div class="card-header border-transparent">
+                                <h3 class="card-title">Produk Terpopuler</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Produk</th>
+                                                <th>Total Terjual</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($transactionProduct as $product)
+                                            <tr>
+                                                <td>{{ $product->nama }}</td>
+                                                <td>
+                                                    <div class="sparkbar" data-color="#00a65a" data-height="20">{{ $product->total_order }}</div>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer clearfix">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
+                                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+                            </div>
+                            
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header border-transparent">
+                                <h3 class="card-title">Toko Terpopuler</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Toko</th>
+                                                <th>Jumlah Transaksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($totalLapakPopuler as $businessPopular)
+                                            <tr>
+                                                <td>{{ $businessPopular->nama_usaha }}</td>
+                                                <td>
+                                                    <div class="sparkbar" data-color="#00a65a" data-height="20">{{ $businessPopular->total_business }}</div>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer clearfix">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
+                                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+                            </div>
+
+                        </div>
+
+
                         
                         <div class="card card-danger">
                             <div class="card-header">
@@ -784,15 +874,10 @@
                             </div>
 
                         </div> --}}
-@push('chartjs_css')
 
-@endpush
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Produk Terpopuler</h3>
-                                @foreach ($transactionProduct as $transaction)
-                                    {{ $transaction->nama_produk . $transaction->transaction_status->tanggal_pesanan_diterima}}
-                                @endforeach
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
