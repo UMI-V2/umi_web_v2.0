@@ -84,7 +84,7 @@ if (!defined('STDIN')) {
 
 @stack('page_css')
 
-{{-- @stack('chartjs_css') --}}
+@stack('leaflet_css')
 
 </head>
 
@@ -219,6 +219,8 @@ if (!defined('STDIN')) {
     @stack('page_scripts')
 
     @stack('chartjs_scripts')
+
+    @stack('leaflet_js')
 
     <script>
         // create a function to toggle dark and light mode
