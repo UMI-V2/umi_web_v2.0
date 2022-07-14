@@ -112,6 +112,8 @@ class SalesTransaction extends Model
 
     public $table = 'sales_transactions';
 
+    protected $appends = ['sales_history'];
+
 
 
 
@@ -157,7 +159,8 @@ class SalesTransaction extends Model
         'is_delivery'=> 'boolean',
         'is_manual_payment'=> 'boolean',
         'is_auto_payment'=> 'boolean',
-        'is_rating' => 'boolean'
+        'is_rating' => 'boolean',
+        'sales_history' => 'object'
     ];
 
     /**
@@ -235,5 +238,14 @@ class SalesTransaction extends Model
     public function address_delivery()
     {
         return $this->belongsTo(\App\Models\AddressDelivery::class, 'id', 'id_transaksi_penjualan');
+    }
+
+    public function getSalesHistoryAttribute()
+    {
+        $history = [];
+        $history['no_pemesanan'] = $this->no_pemesanan;
+        $history['nama_produk'] = $this->products_detail->pluck('products.nama')->implode(', ');
+        $history['transaction_status'] = $this->transaction_status->status ?? '-';
+        return $history;
     }
 }
