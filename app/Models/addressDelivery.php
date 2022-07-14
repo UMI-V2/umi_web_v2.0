@@ -25,6 +25,7 @@ class AddressDelivery extends Model
         'is_usaha',
         'latitude',
         'longitude',
+        // 
     ];
 
     protected $casts = [
