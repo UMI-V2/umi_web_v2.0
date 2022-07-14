@@ -7,8 +7,8 @@ use App\Models\Product;
 use App\Models\Business;
 use Illuminate\Http\Request;
 use App\Models\SalesTransaction;
+use App\Models\Address;
 use App\Helpers\ResponseFormatter;
-
 class DashboardController extends Controller
 {
     /**
@@ -47,6 +47,17 @@ class DashboardController extends Controller
             return $business->total_order;
         })->take(5);
         
+        $alamats = Address::all();
+        $alamatToko = [];
+        foreach ($alamats as $alamat) {
+            $temp = $alamat->toArray();
+            $alamatToko[] = array(
+                array_values($temp)[5],
+                array_values($temp)[13],
+                array_values($temp)[14],
+            );
+        }
+        
         $historiTransaksi = SalesTransaction::all()->take(5);
 
         // return dd(Product::find(3)->total_order);
@@ -54,7 +65,7 @@ class DashboardController extends Controller
         //
 
 
-        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment', 'transactionProduct', 'totalLapakPopuler', 'historiTransaksi'));
+        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment', 'transactionProduct', 'totalLapakPopuler', 'historiTransaksi', 'alamatToko'));
     }
 
     public function popularPaymentMethod()
