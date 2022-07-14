@@ -44,7 +44,7 @@ class RatingAPIController extends Controller
             if ($id_user) {
                 $rating->where('id_user_author', $id_user);
             }
-            return ResponseFormatter::success($rating->paginate($limit), "Get Rating Success");
+            return ResponseFormatter::success($rating->get(), "Get Rating Success");
         } catch (Exception $e) {
             return ResponseFormatter::error([
                 'error' => $e->getMessage(),
