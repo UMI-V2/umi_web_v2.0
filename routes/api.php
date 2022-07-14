@@ -25,6 +25,7 @@ use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
 use App\Http\Controllers\API\MidtransAPIController;
+use App\Http\Controllers\API\NotificationAPIController;
 use App\Http\Controllers\API\RatingAPIController;
 use App\Http\Controllers\API\SalesTransactionAPIController;
 
@@ -156,6 +157,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/all', [RatingAPIController::class, 'all']);
         Route::post('/update', [RatingAPIController::class, 'update']);
         Route::delete('/delete', [RatingAPIController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'notification'], function () {
+        Route::get('/getMyNotification', [NotificationAPIController::class, 'getMyNotification']);
+        Route::post('/update', [NotificationAPIController::class, 'update']);
+        Route::delete('/delete', [NotificationAPIController::class, 'delete']);
     });
     
 });
