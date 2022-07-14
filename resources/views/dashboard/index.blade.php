@@ -167,7 +167,7 @@
                                     crossorigin=""></script>
 
                                 <script>
-                                    var map = L.map('map').setView([-6.406576, 108.282833], 13);
+                                    var map = L.map('map', { scrollWheelZoom: false}).setView([-6.406576, 108.282833], 13);
 
                                     var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                         maxZoom: 19,
@@ -226,10 +226,10 @@
 
                                 </div>
 
-                                <div class="card-footer clearfix">
-                                    <center>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-info">Lihat Semua Pesanan</a>
-                                    </center>
+                                <div class="card-footer clearfix" style="text-align: center">
+                                    
+                                        <a href="{{ route('transactionProducts.index') }}" class="btn btn-sm btn-info">Lihat Semua Pesanan</a>
+                                    
 
                                 </div>
                             </div>
@@ -276,11 +276,11 @@
 
                                         </div>
 
-                                        <div class="card-footer clearfix">
-                                            <center>
+                                        <div class="card-footer clearfix" style="text-align: center">
+                                            
                                                 <a href="{{ route('products.index') }}"
                                                     class="btn btn-sm btn-info">Lihat Semua Produk</a>
-                                            </center>
+                                            
                                         </div>
 
                                     </div>
@@ -328,11 +328,11 @@
 
                                         </div>
 
-                                        <div class="card-footer clearfix">
-                                            <center>
+                                        <div class="card-footer clearfix" style="text-align: center">
+                                            
                                                 <a href="{{ route('businesses.index') }}"
                                                     class="btn btn-sm btn-info">Lihat Semua Toko</a>
-                                            </center>
+                                            
                                         </div>
 
                                     </div>
@@ -345,9 +345,8 @@
 
                                     <div class="card">
                                         <div class="card-header border-transparent">
-                                            <h3 class="card-title"><a
-                                                    href="{{ route('masterPaymentMethods.index') }}">Metode Pembayaran
-                                                    Terpopuler</a></h3>
+                                            <h3 class="card-title">Metode Pembayaran
+                                                    Terpopuler</h3>
                                             <div class="card-tools">
                                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                                     <i class="fas fa-minus"></i>
@@ -384,11 +383,11 @@
 
                                         </div>
 
-                                        <div class="card-footer clearfix">
-                                            <center>
+                                        <div class="card-footer clearfix" style="text-align: center">
+                                            
                                                 <a href="{{ route('masterPaymentMethods.index') }}"
                                                     class="btn btn-sm btn-info">Lihat Semua Metode</a>
-                                            </center>
+                                            
                                         </div>
 
                                     </div>
@@ -428,7 +427,7 @@
 
                             </div>
 
-                            <div class="card card-danger">
+                            {{-- <div class="card card-danger">
                                 <div class="card-header">
                                     <h3 class="card-title">Metode Pembayaran Terpopuler</h3>
                                     <div class="card-tools">
@@ -455,7 +454,7 @@
                                 </div>
 
 
-                            </div>
+                            </div> --}}
 
                         </div>
 
@@ -463,36 +462,7 @@
                             @push('chartjs_scripts')
                                 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
 
-                                <script>
-                                    const ctx = document.getElementById('produkPopulerChart').getContext('2d');
-                                    const dataProdukPopulerChart = {
-                                        labels: [
-                                            'Red',
-                                            'Blue',
-                                            'Yellow',
-                                            'green',
-                                            'purple'
-                                        ],
-                                        datasets: [{
-                                            label: 'My First Dataset',
-                                            data: [300, 50, 100, 30, 80],
-                                            backgroundColor: [
-                                                'rgb(255, 99, 132)',
-                                                'rgb(54, 162, 235)',
-                                                'rgb(255, 205, 86)',
-                                                'rgb(75, 192, 192)',
-                                                'rgb(153, 102, 255)'
-                                            ],
-                                            hoverOffset: 4
-                                        }]
-                                    };
-                                    const produkPopulerChart = new Chart(
-                                        ctx, {
-                                            type: 'doughnut',
-                                            data: dataProdukPopulerChart
-                                        }
-                                    )
-                                </script>
+                                
 
                                 <script>
                                     const labels = [
