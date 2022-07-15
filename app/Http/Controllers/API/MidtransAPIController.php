@@ -54,13 +54,13 @@ class MidtransAPIController extends Controller
             $transactionStatus->status = 'Sedang Disiapkan';
             $transactionStatus->status_auto_payment = 'Telah Dibayar';
             $transactionStatus->tanggal_pembayaran = Carbon::now()->format('Y-m-d H:i:s');
-            Balances::create([
-                'id_user' =>  $transaction->id_user,
-                'id_kategori_transaksi' => 1,
-                'id_transaksi_penjualan' => $transaction->id,
-                'pemasukan' => $transaction->subtotal_produk + $transaction->subtotal_ongkir,
-                'deskripsi' => "Pembayaran untuk pesanan $order_id telah berhasil"
-            ]);
+            // Balances::create([
+            //     'id_user' =>  $transaction->id_user,
+            //     'id_kategori_transaksi' => 1,
+            //     'id_transaksi_penjualan' => $transaction->id,
+            //     'pemasukan' => $transaction->subtotal_produk + $transaction->subtotal_ongkir,
+            //     'deskripsi' => "Pembayaran untuk pesanan $order_id telah berhasil"
+            // ]);
         } else if ($status == 'pending') {
             $transactionStatus->status = 'Menunggu Pembayaran';
             // $transactionStatus->tanggal_pembayaran = Carbon::now()->format('Y-m-d H:i:s');
