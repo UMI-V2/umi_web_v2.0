@@ -171,7 +171,7 @@
 
                                     var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                         maxZoom: 19,
-                                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                        // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                                     }).addTo(map);
 
 
@@ -423,6 +423,27 @@
                                             style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 419px;"
                                             width="523" height="312" class="chartjs-render-monitor"></canvas>
                                     </div>
+                                </div>
+
+                                <div class="card-footer clearfix" style="text-align: left" id="perhari"> 
+                                    <a class="btn btn-sm btn-info">
+                                        Perhari
+                                        </a>
+                                </div>
+                                <div class="card-footer clearfix" style="text-align: left" id="perminggu">    
+                                    <a class="btn btn-sm btn-info">
+                                    Perminggu
+                                    </a>
+                                </div>
+                                <div class="card-footer clearfix" style="text-align: left" id="perbulan">    
+                                    <a class="btn btn-sm btn-info">
+                                    Perbulan
+                                    </a>
+                                </div>
+                                <div class="card-footer clearfix" style="text-align: left" id="pertahun">    
+                                    <a class="btn btn-sm btn-info">
+                                    Pertahun
+                                    </a>
                                 </div>
 
                             </div>
