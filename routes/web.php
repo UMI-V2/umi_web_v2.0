@@ -22,7 +22,7 @@ Route::get('/linkstorage', function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing_pages/index');
 });
 
 //Midtrans Relation
