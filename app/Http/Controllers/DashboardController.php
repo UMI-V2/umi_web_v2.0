@@ -62,19 +62,21 @@ class DashboardController extends Controller
         
         $historiTransaksi = SalesTransaction::all()->take(5);
 
-        $transaksiPerBulan = TransactionStatus::select(DB::raw('MONTH(tanggal_pesanan_diterima) as bulan'), DB::raw('count(*) as jumlah'))->groupBy('bulan')->get();
 
-        return dd($transaksiPerBulan);
+        
         // return dd(Product::find(3)->total_order);
 
-        //
-
-
-        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment', 'transactionProduct', 'totalLapakPopuler', 'historiTransaksi', 'alamatToko', 'transaksiPerBulan'));
+        return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment', 'transactionProduct', 'totalLapakPopuler', 'historiTransaksi', 'alamatToko'));
     }
 
-    public function popularPaymentMethod()
+    public function FrekuensiTransaksi()
     {
+        $transaksiPerBulan = TransactionStatus::select(DB::raw('monthname(tanggal_pesanan_diterima) as bulan'), DB::raw('count(*) as jumlah'))->groupBy('bulan')->get();
+
+        return response()->json([
+            'data' => $transaksiPerBulan
+        ]);
+        // return dd($transaksiPerBulan);
         
     }
 
