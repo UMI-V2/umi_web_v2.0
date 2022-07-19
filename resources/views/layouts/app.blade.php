@@ -210,9 +210,11 @@ if (!defined('STDIN')) {
         integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
         crossorigin="anonymous"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.3/bootstrapSwitch.min.js"
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.3/bootstrapSwitch.min.js"
         integrity="sha512-DAc/LqVY2liDbikmJwUS1MSE3pIH0DFprKHZKPcJC7e3TtAOzT55gEMTleegwyuIWgCfOPOM8eLbbvFaG9F/cA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.5/js/bootstrap-switch.min.js" referrerpolicy="no-referrer"></script> --}}
 
     @stack('third_party_scripts')
 
@@ -221,44 +223,20 @@ if (!defined('STDIN')) {
     @stack('chartjs_scripts')
 
     @stack('leaflet_js')
+    
+    @stack('bootstrap_checkBox')
 
     <script>
-        // create a function to toggle dark and light mode
-        // function toggleDarkLight() {
-        //     var body = document.getElementById("body");
-        //     var currentClass = body.className;
-        //     body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
 
-        //     // change nav theme
-        //     var nav = $('#nav1');
-        //     // check if the current class is dark-mode or light-mode
-        //     if (currentClass == "dark-mode") {
-        //         // if dark-mode, change to light-mode
-        //         nav.removeClass('navbar-dark');
-        //         nav.addClass('navbar-light');
-        //     } else {
-        //         // if light-mode, change to dark-mode
-        //         nav.removeClass('navbar-light');
-        //         nav.addClass('navbar-dark');
-        //     }
+        $("input[data-bootstrap-switch]").each(function() {
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        });
+    </script>
 
-        // }
-
-
-
-
-        // if (localStorage.getItem('theme') == 'dark')
-        //     setDarkMode(true);
-
-        // function setDarkMode(isDark) {
-        //     document.body.setAttribute('id', 'darkmode');
-        //     localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        // } else {
-        //     document.body.setAttribute('id', '');
-        //     localStorage.removeItem('theme');
-        // }
-
-
+    <script>
         function setDarkMode() {
             console.log('setDarkMode');
             $('body').removeClass('light-mode');
@@ -314,18 +292,6 @@ if (!defined('STDIN')) {
 
                 }
             }
-
-            // if (localStorage.getItem('theme') == null) {
-            //     localStorage.setItem('theme', 'light-mode');
-            // } else {
-            //     if (localStorage.getItem('theme') == 'dark-mode') {
-            //         // $('body').addClass('dark-mode');
-            //         bodyElement.classList.toggle("dark-mode");
-            //     } else {
-            //         // set body id to lightmode
-            //         bodyElement.classList.toggle("light-mode");
-            //     }
-            // }
         });
     </script>
 
@@ -359,15 +325,7 @@ if (!defined('STDIN')) {
         });
     </script>
 
-    <script>
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
-
-        $("input[data-bootstrap-switch]").each(function() {
-            $(this).bootstrapSwitch('state', $(this).prop('checked'));
-        });
-    </script>
+    
 
 
 

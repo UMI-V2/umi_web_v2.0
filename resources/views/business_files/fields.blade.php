@@ -6,6 +6,12 @@
 
 
 <!-- File Field -->
+{{-- <div class="form-group col-sm-6">
+    <div class="input-group">
+        <input type="file" name="file[]" multiple="multiple">
+    </div>
+</div> --}}
+
 <div class="form-group col-sm-6">
     {!! Form::label('file', 'File:') !!}
     <div class="input-group">
@@ -32,5 +38,23 @@
     {!! Form::hidden('is_photo', 0) !!}
     {!! Form::checkbox('is_photo', 1, null,  ['data-bootstrap-switch']) !!}
 </div>
+
+<div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <div class="form-check {{ $errors->has('is_photo') ? 'is-invalid' : '' }}">
+            <input class="form-check-input" type="checkbox" name="is_photo" id="is_photo" value="1" {{ old('is_photo') == 1 ? 'checked' : '' }}>
+            <label class="form-check-label" for="is_photo">{{ trans('cruds.task.fields.is_photo') }}</label>
+        </div>
+        @if ($errors->has('isphoto'))
+            <div class="invalid-feedback">
+                {{ §errors->first('is_photo') }}
+            </div>
+        @endif
+        {{-- <span class="help-block">{{ trans('cruds.task.fields.is_photo_helper') }}</span> --}}
+    </div>
 
 </div>

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Business;
-use App\Models\BusinessFile;
-use App\DataTables\BusinessFileDataTable;
+use Response;
 use App\Http\Requests;
+use App\Models\Business;
+use Laracasts\Flash\Flash;
+use App\Models\BusinessFile;
+use Illuminate\Http\Request;
+use App\DataTables\BusinessFileDataTable;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\BusinessFileRepository;
 use App\Http\Requests\CreateBusinessFileRequest;
 use App\Http\Requests\UpdateBusinessFileRequest;
-use App\Repositories\BusinessFileRepository;
-use Laracasts\Flash\Flash;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 class BusinessFileController extends AppBaseController
 {
@@ -42,7 +43,8 @@ class BusinessFileController extends AppBaseController
      */
     public function create()
     {
-        $businesses = Business::query()->pluck('nama_usaha', 'id');
+        $businesses = Business::all();
+        // dd($businesses);
         return view('business_files.create')->with('businesses', $businesses);
     }
 
@@ -53,15 +55,34 @@ class BusinessFileController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateBusinessFileRequest $request)
+    public function store(Request $request)
     {
+        // $input = $request->all();
+        // $businessFile = $this->businessFileRepository->create($input);
+        // Flash::success('Business File saved successfully.');
+        // return redirect(route('businessFiles.index'));
+
+        //menyimpan produk ke database
+        // $input = BusinessFile::create($request->all());
+
+
         $input = $request->all();
+        // dd($request->all());
 
-        $businessFile = $this->businessFileRepository->create($input);
+        if($request->hasFile('file')){
+            foreach ($request->file('file') as $item) {
+                $file = $item->store('imageproduct','public');
 
-        Flash::success('Business File saved successfully.');
-
-        return redirect(route('businessFiles.index'));
+                BusinessFile::create([
+                    'id_usaha' => $request->id_usaha,
+                    'is_video' => $request->is_video == 'on'?1:0,
+                    'is_photo' => $request->is_photo == 'on'?1:0,
+                    'file' => $file
+                ]);
+            }
+          
+            return redirect()->route('businessFiles.index')->with('status','Berhasil Menambah File Usaha Baru');
+        }
     }
 
     /**
