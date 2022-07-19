@@ -61,7 +61,7 @@ class Business extends Model
 
     public $table = 'businesses';
 
-    protected $appends = ['total_business'];
+    protected $appends = ['total_business', 'total_saldo'];
 
 
     protected $dates = ['deleted_at'];
@@ -112,6 +112,15 @@ class Business extends Model
         'id_master_status_usaha' => 'required',
         'nama_usaha' => 'required'
     ];
+
+     public function getTotalSaldoAttribute()
+    {
+    
+        $pemasukan= Balances::where('id_user', $this->id_user)->where('id_usaha', $this->id)->sum('pemasukan');
+        $pengeluaran= Balances::where('id_user', $this->id_user)->where('id_usaha', $this->id)->sum('pengeluaran');
+
+        return  $pemasukan- $pengeluaran;
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

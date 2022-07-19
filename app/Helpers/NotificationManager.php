@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Request;
 
 class NotificationManager
 {
-    public static function sendNotification(string $title, string $body,string $token=null)
+    public static function sendNotification(String $title, String $body,String $token=null)
     {
         $tokenFirebase = [];
         if($token){

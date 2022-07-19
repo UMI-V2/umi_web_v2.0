@@ -73,10 +73,13 @@ class Balances extends Model
         'id_user',
         'id_kategori_transaksi',
         'id_transaksi_penjualan',
+        'id_usaha',
         'pengeluaran',
         'pemasukan',
         'deskripsi'
     ];
+    // protected $appends = ['total_saldo'];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -87,6 +90,7 @@ class Balances extends Model
         'id' => 'integer',
         'id_kategori_transaksi' => 'integer',
         'id_transaksi_penjualan' => 'integer',
+        'id_usaha'=> 'integer',
         'pengeluaran' => 'integer',
         'pemasukan' => 'integer',
         'deskripsi' => 'string'
@@ -103,6 +107,15 @@ class Balances extends Model
         // 'pengeluaran' => 'required|numeric',
         // 'pemasukan' => 'required|numeric'
     ];
+
+    // public function getTotalSaldoAttribute()
+    // {
+    
+    //     $pemasukan= Balances::where('id_user', $this->id_user)->where('id_usaha', $this->id_usaha)->sum('pemasukan');
+    //     $pengeluaran= Balances::where('id_user', $this->id_user)->where('id_usaha', $this->id_usaha)->sum('pengeluaran');
+
+    //     return  $pemasukan- $pengeluaran;
+    // }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

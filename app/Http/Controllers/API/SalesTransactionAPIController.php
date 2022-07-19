@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Address;
 use App\Models\AddressDelivery;
+use App\Models\Balances;
+use App\Models\Notification;
 
 /**
  * Class SalesTransactionController
@@ -127,7 +129,7 @@ class SalesTransactionAPIController extends AppBaseController
 
 
 
-        $transaction = SalesTransaction::with(['users'])->find($transaction->id);
+        $transaction = SalesTransaction::with(['users', 'businesses'])->find($transaction->id);
         // dd($transaction);
         $no_pesanan = Carbon::now()->getPreciseTimestamp(3) . "$transaction->id";
 
@@ -164,6 +166,15 @@ class SalesTransactionAPIController extends AppBaseController
             $transaction->save();
 
             DB::commit();
+            NotificationAPIController::add(
+                "Pesanan Baru",
+                "Harap segera untuk memberikan konfirmasi",
+                "specific",
+                'order',
+                "No. Pemesanan: $transaction->no_pemesanan",
+                $transaction->id,
+                $transaction->businesses->id_user,
+            );
 
             return ResponseFormatter::success(
                 $transaction->load(['businesses.users', 'users', 'transaction_status', 'products_detail.rating']),
@@ -187,7 +198,7 @@ class SalesTransactionAPIController extends AppBaseController
                 'id' => 'required',
                 'confirmation' => 'required',
             ]);
-            $transaction =  SalesTransaction::with('users')->find($request->id);
+            $transaction =  SalesTransaction::with(['users', 'businesses'])->find($request->id);
 
             if ($request->confirmation) {
                 if ($transaction->is_auto_payment) {
@@ -227,6 +238,16 @@ class SalesTransactionAPIController extends AppBaseController
                         'status_auto_payment' => 'Belum Dibayar',
                         'tanggal_pesanan_disetujui' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]);
+                    DB::commit();
+                    NotificationAPIController::add(
+                        "Pesanan Disetujui",
+                        "Harap segera untuk memlakukan pembayaran",
+                        "specific",
+                        'order',
+                        "No. Pemesanan: $transaction->no_pemesanan",
+                        $transaction->id,
+                        $transaction->id_user,
+                    );
                 } else {
                     if ($request->subtotal_ongkir) {
                         $transaction->subtotal_ongkir = $request->subtotal_ongkir;
@@ -241,6 +262,16 @@ class SalesTransactionAPIController extends AppBaseController
                         'tanggal_pesanan_disetujui' => Carbon::now()->format('Y-m-d H:i:s'),
                         'tanggal_pesanan_disiapkan' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]);
+                    DB::commit();
+                    NotificationAPIController::add(
+                        "Pesanan Disetujui",
+                        "Pesanan sedang disiapkan, harap untuk menunggu",
+                        "specific",
+                        'order',
+                        "No. Pemesanan: $transaction->no_pemesanan",
+                        $transaction->id,
+                        $transaction->id_user,
+                    );
                 }
             } else {
                 TransactionStatus::updateOrCreate([
@@ -252,9 +283,32 @@ class SalesTransactionAPIController extends AppBaseController
                     'reason_pembatalan_pembeli' => $request->reason_pembatalan_pembeli,
 
                 ]);
+                DB::commit();
+                if ($request->reason_pembatalan_penjual) {
+                    NotificationAPIController::add(
+                        "Pesanan Ditolak",
+                        "Pesanan ditolak oleh penjual.",
+                        "specific",
+                        'order',
+                        "No. Pemesanan: $transaction->no_pemesanan \nAlasan:\n$request->reason_pembatalan_penjual",
+                        $transaction->id,
+                        $transaction->id_user,
+                    );
+                }
+                if ($request->reason_pembatalan_pembeli) {
+                    NotificationAPIController::add(
+                        "Pesanan Dibatalkan",
+                        "Pesanan dibatalkan oleh pembeli",
+                        "specific",
+                        'order',
+                        "No. Pemesanan: $transaction->no_pemesanan \nAlasan:\n$request->reason_pembatalan_pembeli",
+                        $transaction->id,
+                        $transaction->businesses->id_user,
+                    );
+                }
             }
 
-            DB::commit();
+
 
             return ResponseFormatter::success(
                 $transaction->load(['businesses.users', 'users', 'transaction_status',  'products_detail.rating', 'address_delivery']),
@@ -274,7 +328,7 @@ class SalesTransactionAPIController extends AppBaseController
 
     public function changeStatus(Request $request)
     {
-        $transaction =  SalesTransaction::with('users')->find($request->id);
+        $transaction =  SalesTransaction::with(['users', 'businesses'])->find($request->id);
 
         try {
             DB::beginTransaction();
@@ -283,23 +337,30 @@ class SalesTransactionAPIController extends AppBaseController
                 'status' => 'required|in:Menunggu Konfirmasi, Menunggu Pembayaran, Sedang Disiapkan,Telah Siap, Telah Dikirimkan, Telah Diterima, Dibatalkan',
             ]);
 
-
             switch ($request->status) {
                 case 'Menunggu Konfirmasi':
                     TransactionStatus::updateOrCreate([
                         'id_transaksi_penjualan' => $transaction->id,
                     ], [
                         'status' => 'Menunggu Konfirmasi',
-                        // 'tanggal_pesanan_dibatalkan' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]);
+                    
                     break;
                 case 'Menunggu Pembayaran':
                     TransactionStatus::updateOrCreate([
                         'id_transaksi_penjualan' => $transaction->id,
                     ], [
                         'status' => 'Menunggu Pembayaran',
-                        // 'tanggal_pesanan_dibatalkan' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]);
+                    NotificationAPIController::add(
+                        "Pesanan Disetujui",
+                        "Silahkan untuk segera melakukan pembayaran",
+                        "specific",
+                        'order',
+                        "No. Pemesanan: $transaction->no_pemesanan",
+                        $transaction->id,
+                        $transaction->id_user,
+                    );
                     break;
                 case 'Sedang Disiapkan':
                     TransactionStatus::updateOrCreate([
@@ -308,6 +369,15 @@ class SalesTransactionAPIController extends AppBaseController
                         'status' => 'Sedang Disiapkan',
                         'tanggal_pesanan_disiapkan' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]);
+                    NotificationAPIController::add(
+                        "Pesanan Sedang Disiapkan",
+                        "Pesanan anda sedang disiapkan oleh penjual.\nHarap untuk menunggu",
+                        "specific",
+                        'order',
+                        "No. Pemesanan: $transaction->no_pemesanan",
+                        $transaction->id,
+                        $transaction->id_user,
+                    );
                     break;
                 case 'Telah Siap':
                     TransactionStatus::updateOrCreate([
@@ -316,6 +386,15 @@ class SalesTransactionAPIController extends AppBaseController
                         'status' => 'Telah Siap',
                         'tanggal_pesanan_telah_siap' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]);
+                    NotificationAPIController::add(
+                        "Pesanan Telah Siap",
+                        "Anda dapat segera mengambilnya di lokasi lapak.",
+                        "specific",
+                        'order',
+                        "No. Pemesanan: $transaction->no_pemesanan",
+                        $transaction->id,
+                        $transaction->id_user,
+                    );
                     break;
                 case 'Telah Dikirimkan':
                     TransactionStatus::updateOrCreate([
@@ -324,6 +403,15 @@ class SalesTransactionAPIController extends AppBaseController
                         'status' => 'Telah Dikirimkan',
                         'tanggal_pesanan_dikirimkan' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]);
+                    NotificationAPIController::add(
+                        "Pesanan Telah Dikirim",
+                        "Pesanan dalam pengiriman ke lokasi anda. Harap untuk menunggu",
+                        "specific",
+                        'order',
+                        "No. Pemesanan: $transaction->no_pemesanan",
+                        $transaction->id,
+                        $transaction->id_user,
+                    );
                     break;
                 case 'Telah Diterima':
                     TransactionStatus::updateOrCreate([
@@ -332,12 +420,43 @@ class SalesTransactionAPIController extends AppBaseController
                         'status' => 'Telah Diterima',
                         'tanggal_pesanan_diterima' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]);
+                    
+                    NotificationAPIController::add(
+                        "Pesanan Telah Diterima",
+                        "Terimakasih telah melakukan pembelanjaan melalui aplikasi UMI. Semoga hari-harimu selalu menyenangkan",
+                        "specific",
+                        'order',
+                        "No. Pemesanan: $transaction->no_pemesanan",
+                        $transaction->id,
+                        $transaction->id_user,
+                    );
+                    NotificationAPIController::add(
+                        "Pesanan Telah Diterima",
+                        "Pesanan telah di terima oleh pembeli. Terimakasih atas kepercayaan anda. Semoga hari-harimu selalu menyenangkan",
+                        "specific",
+                        'order',
+                        "No. Pemesanan: $transaction->no_pemesanan",
+                        $transaction->id,
+                        $transaction->businesses->id_user,
+                    );
+                    if($transaction->link_pembayaran!=null&&$transaction->is_auto_payment){
+                        // dd("Masuk sini");
+                        Balances::updateOrCreate([
+                            'id_user'=>  $transaction->businesses->id_user,
+                            'id_kategori_transaksi'=> 1,
+                            'id_transaksi_penjualan'=>  $transaction->id,
+                            'id_usaha'=> $transaction->businesses->id,
+                            'pengeluaran'=>0,
+                            'pemasukan'=> $transaction->total_pesanan -$transaction->biaya_penanganan,
+                            'deskripsi'=> "Pembayaran pemesanan dengan no.pemesanan: $transaction->no_pemesanan"
+                        ]);
+                    }
                     break;
                 case 'Dibatalkan':
                     //  'Telah Siap', 'Telah Dikirimkan', 'Telah Diterima',
                     $statusTransaction = TransactionStatus::where('id_transaksi_penjualan', $transaction->id)->first();
                     if ($transaction->is_delivery) {
-                        if($statusTransaction->status=='Sedang Disiapkan'||$statusTransaction->status=='Telah Dikirimkan'||$statusTransaction->status=='Telah Diterima'){
+                        if ($statusTransaction->status == 'Sedang Disiapkan' || $statusTransaction->status == 'Telah Dikirimkan' || $statusTransaction->status == 'Telah Diterima') {
                             return ResponseFormatter::error(
                                 [
                                     'message' => "Pesanan tidak dapat dibatalkan, karena status pesanan sekarang $statusTransaction->status"
@@ -364,6 +483,28 @@ class SalesTransactionAPIController extends AppBaseController
                         'reason_pembatalan_penjual' => $request->reason_pembatalan_penjual,
                         'reason_pembatalan_pembeli' => $request->reason_pembatalan_pembeli,
                     ]);
+                    if ($request->reason_pembatalan_penjual) {
+                        NotificationAPIController::add(
+                            "Pesanan Ditolak",
+                            "Pesanan ditolak oleh penjual.",
+                            "specific",
+                            'order',
+                            "No. Pemesanan: $transaction->no_pemesanan \nAlasan:\n$request->reason_pembatalan_penjual",
+                            $transaction->id,
+                            $transaction->id_user,
+                        );
+                    }
+                    if ($request->reason_pembatalan_pembeli) {
+                        NotificationAPIController::add(
+                            "Pesanan Dibatalkan",
+                            "Pesanan dibatalkan oleh pembeli",
+                            "specific",
+                            'order',
+                            "No. Pemesanan: $transaction->no_pemesanan \nAlasan:\n$request->reason_pembatalan_pembeli",
+                            $transaction->id,
+                            $transaction->businesses->id_user,
+                        );
+                    }
                     break;
 
                 default:
