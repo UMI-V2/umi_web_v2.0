@@ -76,9 +76,9 @@ class Balances extends Model
         'id_usaha',
         'pengeluaran',
         'pemasukan',
-        'deskripsi'
+        'deskripsi',
     ];
-    // protected $appends = ['total_saldo'];
+    protected $appends = ['kategori_transaksi'];
 
 
     /**
@@ -108,14 +108,10 @@ class Balances extends Model
         // 'pemasukan' => 'required|numeric'
     ];
 
-    // public function getTotalSaldoAttribute()
-    // {
-    
-    //     $pemasukan= Balances::where('id_user', $this->id_user)->where('id_usaha', $this->id_usaha)->sum('pemasukan');
-    //     $pengeluaran= Balances::where('id_user', $this->id_user)->where('id_usaha', $this->id_usaha)->sum('pengeluaran');
-
-    //     return  $pemasukan- $pengeluaran;
-    // }
+    public function getKategoriTransaksiAttribute()
+    {
+        return MasterTransactionCategory::find($this->id_kategori_transaksi) ;
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -16,13 +16,14 @@ class WithdrawBalance extends Model
         'id_user',
         'id_usaha',
         'id_bank',
-        'nominal',
         'bank_name',
         'no_rek',
         'rek_name',
         'cost_admin',
         'status',
         'note',
+        'nominal_request',
+        'total_withdraw',
     ];
 
     protected $appends = ['business', 'bank'];

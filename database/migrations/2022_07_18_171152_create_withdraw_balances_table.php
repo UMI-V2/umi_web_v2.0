@@ -18,11 +18,12 @@ class CreateWithdrawBalancesTable extends Migration
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_usaha');
             $table->unsignedBigInteger('id_bank');
-            $table->integer('nominal');
+            $table->integer('nominal_request');
             $table->string('no_rek');
             $table->string('rek_name');
             $table->string('bank_name');
             $table->integer('cost_admin');
+            $table->integer('total_withdraw');
             $table->enum('status', ['pending', 'onprogress', 'success', 'failed'])->default('pending');
             $table->string('note')->nullable();
             $table->timestamps();

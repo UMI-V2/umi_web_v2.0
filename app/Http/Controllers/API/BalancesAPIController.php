@@ -25,14 +25,14 @@ class BalancesAPIController extends AppBaseController
         try {
             $myUser =  $request->user();
             $myBusiness = Business::where('id_user',   $myUser->id)->first();
-            $balance = Balances::where('id_usaha', $myBusiness->id)->get();
-            $pemasukan = Balances::where('id_usaha', $myBusiness)->sum('pemasukan');
-            $pengeluaran = Balances::where('id_usaha', $myBusiness)->sum('pengeluaran');
+            $pemasukan= Balances::where('id_user', $myUser->id)->where('id_usaha', $myBusiness->id)->sum('pemasukan');
+            $pengeluaran= Balances::where('id_user',  $myUser->id)->where('id_usaha', $myBusiness->id)->sum('pengeluaran');
+    
 
             return ResponseFormatter::success(
                 [
                     "total_saldo" => $pemasukan - $pengeluaran,
-                    "detail" => $balance,
+                    "detail" => Balances::where('id_usaha', $myBusiness->id)->get(),
                 ],
                 "Get Balance Berhasil",
             );
