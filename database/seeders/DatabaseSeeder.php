@@ -26,6 +26,7 @@ use App\Models\MasterBusinessCategory;
 
 use Laravel\Jetstream\HasProfilePhoto;
 use App\Models\BusinessDeliveryService;
+use App\Models\MasterBank;
 use Illuminate\Notifications\Notifiable;
 use App\Models\MasterTransactionCategory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -363,6 +364,8 @@ class DatabaseSeeder extends Seeder
         $this->call(MasterCategoryBusinessSeeder::class);
         $this->call(MasterCategoryProductSeeder::class);
         $this->call(AllNewSeeder::class);
+        $this->call(AllNewSeeder::class);
+        $this->call(MasterBankSeeder::class);
 
         // $this->call(PrivilegeSeeder::class);
     }

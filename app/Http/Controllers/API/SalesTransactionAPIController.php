@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Address;
 use App\Models\AddressDelivery;
+use App\Models\Balances;
 use App\Models\Notification;
 
 /**
@@ -419,6 +420,7 @@ class SalesTransactionAPIController extends AppBaseController
                         'status' => 'Telah Diterima',
                         'tanggal_pesanan_diterima' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]);
+                    
                     NotificationAPIController::add(
                         "Pesanan Telah Diterima",
                         "Terimakasih telah melakukan pembelanjaan melalui aplikasi UMI. Semoga hari-harimu selalu menyenangkan",
@@ -437,6 +439,18 @@ class SalesTransactionAPIController extends AppBaseController
                         $transaction->id,
                         $transaction->businesses->id_user,
                     );
+                    if($transaction->link_pembayaran!=null&&$transaction->is_auto_payment){
+                        // dd("Masuk sini");
+                        Balances::updateOrCreate([
+                            'id_user'=>  $transaction->businesses->id_user,
+                            'id_kategori_transaksi'=> 1,
+                            'id_transaksi_penjualan'=>  $transaction->id,
+                            'id_usaha'=> $transaction->businesses->id,
+                            'pengeluaran'=>0,
+                            'pemasukan'=> $transaction->total_pesanan -$transaction->biaya_penanganan,
+                            'deskripsi'=> "Pembayaran pemesanan dengan no.pemesanan: $transaction->no_pemesanan"
+                        ]);
+                    }
                     break;
                 case 'Dibatalkan':
                     //  'Telah Siap', 'Telah Dikirimkan', 'Telah Diterima',

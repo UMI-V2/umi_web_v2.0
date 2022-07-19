@@ -11,6 +11,7 @@ use App\Repositories\BalancesRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\API\CreateBalancesAPIRequest;
 use App\Http\Requests\API\UpdateBalancesAPIRequest;
+use App\Models\Business;
 
 /**
  * Class BalancesController
@@ -19,13 +20,20 @@ use App\Http\Requests\API\UpdateBalancesAPIRequest;
 
 class BalancesAPIController extends AppBaseController
 {
-    public function getMyTransaction(Request $request)
+    public function getMyBalance(Request $request)
     {
         try {
-            $balance= Balances::where('id_user',$request->user()->id )->get();
+            $myUser =  $request->user();
+            $myBusiness = Business::where('id_user',   $myUser->id)->first();
+            $balance = Balances::where('id_usaha', $myBusiness->id)->get();
+            $pemasukan = Balances::where('id_usaha', $myBusiness)->sum('pemasukan');
+            $pengeluaran = Balances::where('id_usaha', $myBusiness)->sum('pengeluaran');
+
             return ResponseFormatter::success(
-               ["total_saldo"=> Balances::where('id_user',$request->user()->id )->sum('pemasukan'),
-                "detail"=> $balance->load(['master_transaction_categories', 'sales_transactions']),],
+                [
+                    "total_saldo" => $pemasukan - $pengeluaran,
+                    "detail" => $balance,
+                ],
                 "Get Balance Berhasil",
             );
         } catch (Exception $e) {
@@ -37,4 +45,27 @@ class BalancesAPIController extends AppBaseController
     }
 
 
+    public function add(Request $request)
+    {
+        try {
+            $balance =  Balances::create([
+                'id_user' => 100,
+                'id_kategori_transaksi' => 1,
+                'id_transaksi_penjualan' => 100,
+                'id_usaha' => 100,
+                'pengeluaran' => 0,
+                'pemasukan' => 10000,
+                'deskripsi' => 'Pembayaran pemesanan dengan no.pemesanan: $transaction->no_pemesanan'
+            ]);
+            return ResponseFormatter::success(
+                $balance,
+                "Add Balance Berhasil",
+            );
+        } catch (Exception $e) {
+            return ResponseFormatter::error(
+                $e->getMessage(),
+                "Add Balance Failed",
+            );
+        }
+    }
 }

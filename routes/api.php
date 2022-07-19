@@ -10,24 +10,28 @@ use App\Http\Controllers\OpenHourController;
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\CartAPIController;
 use App\Http\Controllers\API\UserAPIController;
+use App\Http\Controllers\API\RatingAPIController;
 use App\Http\Controllers\API\AddressAPIController;
+use App\Http\Controllers\API\MasterBankController;
 use App\Http\Controllers\API\ProductAPIController;
+use App\Http\Controllers\API\BalancesAPIController;
 use App\Http\Controllers\API\BusinessAPIController;
 use App\Http\Controllers\API\DiscountAPIController;
+use App\Http\Controllers\API\MidtransAPIController;
 use App\Http\Controllers\API\OpenHourAPIController;
+use App\Http\Controllers\API\MasterBankAPIController;
 use App\Http\Controllers\API\MasterCityAPIController;
 use App\Http\Controllers\API\MasterUnitAPIController;
+use App\Http\Controllers\API\NotificationAPIController;
 use App\Http\Controllers\API\MasterProvinceAPIController;
 use App\Http\Controllers\MasterDeliveryServiceController;
 use App\Http\Controllers\API\ProductCategoryAPIController;
+use App\Http\Controllers\API\WithdrawBalanceAPIController;
 use App\Http\Controllers\API\BusinessCategoryAPIController;
+use App\Http\Controllers\API\SalesTransactionAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
-use App\Http\Controllers\API\MidtransAPIController;
-use App\Http\Controllers\API\NotificationAPIController;
-use App\Http\Controllers\API\RatingAPIController;
-use App\Http\Controllers\API\SalesTransactionAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,6 +167,20 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/getMyNotification', [NotificationAPIController::class, 'getMyNotification']);
         Route::post('/update', [NotificationAPIController::class, 'update']);
         Route::delete('/delete', [NotificationAPIController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'balance'], function () {
+        Route::get('/getMyBalance', [BalancesAPIController::class, 'getMyBalance']);
+        Route::post('/add', [BalancesAPIController::class, 'add']);
+    });
+
+    Route::group(['prefix' => 'withdraw'], function () {
+        Route::get('/all', [WithdrawBalanceAPIController::class, 'all']);
+        Route::post('/add', [WithdrawBalanceAPIController::class, 'addRequest']);
+    });
+
+    Route::group(['prefix' => 'master_bank'], function () {
+        Route::get('/all', [MasterBankAPIController::class, 'all']);
     });
     
 });
