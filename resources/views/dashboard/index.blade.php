@@ -167,11 +167,13 @@
                                     crossorigin=""></script>
 
                                 <script>
-                                    var map = L.map('map', { scrollWheelZoom: false}).setView([-6.406576, 108.282833], 13);
+                                    var map = L.map('map', {
+                                        scrollWheelZoom: false
+                                    }).setView([-6.406576, 108.282833], 13);
 
                                     var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                         maxZoom: 19,
-                                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                        // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                                     }).addTo(map);
 
 
@@ -227,9 +229,10 @@
                                 </div>
 
                                 <div class="card-footer clearfix" style="text-align: center">
-                                    
-                                        <a href="{{ route('transactionProducts.index') }}" class="btn btn-sm btn-info">Lihat Semua Pesanan</a>
-                                    
+
+                                    <a href="{{ route('transactionProducts.index') }}" class="btn btn-sm btn-info">Lihat
+                                        Semua Pesanan</a>
+
 
                                 </div>
                             </div>
@@ -277,10 +280,10 @@
                                         </div>
 
                                         <div class="card-footer clearfix" style="text-align: center">
-                                            
-                                                <a href="{{ route('products.index') }}"
-                                                    class="btn btn-sm btn-info">Lihat Semua Produk</a>
-                                            
+
+                                            <a href="{{ route('products.index') }}" class="btn btn-sm btn-info">Lihat
+                                                Semua Produk</a>
+
                                         </div>
 
                                     </div>
@@ -329,10 +332,10 @@
                                         </div>
 
                                         <div class="card-footer clearfix" style="text-align: center">
-                                            
-                                                <a href="{{ route('businesses.index') }}"
-                                                    class="btn btn-sm btn-info">Lihat Semua Toko</a>
-                                            
+
+                                            <a href="{{ route('businesses.index') }}" class="btn btn-sm btn-info">Lihat
+                                                Semua Toko</a>
+
                                         </div>
 
                                     </div>
@@ -346,7 +349,7 @@
                                     <div class="card">
                                         <div class="card-header border-transparent">
                                             <h3 class="card-title">Metode Pembayaran
-                                                    Terpopuler</h3>
+                                                Terpopuler</h3>
                                             <div class="card-tools">
                                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                                     <i class="fas fa-minus"></i>
@@ -384,10 +387,10 @@
                                         </div>
 
                                         <div class="card-footer clearfix" style="text-align: center">
-                                            
-                                                <a href="{{ route('masterPaymentMethods.index') }}"
-                                                    class="btn btn-sm btn-info">Lihat Semua Metode</a>
-                                            
+
+                                            <a href="{{ route('masterPaymentMethods.index') }}"
+                                                class="btn btn-sm btn-info">Lihat Semua Metode</a>
+
                                         </div>
 
                                     </div>
@@ -424,6 +427,27 @@
                                             width="523" height="312" class="chartjs-render-monitor"></canvas>
                                     </div>
                                 </div>
+
+                                {{-- <div class="card-footer clearfix" style="text-align: left" id="perhari"> 
+                                    <a class="btn btn-sm btn-info">
+                                        Perhari
+                                        </a>
+                                </div>
+                                <div class="card-footer clearfix" style="text-align: left" id="perminggu">    
+                                    <a class="btn btn-sm btn-info">
+                                    Perminggu
+                                    </a>
+                                </div>
+                                <div class="card-footer clearfix" style="text-align: left" id="perbulan">    
+                                    <a class="btn btn-sm btn-info">
+                                    Perbulan
+                                    </a>
+                                </div>
+                                <div class="card-footer clearfix" style="text-align: left" id="pertahun">    
+                                    <a class="btn btn-sm btn-info">
+                                    Pertahun
+                                    </a>
+                                </div> --}}
 
                             </div>
 
@@ -462,38 +486,60 @@
                             @push('chartjs_scripts')
                                 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
 
-                                
-
                                 <script>
-                                    const labels = [
-                                        'January',
-                                        'February',
-                                        'March',
-                                        'April',
-                                        'May',
-                                        'June',
-                                    ];
+                                    $(document).ready(function() {
+                                        graphicChart()
+                                    })
 
-                                    const dataGrafikTransaksi = {
-                                        labels: labels,
-                                        datasets: [{
-                                            label: 'My First dataset',
-                                            backgroundColor: 'rgb(255, 99, 132)',
-                                            borderColor: 'rgb(255, 99, 132)',
-                                            data: [0, 10, 5, 2, 20, 30, 45],
-                                        }]
-                                    };
+                                    function addData(chart, label, data) {
+                                        chart.data.labels.push(label);
+                                        chart.data.datasets.forEach((dataset) => {
+                                            dataset.data.push(data);
+                                        });
+                                        chart.update();
+                                    }
 
-                                    const config = {
-                                        type: 'bar',
-                                        data: dataGrafikTransaksi,
-                                        options: {}
-                                    };
+                                    function graphicChart() {
 
-                                    const grafikTransaksi = new Chart(
-                                        document.getElementById('grafikTransaksi'),
-                                        config
-                                    );
+                                        const labels = [
+
+                                        ];
+
+                                        const dataGrafikTransaksi = {
+                                            labels: labels,
+                                            datasets: [{
+                                                label: 'My First dataset',
+                                                backgroundColor: 'rgb(255, 99, 132)',
+                                                borderColor: 'rgb(255, 99, 132)',
+                                                data: [],
+                                            }]
+                                        };
+
+                                        const config = {
+                                            type: 'bar',
+                                            data: dataGrafikTransaksi,
+                                            options: {}
+                                        };
+
+                                        const grafikTransaksi = new Chart(
+                                            document.getElementById('grafikTransaksi'),
+                                            config
+                                        );
+
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "./dashboard/data",
+                                            success: function(data) {
+                                                var data = data.data;
+                                                var labels = []
+                                                console.log(data);
+                                                for (var i = 0; i < data.length; i++) {
+                                                    addData(grafikTransaksi, data[i].bulan, data[i].jumlah)
+                                                }
+                                                console.log(labels);
+                                            }
+                                        });
+                                    }
                                 </script>
                             @endpush
 

@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\SalesTransaction;
 use App\Models\Address;
 use App\Helpers\ResponseFormatter;
+use App\Models\TransactionStatus;
+use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     /**
@@ -47,6 +49,8 @@ class DashboardController extends Controller
             return $business->total_order;
         })->take(5);
         
+        $historiTransaksi = SalesTransaction::all()->take(5);
+        
         $alamats = Address::all();
         $alamatToko = [];
         foreach ($alamats as $alamat) {
@@ -58,18 +62,22 @@ class DashboardController extends Controller
             );
         }
         
-        $historiTransaksi = SalesTransaction::all()->take(5);
 
+
+        
         // return dd(Product::find(3)->total_order);
-
-        //
-
 
         return view('dashboard.index', compact('totalUser', 'totalUsaha', 'totalProduk', 'totalTransaksi', 'transaksiAutoPayment', 'transaksiManualPayment', 'transactionProduct', 'totalLapakPopuler', 'historiTransaksi', 'alamatToko'));
     }
 
-    public function popularPaymentMethod()
+    public function FrekuensiTransaksi()
     {
+        $transaksiPerBulan = TransactionStatus::select(DB::raw('monthname(tanggal_pesanan_diterima) as bulan'), DB::raw('count(*) as jumlah'))->groupBy('bulan')->get();
+
+        return response()->json([
+            'data' => $transaksiPerBulan
+        ]);
+        // return dd($transaksiPerBulan);
         
     }
 

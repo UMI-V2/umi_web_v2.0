@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\MidtransAPIController;
+use App\Http\Controllers\BusinessFileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\DashboardController;
@@ -22,7 +23,7 @@ Route::get('/linkstorage', function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing_pages/index');
 });
 
 //Midtrans Relation
@@ -62,6 +63,10 @@ Route::post(
 
 // route get dashboard index
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/landing_pages', [LandingPagesController::class, 'index'])->name('landing_pages');
+Route::get('/dashboard/data', [DashboardController::class, 'FrekuensiTransaksi'])->name('dashboard');
+Route::post('/businessFile/index', [BusinessFileController::class, 'store'])->name('business.store');
+Route::get('/businessFile/{id}/edit', [BusinessFileController::class, 'update'])->name('business.update');
 
 Route::resource('masterProductCategories', App\Http\Controllers\MasterProductCategoryController::class);
 
