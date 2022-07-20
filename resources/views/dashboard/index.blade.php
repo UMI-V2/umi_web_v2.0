@@ -134,8 +134,6 @@
                                     <div class="d-md-flex">
                                         <div class="p-1 flex-fill" style="overflow: hidden">
 
-
-
                                             <div id="map" style="height: 325px; overflow: hidden" class="leaflet">
                                                 <div class="map"><svg height="318.92516996871734" version="1.1"
                                                         width="515.766" xmlns="http://www.w3.org/2000/svg"
@@ -155,6 +153,7 @@
                                                     <div class="zoomButton zoomOut" title="Zoom out">-</div>
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                     </div>
                                 </div>

@@ -24,7 +24,7 @@
         <div class="clearfix"></div>
 
         <div class="card">
-            <div class="card-body p-0">
+            <div class="card-body p-0" id="events">
                 @include('events.table')
 
                 <div class="card-footer clearfix">
@@ -37,7 +37,17 @@
         </div>
     </div>
 
+    <script>
+        $(document).ready(function () {
+        $('dataTableBuilder').DataTable({
+            scrollX: true,
+        });
+    });
+    </script>
+
 @endsection
+
+
 
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 <script>

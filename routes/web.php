@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\API\MidtransAPIController;
-use App\Http\Controllers\BusinessFileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\API\MidtransAPIController;
+use App\Http\Controllers\BusinessFileController;
+use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LandingPagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +21,7 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
-    echo("Storage Link Success");
+    ("Storage Link Success");
 });
 
 Route::get('/', function () {
@@ -62,11 +64,19 @@ Route::post(
 
 
 // route get dashboard index
+Route::get('/', [LandingPagesController::class, 'index'])->name('landing_pages');
+Route::get('/', [LandingPagesController::class, 'index'])->name('landing_pages');
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/landing_pages', [LandingPagesController::class, 'index'])->name('landing_pages');
 Route::get('/dashboard/data', [DashboardController::class, 'FrekuensiTransaksi'])->name('dashboard');
-Route::post('/businessFile/index', [BusinessFileController::class, 'store'])->name('business.store');
-Route::get('/businessFile/{id}/edit', [BusinessFileController::class, 'update'])->name('business.update');
+
+Route::post('/businessFile/index', [BusinessFileController::class, 'store'])->name('business_files.store');
+
+Route::post('/business/index', [BusinessController::class, 'store'])->name('business.store');
+// Route::get('/businessFile/{id}/edit', [BusinessFileController::class, 'update'])->name('business.update');
+
+
+
 
 Route::resource('masterProductCategories', App\Http\Controllers\MasterProductCategoryController::class);
 
@@ -165,8 +175,6 @@ Route::resource('transactionProducts', App\Http\Controllers\TransactionProductCo
 
 
 Route::resource('balances', App\Http\Controllers\BalancesController::class);
-
-
 
 
 Route::resource('events', App\Http\Controllers\EventController::class);

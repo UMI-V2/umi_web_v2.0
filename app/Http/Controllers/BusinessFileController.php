@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Response;
+use Exception;
 use App\Http\Requests;
 use App\Models\Business;
 use Laracasts\Flash\Flash;
 use App\Models\BusinessFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\DataTables\BusinessFileDataTable;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\BusinessFileRepository;
@@ -48,6 +49,35 @@ class BusinessFileController extends AppBaseController
         return view('business_files.create')->with('businesses', $businesses);
     }
 
+    static function uploadOrDeleteFile(Request $request, String $idUsaha)
+    {
+        try {
+            if ($request->add_file_photos) {
+                foreach ($request->file('add_file_photos') as $file) {
+                    $fileRoot = $file->store("assets/business/$idUsaha/photos", 'public');
+                    BusinessFile::create([
+                        'id_usaha' => $idUsaha,
+                        'file' => $fileRoot,
+                        'is_video' => false,
+                        'is_photo' => true
+                    ]);
+                }
+            }
+    
+            if ($request->delete_files) {
+                foreach ($request->delete_files as $photo) {
+                    BusinessFile::where('file', $photo)->delete();
+                    if (Storage::disk('public')->exists($photo)) {
+                        Storage::disk('public')->delete($photo);
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            return ('Gagal Menambah File Usaha Baru');
+        }
+        
+    }
+    
     /**
      * Store a newly created BusinessFile in storage.
      *
@@ -64,16 +94,18 @@ class BusinessFileController extends AppBaseController
 
         //menyimpan produk ke database
         // $input = BusinessFile::create($request->all());
-
-
-        $input = $request->all();
         // dd($request->all());
+
+
+        $request->all();
 
         if($request->hasFile('file')){
             foreach ($request->file('file') as $item) {
                 $file = $item->store('imageproduct','public');
 
-                BusinessFile::create([
+                BusinessFile::updateOrCreate([
+                    'id' => $request->id
+                ], [
                     'id_usaha' => $request->id_usaha,
                     'is_video' => $request->is_video == 'on'?1:0,
                     'is_photo' => $request->is_photo == 'on'?1:0,

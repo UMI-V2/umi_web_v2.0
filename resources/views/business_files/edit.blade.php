@@ -20,10 +20,10 @@
             {{-- {!! Form::model($businessFile, ['route' => ['businessFiles.update', $businessFile->id], 'method' => 'patch', 'files' => true]) !!} --}}
 
             <div class="card-body">
-                <form action="{{ route('business.update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('business_files.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label>Select</label>
                             <select class="form-control" name="id_usaha">
                                 <option value="#" disabled selected>Pilih Jenis Usaha</option>
@@ -31,7 +31,7 @@
                                     <option value="{{ $item->id }}">{{ $item->nama_usaha }}</option>
                                 @endforeach
                             </select>
-                            </div>
+                            </div> --}}
                         {{-- <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
@@ -66,7 +66,7 @@
 
 
                 <div class="row">
-                    @include('business_files.fields')
+                    {{-- @include('business_files.fields') --}}
                 </div>
             </div>
 
