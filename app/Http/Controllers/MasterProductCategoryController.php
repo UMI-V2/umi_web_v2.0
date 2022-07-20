@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateMasterProductCategoryRequest;
 use App\Repositories\MasterProductCategoryRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\ProductCategory;
 use Response;
 
 class MasterProductCategoryController extends AppBaseController
@@ -135,18 +136,24 @@ class MasterProductCategoryController extends AppBaseController
      */
     public function destroy($id)
     {
-        $masterProductCategory = $this->masterProductCategoryRepository->find($id);
+        $productCategory = ProductCategory::where('id_master_kategori_produk', $id)->get();
+        if ($productCategory->isEmpty()) {
+            $masterProductCategory = $this->masterProductCategoryRepository->find($id);
 
-        if (empty($masterProductCategory)) {
-            Flash::error('Master Product Category not found');
+            if (empty($masterProductCategory)) {
+                Flash::error('Master Product Category not found');
+
+                return redirect(route('masterProductCategories.index'));
+            }
+
+            $this->masterProductCategoryRepository->delete($id);
+
+            Flash::success('Master Product Category deleted successfully.');
 
             return redirect(route('masterProductCategories.index'));
+        } else {
+            Flash::warning('Anda tidak dapat menghapus data ini, karena telah digunakan. Anda hanya dapat mengubahnya.');
+            return redirect(route('masterProductCategories.index'));
         }
-
-        $this->masterProductCategoryRepository->delete($id);
-
-        Flash::success('Master Product Category deleted successfully.');
-
-        return redirect(route('masterProductCategories.index'));
     }
 }

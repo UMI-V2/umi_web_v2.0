@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateMasterBusinessCategoryRequest;
 use App\Repositories\MasterBusinessCategoryRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\BusinessCategory;
 use Response;
 
 class MasterBusinessCategoryController extends AppBaseController
@@ -135,18 +136,26 @@ class MasterBusinessCategoryController extends AppBaseController
      */
     public function destroy($id)
     {
-        $masterBusinessCategory = $this->masterBusinessCategoryRepository->find($id);
+        $businessCategory  = BusinessCategory::where('id_master_kategori_usaha', $id)->get();
 
-        if (empty($masterBusinessCategory)) {
-            Flash::error('Master Business Category not found');
+        if ($businessCategory->isEmpty()) {
+
+            $masterBusinessCategory = $this->masterBusinessCategoryRepository->find($id);
+
+            if (empty($masterBusinessCategory)) {
+                Flash::error('Master Business Category not found');
+
+                return redirect(route('masterBusinessCategories.index'));
+            }
+
+            $this->masterBusinessCategoryRepository->delete($id);
+
+            Flash::success('Master Business Category deleted successfully.');
 
             return redirect(route('masterBusinessCategories.index'));
+        } else {
+            Flash::warning('Anda tidak dapat menghapus data ini, karena telah digunakan. Anda hanya dapat mengubahnya.');
+            return redirect(route('masterBusinessCategories.index'));
         }
-
-        $this->masterBusinessCategoryRepository->delete($id);
-
-        Flash::success('Master Business Category deleted successfully.');
-
-        return redirect(route('masterBusinessCategories.index'));
     }
 }

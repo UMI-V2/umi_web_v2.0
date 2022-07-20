@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateMasterStatusBusinessRequest;
 use App\Repositories\MasterStatusBusinessRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Business;
 use Response;
 
 class MasterStatusBusinessController extends AppBaseController
@@ -135,18 +136,26 @@ class MasterStatusBusinessController extends AppBaseController
      */
     public function destroy($id)
     {
-        $masterStatusBusiness = $this->masterStatusBusinessRepository->find($id);
+        $businesses = Business::where('id_master_status_usaha', $id)->get();
+        if ($businesses->isEmpty()) {
 
-        if (empty($masterStatusBusiness)) {
-            Flash::error('Master Status Business not found');
+
+            $masterStatusBusiness = $this->masterStatusBusinessRepository->find($id);
+
+            if (empty($masterStatusBusiness)) {
+                Flash::error('Master Status Business not found');
+
+                return redirect(route('masterStatusBusinesses.index'));
+            }
+
+            $this->masterStatusBusinessRepository->delete($id);
+
+            Flash::success('Master Status Business deleted successfully.');
 
             return redirect(route('masterStatusBusinesses.index'));
+        } else {
+            Flash::warning('Anda tidak dapat menghapus data ini, karena telah digunakan. Anda hanya dapat mengubahnya.');
+            return redirect(route('masterStatusBusinesses.index'));
         }
-
-        $this->masterStatusBusinessRepository->delete($id);
-
-        Flash::success('Master Status Business deleted successfully.');
-
-        return redirect(route('masterStatusBusinesses.index'));
     }
 }

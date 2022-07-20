@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateMasterUnitRequest;
 use App\Repositories\MasterUnitRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Product;
 use Response;
 
 class MasterUnitController extends AppBaseController
@@ -135,18 +136,24 @@ class MasterUnitController extends AppBaseController
      */
     public function destroy($id)
     {
-        $masterUnit = $this->masterUnitRepository->find($id);
+        $products = Product::where('id_satuan', $id)->get();
+        if ($products->isEmpty()) {
+            $masterUnit = $this->masterUnitRepository->find($id);
 
-        if (empty($masterUnit)) {
-            Flash::error('Master Unit not found');
+            if (empty($masterUnit)) {
+                Flash::error('Master Unit not found');
+
+                return redirect(route('masterUnits.index'));
+            }
+
+            $this->masterUnitRepository->delete($id);
+
+            Flash::success('Master Unit deleted successfully.');
 
             return redirect(route('masterUnits.index'));
+        } else {
+            Flash::warning('Anda tidak dapat menghapus data ini, karena telah digunakan. Anda hanya dapat mengubahnya.');
+            return redirect(route('masterUnits.index'));
         }
-
-        $this->masterUnitRepository->delete($id);
-
-        Flash::success('Master Unit deleted successfully.');
-
-        return redirect(route('masterUnits.index'));
     }
 }

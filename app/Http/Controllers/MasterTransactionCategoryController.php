@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateMasterTransactionCategoryRequest;
 use App\Repositories\MasterTransactionCategoryRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Balances;
+use App\Models\SalesTransaction;
 use Response;
 
 class MasterTransactionCategoryController extends AppBaseController
@@ -135,18 +137,25 @@ class MasterTransactionCategoryController extends AppBaseController
      */
     public function destroy($id)
     {
-        $masterTransactionCategory = $this->masterTransactionCategoryRepository->find($id);
+        $balances = Balances::where('id_kategori_transaksi', $id)->get();
+        if ($balances->isEmpty()) {
+            $masterTransactionCategory = $this->masterTransactionCategoryRepository->find($id);
 
-        if (empty($masterTransactionCategory)) {
-            Flash::error('Master Transaction Category not found');
+            if (empty($masterTransactionCategory)) {
+                Flash::error('Master Transaction Category not found');
+
+                return redirect(route('masterTransactionCategories.index'));
+            }
+
+            $this->masterTransactionCategoryRepository->delete($id);
+
+            Flash::success('Master Transaction Category deleted successfully.');
+
+            return redirect(route('masterTransactionCategories.index'));
+        } else {
+            Flash::warning('Anda tidak dapat menghapus data ini, karena telah digunakan. Anda hanya dapat mengubahnya.');
 
             return redirect(route('masterTransactionCategories.index'));
         }
-
-        $this->masterTransactionCategoryRepository->delete($id);
-
-        Flash::success('Master Transaction Category deleted successfully.');
-
-        return redirect(route('masterTransactionCategories.index'));
     }
 }

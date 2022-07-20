@@ -46,6 +46,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BusinessCategory extends Model
 {
 
+    /**
+     * Note:
+     * check : Business, 
+     */
+
     use HasFactory, SoftDeletes;
 
     public $table = 'business_categories';

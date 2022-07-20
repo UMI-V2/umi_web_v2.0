@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateMasterStatusUserRequest;
 use App\Repositories\MasterStatusUserRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\User;
 use Response;
 
 class MasterStatusUserController extends AppBaseController
@@ -135,18 +136,26 @@ class MasterStatusUserController extends AppBaseController
      */
     public function destroy($id)
     {
-        $masterStatusUser = $this->masterStatusUserRepository->find($id);
+        $users = User::where('id_status_pengguna', $id)->get();
+        if ($users->isEmpty()) {
 
-        if (empty($masterStatusUser)) {
-            Flash::error('Master Status User not found');
+
+            $masterStatusUser = $this->masterStatusUserRepository->find($id);
+
+            if (empty($masterStatusUser)) {
+                Flash::error('Master Status User not found');
+
+                return redirect(route('masterStatusUsers.index'));
+            }
+
+            $this->masterStatusUserRepository->delete($id);
+
+            Flash::success('Master Status User deleted successfully.');
 
             return redirect(route('masterStatusUsers.index'));
+        } else {
+            Flash::warning('Anda tidak dapat menghapus data ini, karena telah digunakan. Anda hanya dapat mengubahnya.');
+            return redirect(route('masterStatusUsers.index'));
         }
-
-        $this->masterStatusUserRepository->delete($id);
-
-        Flash::success('Master Status User deleted successfully.');
-
-        return redirect(route('masterStatusUsers.index'));
     }
 }

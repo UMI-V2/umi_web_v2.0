@@ -226,7 +226,8 @@ class Product extends Model
              $product->product_discount()->delete();
              Cart::where('id_produk', $product->id)->delete();
              Rating::where('id_produk', $product->id)->delete();
-             ShippingCostVariable::where('id_produk', $product->id)->delete();
+             ShippingCostVariable::where('id_product', $product->id)->delete();
+             FavoriteProduct::where('id_product', $product->id)->delete();
         });
     }
 }
