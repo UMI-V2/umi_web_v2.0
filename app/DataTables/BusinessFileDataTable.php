@@ -88,9 +88,9 @@ class BusinessFileDataTable extends DataTable
                 'name'  => 'businesses.nama_usaha',
                 'title' => 'Nama Usaha'
             ]),
-            'file',
-            'is_video',
-            'is_photo'
+            // 'file',
+            'is_video' => ['title' => 'Apakah menggunakan video?'],
+            'is_photo' => ['title' => 'Apakah menggunakan foto?']
         ];
     }
 

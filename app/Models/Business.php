@@ -120,6 +120,7 @@ class Business extends Model
         $pengeluaran= Balances::where('id_user', $this->id_user)->where('id_usaha', $this->id)->sum('pengeluaran');
 
         return  $pemasukan- $pengeluaran;
+
     }
 
     /**

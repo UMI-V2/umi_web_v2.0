@@ -63,13 +63,27 @@ class BusinessController extends AppBaseController
      */
     public function store(CreateBusinessRequest $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
+        // $business = $this->businessRepository->create($input);
+        // Flash::success('Business saved successfully.');
+        // return redirect(route('businesses.index'));
 
-        $business = $this->businessRepository->create($input);
+        $request->all();
 
-        Flash::success('Business saved successfully.');
+        if($request->hasFile('file')){
+            foreach ($request->file('file') as $item) {
+                $file = $item->store('imageproduct','public');
 
-        return redirect(route('businesses.index'));
+                BusinessFile::create([
+                    'id_usaha' => $request->id_usaha,
+                    'is_video' => $request->is_video == 'on'?1:0,
+                    'is_photo' => $request->is_photo == 'on'?1:0,
+                    'file' => $file
+                ]);
+            }
+          
+            return redirect()->route('business.index')->with('status','Berhasil Menambah Usaha Baru');
+        }
     }
 
     /**

@@ -28,6 +28,18 @@
     <!-- Template Main CSS File -->
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- Web GIS leaflet js CSS Files -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin="" />
+
+    <style>
+        #map {
+            height: 300px;
+            border-radius: 1%
+        }
+    </style>
+
     <!-- =======================================================
     Template Name: SoftLand
     Template URL: https://bootstrapmade.com/softland-bootstrap-app-landing-page-template/
@@ -63,7 +75,7 @@
 
                             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                                 <li class="active"><a href="index.html" class="nav-link">Home</a></li>
-                                <li><a href="features.html" class="nav-link">Features</a></li>
+                                <li><a href="features.blade.php" class="nav-link">Features</a></li>
                                 <li><a href="pricing.html" class="nav-link">Pricing</a></li>
 
                                 <li class="has-children">
@@ -210,66 +222,6 @@
                 </div>
             </div> <!-- .site-section -->
 
-
-            @push('leaflet_css')
-                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-                    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-                    crossorigin="" />
-
-                <style>
-                    #map {
-                        height: 300px;
-                        border-radius: 1%
-                    }
-                </style>
-            @endpush
-
-            <div class="site-section pb-0">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-4 mr-auto">
-                            <h2 class="mb-4">Sebaran titik-titik UMKM</h2>
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at
-                                reprehenderit optio,
-                                laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus
-                                impedit incidunt
-                                dolore mollitia esse natus beatae.</p>
-                            <p><a href="#">Download Now</a></p>
-                        </div>
-                        <div class="col-md-6" data-aos="fade-left" id="map">
-                            {{-- <img src="img/undraw_svg_2.svg" alt="Image" class="img-fluid"> --}}
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- .site-section -->
-
-            @push('leaflet_js')
-                <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-                    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-                    crossorigin=""></script>
-
-                <script>
-                    var map = L.map('map', {
-                        scrollWheelZoom: false
-                    }).setView([-6.406576, 108.282833], 13);
-
-                    var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        maxZoom: 19,
-                        // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                    }).addTo(map);
-
-
-                    // var location from database in laravel array
-                    var locations = @json($alamatToko);
-
-                    for (var i = 0; i < locations.length; i++) {
-                        marker = new L.marker([locations[i][1], locations[i][2]])
-                            .bindPopup(locations[i][0])
-                            .addTo(map);
-                    }
-                </script>
-            @endpush
-
             <div class="site-section pb-0">
                 <div class="container">
                     <div class="row align-items-center">
@@ -308,6 +260,47 @@
                 </div>
             </div> <!-- .site-section -->
 
+            <div class="site-section pb-0">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-10 mr-auto">
+                            {{-- <div class="row justify-content-center text-center mb-5"> --}}
+                            <h2 class="row justify-content-center text-center mb-4">Sebaran titik-titik UMKM</h2>
+                            <p class="row justify-content-center mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at
+                                reprehenderit optio,
+                                laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus
+                                impedit incidunt
+                                dolore mollitia esse natus beatae.</p>
+                            <p>
+                                {{-- <a href="#">Download Now</a></p> --}}
+                        </div>
+                        <div class="col-md-10" data-aos="fade-left">
+                            {{-- <img src="img/undraw_svg_2.svg" alt="Image" class="img-fluid"> --}}
+                            <div id="map" style="height: 325px; overflow: hidden"
+                                class="leaflet">
+                                <div class="map"><svg height="318.92516996871734" version="1.1"
+                                        width="515.766" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        style="overflow: hidden; position: relative; left: -0.5px; top: -0.734375px;"
+                                        viewBox="0 0 959 593" preserveAspectRatio="xMinYMin">
+                                        <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                            Created
+                                            with Raphaël 2.3.0 and Mapael undefined
+                                            (https://www.vincentbroute.fr/mapael/)</desc>
+                                        <defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                        </defs>
+
+                                    </svg>
+                                    <div class="mapTooltip" style="display: none;"></div>
+                                    <div class="zoomButton zoomReset" title="Reset zoom">•</div>
+                                    <div class="zoomButton zoomIn" title="Zoom in">+</div>
+                                    <div class="zoomButton zoomOut" title="Zoom out">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- .site-section -->
 
             <div class="site-section border-top border-bottom">
                 <div class="container">
@@ -512,6 +505,31 @@
     <!-- Template Main JS File -->
     <script src="js/main.js"></script>
 
+    <!-- Web GIS leaflet js JS File -->
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+
+    <script>
+        var map = L.map('map', {
+            scrollWheelZoom: false
+        }).setView([-6.406576, 108.282833], 13);
+
+        var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+
+        // var location from database in laravel array
+        var locations = @json($alamatToko);
+
+        for (var i = 0; i < locations.length; i++) {
+            marker = new L.marker([locations[i][1], locations[i][2]])
+                .bindPopup(locations[i][0])
+                .addTo(map);
+        }
+    </script>
 </body>
 
 </html>

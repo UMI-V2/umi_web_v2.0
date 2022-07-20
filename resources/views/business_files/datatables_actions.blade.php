@@ -3,9 +3,9 @@
     <a href="{{ route('businessFiles.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-eye"></i>
     </a>
-    <a href="{{ route('businessFiles.edit', $id) }}" class='btn btn-default btn-xs'>
+    {{-- <a href="{{ route('businessFiles.edit', $id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-edit"></i>
-    </a>
+    </a> --}}
     {!! Form::button('<i class="fa fa-trash"></i>', [
         'class' => 'btn btn-danger btn-xs',
         'onclick' => 'swalDelete(' . $id . ')',

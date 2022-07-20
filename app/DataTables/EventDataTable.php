@@ -54,7 +54,7 @@ class EventDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
-'initComplete' => "function () {
+                'initComplete' => "function () {
                     var kolom = this.api().columns();
                     kolom.every(function (i) {
 
@@ -70,6 +70,11 @@ class EventDataTable extends DataTable
                         }).attr('placeholder', 'Search');                        
                     }); 
                 }",
+                `$(document).ready(function () {
+                    $('#dataTableBuilder').DataTable({
+                        scrollX: true,
+                    });
+                })`,
             ]);
     }
 
