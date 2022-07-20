@@ -49,6 +49,8 @@ class DashboardController extends Controller
             return $business->total_order;
         })->take(5);
         
+        $historiTransaksi = SalesTransaction::all()->take(5);
+        
         $alamats = Address::all();
         $alamatToko = [];
         foreach ($alamats as $alamat) {
@@ -60,7 +62,6 @@ class DashboardController extends Controller
             );
         }
         
-        $historiTransaksi = SalesTransaction::all()->take(5);
 
 
         

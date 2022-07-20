@@ -63,6 +63,7 @@ Route::post(
 
 // route get dashboard index
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/landing_pages', [LandingPagesController::class, 'index'])->name('landing_pages');
 Route::get('/dashboard/data', [DashboardController::class, 'FrekuensiTransaksi'])->name('dashboard');
 Route::post('/businessFile/index', [BusinessFileController::class, 'store'])->name('business.store');
 Route::get('/businessFile/{id}/edit', [BusinessFileController::class, 'update'])->name('business.update');
