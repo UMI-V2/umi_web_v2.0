@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @SWG\Definition(
@@ -87,7 +88,7 @@ class Product extends Model
 
     public $table = 'products';
 
-    protected $appends = ['rating', 'total_order'];
+    protected $appends = ['rating', 'total_order', 'is_my_favorite'];
 
 
     public $fillable = [
@@ -108,6 +109,11 @@ class Product extends Model
         'updated_at',
         // 'deleted_at'
     ];
+
+    public function getIsMyFavoriteAttribute()
+    {
+        return FavoriteProduct::where('id_user', Auth::user()->id)->where('id_product', $this->id)->get()->isNotEmpty();
+    }
 
     public function getRatingAttribute()
     {

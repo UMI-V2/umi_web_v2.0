@@ -54,7 +54,7 @@ class WithdrawBalanceAPIController extends Controller
         try {
             Validator::make($request->all(), [
                 'id_bank' => 'required',
-                'nominal' => 'required',
+                'nominal_request' => 'required',
                 'no_rek' => 'required',
                 'rek_name' => 'required',
             ],);
@@ -87,6 +87,7 @@ class WithdrawBalanceAPIController extends Controller
             $bank = MasterBank::find($request->id_bank);
             $data['bank_name'] = $bank->name;
             $data['cost_admin'] = $bank->cost_admin;
+            $data['total_withdraw'] = $request->nominal_request-  $bank->cost_admin;
 
             $result = WithdrawBalance::updateOrCreate(
                 [

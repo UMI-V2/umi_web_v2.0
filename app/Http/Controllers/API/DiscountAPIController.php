@@ -71,7 +71,7 @@ class DiscountAPIController extends AppBaseController
     
     
             if ($id) {
-                $discount = Discount::with(['product_discounts.product.product_files'])->find($id);
+                $discount = Discount::with(['product_discounts.products.product_files'])->find($id);
                 if ($discount) {
                     return ResponseFormatter::success($discount, 'Data diskon berhasil diambil');
                 }
@@ -95,7 +95,7 @@ class DiscountAPIController extends AppBaseController
 
             
     
-            return ResponseFormatter::success($discount->with(['product_discounts.product.product_files'])->orderBy('created_at', 'desc')->get(), 'Data diskon berhasil diambil');
+            return ResponseFormatter::success($discount->with(['product_discounts.products.product_files'])->orderBy('created_at', 'desc')->get(), 'Data diskon berhasil diambil');
     
         } catch (\Exception $e) {
             return ResponseFormatter::error([
@@ -151,7 +151,7 @@ class DiscountAPIController extends AppBaseController
             $result = Discount::updateOrCreate(['id' => $request->id], $data);
 
             ProductDiscountAPIController::createDelete($request, $result->id );
-            $result = Discount::with(['product_discounts.product.product_files'])->find($result->id );
+            $result = Discount::with(['product_discounts.products.product_files'])->find($result->id );
             DB::commit();
             return ResponseFormatter::success($result, 'Update Discount Success');
         }  catch (\Exception $e) {

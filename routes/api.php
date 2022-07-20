@@ -28,10 +28,12 @@ use App\Http\Controllers\MasterDeliveryServiceController;
 use App\Http\Controllers\API\ProductCategoryAPIController;
 use App\Http\Controllers\API\WithdrawBalanceAPIController;
 use App\Http\Controllers\API\BusinessCategoryAPIController;
+use App\Http\Controllers\API\FavoriteProductAPIController;
 use App\Http\Controllers\API\SalesTransactionAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
+use App\Models\FavoriteProduct;
 
 /*
 |--------------------------------------------------------------------------
@@ -181,6 +183,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::group(['prefix' => 'master_bank'], function () {
         Route::get('/all', [MasterBankAPIController::class, 'all']);
+    });
+
+    Route::group(['prefix' => 'product_favorite'], function () {
+        Route::get('/all', [FavoriteProductAPIController::class, 'all']);
+        Route::post('/update', [FavoriteProductAPIController::class, 'update']);
+        Route::delete('/delete', [FavoriteProductAPIController::class, 'delete']);
     });
     
 });
