@@ -81,6 +81,7 @@ class ShippingCostVariableDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'id_product' => ([
                 'data'  => 'products.nama',
                 'title' => 'Product',

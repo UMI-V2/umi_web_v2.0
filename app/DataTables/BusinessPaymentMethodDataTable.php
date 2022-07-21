@@ -81,6 +81,7 @@ class BusinessPaymentMethodDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'id_usaha' => ([
                 'data'  => 'businesses.nama_usaha',
                 'title' => 'Usaha'

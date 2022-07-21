@@ -81,6 +81,7 @@ class MasterBusinessCategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             // 'id',
             'nama_kategori_usaha',
             'status_kategori_usaha'

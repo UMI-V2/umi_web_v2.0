@@ -81,6 +81,7 @@ class BalancesDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'id_kategori_transaksi' => ([ 
                 'data' => 'master_transaction_categories.nama_kategori_transaksi', 
                 'name' => 'master_transaction_categories.nama_kategori_transaksi', 

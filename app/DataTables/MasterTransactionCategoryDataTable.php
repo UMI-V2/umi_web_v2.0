@@ -81,6 +81,7 @@ class MasterTransactionCategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'nama_kategori_transaksi',
             'deskripsi_kategori_transaksi'
         ];

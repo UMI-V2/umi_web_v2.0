@@ -81,6 +81,7 @@ class MasterStatusUserDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'nama_status_pengguna' => ['title' => 'Status Pengguna']
         ];
     }

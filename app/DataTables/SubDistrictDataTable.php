@@ -81,6 +81,7 @@ class SubDistrictDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'province_id' => ([
                 'data' => 'master_provinces.province_name',
                 'name' => 'master_provinces.province_name',

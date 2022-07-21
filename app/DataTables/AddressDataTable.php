@@ -81,6 +81,7 @@ class AddressDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'id_users' => ([
                 'data'  => 'users.name',
                 'name'  => 'users.name',

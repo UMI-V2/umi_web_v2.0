@@ -81,6 +81,7 @@ class BusinessCategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'id_usaha' => new \Yajra\DataTables\Html\Column([
                 'data' => 'businesses.nama_usaha',
                 'name' => 'businesses.nama_usaha',

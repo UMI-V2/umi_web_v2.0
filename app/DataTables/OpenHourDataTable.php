@@ -107,9 +107,9 @@ class OpenHourDataTable extends DataTable
             'selasa',
             'rabu',
             'kamis',
-            // 'jumat',
-            // 'sabtu',
-            // 'minggu',
+            'jumat',
+            'sabtu',
+            'minggu',
         ];
     }
 

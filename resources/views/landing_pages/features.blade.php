@@ -60,8 +60,8 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li class="active"><a href="features.html" class="nav-link">Features</a></li>
+                <li><a href="{{ route('home') }}" class="nav-link">Home</a></li>
+                <li class="active"><a href="{{ route('features') }}" class="nav-link">Features</a></li>
                 <li><a href="pricing.html" class="nav-link">Pricing</a></li>
                 
                 <li class="has-children">

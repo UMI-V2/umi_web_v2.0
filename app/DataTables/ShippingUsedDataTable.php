@@ -81,6 +81,7 @@ class ShippingUsedDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'id_shipping_cost_variable' => ([
                 'data'  => 'shipping_cost_variables.is_paid_by_seller',
                 'name'  => 'shipping_cost_variables.is_paid_by_seller',

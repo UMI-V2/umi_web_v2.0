@@ -81,6 +81,7 @@ class SalesTransactionDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'id_user' => ([
                 'data'  => 'users.name',
                 'title' => 'User',

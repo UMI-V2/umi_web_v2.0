@@ -77,6 +77,14 @@ class MasterBusinessCategory extends Model
         'status_kategori_usaha' => 'required'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function businesses()
+    {
+        return $this->belongsToMany(\App\Models\Business::class, 'business_categories', 'id_usaha', 'id_master_kategori_usaha');
+    }
+
     public static function boot() {
         parent::boot();
 

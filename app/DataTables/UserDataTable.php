@@ -93,6 +93,7 @@ class UserDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'name' => ['title' => 'Nama'],
             // 'nama_hak_akses_pengguna' => ['title' => 'Akses Sebagai'],
             // 'nama_status_pengguna' => [

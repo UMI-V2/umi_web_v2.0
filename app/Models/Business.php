@@ -130,6 +130,10 @@ class Business extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'id_user', 'id');
     }
+    public function master_business_categories()
+    {
+        return $this->belongsTo(\App\Models\MasterBusinessCategory::class);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

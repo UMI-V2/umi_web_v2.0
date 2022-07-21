@@ -85,6 +85,7 @@ class ProductFileDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'id_produk' => ([
                 'data' => 'products.nama',
                 'name' => 'products.nama',

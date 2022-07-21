@@ -81,6 +81,7 @@ class MasterPaymentMethodDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'nama_metode_pembayaran',
             'deskripsi_metode_pembayaran'
         ];

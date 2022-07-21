@@ -81,6 +81,7 @@ class MasterUnitDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'nama_satuan',
             'singkatan_satuan'
         ];

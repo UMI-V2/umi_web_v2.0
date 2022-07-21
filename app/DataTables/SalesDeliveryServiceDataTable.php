@@ -81,6 +81,7 @@ class SalesDeliveryServiceDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'id_jasa_pengiriman' => ([
                 'data'  => 'master_delivery_services.nama_jasa_pengiriman',
                 'title' => 'Jasa Pengiriman',

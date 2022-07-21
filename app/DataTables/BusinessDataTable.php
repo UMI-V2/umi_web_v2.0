@@ -88,6 +88,7 @@ class BusinessDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'name' => ([
                 'data' => 'users.name',
                 'name' => 'users.name',

@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\API\MidtransAPIController;
-use App\Http\Controllers\BusinessFileController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LPFeaturesController;
+use App\Http\Controllers\BusinessFileController;
 use App\Http\Controllers\LandingPagesController;
+use App\Http\Controllers\API\MidtransAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,16 +65,17 @@ Route::post(
 
 
 // route get dashboard index
-Route::get('/', [LandingPagesController::class, 'index'])->name('landing_pages');
-Route::get('/', [LandingPagesController::class, 'index'])->name('landing_pages');
+Route::get('/home', [LandingPagesController::class, 'index'])->name('home');
+Route::get('/features', [LPFeaturesController::class, 'index'])->name('features');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/dashboard/data', [DashboardController::class, 'FrekuensiTransaksi'])->name('dashboard');
 
 Route::post('/businessFile/index', [BusinessFileController::class, 'store'])->name('business_files.store');
 
-Route::post('/business/index', [BusinessController::class, 'store'])->name('business.store');
-// Route::get('/businessFile/{id}/edit', [BusinessFileController::class, 'update'])->name('business.update');
+// Route::post('/business/index', [BusinessController::class, 'store'])->name('business.store');
+
+Route::post('/businessCategories/create', [BusinessController::class, 'store'])->name('business_categories.create');
 
 
 

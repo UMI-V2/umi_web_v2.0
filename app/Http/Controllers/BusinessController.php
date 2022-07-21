@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MasterStatusBusiness;
+use Response;
 use App\Models\User;
-use App\Models\OpenHour;
+use App\Http\Requests;
 use App\Models\Business;
+use App\Models\OpenHour;
+use Laracasts\Flash\Flash;
 use App\Models\BusinessFile;
 use App\Models\BusinessCategory;
+use App\Models\MasterStatusBusiness;
 use App\DataTables\BusinessDataTable;
-use App\Http\Requests;
-use App\Http\Requests\CreateBusinessRequest;
-use App\Http\Requests\UpdateBusinessRequest;
+use App\Models\MasterBusinessCategory;
 use App\Repositories\BusinessRepository;
 use App\Repositories\OpenHourRepository;
-use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
+use App\Http\Requests\CreateBusinessRequest;
+use App\Http\Requests\UpdateBusinessRequest;
 
 class BusinessController extends AppBaseController
 {
@@ -49,8 +50,11 @@ class BusinessController extends AppBaseController
      */
     public function create()
     {
-        $master_status_businesses = MasterStatusBusiness::query()->pluck('nama_status_usaha', 'id');
-        $users = user::query()->pluck('name', 'id');
+        $master_status_businesses = MasterStatusBusiness::query()->select('nama_status_usaha', 'id')->get();
+        $users = user::query()->select('id', 'name')->get();
+        // $business_categories = MasterBusinessCategory::query()->select('id', 'name')->get();
+        // dd($category);
+        // dd($users);
         return view('businesses.create')->with('master_status_businesses', $master_status_businesses)->with('users', $users);
     }
 
@@ -64,25 +68,45 @@ class BusinessController extends AppBaseController
     public function store(CreateBusinessRequest $request)
     {
         // $input = $request->all();
-        // $business = $this->businessRepository->create($input);
         // Flash::success('Business saved successfully.');
         // return redirect(route('businesses.index'));
-
-        $request->all();
+        
+        $input = $request->all();
+        $business = $this->businessRepository->create($input);
 
         if($request->hasFile('file')){
             foreach ($request->file('file') as $item) {
                 $file = $item->store('imageproduct','public');
 
                 BusinessFile::create([
-                    'id_usaha' => $request->id_usaha,
+                    'id_usaha' => $business->id,
                     'is_video' => $request->is_video == 'on'?1:0,
                     'is_photo' => $request->is_photo == 'on'?1:0,
                     'file' => $file
                 ]);
+                
+                OpenHour::create([
+                    'id_usaha' => $business->id,
+                    'senin_buka' => $request->senin_buka,
+                    'senin_tutup' => $request->senin_tutup,
+                    'selasa_buka' => $request->selasa_buka,
+                    'selasa_tutup' => $request->selasa_tutup,
+                    'rabu_buka' => $request->rabu_buka,
+                    'rabu_tutup' => $request->rabu_tutup,
+                    'kamis_buka' => $request->kamis_buka,
+                    'kamis_tutup' => $request->kamis_tutup,
+                    'jumat_buka' => $request->jumat_buka,
+                    'jumat_tutup' => $request->jumat_tutup,
+                    'sabtu_buka' => $request->sabtu_buka,
+                    'sabtu_tutup' => $request->sabtu_tutup,
+                    'minggu_buka' => $request->minggu_buka,
+                    'minggu_tutup' => $request->minggu_tutup,
+                ]);
+                
+                
             }
           
-            return redirect()->route('business.index')->with('status','Berhasil Menambah Usaha Baru');
+            return redirect()->route('business_categories.create')->with('status','Berhasil Menambah Usaha Baru');
         }
     }
 
@@ -98,7 +122,7 @@ class BusinessController extends AppBaseController
 
 
         // $business = $this->businessRepository->find($id);
-        $business = Business::with(['users', 'masterStatusBusinesses', 'business_file'])->where('id', $id)->first();
+        $business = Business::with(['users', 'masterStatusBusinesses', 'business_file', 'category', 'master_business_categories'])->where('id', $id)->first();
         $openHour = OpenHour::find($id);
         $businessCategory = BusinessCategory::with(['master_business_categories', 'businesses'])->where('id', $id)->first();
         // return response()->json([

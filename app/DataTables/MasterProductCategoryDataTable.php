@@ -81,6 +81,7 @@ class MasterProductCategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'nama_kategori_produk',
             'status_kategori_produk'
         ];

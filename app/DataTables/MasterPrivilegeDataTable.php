@@ -86,6 +86,7 @@ console.log(this.columns().header().text);
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'nama_hak_akses_pengguna' => ['title' => 'Hak Akses'],
         ];
     }

@@ -83,6 +83,7 @@ class DiscountDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'nama_usaha' => ([
                 'data' => 'businesses.nama_usaha',
                 'name' => 'businesses.nama_usaha',

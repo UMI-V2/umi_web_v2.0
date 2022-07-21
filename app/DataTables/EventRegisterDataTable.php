@@ -81,6 +81,7 @@ class EventRegisterDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'event_id' => ([
                 'data' => 'events.title',
                 'name' => 'events.title',

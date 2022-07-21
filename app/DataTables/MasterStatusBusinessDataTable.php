@@ -81,6 +81,7 @@ class MasterStatusBusinessDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'nama_status_usaha'
         ];
     }

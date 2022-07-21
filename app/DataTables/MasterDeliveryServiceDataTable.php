@@ -81,6 +81,7 @@ class MasterDeliveryServiceDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'nama_jasa_pengiriman',
             // 'is_set_seller',
             'deskripsi',

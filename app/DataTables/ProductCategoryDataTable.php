@@ -88,6 +88,7 @@ class ProductCategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'nama' => ([
                 'data' => 'products.nama',
                 'name' => 'products.nama',

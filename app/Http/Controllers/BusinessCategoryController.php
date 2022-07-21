@@ -57,12 +57,17 @@ class BusinessCategoryController extends AppBaseController
     public function store(CreateBusinessCategoryRequest $request)
     {
         $input = $request->all();
+        $business = Business::find($input['id_usaha']);
+        $master_kategori_usaha = MasterBusinessCategory::find($input['id_master_kategori_usaha']);
+        $master_kategori_usaha->businesses()->attach($business);
+        $master_kategori_usaha->save();
 
-        $businessCategory = $this->businessCategoryRepository->create($input);
+
+        // $businessCategory = $this->businessCategoryRepository->create($input);
 
         Flash::success('Business Category saved successfully.');
 
-        return redirect(route('businessCategories.index'));
+        return redirect(route('businesses.index'));
     }
 
     /**

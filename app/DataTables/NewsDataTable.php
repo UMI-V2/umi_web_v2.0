@@ -81,6 +81,7 @@ class NewsDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'title',
             'sub_title',
             'description',

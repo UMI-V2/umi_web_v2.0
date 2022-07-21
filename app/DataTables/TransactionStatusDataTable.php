@@ -81,6 +81,7 @@ class TransactionStatusDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id' => ['visible' => false],
             'id_transaksi_penjualan' => ([
                 'data'  => 'sales_transactions.no_pemesanan',
                 'title' => 'Transaksi Penjualan',
