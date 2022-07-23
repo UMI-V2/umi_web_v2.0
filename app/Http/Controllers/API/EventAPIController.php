@@ -2,280 +2,110 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateEventAPIRequest;
-use App\Http\Requests\API\UpdateEventAPIRequest;
+use Exception;
 use App\Models\Event;
-use App\Repositories\EventRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Response;
+use App\Helpers\ResponseFormatter;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\GeneralFileController;
 
-/**
- * Class EventController
- * @package App\Http\Controllers\API
- */
-
-class EventAPIController extends AppBaseController
+class EventAPIController extends Controller
 {
-    /** @var  EventRepository */
-    private $eventRepository;
-
-    public function __construct(EventRepository $eventRepo)
+    public function all(Request $request)
     {
-        $this->eventRepository = $eventRepo;
-    }
+        try {
+            $limit = $request->input('limit', 10);
 
-    /**
-     * @param Request $request
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/events",
-     *      summary="Get a listing of the Events.",
-     *      tags={"Event"},
-     *      description="Get all Events",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Event")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function index(Request $request)
-    {
-        $events = $this->eventRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+            $id = $request->input('id');
+            $title = $request->input('title');
 
-        return $this->sendResponse($events->toArray(), 'Events retrieved successfully');
-    }
+            if ($id) {
+                $value = Event::find($id);
+                if ($value) {
+                    return ResponseFormatter::success($value, "Get Event Success");
+                } else {
+                    return ResponseFormatter::error([
+                        'message' => "Data Event tidak ditemukan"
+                    ], "Get Event failed");
+                }
+            }
+            $value = Event::query();
 
-    /**
-     * @param CreateEventAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/events",
-     *      summary="Store a newly created Event in storage",
-     *      tags={"Event"},
-     *      description="Store Event",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="Event that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Event")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Event"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function store(CreateEventAPIRequest $request)
-    {
-        $input = $request->all();
 
-        $event = $this->eventRepository->create($input);
+            if ($title) {
+                $value->where('title', 'like', '%' . $title . '%');
+            }
 
-        return $this->sendResponse($event->toArray(), 'Event saved successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/events/{id}",
-     *      summary="Display the specified Event",
-     *      tags={"Event"},
-     *      description="Get Event",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Event",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Event"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function show($id)
-    {
-        /** @var Event $event */
-        $event = $this->eventRepository->find($id);
-
-        if (empty($event)) {
-            return $this->sendError('Event not found');
+            return ResponseFormatter::success($value->orderBy('registration_deadline', 'asc')->paginate($limit), "Get News Success");
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'error' => $e->getMessage(),
+            ], "Get News Failed");
         }
-
-        return $this->sendResponse($event->toArray(), 'Event retrieved successfully');
     }
 
-    /**
-     * @param int $id
-     * @param UpdateEventAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/events/{id}",
-     *      summary="Update the specified Event in storage",
-     *      tags={"Event"},
-     *      description="Update Event",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Event",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="Event that should be updated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Event")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/Event"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function update($id, UpdateEventAPIRequest $request)
+    public function update(Request $request)
     {
-        $input = $request->all();
+        try {
+            Validator::make($request->all(), [
+                'title'=> 'required',
+                'sub_title'=> 'required',
+                'description'=> 'required',
+                'start_time'=> 'required',
+                'end_time'=> 'required',
+                'contact_person'=> 'required',
+                'max_registers'=> 'required',
+                'registration_deadline'=> 'required'
+            ],);
+            $data = $request->all();
+            $user = $request->user();
+            if(!($request->author)){
+                $data['author'] = $user->name;
+            }
+            $result = Event::updateOrCreate(
+                [
+                    'id' => $request->id,
+                ],
+                $data
+            );
+            GeneralFileController::uploadOrDeleteEvent($request, $result);
 
-        /** @var Event $event */
-        $event = $this->eventRepository->find($id);
-
-        if (empty($event)) {
-            return $this->sendError('Event not found');
+            $result = Event::find($result->id);
+            return ResponseFormatter::success(
+                $result,
+                'Event Add Success',
+            );
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => "Event Add Request gagal",
+                'error' => $error->getMessage(),
+            ],  'Event Add  Failed', 500);
         }
-
-        $event = $this->eventRepository->update($input, $id);
-
-        return $this->sendResponse($event->toArray(), 'Event updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Delete(
-     *      path="/events/{id}",
-     *      summary="Remove the specified Event from storage",
-     *      tags={"Event"},
-     *      description="Delete Event",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of Event",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function destroy($id)
+
+    public function delete(Request $request)
     {
-        /** @var Event $event */
-        $event = $this->eventRepository->find($id);
 
-        if (empty($event)) {
-            return $this->sendError('Event not found');
+        try {
+            Validator::make($request->all(), [
+                'id' => 'required',
+            ],);
+
+            $result = Event::where('id', $request->id)->delete();
+
+            return ResponseFormatter::success(
+                $result,
+                'Event Delete Success',
+            );
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => "Delete Event Failed",
+                'error' => $error,
+            ],  'Delete Event Failed', 500);
         }
-
-        $event->delete();
-
-        return $this->sendSuccess('Event deleted successfully');
     }
+
+    
 }

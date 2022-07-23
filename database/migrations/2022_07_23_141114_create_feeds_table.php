@@ -4,9 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNewsTable extends Migration
+class CreateFeedsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,15 +13,10 @@ class CreateNewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('feeds', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('sub_title');
+            $table->unsignedBigInteger('id_user');
             $table->string('description');
-            $table->string('author');
-            $table->boolean('is_headline')->default(false);
-            $table->string('title_related_link')->nullable();
-            $table->string('related_link')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,6 +29,6 @@ class CreateNewsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('news');
+        Schema::dropIfExists('feeds');
     }
 }

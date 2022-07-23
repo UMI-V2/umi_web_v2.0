@@ -14,15 +14,19 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('sub_title');
             $table->string('description');
             $table->string('author');
-            $table->string('start_time');
-            $table->string('end_time');
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
+            $table->dateTime('registration_deadline');
             $table->string('contact_person');
+            $table->integer('max_registers');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,6 +39,8 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::drop('events');
     }
 }

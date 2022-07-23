@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\MasterProvince;
+use App\Models\FavoriteProduct;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
@@ -9,7 +10,9 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\OpenHourController;
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\CartAPIController;
+use App\Http\Controllers\API\NewsAPIController;
 use App\Http\Controllers\API\UserAPIController;
+use App\Http\Controllers\API\EventAPIController;
 use App\Http\Controllers\API\RatingAPIController;
 use App\Http\Controllers\API\AddressAPIController;
 use App\Http\Controllers\API\MasterBankController;
@@ -25,15 +28,15 @@ use App\Http\Controllers\API\MasterUnitAPIController;
 use App\Http\Controllers\API\NotificationAPIController;
 use App\Http\Controllers\API\MasterProvinceAPIController;
 use App\Http\Controllers\MasterDeliveryServiceController;
+use App\Http\Controllers\API\FavoriteProductAPIController;
 use App\Http\Controllers\API\ProductCategoryAPIController;
 use App\Http\Controllers\API\WithdrawBalanceAPIController;
 use App\Http\Controllers\API\BusinessCategoryAPIController;
-use App\Http\Controllers\API\FavoriteProductAPIController;
+use App\Http\Controllers\API\EventRegisterAPIController;
 use App\Http\Controllers\API\SalesTransactionAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
 use App\Http\Controllers\API\MasterBusinessCategoryAPIController;
-use App\Models\FavoriteProduct;
 
 /*
 |--------------------------------------------------------------------------
@@ -189,6 +192,20 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/all', [FavoriteProductAPIController::class, 'all']);
         Route::post('/update', [FavoriteProductAPIController::class, 'update']);
         Route::delete('/delete', [FavoriteProductAPIController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'news'], function () {
+        Route::get('/all', [NewsAPIController::class, 'all']);
+        Route::post('/update', [NewsAPIController::class, 'update']);
+        Route::delete('/delete', [NewsAPIController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'events'], function () {
+        Route::get('/all', [EventAPIController::class, 'all']);
+        Route::post('/update', [EventAPIController::class, 'update']);
+        Route::delete('/delete', [EventAPIController::class, 'delete']);
+        Route::post('/register', [EventRegisterAPIController::class, 'registerEvent']);
+
     });
     
 });

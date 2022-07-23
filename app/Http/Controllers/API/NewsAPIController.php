@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\API;
 
+use Response;
+use Exception;
+use App\Models\News;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
+use App\Repositories\NewsRepository;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Controllers\GeneralFileController;
 use App\Http\Requests\API\CreateNewsAPIRequest;
 use App\Http\Requests\API\UpdateNewsAPIRequest;
-use App\Models\News;
-use App\Repositories\NewsRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 /**
  * Class NewsController
@@ -17,265 +21,101 @@ use Response;
 
 class NewsAPIController extends AppBaseController
 {
-    /** @var  NewsRepository */
-    private $newsRepository;
-
-    public function __construct(NewsRepository $newsRepo)
+    public function all(Request $request)
     {
-        $this->newsRepository = $newsRepo;
-    }
+        try {
+            $limit = $request->input('limit', 10);
 
-    /**
-     * @param Request $request
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/news",
-     *      summary="Get a listing of the News.",
-     *      tags={"News"},
-     *      description="Get all News",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/News")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function index(Request $request)
-    {
-        $news = $this->newsRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+            $id = $request->input('id');
+            $title = $request->input('title');
+            $is_headline = $request->input('is_headline');
 
-        return $this->sendResponse($news->toArray(), 'News retrieved successfully');
-    }
+            if ($id) {
+                $value = News::find($id);
+                if ($value) {
+                    return ResponseFormatter::success($value, "Get News Success");
+                } else {
+                    return ResponseFormatter::error([
+                        'message' => "Data News tidak ditemukan"
+                    ], "Get News failed");
+                }
+            }
+            $value = News::query();
 
-    /**
-     * @param CreateNewsAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/news",
-     *      summary="Store a newly created News in storage",
-     *      tags={"News"},
-     *      description="Store News",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="News that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/News")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/News"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function store(CreateNewsAPIRequest $request)
-    {
-        $input = $request->all();
 
-        $news = $this->newsRepository->create($input);
+            if ($title) {
+                $value->where('title', 'like', '%' . $title . '%');
+            }
+            if ($is_headline!=null) {
+                // dd($request->user()->id);
+                $value->where('is_headline', $is_headline);
+            }
 
-        return $this->sendResponse($news->toArray(), 'News saved successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/news/{id}",
-     *      summary="Display the specified News",
-     *      tags={"News"},
-     *      description="Get News",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of News",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/News"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function show($id)
-    {
-        /** @var News $news */
-        $news = $this->newsRepository->find($id);
-
-        if (empty($news)) {
-            return $this->sendError('News not found');
+            return ResponseFormatter::success($value->orderBy('created_at', 'desc')->paginate($limit), "Get News Success");
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'error' => $e->getMessage(),
+            ], "Get News Failed");
         }
-
-        return $this->sendResponse($news->toArray(), 'News retrieved successfully');
     }
 
-    /**
-     * @param int $id
-     * @param UpdateNewsAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/news/{id}",
-     *      summary="Update the specified News in storage",
-     *      tags={"News"},
-     *      description="Update News",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of News",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="News that should be updated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/News")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/News"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function update($id, UpdateNewsAPIRequest $request)
+    public function update(Request $request)
     {
-        $input = $request->all();
-
-        /** @var News $news */
-        $news = $this->newsRepository->find($id);
-
-        if (empty($news)) {
-            return $this->sendError('News not found');
+        try {
+            Validator::make($request->all(), [
+                'id_bank' => 'required',
+                'nominal_request' => 'required',
+                'no_rek' => 'required',
+                'rek_name' => 'required',
+                'title' => 'required',
+                'sub_title' => 'required',
+                'description' => 'required',
+            ],);
+            $data = $request->all();
+            $user = $request->user();
+            if(!($request->author)){
+                $data['author'] = $user->name;
+            }
+            $result = News::updateOrCreate(
+                [
+                    'id' => $request->id,
+                ],
+                $data
+            );
+            GeneralFileController::uploadOrDeleteFileNews($request, $result);
+            $result = News::find($result->id);
+            return ResponseFormatter::success(
+                $result,
+                'News Add Request Success',
+            );
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => "News Add gagal",
+                'error' => $error->getMessage(),
+            ],  'News Add Failed', 500);
         }
-
-        $news = $this->newsRepository->update($input, $id);
-
-        return $this->sendResponse($news->toArray(), 'News updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Delete(
-     *      path="/news/{id}",
-     *      summary="Remove the specified News from storage",
-     *      tags={"News"},
-     *      description="Delete News",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of News",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function destroy($id)
+
+    public function delete(Request $request)
     {
-        /** @var News $news */
-        $news = $this->newsRepository->find($id);
 
-        if (empty($news)) {
-            return $this->sendError('News not found');
+        try {
+            Validator::make($request->all(), [
+                'id' => 'required',
+            ],);
+
+            $result = News::where('id', $request->id)->delete();
+
+            return ResponseFormatter::success(
+                $result,
+                'News Delete Success',
+            );
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => "Delete News Failed",
+                'error' => $error,
+            ],  'Delete News Failed', 500);
         }
-
-        $news->delete();
-
-        return $this->sendSuccess('News deleted successfully');
     }
 }
