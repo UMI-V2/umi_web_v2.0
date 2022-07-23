@@ -85,7 +85,8 @@ class News extends Model
         'title' => 'string',
         'sub_title' => 'string',
         'description' => 'string',
-        'author' => 'string'
+        'author' => 'string',
+        'is_headline'=>'boolean'
     ];
 
     /**

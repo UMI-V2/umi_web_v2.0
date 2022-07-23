@@ -20,6 +20,36 @@ use App\Http\Requests\API\UpdateEventRegisterAPIRequest;
 
 class EventRegisterAPIController extends AppBaseController
 {
+    public function all(Request $request)
+    {
+        try {
+            $limit = $request->input('limit', 20);
+
+            $id = $request->input('id');
+            $event_id = $request->input('event_id');
+            if ($id) {
+                $value = EventRegister::find($id);
+                if ($value) {
+                    return ResponseFormatter::success($value, "Get Event Register Success");
+                } else {
+                    return ResponseFormatter::error([
+                        'message' => "Data Event Register tidak ditemukan"
+                    ], "Get Like Feed failed");
+                }
+            }
+            $value = EventRegister::query();
+            if($event_id){
+                $value->where('event_id', $event_id );
+            }
+
+            return ResponseFormatter::success($value->orderBy('created_at', 'desc')->paginate($limit), "Get Event Register Success");
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'error' => $e->getMessage(),
+            ], "Get Event Register Failed");
+        }
+    }
+
     public function registerEvent(Request $request)
     {
         try {
