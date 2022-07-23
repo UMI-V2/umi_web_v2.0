@@ -18,8 +18,6 @@ class CreateLikeFeedsTable extends Migration
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_feed');
             $table->timestamps();
-            $table->softDeletes();
-
         });
     }
 
