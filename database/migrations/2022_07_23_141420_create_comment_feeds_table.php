@@ -19,6 +19,7 @@ class CreateCommentFeedsTable extends Migration
             $table->unsignedBigInteger('id_feed');
             $table->string('comment');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

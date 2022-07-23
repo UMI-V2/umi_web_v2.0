@@ -32,7 +32,10 @@ use App\Http\Controllers\API\FavoriteProductAPIController;
 use App\Http\Controllers\API\ProductCategoryAPIController;
 use App\Http\Controllers\API\WithdrawBalanceAPIController;
 use App\Http\Controllers\API\BusinessCategoryAPIController;
+use App\Http\Controllers\API\CommentFeedAPIController;
 use App\Http\Controllers\API\EventRegisterAPIController;
+use App\Http\Controllers\API\FeedAPIController;
+use App\Http\Controllers\API\LikeFeedAPIController;
 use App\Http\Controllers\API\SalesTransactionAPIController;
 use App\Http\Controllers\API\MasterSubDistrictAPIController;
 use App\Http\Controllers\API\MasterProductCategoryAPIController;
@@ -205,7 +208,26 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/update', [EventAPIController::class, 'update']);
         Route::delete('/delete', [EventAPIController::class, 'delete']);
         Route::post('/register', [EventRegisterAPIController::class, 'registerEvent']);
+        Route::get('/participants', [EventRegisterAPIController::class, 'all']);
 
+    });
+
+    Route::group(['prefix' => 'feed'], function () {
+        Route::get('/all', [FeedAPIController::class, 'all']);
+        Route::post('/update', [FeedAPIController::class, 'update']);
+        Route::delete('/delete', [FeedAPIController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'like_feed'], function () {
+        Route::get('/all', [LikeFeedAPIController::class, 'all']);
+        Route::post('/update', [LikeFeedAPIController::class, 'update']);
+        Route::delete('/delete', [LikeFeedAPIController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'comment_feed'], function () {
+        Route::get('/all', [CommentFeedAPIController::class, 'all']);
+        Route::post('/update', [CommentFeedAPIController::class, 'update']);
+        Route::delete('/delete', [CommentFeedAPIController::class, 'delete']);
     });
     
 });
