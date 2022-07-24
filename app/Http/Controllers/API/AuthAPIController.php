@@ -64,10 +64,10 @@ class AuthAPIController extends Controller
         try {
 
             // $user = User::query();
-            $request->validate([
-                'no_hp' => ['required', 'string', 'max:255', 'unique:users'],
-                'password' => ['required', 'string'],
-            ]);
+            // $request->validate([
+            //     'no_hp' => ['required', 'string', 'max:255', 'unique:users'],
+            //     'password' => ['required', 'string'],
+            // ]);
             // dd($request->nama);
             $user =  User::create([
                 'name' => $request->name,
