@@ -105,7 +105,7 @@ class AuthAPIController extends Controller
             }
 
             return ResponseFormatter::error([
-                'message' => "Something went wrong ERROR: " . $error,
+                'message' => "Something went wrong ERROR: " . $error->getMessage(),
                 'error' => $error,
             ], 'Authentication Failed', 500);
         }
