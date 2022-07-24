@@ -6,6 +6,7 @@ use App\Models\LikeFeed;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 
 class Feed extends Model
 {
@@ -20,7 +21,7 @@ class Feed extends Model
 
     public function getIsMyLikeAttribute()
     {
-        return LikeFeed::where('id_feed',$this->id)->where('id_user', $this->id_user)->get()->isNotEmpty();
+        return LikeFeed::where('id_feed',$this->id)->where('id_user', Auth::user()->id)->get()->isNotEmpty();
     }
 
     public function getTotalLikeAttribute()
