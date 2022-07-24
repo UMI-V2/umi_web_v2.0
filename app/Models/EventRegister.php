@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -49,7 +49,7 @@ class EventRegister extends Model
     use HasFactory;
 
     public $table = 'event_registers';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -57,7 +57,15 @@ class EventRegister extends Model
 
     public $fillable = [
         'event_id',
-        'user_id'
+        'user_id',
+        'name',
+        'jenis_kelamin',
+        'tanggal_lahir',
+        'no_hp',
+        'foto',
+        'city',
+        'subdistrict',
+        'full_address',
     ];
 
     /**
@@ -68,7 +76,7 @@ class EventRegister extends Model
     protected $casts = [
         'id' => 'integer',
         'event_id' => 'integer',
-        'user_id' => 'integer'
+        'user_id' => 'integer',
     ];
 
     /**

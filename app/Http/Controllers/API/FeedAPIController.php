@@ -3,45 +3,43 @@
 namespace App\Http\Controllers\API;
 
 use Exception;
-use App\Models\Event;
+use App\Models\Feed;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\GeneralFileController;
 
-class EventAPIController extends Controller
+class FeedAPIController extends Controller
 {
     public function all(Request $request)
     {
         try {
-            $limit = $request->input('limit', 10);
+            $limit = $request->input('limit', 15);
 
             $id = $request->input('id');
-            $title = $request->input('title');
-
+            $id_user =  $request->input('id_user');
             if ($id) {
-                $value = Event::find($id);
+                $value = Feed::find($id);
                 if ($value) {
-                    return ResponseFormatter::success($value, "Get Event Success");
+                    return ResponseFormatter::success($value, "Get Feed Success");
                 } else {
                     return ResponseFormatter::error([
-                        'message' => "Data Event tidak ditemukan"
-                    ], "Get Event failed");
+                        'message' => "Data Feed tidak ditemukan"
+                    ], "Get Feed failed");
                 }
             }
-            $value = Event::query();
-
-
-            if ($title) {
-                $value->where('title', 'like', '%' . $title . '%');
+            $value = Feed::query();
+            
+            if($id_user){
+                $value->where('id_user', $id_user);
             }
 
-            return ResponseFormatter::success($value->orderBy('registration_deadline', 'asc')->paginate($limit), "Get News Success");
+            return ResponseFormatter::success($value->orderBy('created_at', 'desc')->paginate($limit), "Get Feed Success");
         } catch (Exception $e) {
             return ResponseFormatter::error([
                 'error' => $e->getMessage(),
-            ], "Get News Failed");
+            ], "Get Feed Failed");
         }
     }
 
@@ -49,38 +47,29 @@ class EventAPIController extends Controller
     {
         try {
             Validator::make($request->all(), [
-                'title'=> 'required',
-                'sub_title'=> 'required',
                 'description'=> 'required',
-                'start_time'=> 'required',
-                'end_time'=> 'required',
-                'contact_person'=> 'required',
-                'max_registers'=> 'required',
-                'registration_deadline'=> 'required'
             ],);
             $data = $request->all();
             $user = $request->user();
-            if(!($request->author)){
-                $data['author'] = $user->name;
-            }
-            $result = Event::updateOrCreate(
+            $data['id_user'] = $user->id;
+
+            $result = Feed::updateOrCreate(
                 [
                     'id' => $request->id,
                 ],
                 $data
             );
-            GeneralFileController::uploadOrDeleteEvent($request, $result);
-
-            $result = Event::find($result->id);
+            GeneralFileController::uploadOrDeleteFileFeed($request, $result);
+            $result = Feed::find($result->id);
             return ResponseFormatter::success(
                 $result,
-                'Event Add Success',
+                'Feed AddFeed Success',
             );
         } catch (Exception $error) {
             return ResponseFormatter::error([
-                'message' => "Event Add Request gagal",
+                'message' => "Feed Add gagal",
                 'error' => $error->getMessage(),
-            ],  'Event Add  Failed', 500);
+            ],  'Feed Add Failed', 500);
         }
     }
 
@@ -93,19 +82,17 @@ class EventAPIController extends Controller
                 'id' => 'required',
             ],);
 
-            $result = Event::where('id', $request->id)->delete();
+            $result = Feed::where('id', $request->id)->delete();
 
             return ResponseFormatter::success(
                 $result,
-                'Event Delete Success',
+                'Feed Delete Success',
             );
         } catch (Exception $error) {
             return ResponseFormatter::error([
-                'message' => "Delete Event Failed",
+                'message' => "Delete Feed Failed",
                 'error' => $error,
-            ],  'Delete Event Failed', 500);
+            ],  'Delete Feed Failed', 500);
         }
     }
-
-    
 }

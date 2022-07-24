@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -57,17 +57,22 @@ class News extends Model
     use HasFactory;
 
     public $table = 'news';
-    
+
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['photos'];
 
 
     public $fillable = [
+        'id',
         'title',
         'sub_title',
         'description',
-        'author'
+        'author',
+        'is_headline',
+        'title_related_link',
+        'related_link',
     ];
 
     /**
@@ -80,7 +85,8 @@ class News extends Model
         'title' => 'string',
         'sub_title' => 'string',
         'description' => 'string',
-        'author' => 'string'
+        'author' => 'string',
+        'is_headline'=>'boolean'
     ];
 
     /**
@@ -95,5 +101,9 @@ class News extends Model
         'author' => 'required'
     ];
 
-    
+
+    public function getPhotosAttribute()
+    {
+        return GeneralFile::where('news_id',$this->id)->get();
+    }
 }

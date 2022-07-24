@@ -9,6 +9,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthAPIController extends Controller
 {
@@ -31,7 +32,7 @@ class AuthAPIController extends Controller
             }
 
             $user = User::where('no_hp', $request->no_hp)->first();
-            if($request->token_notification){
+            if ($request->token_notification) {
                 $user->token_notification = $request->token_notification;
                 $user->update();
             }
@@ -62,12 +63,13 @@ class AuthAPIController extends Controller
     public function register(Request $request)
     {
         try {
-
-            // $user = User::query();
-            $request->validate([
+            Validator::make($request->all(), [
                 'no_hp' => ['required', 'string', 'max:255', 'unique:users'],
                 'password' => ['required', 'string'],
-            ]);
+            ],);
+            // $user = User::query();
+            // $request->validate([
+            // ]);
             // dd($request->nama);
             $user =  User::create([
                 'name' => $request->name,
@@ -103,7 +105,7 @@ class AuthAPIController extends Controller
             }
 
             return ResponseFormatter::error([
-                'message' => "Something went wrong",
+                'message' => "Something went wrong ERROR: " . $error->getMessage(),
                 'error' => $error,
             ], 'Authentication Failed', 500);
         }

@@ -76,6 +76,7 @@ class Event extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['photos', 'total_participants'];
 
 
     public $fillable = [
@@ -85,7 +86,10 @@ class Event extends Model
         'author',
         'start_time',
         'end_time',
-        'contact_person'
+        'contact_person',
+        'max_registers',
+        'registration_deadline',
+
     ];
 
     /**
@@ -99,8 +103,9 @@ class Event extends Model
         'sub_title' => 'string',
         'description' => 'string',
         'author' => 'string',
-        'start_time' => 'string',
-        'end_time' => 'string',
+        'start_time' => 'datetime',
+        'end_time' => 'datetime',
+        'registration_deadline'=>'datetime',
         'contact_person' => 'string'
     ];
 
@@ -119,5 +124,13 @@ class Event extends Model
         'contact_person' => 'required'
     ];
 
-    
+    public function getPhotosAttribute()
+    {
+        return GeneralFile::where('events_id',$this->id)->get();
+    }
+
+    public function getTotalParticipantsAttribute()
+    {
+        return EventRegister::where('event_id',$this->id)->get();
+    }
 }

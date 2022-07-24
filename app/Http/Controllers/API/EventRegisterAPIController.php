@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\API;
 
+use Response;
+use Exception;
+use Illuminate\Http\Request;
+use App\Models\EventRegister;
+use App\Helpers\ResponseFormatter;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\EventRegisterRepository;
 use App\Http\Requests\API\CreateEventRegisterAPIRequest;
 use App\Http\Requests\API\UpdateEventRegisterAPIRequest;
-use App\Models\EventRegister;
-use App\Repositories\EventRegisterRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 /**
  * Class EventRegisterController
@@ -17,265 +20,70 @@ use Response;
 
 class EventRegisterAPIController extends AppBaseController
 {
-    /** @var  EventRegisterRepository */
-    private $eventRegisterRepository;
-
-    public function __construct(EventRegisterRepository $eventRegisterRepo)
+    public function all(Request $request)
     {
-        $this->eventRegisterRepository = $eventRegisterRepo;
-    }
+        try {
+            $limit = $request->input('limit', 20);
 
-    /**
-     * @param Request $request
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/eventRegisters",
-     *      summary="Get a listing of the EventRegisters.",
-     *      tags={"EventRegister"},
-     *      description="Get all EventRegisters",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/EventRegister")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function index(Request $request)
-    {
-        $eventRegisters = $this->eventRegisterRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+            $id = $request->input('id');
+            $event_id = $request->input('event_id');
+            if ($id) {
+                $value = EventRegister::find($id);
+                if ($value) {
+                    return ResponseFormatter::success($value, "Get Event Register Success");
+                } else {
+                    return ResponseFormatter::error([
+                        'message' => "Data Event Register tidak ditemukan"
+                    ], "Get Like Feed failed");
+                }
+            }
+            $value = EventRegister::query();
+            if($event_id){
+                $value->where('event_id', $event_id );
+            }
 
-        return $this->sendResponse($eventRegisters->toArray(), 'Event Registers retrieved successfully');
-    }
-
-    /**
-     * @param CreateEventRegisterAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/eventRegisters",
-     *      summary="Store a newly created EventRegister in storage",
-     *      tags={"EventRegister"},
-     *      description="Store EventRegister",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="EventRegister that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/EventRegister")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/EventRegister"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function store(CreateEventRegisterAPIRequest $request)
-    {
-        $input = $request->all();
-
-        $eventRegister = $this->eventRegisterRepository->create($input);
-
-        return $this->sendResponse($eventRegister->toArray(), 'Event Register saved successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Get(
-     *      path="/eventRegisters/{id}",
-     *      summary="Display the specified EventRegister",
-     *      tags={"EventRegister"},
-     *      description="Get EventRegister",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of EventRegister",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/EventRegister"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function show($id)
-    {
-        /** @var EventRegister $eventRegister */
-        $eventRegister = $this->eventRegisterRepository->find($id);
-
-        if (empty($eventRegister)) {
-            return $this->sendError('Event Register not found');
+            return ResponseFormatter::success($value->orderBy('created_at', 'desc')->paginate($limit), "Get Event Register Success");
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'error' => $e->getMessage(),
+            ], "Get Event Register Failed");
         }
-
-        return $this->sendResponse($eventRegister->toArray(), 'Event Register retrieved successfully');
     }
 
-    /**
-     * @param int $id
-     * @param UpdateEventRegisterAPIRequest $request
-     * @return Response
-     *
-     * @SWG\Put(
-     *      path="/eventRegisters/{id}",
-     *      summary="Update the specified EventRegister in storage",
-     *      tags={"EventRegister"},
-     *      description="Update EventRegister",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of EventRegister",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="EventRegister that should be updated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/EventRegister")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/EventRegister"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function update($id, UpdateEventRegisterAPIRequest $request)
+    public function registerEvent(Request $request)
     {
-        $input = $request->all();
+        try {
+            Validator::make($request->all(), [
+                'event_id'=> 'required',
+                'user_id'=> 'required',
+                'name'=> 'required',
+                'jenis_kelamin'=> 'required',
+                'tanggal_lahir'=> 'required',
+                'no_hp'=> 'required',
+                'foto'=> 'required',
+                'city'=> 'required',
+                'subdistrict'=> 'required',
+                'full_address'=> 'required',
+            ],);
+            $data = $request->all();            
 
-        /** @var EventRegister $eventRegister */
-        $eventRegister = $this->eventRegisterRepository->find($id);
+            $result = EventRegister::updateOrCreate(
+                [
+                    'id' => $request->id,
+                ],
+                $data
+            );
 
-        if (empty($eventRegister)) {
-            return $this->sendError('Event Register not found');
+            $result = EventRegister::find($result->id);
+            return ResponseFormatter::success(
+                $result,
+                'Register Event Success',
+            );
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => "Register Event gagal",
+                'error' => $error->getMessage(),
+            ],  'Register Event Failed', 500);
         }
-
-        $eventRegister = $this->eventRegisterRepository->update($input, $id);
-
-        return $this->sendResponse($eventRegister->toArray(), 'EventRegister updated successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Delete(
-     *      path="/eventRegisters/{id}",
-     *      summary="Remove the specified EventRegister from storage",
-     *      tags={"EventRegister"},
-     *      description="Delete EventRegister",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of EventRegister",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function destroy($id)
-    {
-        /** @var EventRegister $eventRegister */
-        $eventRegister = $this->eventRegisterRepository->find($id);
-
-        if (empty($eventRegister)) {
-            return $this->sendError('Event Register not found');
-        }
-
-        $eventRegister->delete();
-
-        return $this->sendSuccess('Event Register deleted successfully');
     }
 }

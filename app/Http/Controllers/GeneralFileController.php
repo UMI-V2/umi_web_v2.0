@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feed;
 use App\Models\News;
+use App\Models\Event;
 use App\Models\GeneralFile;
+use App\Models\Announcement;
 use Illuminate\Http\Request;
 use PharIo\Manifest\Exception;
 use App\Helpers\ResponseFormatter;
-use App\Models\Announcement;
-use App\Models\Event;
 use Illuminate\Support\Facades\Storage;
 
 class GeneralFileController extends Controller
@@ -41,7 +42,39 @@ class GeneralFileController extends Controller
                 [
                     'message' => $e
                 ],
-                'Upload Product File Failed',
+                'Upload News File Failed',
+            );
+        }
+    }
+
+    static function uploadOrDeleteFileFeed(Request $request, Feed $feed,)
+    {
+        try {
+            if ($request->add_file_photos) {
+                foreach ($request->file('add_file_photos') as $file) {
+                    $fileRoot = $file->store("assets/feed/$feed->id", 'public');
+                    GeneralFile::create([
+                        'feed_id' => $feed->id,
+                        'file' => $fileRoot,
+                        'is_photo' => true,
+                    ]);
+                }
+            }
+
+            if ($request->delete_files) {
+                foreach ($request->delete_files as $photo) {
+                    GeneralFile::where('file', $photo)->delete();
+                    if (Storage::disk('public')->exists($photo)) {
+                        Storage::disk('public')->delete($photo);
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            return ResponseFormatter::error(
+                [
+                    'message' => $e
+                ],
+                'Upload feed File Failed',
             );
         }
     }
