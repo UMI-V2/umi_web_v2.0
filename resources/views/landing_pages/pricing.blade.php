@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Features - SoftLand</title>
+  <title>Pricing - SoftLand</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -61,8 +61,8 @@
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="{{ route('home') }}" class="nav-link">Home</a></li>
-                <li class="active"><a href="{{ route('features') }}" class="nav-link">Features</a></li>
-                <li><a href="{{ route('pricing') }}" class="nav-link">Pricing</a></li>
+                <li><a href="{{ route('features') }}" class="nav-link">Features</a></li>
+                <li class="active"><a href="{{ route('pricing') }}" class="nav-link">Pricing</a></li>
                 
                 <li class="has-children">
                   <a href="{{ route('blog') }}" class="nav-link">Blog</a>
@@ -109,7 +109,7 @@
             <div class="col-12">
               <div class="row justify-content-center">
                 <div class="col-md-7 text-center hero-text">
-                  <h1 data-aos="fade-up" data-aos-delay="">SoftLand Features</h1>
+                  <h1 data-aos="fade-up" data-aos-delay="">Our Pricing</h1>
                   <p class="mb-5" data-aos="fade-up"  data-aos-delay="100">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>  
                 </div>
               </div>
@@ -121,65 +121,64 @@
 
       
 
-      <div class="site-section pb-0">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-4 mr-auto">
-              <h2 class="mb-4">Seamlessly Communicate</h2>
-              <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at reprehenderit optio, laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus impedit incidunt dolore mollitia esse natus beatae.</p>
-              <p><a href="#">Read More</a></p>
-            </div>
-            <div class="col-md-6" data-aos="fade-left">
-              <img src="img/undraw_svg_2.svg" alt="Image" class="img-fluid">
-            </div>
-          </div>
-        </div>
-      </div> <!-- .site-section -->
-
       <div class="site-section">
         <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-4 ml-auto order-2">
-              <h2 class="mb-4">Gather Feedback</h2>
-              <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at reprehenderit optio, laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus impedit incidunt dolore mollitia esse natus beatae.</p>
-              <p><a href="#">Read More</a></p>
-            </div>
-            <div class="col-md-6" data-aos="fade-right">
-              <img src="img/undraw_svg_3.svg" alt="Image" class="img-fluid">
+          
+          <div class="row justify-content-center text-center">
+            <div class="col-md-7 mb-5">
+              <h2 class="section-heading">Choose A Plan</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere illum obcaecati inventore velit laborum earum.</p>
             </div>
           </div>
-        </div>
-      </div> <!-- .site-section -->
+          <div class="row align-items-stretch">
 
-      <div class="site-section pb-0">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-4 mr-auto">
-              <h2 class="mb-4">Present Designs Inspiration</h2>
-              <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at reprehenderit optio, laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus impedit incidunt dolore mollitia esse natus beatae.</p>
-              <p><a href="#">Read More</a></p>
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div class="pricing h-100 text-center">
+                <span>&nbsp;</span>
+                <h3>Basic</h3>
+                <ul class="list-unstyled">
+                  <li>Create up to 5 forms</li>
+                  <li>Generate 100 monthly reports</li>
+                </ul>
+                <div class="price-cta">
+                  <strong class="price">Free</strong>
+                  <p><a href="#" class="btn btn-white">Choose Plan</a></p>
+                </div>
+              </div>
             </div>
-            <div class="col-md-6" data-aos="fade-left">
-              <img src="img/undraw_svg_3.svg" alt="Image" class="img-fluid">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div class="pricing h-100 text-center popular">
+                <span class="popularity">Most Popular</span>
+                <h3>Professional</h3>
+                <ul class="list-unstyled">
+                  <li>Create up to 20 forms</li>
+                  <li>Generate 2500 monthly reports</li>
+                  <li>Manage a team of up to 5 people</li>
+                </ul>
+                <div class="price-cta">
+                  <strong class="price">$9.95/month</strong>
+                  <p><a href="#" class="btn btn-white">Choose Plan</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div class="pricing h-100 text-center">
+                <span class="popularity">Best Value</span>
+                <h3>Ultimate</h3>
+                <ul class="list-unstyled">
+                  <li>Create up to 20 forms</li>
+                  <li>Generate 2500 monthly reports</li>
+                  <li>Manage a team of up to 5 people</li>
+                </ul>
+                <div class="price-cta">
+                  <strong class="price">$199.95/month</strong>
+                  <p><a href="#" class="btn btn-white">Choose Plan</a></p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div> <!-- .site-section -->
-
-      <div class="site-section">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-4 ml-auto order-2">
-              <h2 class="mb-4">Powerful App Design </h2>
-              <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at reprehenderit optio, laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus impedit incidunt dolore mollitia esse natus beatae.</p>
-              <p><a href="#">Read More</a></p>
-            </div>
-            <div class="col-md-6" data-aos="fade-right">
-              <img src="img/undraw_svg_4.svg" alt="Image" class="img-fluid">
-            </div>
-          </div>
-        </div>
-      </div> <!-- .site-section -->
+      </div>
 
 
       <div class="site-section border-top border-bottom">

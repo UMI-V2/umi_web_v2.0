@@ -76,16 +76,16 @@
                             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                                 <li class="active"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
                                 <li><a href="{{ route('features') }}" class="nav-link">Features</a></li>
-                                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                                <li><a href="{{ route('pricing') }}" class="nav-link">Pricing</a></li>
 
                                 <li class="has-children">
-                                    <a href="blog.html" class="nav-link">Blog</a>
+                                    <a href="{{ route('blog') }}" class="nav-link">Blog</a>
                                     <ul class="dropdown">
-                                        <li><a href="blog.html" class="nav-link">Blog</a></li>
-                                        <li><a href="blog-single.html" class="nav-link">Blog Sigle</a></li>
+                                        <li><a href="{{ route('blog') }}" class="nav-link">Blog</a></li>
+                                        <li><a href="{{ route('blog-single') }}" class="nav-link">Blog Sigle</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                                <li><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
                             </ul>
                         </nav>
                     </div>

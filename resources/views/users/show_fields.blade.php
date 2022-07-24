@@ -1,12 +1,12 @@
 <!-- Id Field -->
-<div class="col-sm-12">
+{{-- <div class="col-sm-12">
     {!! Form::label('id', 'Id:') !!}
     <p>{{ $user->id }}</p>
-</div>
+</div> --}}
 
 <!-- Name Field -->
 <div class="col-sm-12">
-    {!! Form::label('name', 'Name:') !!}
+    {!! Form::label('name', 'Nama Pengguna:') !!}
     <p>{{ $user->name }}</p>
 </div>
 
@@ -47,20 +47,20 @@
 </div>
 
 <!-- Password Field -->
-<div class="col-sm-12">
+{{-- <div class="col-sm-12">
     {!! Form::label('password', 'Password:') !!}
     <p>{{ $user->password }}</p>
-</div>
+</div> --}}
 
 <!-- Id Privilege Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_privilege', 'Id Privilege:') !!}
+    {!! Form::label('id_privilege', 'Hak Akses:') !!}
     <p>{{ $user->id_privilege }}</p>
 </div>
 
 <!-- Id Status Pengguna Field -->
 <div class="col-sm-12">
-    {!! Form::label('id_status_pengguna', 'Id Status Pengguna:') !!}
+    {!! Form::label('id_status_pengguna', 'Status:') !!}
     <p>{{ $user->id_status_pengguna }}</p>
 </div>
 

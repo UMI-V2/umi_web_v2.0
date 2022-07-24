@@ -65,7 +65,7 @@ class BusinessCategoryController extends AppBaseController
 
         // $businessCategory = $this->businessCategoryRepository->create($input);
 
-        Flash::success('Business Category saved successfully.');
+        Flash::success('Business saved successfully.');
 
         return redirect(route('businesses.index'));
     }

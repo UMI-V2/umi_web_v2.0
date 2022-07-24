@@ -8,11 +8,11 @@
 <div class="form-group col-sm-12">
     {!! Form::label('status_kategori_usaha', 'Status Kategori Usaha', ['class' => 'form-check-label']) !!}
     <label class="form-check">
-    {!! Form::radio('status_kategori_usaha', "Barang", null, ['class' => 'form-check-input']) !!} Barang
+    {!! Form::radio('status_kategori_usaha', "0", null, ['class' => 'form-check-input']) !!} Barang
 </label>
 
 <label class="form-check">
-    {!! Form::radio('status_kategori_usaha', "Jasa", null, ['class' => 'form-check-input']) !!} Jasa
+    {!! Form::radio('status_kategori_usaha', "1", null, ['class' => 'form-check-input']) !!} Jasa
 </label>
 
 </div>
