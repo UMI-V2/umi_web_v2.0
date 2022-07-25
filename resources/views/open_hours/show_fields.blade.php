@@ -13,7 +13,8 @@
 <!-- Senin Field -->
 <div class="col-sm-12">
     {!! Form::label('senin', 'Senin:') !!}
-    <p>{{ $openHour->senin_buka }} - {{ $openHour->senin_tutup }}</p>
+    <p>{{ $openHour->senin_buka && $openHour->senin_tutup  == null ? 'Tutup' : $openHour->senin_buka . ' - ' . $openHour->senin_tutup }}</p>
+    {{-- <p>{{ $openHour->senin_buka }} - {{ $openHour->senin_tutup }}</p> --}}
 </div>
 
 <!-- Selasa Field -->
@@ -49,6 +50,7 @@
 <!-- Minggu Field -->
 <div class="col-sm-12">
     {!! Form::label('minggu', 'Minggu:') !!}
-    <p>{{ $openHour->minggu_buka }} - {{ $openHour->minggu_tutup }}</p>
+    <p>{{ (($openHour->minggu_buka ==null) && ($openHour->minggu_tutup  == null)) ? 'Tutup' : $openHour->minggu_buka . ' - ' . $openHour->minggu_tutup }}</p>
+    {{-- <p>{{ $openHour->minggu_buka }} - {{ $openHour->minggu_tutup }}</p> --}}
 </div>
 

@@ -18,6 +18,14 @@ class MasterBusinessCategoryDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
+        // return if statement for status_kategori_usaha
+        $dataTable->addColumn('status_kategori_usaha', function ($model) {
+            if ($model->status_kategori_usaha == '1') {
+                return "Jasa" ;
+            } else {
+                return  "Barang";
+            }
+        });
         return $dataTable->addColumn('action', 'master_business_categories.datatables_actions');
     }
 

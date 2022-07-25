@@ -63,6 +63,21 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Kondisi Produk</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="status" value="1">
+                                <label class="form-check-label" for="status">
+                                    Aktif
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="status" value="0">
+                                <label class="form-check-label" for="status">
+                                    Tidak Aktif
+                                </label>
+                            </div>
+
+                        {{-- <div class="form-group">
                             <label>Kategori Produk</label>
                             <select class="form-control" name="id_kategori">
                                 <option value="#" disabled selected>Pilih Kategori Produk</option>
@@ -70,7 +85,7 @@
                                     <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <label for="exampleInputFile">File input</label>

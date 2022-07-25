@@ -81,9 +81,9 @@ Route::get('/dashboard/data', [DashboardController::class, 'FrekuensiTransaksi']
 
 Route::post('/businessFile/index', [BusinessFileController::class, 'store'])->name('business_files.store');
 
-// Route::post('/business/index', [BusinessController::class, 'store'])->name('business.store');
+Route::post('/business/index', [BusinessController::class, 'store'])->name('businesses.store');
 
-Route::post('/businessCategories/create', [BusinessController::class, 'store'])->name('business_categories.create');
+// Route::post('/businessCategories/create', [BusinessController::class, 'store'])->name('business_categories.create');
 
 
 

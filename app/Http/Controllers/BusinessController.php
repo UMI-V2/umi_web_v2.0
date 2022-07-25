@@ -43,6 +43,12 @@ class BusinessController extends AppBaseController
         return $businessDataTable->render('businesses.index');
     }
 
+    public function allMasterBusinessCategory()
+    {
+        dd(MasterBusinessCategory::get());
+        return MasterBusinessCategory::get();
+    }
+
     /**
      * Show the form for creating a new Business.
      *
@@ -52,10 +58,11 @@ class BusinessController extends AppBaseController
     {
         $master_status_businesses = MasterStatusBusiness::query()->select('nama_status_usaha', 'id')->get();
         $users = user::query()->select('id', 'name')->get();
+        $master_business_categories = MasterBusinessCategory::query()->select('nama_kategori_usaha', 'id', 'status_kategori_usaha' )->get();
         // $business_categories = MasterBusinessCategory::query()->select('id', 'name')->get();
         // dd($category);
         // dd($users);
-        return view('businesses.create')->with('master_status_businesses', $master_status_businesses)->with('users', $users);
+        return view('businesses.create')->with('master_status_businesses', $master_status_businesses)->with('users', $users)->with('master_business_categories', $master_business_categories);
     }
 
     /**
@@ -73,11 +80,9 @@ class BusinessController extends AppBaseController
 
         $input = $request->all();
         $business = $this->businessRepository->create($input);
-
         if ($request->hasFile('file')) {
             foreach ($request->file('file') as $item) {
                 $file = $item->store("assets/business/$business->id/photos", 'public');
-
                 BusinessFile::create([
                     'id_usaha' => $business->id,
                     // 'is_video' => $request->is_video == 'on'?1:0,
@@ -86,28 +91,37 @@ class BusinessController extends AppBaseController
                     'is_photo' => true,
                     'file' => $file
                 ]);
-
-                OpenHour::create([
-                    'id_usaha' => $business->id,
-                    'senin_buka' => $request->senin_buka,
-                    'senin_tutup' => $request->senin_tutup,
-                    'selasa_buka' => $request->selasa_buka,
-                    'selasa_tutup' => $request->selasa_tutup,
-                    'rabu_buka' => $request->rabu_buka,
-                    'rabu_tutup' => $request->rabu_tutup,
-                    'kamis_buka' => $request->kamis_buka,
-                    'kamis_tutup' => $request->kamis_tutup,
-                    'jumat_buka' => $request->jumat_buka,
-                    'jumat_tutup' => $request->jumat_tutup,
-                    'sabtu_buka' => $request->sabtu_buka,
-                    'sabtu_tutup' => $request->sabtu_tutup,
-                    'minggu_buka' => $request->minggu_buka,
-                    'minggu_tutup' => $request->minggu_tutup,
-                ]);
             }
-
-            return redirect()->route('business_categories.create');
         }
+
+        OpenHour::updateOrCreate([
+            'id_usaha' => $business->id
+        ],[
+            'id_usaha' => $business->id,
+            'senin_buka' => $request->senin_buka,
+            'senin_tutup' => $request->senin_tutup,
+            'selasa_buka' => $request->selasa_buka,
+            'selasa_tutup' => $request->selasa_tutup,
+            'rabu_buka' => $request->rabu_buka,
+            'rabu_tutup' => $request->rabu_tutup,
+            'kamis_buka' => $request->kamis_buka,
+            'kamis_tutup' => $request->kamis_tutup,
+            'jumat_buka' => $request->jumat_buka,
+            'jumat_tutup' => $request->jumat_tutup,
+            'sabtu_buka' => $request->sabtu_buka,
+            'sabtu_tutup' => $request->sabtu_tutup,
+            'minggu_buka' => $request->minggu_buka,
+            'minggu_tutup' => $request->minggu_tutup,
+        ]);
+
+        BusinessCategory::updateOrCreate([
+            'id' => $request->id,
+        ],[
+            'id_usaha' => $business->id,
+            'id_master_kategori_usaha' => $request->id_master_kategori_usaha,
+        ]);
+        return redirect()->route('businesses.index'); 
+        // return view('businesses.index',  compact('masterCategories'));
     }
 
     /**
@@ -130,7 +144,7 @@ class BusinessController extends AppBaseController
         //     "data"=>$business
         // ]);
 
-        dd($business);
+        // dd($business);
 
 
         if (empty($business)) {

@@ -10,6 +10,8 @@ use App\Repositories\MasterBusinessCategoryRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use App\Models\BusinessCategory;
+use App\Models\MasterBusinessCategory;
+use GuzzleHttp\Psr7\Request;
 use Response;
 
 class MasterBusinessCategoryController extends AppBaseController
@@ -29,6 +31,11 @@ class MasterBusinessCategoryController extends AppBaseController
      *
      * @return Response
      */
+
+    public function all(Request $request)
+    {
+        return MasterBusinessCategory::get();
+    }
     public function index(MasterBusinessCategoryDataTable $masterBusinessCategoryDataTable)
     {
         return $masterBusinessCategoryDataTable->render('master_business_categories.index');
