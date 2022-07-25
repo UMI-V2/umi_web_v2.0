@@ -78,14 +78,25 @@ class ProductAPIController extends AppBaseController
             if ($id_usaha) {
                 $value->where('id_usaha', $id_usaha);
             }
+            
             //Filter hanya menampilkan produk diskon
-
+            
             if ($is_show_discount_only) {
                 $value->whereHas('product_discount', function ($q) {
                     $q->with('discounts')->whereHas('discounts', function ($q) {
                         $q->where('waktu_mulai', '<', Carbon::now())->where('waktu_berakhir', '>', Carbon::now());
                     });
                 });
+            }
+            //Hanya menampilkan produk yang ready
+            // if ($is_ready_only) {
+            //     $value->where('stok', '>=', 1);
+            //     // $value->whereIn('stok', )
+            // }
+
+            //Memfilter produk berdasarkan nama
+            if ($nama) {
+                $value->where('nama', 'like', '%' . $nama . '%');
             }
 
             //Show Product Arshive
@@ -96,14 +107,7 @@ class ProductAPIController extends AppBaseController
                 $value->where('is_arshive', 0);
             }
             
-            //Memfilter produk berdasarkan nama
-            if ($nama) {
-                $value->where('nama', 'like', '%' . $nama . '%');
-            }
-            //Hanya menampilkan produk yang ready
-            if ($is_ready_only) {
-                $value->where('stok', null)->orWhere('stok', '>=', 1);
-            }
+            
             //Memfilter produk berdasarkan kondisi
             if ($kondisi != null) {
                 $value->where('kondisi',  $kondisi);
@@ -150,6 +154,8 @@ class ProductAPIController extends AppBaseController
             }
 
             // dd(  $value->get());
+
+            
 
             if ($sort_distance) {
                 $value->nearby([

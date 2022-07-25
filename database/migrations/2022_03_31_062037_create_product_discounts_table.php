@@ -18,7 +18,7 @@ class CreateProductDiscountsTable extends Migration
             $table->bigInteger('id_product')->unsigned();
             $table->bigInteger('id_discount')->unsigned();
             $table->integer('harga_diskon');
-            $table->integer('batas_pembelian');
+            $table->integer('batas_pembelian')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

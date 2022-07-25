@@ -140,4 +140,9 @@ class Event extends Model
     {
         return EventRegister::where('event_id',$this->id)->get();
     }
+
+    public function event_registers()
+    {
+        return $this->hasMany(EventRegister::class, 'event_id', 'id');
+    }
 }

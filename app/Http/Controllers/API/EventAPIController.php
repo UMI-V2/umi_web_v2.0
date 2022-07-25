@@ -9,6 +9,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\GeneralFileController;
+use Illuminate\Support\Facades\Auth;
 
 class EventAPIController extends Controller
 {
@@ -19,6 +20,7 @@ class EventAPIController extends Controller
 
             $id = $request->input('id');
             $title = $request->input('title');
+            $isMyEventOnly =  $request->input('isMyEventOnly');
 
             if ($id) {
                 $value = Event::find($id);
@@ -35,6 +37,11 @@ class EventAPIController extends Controller
 
             if ($title) {
                 $value->where('title', 'like', '%' . $title . '%');
+            }
+            if($isMyEventOnly){
+                $value->whereHas('event_registers', function ($q) {
+                    $q->where('user_id',  Auth::user()->id);
+                });
             }
 
             return ResponseFormatter::success($value->orderBy('registration_deadline', 'asc')->paginate($limit), "Get News Success");

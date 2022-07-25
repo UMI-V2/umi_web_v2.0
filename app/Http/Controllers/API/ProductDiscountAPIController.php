@@ -46,7 +46,7 @@ class ProductDiscountAPIController extends Controller
                         'id_product'=> $productDiscount['id_product'],
                         'id_discount'=>$discount_id,
                         'harga_diskon'=> $productDiscount['harga_diskon'],
-                        'batas_pembelian'=>$productDiscount['batas_pembelian']
+                        'batas_pembelian'=>$productDiscount['batas_pembelian']??null,
                     ]);  
                 }
             }

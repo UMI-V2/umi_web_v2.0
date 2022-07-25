@@ -54,7 +54,7 @@ class ProductDiscount extends Model
         'id_product' => 'required',
         'id_discount' => 'required',
         'harga_diskon' => 'required',
-        'batas_pembelian' => 'required'
+        'batas_pembelian' => 'nullable'
     ];
     public static function boot() {
         parent::boot();
