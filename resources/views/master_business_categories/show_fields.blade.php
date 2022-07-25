@@ -1,8 +1,8 @@
 <!-- Id Field -->
-<div class="col-sm-12">
+{{-- <div class="col-sm-12">
     {!! Form::label('id', 'Id:') !!}
     <p>{{ $masterBusinessCategory->id }}</p>
-</div>
+</div> --}}
 
 <!-- Nama Kategori Usaha Field -->
 <div class="col-sm-12">
@@ -13,7 +13,7 @@
 <!-- Status Kategori Usaha Field -->
 <div class="col-sm-12">
     {!! Form::label('status_kategori_usaha', 'Status Kategori Usaha:') !!}
-    <p>{{ $masterBusinessCategory->status_kategori_usaha }}</p>
+    <p>{{ $masterBusinessCategory->status_kategori_usaha == 1 ? 'Jasa' : 'Barang' }}</p>
 </div>
 
 <!-- Created At Field -->

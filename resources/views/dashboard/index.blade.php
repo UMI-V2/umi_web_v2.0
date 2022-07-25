@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 col-md-4">
                             <div class="info-box mb-3">
-                                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-suitcase"></i></span>
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-suitcase"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Total Lapak</span>
                                     <span class="info-box-number">{{ $totalUsaha }}</span>
@@ -34,7 +34,7 @@
                         <div class="clearfix hidden-md-up"></div>
                         <div class="col-12 col-sm-6 col-md-4">
                             <div class="info-box mb-3">
-                                <span class="info-box-icon bg-success elevation-1"><i
+                                <span class="info-box-icon bg-info elevation-1"><i
                                         class="fas fa-shopping-cart"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Total Produk</span>
@@ -47,7 +47,7 @@
 
                         <div class="col-12 col-sm-6 col-md-4">
                             <div class="info-box mb-3">
-                                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Total Pengguna</span>
                                     <span class="info-box-number">{{ $totalUser }}</span>
@@ -59,7 +59,7 @@
 
                         <div class="col-12 col-sm-6 col-md-4">
                             <div class="info-box mb-3">
-                                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-handshake"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Total Transaksi</span>
                                     <span class="info-box-number">{{ $totalTransaksi }}</span>
@@ -71,7 +71,7 @@
 
                         <div class="col-12 col-sm-6 col-md-4">
                             <div class="info-box mb-3">
-                                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-credit-card"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Auto Payment</span>
                                     <span class="info-box-number">{{ $transaksiAutoPayment }}</span>
@@ -83,7 +83,7 @@
 
                         <div class="col-12 col-sm-6 col-md-4">
                             <div class="info-box mb-3">
-                                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-credit-card"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Manual Payment</span>
                                     <span class="info-box-number">{{ $transaksiManualPayment }}</span>
@@ -241,7 +241,7 @@
 
                                     <div class="card">
                                         <div class="card-header border-transparent">
-                                            <h3 class="card-title">Produk Terpopuler</h3>
+                                            <h3 class="card-title">Produk Terlaris</h3>
                                             <div class="card-tools">
                                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                                     <i class="fas fa-minus"></i>
@@ -507,7 +507,7 @@
                                         const dataGrafikTransaksi = {
                                             labels: labels,
                                             datasets: [{
-                                                label: 'My First dataset',
+                                                label: 'Total Transaksi',
                                                 backgroundColor: 'rgb(255, 99, 132)',
                                                 borderColor: 'rgb(255, 99, 132)',
                                                 data: [],

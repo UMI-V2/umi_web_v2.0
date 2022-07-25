@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\NewsDataTable;
+use Response;
 use App\Http\Requests;
+use Laracasts\Flash\Flash;
+use App\Models\GeneralFile;
+use App\DataTables\NewsDataTable;
+use App\Repositories\NewsRepository;
 use App\Http\Requests\CreateNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
-use App\Repositories\NewsRepository;
-use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class NewsController extends AppBaseController
 {
@@ -52,13 +53,29 @@ class NewsController extends AppBaseController
      */
     public function store(CreateNewsRequest $request)
     {
+        // $input = $request->all();
+        // $news = $this->newsRepository->create($input);
+        // Flash::success('News saved successfully.');
+        // return redirect(route('news.index'));
+
         $input = $request->all();
-
         $news = $this->newsRepository->create($input);
-
-        Flash::success('News saved successfully.');
-
-        return redirect(route('news.index'));
+        if ($request->hasFile('file')) {
+            foreach ($request->file('file') as $item) {
+                $file = $item->store("assets/news/$news->id/photos", 'public');
+                GeneralFile::create([
+                    'news_id' => $news->id,
+                    'events_id' => null,
+                    'announcement_id' => null,
+                    'feed_id' => null,
+                    'is_video' => false,
+                    'is_photo' => true,
+                    'file' => $file
+                ]);
+            }
+            Flash::success('Berhasil Menambah Berita.');
+            return redirect(route('news.index'))->with('status', 'Berhasil Menambah Berita Baru');
+        }
     }
 
     /**

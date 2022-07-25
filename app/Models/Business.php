@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use App\Models\Address;
-use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
+use App\Models\MasterBusinessCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
 
 /**
  * @SWG\Definition(
@@ -113,6 +114,13 @@ class Business extends Model
         'nama_usaha' => 'required'
     ];
 
+    public function master_business_categories()
+    {
+        return $this->belongsTo(MasterBusinessCategory::class);
+    }
+
+    
+
      public function getTotalSaldoAttribute()
     {
     
@@ -130,10 +138,7 @@ class Business extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'id_user', 'id');
     }
-    public function master_business_categories()
-    {
-        return $this->belongsTo(\App\Models\MasterBusinessCategory::class);
-    }
+    
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -145,6 +150,10 @@ class Business extends Model
     public function masterStatusBusinesses()
     {
         return $this->belongsTo(\App\Models\MasterStatusBusiness::class, 'id_master_status_usaha', 'id');
+    }
+    public function business_categories()
+    {
+        return $this->belongsTo(\App\Models\BusinessCategory::class, 'id_master_status_usaha', 'id');
     }
     public function category()
     {
@@ -171,6 +180,9 @@ class Business extends Model
           $totalBusiness = SalesTransaction::where('id_usaha',$this->id)->count();
             return  $totalBusiness;
     }
+
+    
+    
 
     public static function boot()
     {

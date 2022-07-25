@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\AnnouncementDataTable;
+use Response;
 use App\Http\Requests;
+use Laracasts\Flash\Flash;
+use App\Models\GeneralFile;
+use App\DataTables\AnnouncementDataTable;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\AnnouncementRepository;
 use App\Http\Requests\CreateAnnouncementRequest;
 use App\Http\Requests\UpdateAnnouncementRequest;
-use App\Repositories\AnnouncementRepository;
-use Laracasts\Flash\Flash;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 class AnnouncementController extends AppBaseController
 {
@@ -52,13 +53,29 @@ class AnnouncementController extends AppBaseController
      */
     public function store(CreateAnnouncementRequest $request)
     {
+        // $input = $request->all();
+        // $announcement = $this->announcementRepository->create($input);
+        // Flash::success('Announcement saved successfully.');
+        // return redirect(route('announcements.index'));
+
         $input = $request->all();
-
         $announcement = $this->announcementRepository->create($input);
-
-        Flash::success('Announcement saved successfully.');
-
-        return redirect(route('announcements.index'));
+        if ($request->hasFile('file')) {
+            foreach ($request->file('file') as $item) {
+                $file = $item->store("assets/announcement/$announcement->id/photos", 'public');
+                GeneralFile::create([
+                    'announcement_id' => $announcement->id,
+                    'events_id' => null,
+                    'news_id' => null,
+                    'feed_id' => null,
+                    'is_video' => false,
+                    'is_photo' => true,
+                    'file' => $file
+                ]);
+            }
+            Flash::success('Berhasil Menambah Pengumuman.');
+            return redirect(route('announcements.index'));
+        }
     }
 
     /**

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\EventDataTable;
+use Response;
 use App\Http\Requests;
+use Laracasts\Flash\Flash;
+use App\Models\GeneralFile;
+use App\DataTables\EventDataTable;
+use App\Repositories\EventRepository;
 use App\Http\Requests\CreateEventRequest;
 use App\Http\Requests\UpdateEventRequest;
-use App\Repositories\EventRepository;
-use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class EventController extends AppBaseController
 {
@@ -52,13 +53,35 @@ class EventController extends AppBaseController
      */
     public function store(CreateEventRequest $request)
     {
+        // $input = $request->all();
+        // $event = $this->eventRepository->create($input);
+        // Flash::success('Event saved successfully.');
+        // return redirect(route('events.index'));
+
         $input = $request->all();
-
         $event = $this->eventRepository->create($input);
+        // dd($event->id);
 
-        Flash::success('Event saved successfully.');
+        if ($request->hasFile('file')) {
+            foreach ($request->file('file') as $item) {
+                $file = $item->store("assets/event/$event->id/photos", 'public');
 
-        return redirect(route('events.index'));
+                GeneralFile::create([
+                    'events_id' => $event->id,
+                    'news_id' => null,
+                    'announcement_id' => null,
+                    'feed_id' => null,
+                    // 'is_video' => $request->is_video == 'on' ? 1 : 0,
+                    // 'is_photo' => $request->is_photo == 'on' ? 1 : 0,
+                    'is_video' => false,
+                    'is_photo' => true,
+                    'file' => $file
+                ]);
+            }
+
+            return redirect(route('events.index'))->with('status', 'Berhasil Menambah Usaha Baru');
+            // return redirect()->route('events.index')->with('status', 'Berhasil Menambah Usaha Baru');
+        }
     }
 
     /**

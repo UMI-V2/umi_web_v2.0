@@ -76,16 +76,16 @@
                             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                                 <li class="active"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
                                 <li><a href="{{ route('features') }}" class="nav-link">Features</a></li>
-                                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                                <li><a href="{{ route('pricing') }}" class="nav-link">Pricing</a></li>
 
                                 <li class="has-children">
-                                    <a href="blog.html" class="nav-link">Blog</a>
+                                    <a href="{{ route('blog') }}" class="nav-link">Blog</a>
                                     <ul class="dropdown">
-                                        <li><a href="blog.html" class="nav-link">Blog</a></li>
-                                        <li><a href="blog-single.html" class="nav-link">Blog Sigle</a></li>
+                                        <li><a href="{{ route('blog') }}" class="nav-link">Blog</a></li>
+                                        <li><a href="{{ route('blog-single') }}" class="nav-link">Blog Sigle</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                                <li><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -128,15 +128,13 @@
                             <div class="row">
                                 <div class="col-lg-7 text-center text-lg-left">
                                     <h1 data-aos="fade-right">Gunakan aplikasi UMKM Masa Kini</h1>
-                                    <p class="mb-5" data-aos="fade-right" data-aos-delay="100">Lorem ipsum dolor sit
-                                        amet, consectetur
-                                        adipisicing elit.</p>
+                                    <p class="mb-5" data-aos="fade-right" data-aos-delay="100">Untuk memajukan UMKM di Indonesia</p>
                                     <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a
-                                            href="#" class="btn btn-outline-white">Get started</a></p>
+                                            href="https://play.google.com/store/apps/details?id=com.umi.mobile" class="btn btn-outline-white">Download</a></p>
                                 </div>
                                 <div class="col-lg-5 iphone-wrap">
-                                    <img src="img/phone_1.png" alt="Image" class="phone-1" data-aos="fade-right">
-                                    <img src="img/phone_2.png" alt="Image" class="phone-2" data-aos="fade-right"
+                                    <img src="img/phone1.png" alt="Image" class="phone-1" data-aos="fade-right">
+                                    <img src="img/phone2.png" alt="Image" class="phone-2" data-aos="fade-right"
                                         data-aos-delay="200">
                                 </div>
                             </div>
@@ -151,7 +149,7 @@
 
                     <div class="row justify-content-center text-center mb-5">
                         <div class="col-md-5" data-aos="fade-up">
-                            <h2 class="section-heading">Aplikasi UMI dapat melakukan</h2>
+                            <h2 class="section-heading">Keunggulan Aplikasi UMI</h2>
                         </div>
                     </div>
 
@@ -159,28 +157,28 @@
                         <div class="col-md-4" data-aos="fade-up" data-aos-delay="">
                             <div class="feature-1 text-center">
                                 <div class="wrap-icon icon-1">
-                                    <span class="icon la la-users"></span>
+                                    <span class="icon la la-map-marker"></span>
                                 </div>
-                                <h3 class="mb-3">Explore Your Team</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
+                                <h3 class="mb-3">Informasi Jarak Terdekat</h3>
+                                <p>Menyediakan informasi jarak terdekat dari lokasi UMKM. Pengguna dapat mencari penjual produk terdekat, sehingga pengguna bisa mendapatkan produk yang dicari dengan lebih cepat dan lebih efisien.</p>
                             </div>
                         </div>
                         <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                             <div class="feature-1 text-center">
                                 <div class="wrap-icon icon-1">
-                                    <span class="icon la la-toggle-off"></span>
+                                    <span class="icon la la-shopping-cart"></span>
                                 </div>
-                                <h3 class="mb-3">Digital Whiteboard</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
+                                <h3 class="mb-3">Produk Barang dan Jasa</h3>
+                                <p>Menyediakan penjualan produk berupa barang dan jasa dari beberapa kategori. Kategori-kategori tersebut diantaranya : Kuliner, agrobisnis, fashion, otomatif, teknologi, rumah tangga, dan lain sebagainya.</p>
                             </div>
                         </div>
                         <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                             <div class="feature-1 text-center">
                                 <div class="wrap-icon icon-1">
-                                    <span class="icon la la-umbrella"></span>
+                                    <span class="icon la la-money"></span>
                                 </div>
-                                <h3 class="mb-3">Design To Development</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
+                                <h3 class="mb-3">Pembayaran dan Pengiriman Fleksibel</h3>
+                                <p>Pembayaran dan pengiriman produk dapat dilakukan lebih fleksibel. Pembayaran dapat dilakukan dengan menggunakan metode COD, transfer bank, e-wallet, dan pembayaran melalui minimarket terdekat. Sementara pengiriman dapat menggunakan kurir pribadi yang disediakan oleh pemilik lapak, ataupun dengan menggunakan mitra kulir yang telah bekerjasama dengan pemilik lapak. Dan setiap proses pengiriman dapat dimonitor langsung pada aplikasi UMI.</p>
                             </div>
                         </div>
                     </div>
@@ -200,22 +198,22 @@
                         <div class="col-md-4">
                             <div class="step">
                                 <span class="number">01</span>
-                                <h3>Sign Up</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
+                                <h3>Download</h3>
+                                <p>Langkah pertama, download aplikasi UMI dari tombol download di awal halaman web</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="step">
                                 <span class="number">02</span>
-                                <h3>Create Profile</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
+                                <h3>Buat Akun</h3>
+                                <p>Langkah kedua, buat akun dan ikuti langkah-langkah pendaftarannya</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="step">
                                 <span class="number">03</span>
-                                <h3>Enjoy the app</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
+                                <h3>Nikmati aplikasinya</h3>
+                                <p>Nikmati fitur yang disediakan UMI seperti UMKM terdekat, Pelayanan jasa, Lelang produk, Live Chat, Augmented Reality product style, dan masih banyak lagi</p>
                             </div>
                         </div>
                     </div>
@@ -226,13 +224,14 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-md-4 mr-auto">
-                            <h2 class="mb-4">Seamlessly Communicate</h2>
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at
-                                reprehenderit optio,
-                                laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus
-                                impedit incidunt
-                                dolore mollitia esse natus beatae.</p>
-                            <p><a href="#">Download Now</a></p>
+                            <h2 class="mb-4">Dapat Berjualan Dimanapun</h2>
+                            <p class="mb-4">Kami menyediakan aplikasi yang dapat digunakan oleh siapa saja, 
+                                kapan saja dan dimana saja. Dengan aplikasi UMI, 
+                                kita dapat berjualan berupa produk maupun jasa,
+                                dimanapun kita berada, dengan sasaran pelanggan terpusat di desa yang kita tinggali 
+                                sehingga pesanan akan cepat sampai.
+                            </p>
+                            <p><a href="https://play.google.com/store/apps/details?id=com.umi.mobile">Download Sekarang</a></p>
                         </div>
                         <div class="col-md-6" data-aos="fade-left">
                             <img src="img/undraw_svg_2.svg" alt="Image" class="img-fluid">
@@ -245,13 +244,13 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-md-4 ml-auto order-2">
-                            <h2 class="mb-4">Gather Feedback</h2>
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at
-                                reprehenderit optio,
-                                laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus
-                                impedit incidunt
-                                dolore mollitia esse natus beatae.</p>
-                            <p><a href="#">Download Now</a></p>
+                            <h2 class="mb-4">Dapat Belanja Dimanapun</h2>
+                            <p class="mb-4">Dengan aplikasi UMI, kita dapat belanja untuk kebutuhan pokok yang mudah basi seperti.
+                                Makanan, Minuman, Sayur, maupun buah-buahan dengan kondisi yang masih segar. 
+                                karena aplikasi dapat melacak UMKM terdekat, 
+                                sehingga pesanan akan cepat sampai.
+                            </p>
+                            <p><a href="https://play.google.com/store/apps/details?id=com.umi.mobile">Download Now</a></p>
                         </div>
                         <div class="col-md-6" data-aos="fade-right">
                             <img src="img/undraw_svg_3.svg" alt="Image" class="img-fluid">
@@ -266,11 +265,7 @@
                         <div class="col-md-10 mr-auto">
                             {{-- <div class="row justify-content-center text-center mb-5"> --}}
                             <h2 class="row justify-content-center text-center mb-4">Sebaran titik-titik UMKM</h2>
-                            <p class="row justify-content-center mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at
-                                reprehenderit optio,
-                                laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus
-                                impedit incidunt
-                                dolore mollitia esse natus beatae.</p>
+                            <p class="row justify-content-center mb-4">Berikut dibawah ini adalah peta persebaran UMKM-UMKM yang sudah terdaftar pada aplikasi UMI</p>
                             <p>
                                 {{-- <a href="#">Download Now</a></p> --}}
                         </div>
@@ -303,7 +298,7 @@
             </div> <!-- .site-section -->
 
             <div class="site-section border-top border-bottom">
-                <div class="container">
+                {{-- <div class="container">
                     <div class="row justify-content-center text-center mb-5">
                         <div class="col-md-4">
                             <h2 class="section-heading">Review From Our Users</h2>
@@ -402,7 +397,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
 
@@ -411,12 +406,14 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-md-6 mr-auto text-center text-md-left mb-5 mb-md-0">
-                            <h2>Starts Publishing Your Apps</h2>
+                            <h2>Tunggu Apalagi? Ayo Download Sekarang Juga!</h2>
                         </div>
                         <div class="col-md-5 text-center text-md-right">
-                            <p><a href="#" class="btn"><span class="icofont-brand-apple mr-3"></span>App
-                                    store</a> <a href="#" class="btn"><span
-                                        class="icofont-ui-play mr-3"></span>Google play</a></p>
+                            <p>
+                                {{-- <a href="#" class="btn"><span class="icofont-brand-apple mr-3"></span>App store</a>  --}}
+                                <a href="https://play.google.com/store/apps/details?id=com.umi.mobile" class="btn"><span
+                                        class="icofont-ui-play mr-3"></span>Google play</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -428,10 +425,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 mb-4 mb-md-0">
-                        <h3>About SoftLand</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam
-                            aperiam
-                            dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi.</p>
+                        <h3>Tentang UMI</h3>
+                        <p>Umi Merupakan aplikasi marketplace berbasis mobile yang dapat membantu umkm dalam mengembangkan usahanya dengan masyarakat dan menentukan umkm yang dicarinya.</p>
                         <p class="social">
                             <a href="#"><span class="icofont-twitter"></span></a>
                             <a href="#"><span class="icofont-facebook"></span></a>
@@ -442,12 +437,12 @@
                     <div class="col-md-7 ml-auto">
                         <div class="row site-section pt-0">
                             <div class="col-md-4 mb-4 mb-md-0">
-                                <h3>Navigation</h3>
+                                <h3>Navigasi</h3>
                                 <ul class="list-unstyled">
-                                    <li><a href="#">Pricing</a></li>
-                                    <li><a href="#">Features</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="{{ route('pricing') }}">Pricing</a></li>
+                                    <li><a href="{{ route('features') }}">Features</a></li>
+                                    <li><a href="{{ route('blog') }}">Blog</a></li>
+                                    <li><a href="{{ route('contact') }}">Contact</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4 mb-4 mb-md-0">
@@ -462,29 +457,31 @@
                             <div class="col-md-4 mb-4 mb-md-0">
                                 <h3>Downloads</h3>
                                 <ul class="list-unstyled">
-                                    <li><a href="#">Get from the App Store</a></li>
-                                    <li><a href="#">Get from the Play Store</a></li>
+                                    {{-- <li><a href="#">Get from the App Store</a></li> --}}
+                                    <li><a href="https://play.google.com/store/apps/details?id=com.umi.mobile">Get from the Play Store</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <?php /*
                 <div class="row justify-content-center text-center">
                     <div class="col-md-7">
-                        <p class="copyright">&copy; Copyright SoftLand. All Rights Reserved</p>
+                        {{-- <p class="copyright">&copy; Copyright SoftLand. All Rights Reserved</p> --}}
                         <div class="credits">
                             <!--
-                All the links in the footer should remain intact.
-                You can delete the links only if you purchased the pro version.
-                Licensing information: https://bootstrapmade.com/license/
-                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=SoftLand
-              -->
-                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Downloaded from <a
-                                href="https://themeslab.org/" target="_blank">Themeslab</a>
+                                    All the links in the footer should remain intact.
+                                    You can delete the links only if you purchased the pro version.
+                                    Licensing information: https://bootstrapmade.com/license/
+                                    Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=SoftLand
+                                -->
+                            {{-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Downloaded from <a
+                                href="https://themeslab.org/" target="_blank">Themeslab</a> --}}
                         </div>
                     </div>
                 </div>
+                */ ?>
 
             </div>
         </footer>

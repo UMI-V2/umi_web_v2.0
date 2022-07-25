@@ -198,7 +198,7 @@ class User extends Authenticatable
     // accessor for user role
     public function getRoleAttribute()
     {
-        return $this->MasterPrivilege->nama_hak_akses_pengguna;
+        return $this->master_privileges->nama_hak_akses_pengguna;
     }
 
 

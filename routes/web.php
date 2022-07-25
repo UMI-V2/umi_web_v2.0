@@ -2,11 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\LPBlogController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LPContactController;
+use App\Http\Controllers\LPPricingController;
 use App\Http\Controllers\LPFeaturesController;
 use App\Http\Controllers\BusinessFileController;
 use App\Http\Controllers\LandingPagesController;
+use App\Http\Controllers\LPBlogSingleController;
 use App\Http\Controllers\API\MidtransAPIController;
 
 /*
@@ -65,17 +69,22 @@ Route::post(
 
 
 // route get dashboard index
-Route::get('/home', [LandingPagesController::class, 'index'])->name('home');
+Route::get('/', [LandingPagesController::class, 'index'])->name('home');
 Route::get('/features', [LPFeaturesController::class, 'index'])->name('features');
+Route::get('/pricing', [LPPricingController::class, 'index'])->name('pricing');
+Route::get('/blog', [LPBlogController::class, 'index'])->name('blog');
+Route::get('/blog-single', [LPBlogSingleController::class, 'index'])->name('blog-single');
+Route::get('/contact', [LPContactController::class, 'index'])->name('contact');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/dashboard/data', [DashboardController::class, 'FrekuensiTransaksi'])->name('dashboard');
 
 Route::post('/businessFile/index', [BusinessFileController::class, 'store'])->name('business_files.store');
 
-// Route::post('/business/index', [BusinessController::class, 'store'])->name('business.store');
+Route::post('/business/index', [BusinessController::class, 'store'])->name('businesses.store');
 
-Route::post('/businessCategories/create', [BusinessController::class, 'store'])->name('business_categories.create');
+Route::post('/products/create', [ProductController::class, 'store'])->name('products.create');
+Route::post('/products/create', [ProductController::class, 'store'])->name('products.create_service');
 
 
 

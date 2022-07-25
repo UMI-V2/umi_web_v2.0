@@ -21,7 +21,7 @@
 
             <div class="card-body">
 
-                <form action="{{ route('business_categories.create') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('businesses.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -42,11 +42,21 @@
                                 @endforeach
                             </select>
                         </div>
-                        {{-- <div class="form-group">
+                        {{-- how to get nama_kategori_usaha from model BusinessCategory --}}
+                        <div class="form-group">
                             <label>Kategori Usaha</label>
                             <select class="form-control" name="id_master_kategori_usaha">
                                 <option value="#" disabled selected>Pilih Kategori Usaha</option>
-                                @foreach ($business_categories as $item)
+                                @foreach ($master_business_categories as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama_kategori_usaha .  (($item->status_kategori_usaha=='0') ? ' - (Barang)':' - (Jasa)') }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        {{-- <div class="form-group">
+                            <label>Kategori Usaha</label>
+                            <select class="form-control" name="id_kategori">
+                                <option value="#" disabled selected>Pilih Kategori Usaha</option>
+                                @foreach ($category as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_kategori_usaha }}</option>
                                 @endforeach
                             </select>
@@ -291,7 +301,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ route('businessFiles.index') }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ route('businesses.index') }}" class="btn btn-default">Cancel</a>
                     </div>
                 </form>
 
