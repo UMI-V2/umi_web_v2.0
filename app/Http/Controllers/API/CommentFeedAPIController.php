@@ -36,7 +36,7 @@ class CommentFeedAPIController extends Controller
                 $value->where('id_feed', $id_feed);
             }
 
-            return ResponseFormatter::success($value->orderBy('created_at', 'desc')->paginate($limit), "Get Comment Feed Success");
+            return ResponseFormatter::success($value->orderBy('created_at', 'asc')->paginate($limit), "Get Comment Feed Success");
         } catch (Exception $e) {
             return ResponseFormatter::error([
                 'error' => $e->getMessage(),

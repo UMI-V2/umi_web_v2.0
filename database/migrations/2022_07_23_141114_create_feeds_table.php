@@ -16,7 +16,7 @@ class CreateFeedsTable extends Migration
         Schema::create('feeds', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_user');
-            $table->string('description');
+            $table->longText('description');
             $table->timestamps();
             $table->softDeletes();
         });

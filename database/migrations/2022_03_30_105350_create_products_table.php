@@ -22,10 +22,11 @@ class CreateProductsTable extends Migration
             $table->string('nama');
             $table->longText('deskripsi');
             $table->bigInteger('harga');
-            $table->integer('stok');
-            $table->boolean('kondisi');
-            $table->boolean('preorder');
-            $table->string('jumlah_satuan')->nullable();;
+            $table->integer('stok')->nullable();
+            $table->boolean('is_service')->default(true);
+            $table->boolean('kondisi')->nullable();
+            $table->boolean('preorder')->nullable();
+            $table->string('jumlah_satuan')->nullable();
             $table->boolean('is_arshive')->default(false);
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();

@@ -37,8 +37,9 @@ class TransactionProductAPIController extends AppBaseController
                     'jumlah_satuan' => $product['jumlah_satuan'],
                     'nama_satuan' => $product['nama_satuan'],
                     'kuantitas' => $product['kuantitas'],
-                    'kondisi' => $product['kondisi'],
-                    'preorder' => $product['preorder'],
+                    'kondisi' => $product['kondisi']??null,
+                    'preorder' => $product['preorder']??null,
+                    'is_service'=>$product['is_service']??null,
                 ]);
             }
         } catch (Exception $error) {

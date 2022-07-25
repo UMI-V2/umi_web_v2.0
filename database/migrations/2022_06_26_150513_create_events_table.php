@@ -20,13 +20,15 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('sub_title');
-            $table->string('description');
+            $table->longText('description');
             $table->string('author');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->dateTime('registration_deadline');
             $table->string('contact_person');
             $table->integer('max_registers');
+            $table->string('address');
+
             $table->timestamps();
             $table->softDeletes();
         });

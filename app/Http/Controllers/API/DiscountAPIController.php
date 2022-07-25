@@ -99,7 +99,7 @@ class DiscountAPIController extends AppBaseController
     
         } catch (\Exception $e) {
             return ResponseFormatter::error([
-                'error'=> $e
+                'error'=> $e->getMessage()
             ], "Get Discount Failed");
         }
     }
@@ -157,7 +157,7 @@ class DiscountAPIController extends AppBaseController
         }  catch (\Exception $e) {
             DB::rollBack();
             return ResponseFormatter::error([
-                'error'=> $e
+                'error'=> $e->getMessage()
             ], "Add/Update Discount Failed");
         }
         

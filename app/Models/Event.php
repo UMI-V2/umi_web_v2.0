@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @SWG\Definition(
@@ -76,7 +77,7 @@ class Event extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['photos', 'total_participants'];
+    protected $appends = ['photos', 'total_participants', 'is_participant'];
 
 
     public $fillable = [
@@ -89,6 +90,7 @@ class Event extends Model
         'contact_person',
         'max_registers',
         'registration_deadline',
+        'address'
 
     ];
 
@@ -130,6 +132,11 @@ class Event extends Model
     public function getPhotosAttribute()
     {
         return GeneralFile::where('events_id',$this->id)->get();
+    }
+
+    public function getIsParticipantAttribute()
+    {
+        return EventRegister::where('event_id',$this->id)->where('user_id', Auth::user()->id)->get()->isNotEmpty();
     }
 
     public function getTotalParticipantsAttribute()

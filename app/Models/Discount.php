@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -77,7 +78,7 @@ class Discount extends Model
     use HasFactory, SoftDeletes;
 
     public $table = 'discounts';
-    
+
     public $fillable = [
         'id',
         // 'id_product_discount',
@@ -87,7 +88,7 @@ class Discount extends Model
         'waktu_berakhir',
         'potongan',
         'type',
-        
+
     ];
 
     /**
@@ -123,6 +124,13 @@ class Discount extends Model
         'type' => 'required'
     ];
 
+    // public function getWaktuMulaiAttribute()
+    // {
+    //     dd($this->waktu_mulai);
+    //     return date('Y-m-d h:i:s', strtotime($this->waktu_mulai));
+    // }
+    // return $this->waktu_mulai->format('Y-m-d H:i:s');
+    // }
     
 
     /**
@@ -138,11 +146,12 @@ class Discount extends Model
     }
 
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($discount) { 
-             $discount->product_discounts()->delete();             
+        static::deleting(function ($discount) {
+            $discount->product_discounts()->delete();
         });
     }
 }

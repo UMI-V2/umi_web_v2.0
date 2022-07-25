@@ -95,6 +95,8 @@ class ProductCategoryAPIController extends AppBaseController
             }
 
         } catch (Exception $error) {
+            throw new Exception("Error Add Category : ". $error->getMessage(), 1);
+            
             return ResponseFormatter::error(
                 [
                     'message' => $error
