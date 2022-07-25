@@ -70,21 +70,23 @@ class BusinessController extends AppBaseController
         // $input = $request->all();
         // Flash::success('Business saved successfully.');
         // return redirect(route('businesses.index'));
-        
+
         $input = $request->all();
         $business = $this->businessRepository->create($input);
 
-        if($request->hasFile('file')){
+        if ($request->hasFile('file')) {
             foreach ($request->file('file') as $item) {
-                $file = $item->store('imageproduct','public');
+                $file = $item->store("assets/business/$business->id/photos", 'public');
 
                 BusinessFile::create([
                     'id_usaha' => $business->id,
-                    'is_video' => $request->is_video == 'on'?1:0,
-                    'is_photo' => $request->is_photo == 'on'?1:0,
+                    // 'is_video' => $request->is_video == 'on'?1:0,
+                    // 'is_photo' => $request->is_photo == 'on'?1:0,
+                    'is_video' => false,
+                    'is_photo' => true,
                     'file' => $file
                 ]);
-                
+
                 OpenHour::create([
                     'id_usaha' => $business->id,
                     'senin_buka' => $request->senin_buka,
@@ -102,11 +104,9 @@ class BusinessController extends AppBaseController
                     'minggu_buka' => $request->minggu_buka,
                     'minggu_tutup' => $request->minggu_tutup,
                 ]);
-                
-                
             }
-          
-            return redirect()->route('business_categories.create')->with('status','Berhasil Menambah Usaha Baru');
+
+            return redirect()->route('business_categories.create');
         }
     }
 
@@ -125,10 +125,12 @@ class BusinessController extends AppBaseController
         $business = Business::with(['users', 'masterStatusBusinesses', 'business_file', 'category', 'master_business_categories'])->where('id', $id)->first();
         $openHour = OpenHour::find($id);
         $businessCategory = BusinessCategory::with(['master_business_categories', 'businesses'])->where('id', $id)->first();
+        // $businessCategory = BusinessCategory::find($id);
         // return response()->json([
         //     "data"=>$business
         // ]);
-        // $businessCategory = BusinessCategory::find($id);
+
+        dd($business);
 
 
         if (empty($business)) {

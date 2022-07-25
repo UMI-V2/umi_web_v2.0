@@ -291,7 +291,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ route('businessFiles.index') }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ route('businesses.index') }}" class="btn btn-default">Cancel</a>
                     </div>
                 </form>
 

@@ -107,6 +107,7 @@ class Event extends Model
         'end_time' => 'datetime',
         'registration_deadline'=>'datetime',
         'contact_person' => 'string'
+        
     ];
 
     /**
@@ -123,6 +124,8 @@ class Event extends Model
         'end_time' => 'required',
         'contact_person' => 'required'
     ];
+
+   
 
     public function getPhotosAttribute()
     {
