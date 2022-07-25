@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Business;
-use App\Models\Product;
-use App\Models\MasterUnit;
-use App\DataTables\ProductDataTable;
+use Response;
 use App\Http\Requests;
+use App\Models\Product;
+use App\Models\Business;
+use App\Models\MasterUnit;
+use Laracasts\Flash\Flash;
+use App\Models\ProductFile;
+use App\DataTables\ProductDataTable;
+use App\Repositories\ProductRepository;
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Repositories\ProductRepository;
-use Laracasts\Flash\Flash;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 class ProductController extends AppBaseController
 {
@@ -43,8 +44,11 @@ class ProductController extends AppBaseController
      */
     public function create()
     {
-        $businesses = Business::query()->pluck('nama_usaha', 'id');
-        $master_units = MasterUnit::query()->pluck('nama_satuan', 'id');
+        // $businesses = Business::query()->pluck('nama_usaha', 'id');
+        // $master_units = MasterUnit::query()->pluck('nama_satuan', 'id');
+
+        $businesses = Business::query()->select('nama_usaha', 'id')->get();
+        $master_units = MasterUnit::query()->select('nama_satuan', 'id')->get();
         return view('products.create')->with('businesses', $businesses)->with('master_units', $master_units);
     }
 
@@ -57,13 +61,52 @@ class ProductController extends AppBaseController
      */
     public function store(CreateProductRequest $request)
     {
+        // $input = $request->all();
+        // $product = $this->productRepository->create($input);
+        // Flash::success('Product saved successfully.');
+        // return redirect(route('products.index'));
+
         $input = $request->all();
-
         $product = $this->productRepository->create($input);
+        if ($request->hasFile('file')) {
+            foreach ($request->file('file') as $item) {
+                $file = $item->store("assets/business/$product->id_usaha/products", 'public');
+                ProductFile::create([
+                    'id_produk' => $product->id,
+                    'video' => false,
+                    'photo' => true,
+                    'file' => $file
+                ]);
+            }
+        }
 
-        Flash::success('Product saved successfully.');
+        // OpenHour::updateOrCreate([
+        //     'id_usaha' => $business->id
+        // ],[
+        //     'id_usaha' => $business->id,
+        //     'senin_buka' => $request->senin_buka,
+        //     'senin_tutup' => $request->senin_tutup,
+        //     'selasa_buka' => $request->selasa_buka,
+        //     'selasa_tutup' => $request->selasa_tutup,
+        //     'rabu_buka' => $request->rabu_buka,
+        //     'rabu_tutup' => $request->rabu_tutup,
+        //     'kamis_buka' => $request->kamis_buka,
+        //     'kamis_tutup' => $request->kamis_tutup,
+        //     'jumat_buka' => $request->jumat_buka,
+        //     'jumat_tutup' => $request->jumat_tutup,
+        //     'sabtu_buka' => $request->sabtu_buka,
+        //     'sabtu_tutup' => $request->sabtu_tutup,
+        //     'minggu_buka' => $request->minggu_buka,
+        //     'minggu_tutup' => $request->minggu_tutup,
+        // ]);
 
-        return redirect(route('products.index'));
+        // BusinessCategory::updateOrCreate([
+        //     'id' => $request->id,
+        // ],[
+        //     'id_usaha' => $business->id,
+        //     'id_master_kategori_usaha' => $request->id_master_kategori_usaha,
+        // ]);
+        return redirect()->route('products.index');
     }
 
     /**

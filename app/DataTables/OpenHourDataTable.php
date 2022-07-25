@@ -17,6 +17,10 @@ class OpenHourDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
+        // only show HH:MM format
+        // $dataTable->editColumn('open_hour', function ($openHour) {
+        //     return $openHour->open_hour->format('H:i');
+        // });
         return $dataTable->addColumn('nama_usaha', function ($data) {
             return $data->businesses->nama_usaha;
         })->addColumn('senin', function ($data) {

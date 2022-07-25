@@ -120,8 +120,7 @@ class BusinessController extends AppBaseController
             'id_usaha' => $business->id,
             'id_master_kategori_usaha' => $request->id_master_kategori_usaha,
         ]);
-        return redirect()->route('businesses.index'); 
-        // return view('businesses.index',  compact('masterCategories'));
+        return redirect()->route('businesses.index');
     }
 
     /**

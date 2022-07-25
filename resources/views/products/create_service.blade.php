@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Tambah Produk</h1>
+                    <h1>Tambah Jasa</h1>
                 </div>
             </div>
         </div>
@@ -23,8 +23,8 @@
 
                 <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="card-header" style="text-align: right">
-                        <a href="{{ route('products.create_service') }}" class="btn btn-danger">Klik disini apabila anda ingin manambahkan jasa >></a>
+                    <div class="card-header" style="text-align: left">
+                        <a href="{{ route('products.create') }}" class="btn btn-success"><< Klik disini untuk kembali ke menu produk</a>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
@@ -37,9 +37,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Satuan Produk</label>
+                            <label>Satuan Jasa</label>
                             <select class="form-control" name="id_satuan">
-                                <option value="#" disabled selected>Pilih Satuan Produk</option>
+                                <option value="#" disabled selected>Pilih Satuan Jasa</option>
                                 @foreach ($master_units as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_satuan }}</option>
                                 @endforeach
@@ -48,60 +48,25 @@
                         
                         {{-- <div class="form-group">
                             <label>is_service</label> --}}
-                            <input type="hidden" name="is_service" value="0" class="form-control">
+                            <input type="hidden" name="is_service" value="1" class="form-control">
                         {{-- </div> --}}
                         
                         <div class="form-group">
-                            <label>Nama Produk</label>
+                            <label>Nama Jasa</label>
                             <input type="input" name="nama" class="form-control" placeholder="Nama Produk">
                         </div>
                         
                         <div class="form-group">
-                            <label>Deskripsi Produk</label>
+                            <label>Deskripsi Jasa</label>
                             <textarea name="deskripsi" class="form-control" placeholder="Deskripsi Produk"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label>Harga Produk</label>
+                            <label>Harga Jasa</label>
                             <input type="input" name="harga" class="form-control" placeholder="Harga Produk">
                         </div>
                         
-                        <div class="form-group">
-                            <label>Stok Produk</label>
-                            <input type="input" name="stok" class="form-control" placeholder="Stok Produk">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Kondisi Produk</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" id="status" value="1">
-                                <label class="form-check-label" for="status">
-                                    Baru
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" id="status" value="0">
-                                <label class="form-check-label" for="status">
-                                    Bekas
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Preorder?</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" id="status" value="1">
-                                <label class="form-check-label" for="status">
-                                    Ya, produk ini dapat di preorder
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" id="status" value="0">
-                                <label class="form-check-label" for="status">
-                                    Tidak, produk ini tidak dapat di preorder
-                                </label>
-                            </div>
-                        </div>
+                        {{--    --}}
                         
 
                         {{-- <div class="form-group">

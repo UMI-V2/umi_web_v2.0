@@ -314,13 +314,13 @@
           <div class="col-md-7 ml-auto">
             <div class="row site-section pt-0">
               <div class="col-md-4 mb-4 mb-md-0">
-                <h3>Navigation</h3>
-                <ul class="list-unstyled">
-                  <li><a href="#">Pricing</a></li>
-                  <li><a href="#">Features</a></li>
-                  <li><a href="#">Blog</a></li>
-                  <li><a href="#">Contact</a></li>
-                </ul>
+                <h3>Navigasi</h3>
+                                <ul class="list-unstyled">
+                                    <li><a href="{{ route('pricing') }}">Pricing</a></li>
+                                    <li><a href="{{ route('features') }}">Features</a></li>
+                                    <li><a href="{{ route('blog') }}">Blog</a></li>
+                                    <li><a href="{{ route('contact') }}">Contact</a></li>
+                                </ul>
               </div>
               <div class="col-md-4 mb-4 mb-md-0">
                 <h3>Services</h3>

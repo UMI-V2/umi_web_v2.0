@@ -83,7 +83,8 @@ Route::post('/businessFile/index', [BusinessFileController::class, 'store'])->na
 
 Route::post('/business/index', [BusinessController::class, 'store'])->name('businesses.store');
 
-// Route::post('/businessCategories/create', [BusinessController::class, 'store'])->name('business_categories.create');
+Route::post('/products/create', [ProductController::class, 'store'])->name('products.create');
+Route::post('/products/create', [ProductController::class, 'store'])->name('products.create_service');
 
 
 

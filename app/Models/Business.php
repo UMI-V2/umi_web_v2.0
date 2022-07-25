@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use App\Models\Address;
-use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
+use App\Models\MasterBusinessCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
 
 /**
  * @SWG\Definition(
@@ -112,6 +113,13 @@ class Business extends Model
         'id_master_status_usaha' => 'required',
         'nama_usaha' => 'required'
     ];
+
+    public function master_business_categories()
+    {
+        return $this->belongsTo(MasterBusinessCategory::class);
+    }
+
+    
 
      public function getTotalSaldoAttribute()
     {
