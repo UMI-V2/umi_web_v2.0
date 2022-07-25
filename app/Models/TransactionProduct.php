@@ -101,7 +101,8 @@ class TransactionProduct extends Model
         'kuantitas',
         'kondisi',
         'preorder',
-        'is_rating'
+        'is_rating',
+        'is_service'
     ];
 
     /**
@@ -118,7 +119,8 @@ class TransactionProduct extends Model
         'deskripsi_produk' => 'string',
         'kondisi' => 'boolean',
         'preorder' => 'boolean',
-        'is_rating'=>'boolean'
+        'is_rating'=>'boolean',
+        'is_service'=> 'boolean'
     ];
 
     /**
@@ -132,8 +134,9 @@ class TransactionProduct extends Model
         'harga_produk' => 'required|numeric',
         'harga_diskon' => 'required|numeric',
         'deskripsi_produk' => 'required',
-        'kondisi' => 'required',
-        'preorder' => 'required',
+        'kondisi' => 'nullable',
+        'preorder' => 'nullable',
+        'is_service'=> 'nullable'
     ];
 
     public static function boot()

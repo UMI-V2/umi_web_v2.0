@@ -46,6 +46,8 @@ class ProductFileAPIController extends AppBaseController
                 }
             }
         } catch (Exception $e) {
+            throw new Exception("Error Add Photo Product : ". $e->getMessage(), 1);
+
             return ResponseFormatter::error(
                 [
                     'message' => $e

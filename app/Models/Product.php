@@ -88,7 +88,7 @@ class Product extends Model
 
     public $table = 'products';
 
-    protected $appends = ['rating', 'total_order', 'is_my_favorite'];
+    protected $appends = ['rating', 'total_order', 'is_my_favorite', 'total_favorite'];
 
 
     public $fillable = [
@@ -103,16 +103,23 @@ class Product extends Model
         'preorder',
         'jumlah_satuan',
         'is_arshive',
+        'is_service',
         'latitude',
         'longitude',
         'created_at',
         'updated_at',
+        
         // 'deleted_at'
     ];
 
     public function getIsMyFavoriteAttribute()
     {
         return FavoriteProduct::where('id_user', Auth::user()->id)->where('id_product', $this->id)->get()->isNotEmpty();
+    }
+
+    public function getTotalFavoriteAttribute()
+    {
+        return FavoriteProduct::where('id_product', $this->id)->count();
     }
 
     public function getRatingAttribute()
@@ -149,6 +156,7 @@ class Product extends Model
         'kondisi' => 'boolean',
         'preorder' => 'boolean',
         'is_arshive' => 'boolean',
+        'is_service'=> 'boolean',
         'rating' =>'double',
         'total_order'=>'integer'
     ];
@@ -164,9 +172,9 @@ class Product extends Model
         'nama' => 'required',
         'deskripsi' => 'required',
         'harga' => 'required',
-        'stok' => 'required|numeric',
-        'kondisi' => 'required',
-        'preorder' => 'required'
+        'stok' => 'nullable',
+        'kondisi' => 'nullable',
+        'preorder' => 'nullable'
     ];
 
     /**

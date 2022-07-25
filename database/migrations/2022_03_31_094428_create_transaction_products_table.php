@@ -27,9 +27,10 @@ class CreateTransactionProductsTable extends Migration
 
             $table->string('photo_url_produk');
             $table->longText('deskripsi_produk');
-            $table->boolean('kondisi');
-            $table->boolean('preorder');
+            $table->boolean('kondisi')->nullable();
+            $table->boolean('preorder')->nullable();
             $table->boolean('is_rating')->default(false);
+            $table->boolean('is_service')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

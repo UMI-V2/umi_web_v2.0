@@ -18,7 +18,7 @@ class CreateNewsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('sub_title');
-            $table->string('description');
+            $table->longText('description');
             $table->string('author');
             $table->boolean('is_headline')->default(false);
             $table->string('title_related_link')->nullable();

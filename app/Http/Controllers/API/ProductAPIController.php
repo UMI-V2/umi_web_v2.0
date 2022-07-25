@@ -95,13 +95,14 @@ class ProductAPIController extends AppBaseController
                 // dd("MAsuk Sini");
                 $value->where('is_arshive', 0);
             }
-            //Hanya menampilkan produk yang ready
-            if ($is_ready_only) {
-                $value->where('stok', '>=', 1);
-            }
+            
             //Memfilter produk berdasarkan nama
             if ($nama) {
                 $value->where('nama', 'like', '%' . $nama . '%');
+            }
+            //Hanya menampilkan produk yang ready
+            if ($is_ready_only) {
+                $value->where('stok', null)->orWhere('stok', '>=', 1);
             }
             //Memfilter produk berdasarkan kondisi
             if ($kondisi != null) {
@@ -194,6 +195,11 @@ class ProductAPIController extends AppBaseController
                 $data['longitude'] =  $businessAddress->longitude;
             }
 
+            $data['kondisi'] = ($request->kondisi =='')?null:$request->kondisi;
+            $data['preorder'] = ($request->preorder =='')?null:$request->preorder;
+            $data['is_service'] = ($request->is_service =='')?null:$request->is_service;
+            $data['stok'] = ($request->stok =='')?null:$request->stok;
+
             $result = Product::updateOrCreate(['id' => $request->id], $data);
 
             ProductCategoryAPIController::createDelete($request, $result->id);
@@ -210,7 +216,7 @@ class ProductAPIController extends AppBaseController
             DB::rollBack();
 
             return ResponseFormatter::error([
-                'error' => $e,
+                'error' => $e->getMessage(),
             ],  'Update Product Failed', 500);
         }
     }
