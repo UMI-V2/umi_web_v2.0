@@ -51,6 +51,16 @@ class ProductController extends AppBaseController
         $master_units = MasterUnit::query()->select('nama_satuan', 'id')->get();
         return view('products.create')->with('businesses', $businesses)->with('master_units', $master_units);
     }
+    
+    public function create_service()
+    {
+        // $businesses = Business::query()->pluck('nama_usaha', 'id');
+        // $master_units = MasterUnit::query()->pluck('nama_satuan', 'id');
+
+        $businesses = Business::query()->select('nama_usaha', 'id')->get();
+        $master_units = MasterUnit::query()->select('nama_satuan', 'id')->get();
+        return view('products.create_service')->with('businesses', $businesses)->with('master_units', $master_units);
+    }
 
     /**
      * Store a newly created Product in storage.
@@ -79,33 +89,6 @@ class ProductController extends AppBaseController
                 ]);
             }
         }
-
-        // OpenHour::updateOrCreate([
-        //     'id_usaha' => $business->id
-        // ],[
-        //     'id_usaha' => $business->id,
-        //     'senin_buka' => $request->senin_buka,
-        //     'senin_tutup' => $request->senin_tutup,
-        //     'selasa_buka' => $request->selasa_buka,
-        //     'selasa_tutup' => $request->selasa_tutup,
-        //     'rabu_buka' => $request->rabu_buka,
-        //     'rabu_tutup' => $request->rabu_tutup,
-        //     'kamis_buka' => $request->kamis_buka,
-        //     'kamis_tutup' => $request->kamis_tutup,
-        //     'jumat_buka' => $request->jumat_buka,
-        //     'jumat_tutup' => $request->jumat_tutup,
-        //     'sabtu_buka' => $request->sabtu_buka,
-        //     'sabtu_tutup' => $request->sabtu_tutup,
-        //     'minggu_buka' => $request->minggu_buka,
-        //     'minggu_tutup' => $request->minggu_tutup,
-        // ]);
-
-        // BusinessCategory::updateOrCreate([
-        //     'id' => $request->id,
-        // ],[
-        //     'id_usaha' => $business->id,
-        //     'id_master_kategori_usaha' => $request->id_master_kategori_usaha,
-        // ]);
         return redirect()->route('products.index');
     }
 

@@ -24,7 +24,7 @@
                 <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-header" style="text-align: left">
-                        <a href="{{ route('products.create') }}" class="btn btn-success"><< Klik disini untuk kembali ke menu produk</a>
+                        <a href="{{ route('products.create') }}" class="btn btn-success"><< Klik disini untuk kembali ke menu barang</a>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
