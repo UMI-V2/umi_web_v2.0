@@ -59,7 +59,7 @@
                 </div>
                 <div class="tab-pane fade" id="custom-tabs-two-settings" role="tabpanel"
                     aria-labelledby="custom-tabs-two-settings-tab">
-                    {{-- @include('business_categories.show_fields') --}}
+                    {{-- @include('products_categories.show_fields') --}}
                 </div>
             </div>
         </div>

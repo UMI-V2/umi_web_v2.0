@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MasterStatusUser;
-use App\Models\MasterPrivilege;
-use App\DataTables\UserDataTable;
-use App\Http\Requests;
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Repositories\UserRepository;
-use Laracasts\Flash\Flash;
-use App\Http\Controllers\AppBaseController;
 use Response;
-
 use Exception;
 use App\Models\User;
+use App\Http\Requests;
+use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
+use App\Models\MasterPrivilege;
+use App\Models\MasterStatusUser;
+use App\DataTables\UserDataTable;
 use App\Helpers\ResponseFormatter;
+
 use App\Http\Controllers\Controller;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\AppBaseController;
 
 class UserController extends AppBaseController
 {
@@ -50,8 +52,8 @@ class UserController extends AppBaseController
      */
     public function create()
     {
-        $master_privileges = MasterPrivilege::query()->pluck('nama_hak_akses_pengguna', 'id');
-        $master_status_users = MasterStatusUser::query()->pluck('nama_status_pengguna', 'id');
+        $master_privileges = MasterPrivilege::query()->select('nama_hak_akses_pengguna', 'id')->get();
+        $master_status_users = MasterStatusUser::query()->select('nama_status_pengguna', 'id')->get();
 
         return view('users.create')->with('master_privileges', $master_privileges)->with('master_status_users', $master_status_users);
     }
@@ -64,26 +66,26 @@ class UserController extends AppBaseController
      * @return Response
      */
     public function store(CreateUserRequest $request)
-    {
+    { 
         $input = $request->all();
-
-        // array merge password
         $input['password'] = Hash::make($input['password']);
+        $result = $this->userRepository->create($input);
 
-        // $input = User::create(aray_merge[
-        //         'name' => $request->name,
-        //         'username' => $request->username,
-        //         'jenis_kelamin' => $request->jenis_kelamin,
-        //         'tanggal_lahir' => $request->tanggal_lahir,
-        //         'no_hp' => $request->no_hp,
-        //         'foto' => $request->foto,
-        //         'email' => $request->email,
-        //         'password' => Hash::make($request->password),
-        //         'id_privilege' => $request->id_privilege,
-        //         'id_status_pengguna' => $request->id_status_pengguna,
-        //     ]);
 
-        $user = $this->userRepository->create($input);
+        $validator  = Validator::make($request->all(), [
+            'profile_photo_path' => 'required|image'
+        ],);
+        if ($validator->fails()) {
+            Flash::danger('Gambar harus diisi.');
+        }
+        if ($request->file('profile_photo_path')) {
+            
+            $file = $request->profile_photo_path->store('assets/user', 'public');     
+            // $user = $request->user();
+             $result ->profile_photo_path = $file;
+            $result->update();
+            // dd($result);
+        }
 
         Flash::success('User saved successfully.');
 

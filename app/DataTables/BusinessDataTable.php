@@ -92,12 +92,12 @@ class BusinessDataTable extends DataTable
             'name' => ([
                 'data' => 'users.name',
                 'name' => 'users.name',
-                'title' => 'Name',
+                'title' => 'Pemilik Usaha',
             ]),
             'nama_status_usaha' => ([
                 'data' => 'master_status_businesses.nama_status_usaha',
                 'name' => 'master_status_businesses.nama_status_usaha',
-                'title' => 'Nama Status Usaha',
+                'title' => 'Status Usaha',
             ]),
             'nama_usaha'
         ];

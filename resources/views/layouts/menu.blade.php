@@ -7,49 +7,17 @@
 </li>
 <li class="nav-item menu-is-closed menu-open">
     <a href="#" class="nav-link active">
-        <i class="nav-icon fas fa-users"></i>
+        <i class="nav-icon fas fa-building"></i>
         <p>
-            Pengguna
+            Data UMKM
             <i class="right fas fa-angle-left"></i>
         </p>
     </a>
     <ul class="nav nav-treeview" style="display: block;">
-        <li class="nav-item">
-            <a href="{{ route('masterPrivileges.index') }}"
-                class="nav-link {{ Request::is('masterPrivileges*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Hak Akses Pengguna</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('masterStatusUsers.index') }}"
-                class="nav-link {{ Request::is('masterStatusUsers*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Status Pengguna</p>
-            </a>
-        </li>
         <li class="nav-item">
             <a href="{{ route('users.index') }}" class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Pengguna</p>
-            </a>
-        </li>
-    </ul>
-</li>
-<li class="nav-item menu-is-closed menu-open">
-    <a href="#" class="nav-link active">
-        <i class="nav-icon fas fa-suitcase"></i>
-        <p>
-            Usaha
-            <i class="right fas fa-angle-left"></i>
-        </p>
-    </a>
-    <ul class="nav nav-treeview" style="display: block;">
-        <li class="nav-item">
-            <a href="{{ route('masterStatusBusinesses.index') }}"
-                class="nav-link {{ Request::is('masterStatusBusinesses*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Master Status Usaha</p>
+                <p>Pemilik Usaha</p>
             </a>
         </li>
         <li class="nav-item">
@@ -60,98 +28,10 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('masterBusinessCategories.index') }}"
-                class="nav-link {{ Request::is('masterBusinessCategories*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Master Kategori Usaha</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('businessCategories.index') }}"
-                class="nav-link {{ Request::is('businessCategories*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kategori Usaha</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('openHours.index') }}"
-                class="nav-link {{ Request::is('openHours*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Jam Buka</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('businessFiles.index') }}"
-                class="nav-link {{ Request::is('businessFiles*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>File Usaha</p>
-            </a>
-        </li>
-    </ul>
-</li>
-<li class="nav-item menu-is-closed menu-open">
-    <a href="#" class="nav-link active">
-        <i class="nav-icon fa fa-shopping-cart"></i>
-        <p>
-            Produk
-            <i class="right fas fa-angle-left"></i>
-        </p>
-    </a>
-    <ul class="nav nav-treeview" style="display: block;">
-        <li class="nav-item">
-            <a href="{{ route('masterUnits.index') }}"
-                class="nav-link {{ Request::is('masterUnits*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Master Satuan</p>
-            </a>
-        </li>
-        <li class="nav-item">
             <a href="{{ route('products.index') }}"
                 class="nav-link {{ Request::is('products*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Produk</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('masterProductCategories.index') }}"
-                class="nav-link {{ Request::is('masterProductCategories*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Master Kategori</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('productCategories.index') }}"
-                class="nav-link {{ Request::is('productCategories*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kategori Produk</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('discounts.index') }}"
-                class="nav-link {{ Request::is('discounts*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Diskon</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('productDiscounts.index') }}"
-                class="nav-link {{ Request::is('productDiscounts*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Diskon Produk</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('ratings.index') }}"
-                class="nav-link {{ Request::is('ratings*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Rating</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('productFiles.index') }}"
-                class="nav-link {{ Request::is('productFiles*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>File Produk</p>
             </a>
         </li>
     </ul>
