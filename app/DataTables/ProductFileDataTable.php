@@ -18,12 +18,19 @@ class ProductFileDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('image_url', function($data){
-            return '<img src="'.$data->image_url.'" width="100px" height="100px">';
-        })
-        ->addColumn('action', 'product_files.datatables_actions')
-        ->rawColumns(['image_url', 'action']);
+        return $dataTable->addColumn('action', 'product_files.datatables_actions');
     }
+
+    // public function dataTable($query)
+    // {
+    //     $dataTable = new EloquentDataTable($query);
+
+    //     return $dataTable->addColumn('image_url', function($data){
+    //         return '<img src="'.$data->image_url.'" width="100px" height="100px">';
+    //     })
+    //     ->addColumn('action', 'product_files.datatables_actions')
+    //     ->rawColumns(['image_url', 'action']);
+    // }
 
     /**
      * Get query source of dataTable.
@@ -92,7 +99,7 @@ class ProductFileDataTable extends DataTable
                 'title' => 'Produk',
             ]),
             'file',
-            'image_url',
+            // 'image_url',
             'video',
             'photo'
         ];

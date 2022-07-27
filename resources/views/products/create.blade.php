@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Tambah Produk</h1>
+                    <h1>Tambah Barang</h1>
                 </div>
             </div>
         </div>
@@ -37,9 +37,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Satuan Produk</label>
+                            <label>Satuan Barang</label>
                             <select class="form-control" name="id_satuan">
-                                <option value="#" disabled selected>Pilih Satuan Produk</option>
+                                <option value="#" disabled selected>Pilih Satuan Barang</option>
                                 @foreach ($master_units as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_satuan }}</option>
                                 @endforeach
@@ -52,36 +52,41 @@
                         {{-- </div> --}}
                         
                         <div class="form-group">
-                            <label>Nama Produk</label>
-                            <input type="input" name="nama" class="form-control" placeholder="Nama Produk">
+                            <label>Nama Barang</label>
+                            <input type="input" name="nama" class="form-control" placeholder="Nama Barang">
                         </div>
                         
                         <div class="form-group">
-                            <label>Deskripsi Produk</label>
-                            <textarea name="deskripsi" class="form-control" placeholder="Deskripsi Produk"></textarea>
+                            <label>Deskripsi Barang</label>
+                            <textarea name="deskripsi" class="form-control" placeholder="Deskripsi Barang"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label>Harga Produk</label>
-                            <input type="input" name="harga" class="form-control" placeholder="Harga Produk">
+                            <label>Harga Barang</label>
+                            <input type="input" name="harga" class="form-control" placeholder="Harga Barang">
                         </div>
                         
                         <div class="form-group">
-                            <label>Stok Produk</label>
-                            <input type="input" name="stok" class="form-control" placeholder="Stok Produk">
+                            <label>Stok Barang</label>
+                            <input type="input" name="stok" class="form-control" placeholder="Stok Barang">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Jumlah Satuan</label>
+                            <input type="number" name="jumlah_satuan" class="form-control" placeholder="Jumlah Satuan">
                         </div>
 
                         <div class="form-group">
-                            <label>Kondisi Produk</label>
+                            <label>Kondisi Barang</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" id="status" value="1">
-                                <label class="form-check-label" for="status">
+                                <input class="form-check-input" type="radio" name="kondisi" id="kondisi" value="1">
+                                <label class="form-check-label" for="kondisi">
                                     Baru
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" id="status" value="0">
-                                <label class="form-check-label" for="status">
+                                <input class="form-check-input" type="radio" name="kondisi" id="kondisi" value="0">
+                                <label class="form-check-label" for="kondisi">
                                     Bekas
                                 </label>
                             </div>
@@ -90,24 +95,24 @@
                         <div class="form-group">
                             <label>Preorder?</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" id="status" value="1">
-                                <label class="form-check-label" for="status">
-                                    Ya, produk ini dapat di preorder
+                                <input class="form-check-input" type="radio" name="preorder" id="preorder" value="1">
+                                <label class="form-check-label" for="preorder">
+                                    Ya, Barang ini dapat di preorder
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" id="status" value="0">
-                                <label class="form-check-label" for="status">
-                                    Tidak, produk ini tidak dapat di preorder
+                                <input class="form-check-input" type="radio" name="preorder" id="preorder" value="0">
+                                <label class="form-check-label" for="preorder">
+                                    Tidak, Barang ini tidak dapat di preorder
                                 </label>
                             </div>
                         </div>
                         
 
                         {{-- <div class="form-group">
-                            <label>Kategori Produk</label>
+                            <label>Kategori Barang</label>
                             <select class="form-control" name="id_kategori">
-                                <option value="#" disabled selected>Pilih Kategori Produk</option>
+                                <option value="#" disabled selected>Pilih Kategori Barang</option>
                                 @foreach ($master_categories as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
                                 @endforeach

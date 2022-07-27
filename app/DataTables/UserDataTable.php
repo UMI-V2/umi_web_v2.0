@@ -25,8 +25,30 @@ class UserDataTable extends DataTable
             }
         )->addColumn('nama_status_pengguna', function ($data) {
             return $data->master_status_users->nama_status_pengguna;
-        });
+        })->addColumn('id', function ($data) {
+            return $data->id;
+        })->addColumn('jenis_kelamin', function ($data) {
+            if ($data->jenis_kelamin == 'L') {
+                return "Laki-laki" ;
+            } else {
+                return  "Perempuan";
+            }
+        })->addColumn('profile_photo_url', function($data){
+            return '<img src="'.$data->profile_photo_url.'" width="50px" style="border-radius: 25%">';
+        })
+        ->rawColumns(['profile_photo_url', 'action']);
     }
+
+    // public function dataTable($query)
+    // {
+    //     $dataTable = new EloquentDataTable($query);
+
+    //     return $dataTable->addColumn('image_url', function($data){
+    //         return '<img src="'.$data->image_url.'" width="100px" height="100px">';
+    //     })
+    //     ->addColumn('action', 'product_files.datatables_actions')
+    //     ->rawColumns(['image_url', 'action']);
+    // }
 
     /**
      * Get query source of dataTable.
@@ -36,7 +58,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->with('master_privileges')->with('master_status_users');
+        return $model->newQuery()->where('id_privilege', 4)->orWhere('id_privilege', 5)->with('master_privileges')->with('master_status_users');
     }
 
     /**
@@ -65,7 +87,7 @@ class UserDataTable extends DataTable
                     var kolom = this.api().columns();
                     kolom.every(function (i) {
 
-                        if(i === kolom['0'].length - 1){
+                        if(i === kolom['0'].length - 1 || i === kolom['0'].length - 10){
                             return false;
                         }
                         var column = this;
@@ -94,29 +116,27 @@ class UserDataTable extends DataTable
     {
         return [
             'id' => ['visible' => false],
+            'profile_photo_url' => ['title' => 'Foto Profil'],
             'name' => ['title' => 'Nama'],
             'nama_hak_akses_pengguna' => ['title' => 'Akses Sebagai'],
-            'nama_status_pengguna' => [
-                'title' => 'Status Akun',
-                'data' => 'master_privileges.nama_hak_akses_pengguna',
-            ],
-            'username',
+            'nama_status_pengguna' => ['title' => 'Status Akun'],
             'jenis_kelamin',
             'tanggal_lahir',
             'no_hp',
-            'foto',
             'email',
+            'username',
+            // 'nama_hak_akses_pengguna' => ([
+            //     'data' => 'master_privileges.nama_hak_akses_pengguna',
+            //     'name' => 'master_privileges.nama_hak_akses_pengguna',
+            //     'title' => 'Hak Akses'
+            // ]),
+            // 'nama_status_pengguna' => ([
+            //     'data' => 'master_status_users.nama_status_pengguna',
+            //     'name' => 'master_status_users.nama_status_pengguna',
+            //     'title' => 'Status'
+            // ]),
+            // 'foto',
             // 'password' => ['visible' => false],
-            'nama_hak_akses_pengguna' => ([
-                'data' => 'master_privileges.nama_hak_akses_pengguna',
-                'name' => 'master_privileges.nama_hak_akses_pengguna',
-                'title' => 'Hak Akses'
-            ]),
-            'nama_status_pengguna' => ([
-                'data' => 'master_status_users.nama_status_pengguna',
-                'name' => 'master_status_users.nama_status_pengguna',
-                'title' => 'Status'
-            ]),
         ];
     }
 

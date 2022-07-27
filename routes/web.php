@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\LPBlogController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LPContactController;
@@ -82,9 +83,10 @@ Route::get('/dashboard/data', [DashboardController::class, 'FrekuensiTransaksi']
 Route::post('/businessFile/index', [BusinessFileController::class, 'store'])->name('business_files.store');
 
 Route::post('/business/index', [BusinessController::class, 'store'])->name('businesses.store');
+Route::post('/products/create', [ProductController::class, 'store'])->name('products.store');
+Route::post('/users/create', [UserController::class, 'store'])->name('users.store');
 
-Route::post('/products/create', [ProductController::class, 'store'])->name('products.create');
-Route::post('/products/create', [ProductController::class, 'store'])->name('products.create_service');
+Route::get('/products/create_service', [ProductController::class, 'create_service'])->name('products.create_service');
 
 
 

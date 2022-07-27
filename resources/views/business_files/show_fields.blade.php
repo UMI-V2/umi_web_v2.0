@@ -1,6 +1,6 @@
 <div class="card card-primary">
     <div class="card-header">
-        <h4 class="card-title">Ekko Lightbox</h4>
+        <h1 class="card-title"><strong>Foto-foto - {{ $business->nama_usaha }}</strong></h1>
     </div>
     <div class="card-body">
         <div class="row">
@@ -12,7 +12,6 @@
                 </a>
             </div>
             @endforeach
-            
         </div>
     </div>
 </div>

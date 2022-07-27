@@ -67,7 +67,7 @@ class BusinessCategoryController extends AppBaseController
 
         Flash::success('Business saved successfully.');
 
-        return redirect(route('businesses.index'));
+        return redirect(route('businessCategories.index'));
     }
 
     /**

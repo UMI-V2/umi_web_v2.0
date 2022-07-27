@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('jenis_kelamin', 2);
             $table->string('tanggal_lahir');
             $table->string('no_hp')->unique();
-            $table->string('foto')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('password');
             $table->bigInteger('id_privilege')->unsigned()->default(4);

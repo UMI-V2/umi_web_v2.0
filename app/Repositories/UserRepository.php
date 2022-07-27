@@ -22,7 +22,7 @@ class UserRepository extends BaseRepository
         'jenis_kelamin',
         'tanggal_lahir',
         'no_hp',
-        'foto',
+        'profile_photo_path',
         'email',
         'password',
         'id_privilege',

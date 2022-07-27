@@ -19,7 +19,7 @@
 <!-- Jenis Kelamin Field -->
 <div class="col-sm-12">
     {!! Form::label('jenis_kelamin', 'Jenis Kelamin:') !!}
-    <p>{{ $user->jenis_kelamin }}</p>
+    <p>{{ $user->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan'}}</p>
 </div>
 
 <!-- Tanggal Lahir Field -->
@@ -37,8 +37,19 @@
 <!-- Foto Field -->
 <div class="col-sm-12">
     {!! Form::label('foto', 'Foto:') !!}
-    <p>{{ $user->foto }}</p>
+    <p><img src="{{ $user->profile_photo_url }}class="img-fluid mb-2 alt="white sample" style="border-radius: 25%"></p>
 </div>
+
+{{-- <div class="row">
+    @foreach ( $business->business_file as $file )
+        <div class="col-sm-2">
+        <a href="{{ $file->file }}" data-toggle="lightbox"
+            data-title="sample 1 - white" data-gallery="gallery">
+            <img src="{{ $file->file }}" class="img-fluid mb-2" alt="white sample">
+        </a>
+    </div>
+    @endforeach
+</div> --}}
 
 <!-- Email Field -->
 <div class="col-sm-12">
@@ -55,13 +66,13 @@
 <!-- Id Privilege Field -->
 <div class="col-sm-12">
     {!! Form::label('id_privilege', 'Hak Akses:') !!}
-    <p>{{ $user->id_privilege }}</p>
+    <p>{{ $user->id_privilege == '4' ? 'Pembeli' : 'Pengusaha UMKM' }}</p>
 </div>
 
 <!-- Id Status Pengguna Field -->
 <div class="col-sm-12">
     {!! Form::label('id_status_pengguna', 'Status:') !!}
-    <p>{{ $user->id_status_pengguna }}</p>
+    <p>{{ $user->id_status_pengguna == '1' ? 'Aktif' : 'Tidak Aktif' }}</p>
 </div>
 
 <!-- Created At Field -->
