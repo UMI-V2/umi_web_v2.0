@@ -25,6 +25,12 @@ class ProductDataTable extends DataTable
             }
         )->addColumn('nama_satuan', function ($data) {
             return $data->master_units->nama_satuan;
+        })->addColumn('harga', function ($model) {
+            if ($model->harga == '0') {
+                return "Gratis" ;
+            } else {
+                return  "Rp. " .number_format($model->harga, 0, ',', '.');
+            }
         });
     }
 

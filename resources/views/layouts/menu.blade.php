@@ -685,4 +685,11 @@
         </li>
     </ul>
 </li>
-@endrole
+@endrole<li class="nav-item">
+    <a href="{{ route('masterBanks.index') }}"
+       class="nav-link {{ Request::is('masterBanks*') ? 'active' : '' }}">
+        <p>Master Banks</p>
+    </a>
+</li>
+
+

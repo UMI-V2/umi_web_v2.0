@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -77,6 +78,14 @@ class EventRegister extends Model
         'id' => 'integer',
         'event_id' => 'integer',
         'user_id' => 'integer',
+        'name',
+        'jenis_kelamin',
+        'tanggal_lahir',
+        'no_hp',
+        'foto',
+        'city',
+        'subdistrict',
+        'full_address',
     ];
 
     /**
@@ -86,7 +95,7 @@ class EventRegister extends Model
      */
     public static $rules = [
         'event_id' => 'required',
-        'user_id' => 'required'
+        'user_id' => 'required',
     ];
 
     /**
@@ -103,5 +112,14 @@ class EventRegister extends Model
     public function users()
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
+    }
+
+    public function getFotoAttribute()
+    {
+        if ($this->attributes['foto']) {
+            return url('') . Storage::url($this->attributes['foto']);
+        } else {
+            return null;
+        }
     }
 }

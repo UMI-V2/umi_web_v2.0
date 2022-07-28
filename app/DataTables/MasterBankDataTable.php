@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\Announcement;
+use App\Models\MasterBank;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class AnnouncementDataTable extends DataTable
+class MasterBankDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,16 +18,25 @@ class AnnouncementDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'announcements.datatables_actions');
+        return $dataTable->addColumn('action', 'master_banks.datatables_actions')->addColumn('logo', function($data){
+            return '<img src="'.$data->logo.'" width="50px" style="border-radius: 25%">';
+        })
+        ->rawColumns(['logo', 'action'])->addColumn('cost_admin', function ($model) {
+            if ($model->cost_admin == '0') {
+                return "Gratis Biaya Admin" ;
+            } else {
+                return  "Rp. " .number_format($model->cost_admin, 0, ',', '.');
+            }
+        });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Announcement $model
+     * @param \App\Models\MasterBank $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Announcement $model)
+    public function query(MasterBank $model)
     {
         return $model->newQuery();
     }
@@ -45,7 +54,7 @@ class AnnouncementDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
-                'stateSave' => false,
+                'stateSave' => true,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -54,22 +63,6 @@ class AnnouncementDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
-'initComplete' => "function () {
-                    var kolom = this.api().columns();
-                    kolom.every(function (i) {
-
-                        if(i === kolom['0'].length - 1){
-                            return false;
-                        }
-                        var column = this;
-                        var input = document.createElement(\"input\");
-                        input.setAttribute('id', i);
-                        $(input).appendTo($(column.footer()).empty())
-                        .on('keyup', function () {
-                            column.search($(this).val()).draw();
-                        }).attr('placeholder', 'Search');                        
-                    }); 
-                }",
             ]);
     }
 
@@ -81,11 +74,10 @@ class AnnouncementDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id' => ['visible' => false],
-            'title' => ['title' => 'Judul Pengumuman'],
-            'sub_title' => ['title' => 'Sub Judul'],
-            'description' => ['title' => 'Deskripsi'],
-            'author' => ['title' => 'Penulis'],
+            'name',
+            'description',
+            'cost_admin',
+            'logo'
         ];
     }
 
@@ -96,6 +88,6 @@ class AnnouncementDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'announcements_datatable_' . time();
+        return 'master_banks_datatable_' . time();
     }
 }

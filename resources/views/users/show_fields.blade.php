@@ -37,7 +37,7 @@
 <!-- Foto Field -->
 <div class="col-sm-12">
     {!! Form::label('foto', 'Foto:') !!}
-    <p><img src="{{ $user->profile_photo_url }}class="img-fluid mb-2 alt="white sample" style="border-radius: 25%"></p>
+    <p><img src="{{ $user->profile_photo_url }}" width="100px" class="img-fluid mb-2" alt="white sample" style="border-radius: 25%"></p>
 </div>
 
 {{-- <div class="row">

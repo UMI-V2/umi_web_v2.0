@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\EventRegisterDataTable;
+use Response;
+use App\Models\User;
+use App\Models\Event;
 use App\Http\Requests;
+use Laracasts\Flash\Flash;
+use Illuminate\Support\Facades\Validator;
+use App\DataTables\EventRegisterDataTable;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\EventRegisterRepository;
 use App\Http\Requests\CreateEventRegisterRequest;
 use App\Http\Requests\UpdateEventRegisterRequest;
-use App\Repositories\EventRegisterRepository;
-use Laracasts\Flash\Flash;
-use App\Http\Controllers\AppBaseController;
-use Response;
-use App\Models\Event;
-use App\Models\User;
 
 class EventRegisterController extends AppBaseController
 {
@@ -42,8 +43,8 @@ class EventRegisterController extends AppBaseController
      */
     public function create()
     {
-        $events = Event::query()->pluck('title', 'id');
-        $users = User::query()->pluck('name', 'id');
+        $events = Event::query()->select('title', 'id')->get();
+        $users = User::query()->select('name', 'id')->get();
 
         return view('event_registers.create')->with('events', $events)->with('users', $users);
     }
@@ -57,9 +58,27 @@ class EventRegisterController extends AppBaseController
      */
     public function store(CreateEventRegisterRequest $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
+        // $eventRegister = $this->eventRegisterRepository->create($input);
+        // Flash::success('Event Register saved successfully.');
+        // return redirect(route('eventRegisters.index'));
 
+        $input = $request->all();
         $eventRegister = $this->eventRegisterRepository->create($input);
+
+
+        $validator  = Validator::make($request->all(), [
+            'foto' => 'required|image'
+        ],);
+        if ($validator->fails()) {
+            Flash::danger('Gambar harus diisi.');
+        }
+        if ($request->file('foto')) {
+            
+            $file = $request->foto->store('assets/event_register', 'public');     
+             $eventRegister ->foto = $file;
+            $eventRegister->update();
+        }
 
         Flash::success('Event Register saved successfully.');
 
