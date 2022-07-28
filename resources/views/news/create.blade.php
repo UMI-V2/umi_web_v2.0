@@ -40,11 +40,36 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Author</label>
-                        <input type="input" name="author" class="form-control" placeholder="Author">
+                        <label>Penulis Berita</label>
+                        <input type="input" name="author" class="form-control" placeholder="Penulis Berita">
+                    </div>
+                    
+                    {{-- make radio button --}}
+                    <div class="form-group">
+                        <label>Apakah ini berita Utama?</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="is_headline" value="1">
+                                Ya, Ini Berita Utama
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="is_headline" value="2">
+                                Bukan, Ini Bukan Berita Utama
+                            </label>
+                        </div>
                     </div>
 
+                    <div class="form-group">
+                        <label>Link Yang Bersangkutan Dengan Judul</label>
+                        <input type="input" name="title_related_link" class="form-control" placeholder="Link Yang Bersangkutan Dengan Judul">
+                    </div>
                     
+                    <div class="form-group">
+                        <label>Link Yang Bersangkutan</label>
+                        <input type="input" name="related_link" class="form-control" placeholder="Link Yang Bersangkutan">
+                    </div>
 
                     <div class="form-group">
                         <label for="exampleInputFile">File input</label>
