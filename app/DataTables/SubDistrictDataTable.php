@@ -81,18 +81,19 @@ class SubDistrictDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id' => ['visible' => false],
+            // 'id' => ['visible' => false],
             'province_id' => ([
                 'data' => 'master_provinces.province_name',
                 'name' => 'master_provinces.province_name',
-                'title' => 'Provinsi'
+                'title' => 'Provinsi',
+                'visible' => false,
             ]),
             'city_id' => ([
                 'data' => 'master_cities.city_name',
                 'name' => 'master_cities.city_name',
                 'title' => 'Kota'
             ]),
-            'subdistrict_name'
+            'subdistrict_name' => ['title' => 'Kecamatan'],
         ];
     }
 

@@ -13,42 +13,42 @@
 <!-- Senin Field -->
 <div class="col-sm-12">
     {!! Form::label('senin', 'Senin:') !!}
-    <p>{{ $openHour->senin_buka && $openHour->senin_tutup  == null ? 'Tutup' : $openHour->senin_buka . ' - ' . $openHour->senin_tutup }}</p>
+    <p>{{ (($business->open_hours->senin_buka) && ($business->open_hours->senin_tutup))  == null ? 'Tutup' : (($business->open_hours->senin_buka) . ' - ' . ($business->open_hours->senin_tutup)) }}</p>
 </div>
 
 <!-- Selasa Field -->
 <div class="col-sm-12">
     {!! Form::label('selasa', 'Selasa:') !!}
-    <p>{{ (($openHour->selasa_buka ==null) && ($openHour->selasa_tutup  == null)) ? 'Tutup' : $openHour->selasa_buka . ' - ' . $openHour->selasa_tutup }}</p>
+    <p>{{ (($business->open_hours->selasa_buka ==null) && ($business->open_hours->selasa_tutup  == null)) ? 'Tutup' : (($business->open_hours->selasa_buka) . ' - ' . ($business->open_hours->selasa_tutup)) }}</p>
 </div>
 
 <!-- Rabu Field -->
 <div class="col-sm-12">
     {!! Form::label('rabu', 'Rabu:') !!}
-    <p>{{ (($openHour->rabu_buka ==null) && ($openHour->rabu_tutup  == null)) ? 'Tutup' : $openHour->rabu_buka . ' - ' . $openHour->rabu_tutup }}</p>
+    <p>{{ (($business->open_hours->rabu_buka ==null) && ($business->open_hours->rabu_tutup  == null)) ? 'Tutup' : (($business->open_hours->rabu_buka) . ' - ' . ($business->open_hours->rabu_tutup)) }}</p>
 </div>
 
 <!-- Kamis Field -->
 <div class="col-sm-12">
     {!! Form::label('kamis', 'Kamis:') !!}
-    <p>{{ (($openHour->kamis_buka ==null) && ($openHour->kamis_tutup  == null)) ? 'Tutup' : $openHour->kamis_buka . ' - ' . $openHour->kamis_tutup }}</p>
+    <p>{{ (($business->open_hours->kamis_buka ==null) && ($business->open_hours->kamis_tutup  == null)) ? 'Tutup' : (($business->open_hours->kamis_buka) . ' - ' . ($business->open_hours->kamis_tutup)) }}</p>
 </div>
 
 <!-- Jumat Field -->
 <div class="col-sm-12">
     {!! Form::label('jumat', 'Jumat:') !!}
-    <p>{{ (($openHour->jumat_buka ==null) && ($openHour->jumat_tutup  == null)) ? 'Tutup' : $openHour->jumat_buka . ' - ' . $openHour->jumat_tutup }}</p>
+    <p>{{ (($business->open_hours->jumat_buka ==null) && ($business->open_hours->jumat_tutup  == null)) ? 'Tutup' : (($business->open_hours->jumat_buka) . ' - ' . ($business->open_hours->jumat_tutup)) }}</p>
 </div>
 
 <!-- Sabtu Field -->
 <div class="col-sm-12">
     {!! Form::label('sabtu', 'Sabtu:') !!}
-    <p>{{ (($openHour->sabtu_buka ==null) && ($openHour->sabtu_tutup  == null)) ? 'Tutup' : $openHour->sabtu_buka . ' - ' . $openHour->sabtu_tutup }}</p>
+    <p>{{ (($business->open_hours->sabtu_buka ==null) && ($business->open_hours->sabtu_tutup  == null)) ? 'Tutup' : (($business->open_hours->sabtu_buka) . ' - ' . ($business->open_hours->sabtu_tutup)) }}</p>
 </div>
 
 <!-- Minggu Field -->
 <div class="col-sm-12">
     {!! Form::label('minggu', 'Minggu:') !!}
-    <p>{{ (($openHour->minggu_buka ==null) && ($openHour->minggu_tutup  == null)) ? 'Tutup' : $openHour->minggu_buka . ' - ' . $openHour->minggu_tutup }}</p>
+    <p>{{ (($business->open_hours->minggu_buka ==null) && ($business->open_hours->minggu_tutup  == null)) ? 'Tutup' : (($business->open_hours->minggu_buka) . ' - ' . ($business->open_hours->minggu_tutup)) }}</p>
 </div>
 

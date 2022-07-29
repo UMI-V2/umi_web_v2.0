@@ -194,6 +194,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(\App\Models\MasterStatusUser::class, 'id_status_pengguna', 'id');
     }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function addresses()
+    {
+        return $this->hasMany(\App\Models\Address::class, 'id_users', 'id');
+    }
 
     // accessor for user role
     public function getRoleAttribute()

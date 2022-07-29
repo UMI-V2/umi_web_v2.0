@@ -84,13 +84,6 @@ class BusinessCategory extends Model
         'id_master_kategori_usaha' => 'required'
     ];
 
-    public static function boot() {
-        parent::boot();
-
-        static::deleting(function($model) { 
-           
-        });
-    }
 
     public function usaha()
     {

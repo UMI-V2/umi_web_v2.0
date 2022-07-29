@@ -18,12 +18,11 @@ class BusinessDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'businesses.datatables_actions')->addColumn(
-            'name', 
-            function ($data) {
+        return $dataTable->addColumn('action', 'businesses.datatables_actions')
+        ->addColumn('name', function ($data) {
                 return $data->users->name;
-            }
-        )->addColumn('nama_status_usaha', function ($data) {
+            })
+        ->addColumn('nama_status_usaha', function ($data) {
             return $data->master_status_businesses->nama_status_usaha;
         });
     }
@@ -88,18 +87,20 @@ class BusinessDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id' => ['visible' => false],
-            'name' => ([
-                'data' => 'users.name',
-                'name' => 'users.name',
-                'title' => 'Pemilik Usaha',
-            ]),
-            'nama_status_usaha' => ([
-                'data' => 'master_status_businesses.nama_status_usaha',
-                'name' => 'master_status_businesses.nama_status_usaha',
-                'title' => 'Status Usaha',
-            ]),
-            'nama_usaha'
+            'id' => ['title' => 'Id', 'visible' => false],
+            'nama_usaha' => ['title' => 'Nama Usaha'],
+            'name' => ['title' => 'Nama Pemilik'],
+            'nama_status_usaha' => ['title' => 'Status Usaha'],
+            // 'name' => ([
+            //     'data' => 'users.name',
+            //     'name' => 'users.name',
+            //     'title' => 'Pemilik Usaha',
+            // ]),
+            // 'nama_status_usaha' => ([
+            //     'data' => 'master_status_businesses.nama_status_usaha',
+            //     'name' => 'master_status_businesses.nama_status_usaha',
+            //     'title' => 'Status Usaha',
+            // ]),
         ];
     }
 

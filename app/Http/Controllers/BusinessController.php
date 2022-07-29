@@ -18,6 +18,7 @@ use App\Repositories\OpenHourRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateBusinessRequest;
 use App\Http\Requests\UpdateBusinessRequest;
+use App\Models\Discount;
 
 class BusinessController extends AppBaseController
 {
@@ -132,27 +133,15 @@ class BusinessController extends AppBaseController
      */
     public function show($id)
     {
-
-
-        // $business = $this->businessRepository->find($id);
-        $business = Business::with(['users', 'masterStatusBusinesses', 'business_file', 'category', 'master_business_categories'])->where('id', $id)->first();
-        $openHour = OpenHour::find($id);
-        $businessCategory = BusinessCategory::with(['master_business_categories', 'businesses'])->where('id', $id)->first();
-        // $businessCategory = BusinessCategory::find($id);
-        // return response()->json([
-        //     "data"=>$business
-        // ]);
-
-        // dd($business);
-
-
+        $business = Business::with(['users', 'discounts', 'masterStatusBusinesses', 'business_file', 'category', 'master_business_categories', 'open_hours'])->where('id', $id)->first();
+        
         if (empty($business)) {
             Flash::error('Business not found');
 
             return redirect(route('businesses.index'));
         }
 
-        return view('businesses.show')->with('openHour', $openHour)->with('business', $business)->with('businessCategory', $businessCategory);
+        return view('businesses.show')->with('business', $business);
     }
 
     /**
