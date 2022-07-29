@@ -48,11 +48,11 @@
 
 <!-- Foto Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('foto', 'Foto:') !!}
+    {!! Form::label('profile_photo_path', 'Foto:') !!}
     <div class="input-group">
         <div class="custom-file">
-            {!! Form::file('foto', ['class' => 'custom-file-input']) !!}
-            {!! Form::label('foto', 'Choose file', ['class' => 'custom-file-label']) !!}
+            {!! Form::file('profile_photo_path', ['class' => 'custom-file-input']) !!}
+            {!! Form::label('profile_photo_path', 'Choose file', ['class' => 'custom-file-label']) !!}
         </div>
     </div>
 </div>

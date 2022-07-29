@@ -206,3 +206,8 @@ Route::resource('productDiscounts', App\Http\Controllers\ProductDiscountControll
 
 
 Route::resource('masterBanks', App\Http\Controllers\MasterBankController::class);
+
+
+Route::resource('withdrawBalances', App\Http\Controllers\WithdrawBalanceController::class);
+
+

@@ -693,3 +693,12 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('withdrawBalances.index') }}"
+       class="nav-link {{ Request::is('withdrawBalances*') ? 'active' : '' }}">
+        <p>Withdraw Balances</p>
+    </a>
+</li>
+
+
+
