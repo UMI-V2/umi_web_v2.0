@@ -81,7 +81,7 @@ class WithdrawBalanceController extends AppBaseController
         if (empty($withdrawBalance)) {
             Flash::error('Withdraw Balance not found');
 
-            return redirect(route('withdrawBalances.index'));
+            return redirect(route('withdrawBalances.index'));#
         }
 
         return view('withdraw_balances.show')->with('withdrawBalance', $withdrawBalance);

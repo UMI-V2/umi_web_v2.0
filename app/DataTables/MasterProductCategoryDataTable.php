@@ -19,7 +19,7 @@ class MasterProductCategoryDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable->addColumn('action', 'master_product_categories.datatables_actions')->addColumn('status_kategori_produk', function ($model) {
-            if ($model->status_kategori_usaha == '1') {
+            if ($model->status_kategori_produk == '1') {
                 return "Jasa" ;
             } else {
                 return  "Barang";

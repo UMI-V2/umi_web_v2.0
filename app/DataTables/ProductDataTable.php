@@ -31,6 +31,24 @@ class ProductDataTable extends DataTable
             } else {
                 return  "Rp. " .number_format($model->harga, 0, ',', '.');
             }
+        })->addColumn('stok', function ($model) {
+            if ($model->stok == null) {
+                return "Stok Produk Habis" ;
+            } else {
+                return  $model->stok;
+            }
+        })->addColumn('kondisi', function ($model) {
+            if ($model->kondisi == true) {
+                return "Baru" ;
+            } else {
+                return  "Bekas";
+            }
+        })->addColumn('preorder', function ($model) {
+            if ($model->preorder == true) {
+                return "Ya, Product ini dapat di preorder" ;
+            } else {
+                return  "Tidak, Product ini tidak dapat di preorder";
+            }
         });
     }
 
@@ -111,8 +129,10 @@ class ProductDataTable extends DataTable
             // ]),
             'harga',
             'stok',
-            // 'kondisi',
-            // 'preorder'
+            'kondisi',
+            'preorder' => ([
+                'title' => 'Apakah ada Preorder?',
+            ]),
         ];
     }
 

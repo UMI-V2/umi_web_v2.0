@@ -18,7 +18,23 @@ class RatingDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'ratings.datatables_actions');
+        return $dataTable->addColumn('action', 'ratings.datatables_actions')->addColumn('nama', function ($data) {
+            return $data->products->nama;
+        })->addColumn('rating', function ($model) {
+            if ($model->rating == '1') {
+                return "1 (Sangat Buruk)" ;
+            } else if ($model->rating == '2') {
+                return "2 (Buruk)" ;
+            } else if ($model->rating == '3') {
+                return "3 (Cukup)" ;
+            } else if ($model->rating == '4') {
+                return "4 (Baik)" ; 
+            } else if ($model->rating == '5') {
+                return "5 (Sangat Baik)" ;
+            } else {
+                return "Produk ini belum diberi rating" ;
+            }
+        });
     }
 
     /**
@@ -82,15 +98,15 @@ class RatingDataTable extends DataTable
     {
         return [
             'id' => ['visible' => false],
-            'id_produk' => ([
+            'no_pemesanan' => ([
+                'data'  => 'sales_transactions.no_pemesanan',
+                'name'  => 'sales_transactions.no_pemesanan',
+                'title' => 'No Pemesanan',
+            ]),
+            'nama' => ([
                 'data'  => 'products.nama',
                 'name'  => 'products.nama',
                 'title' => 'Produk',
-            ]),
-            'id_transaksi_penjualan' => ([
-                'data'  => 'sales_transactions.id',
-                'name'  => 'sales_transactions.id',
-                'title' => 'Transaksi Penjualan',
             ]),
             'rating',
             'ulasan'

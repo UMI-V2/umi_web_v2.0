@@ -20,7 +20,21 @@ class BusinessFileDataTable extends DataTable
 
         return $dataTable->addColumn('action', 'business_files.datatables_actions')->addColumn('nama_usaha', function ($data) {
             return $data->businesses->nama_usaha;
-        });
+        })->addColumn('is_video', function ($model) {
+            if ($model->is_video == '1') {
+                return "Ya" ;
+            } else {
+                return  "Tidak";
+            }
+        })->addColumn('is_photo', function ($model) {
+            if ($model->is_photo == '1') {
+                return "Ya" ;
+            } else {
+                return  "Tidak";
+            }
+        })->addColumn('file', function($data){
+            return '<img src="'.$data->file.'" width="400px" style="border-radius: 1%">';
+        })->rawColumns(['file', 'action']);
     }
 
     /**
@@ -60,7 +74,7 @@ class BusinessFileDataTable extends DataTable
                     var kolom = this.api().columns();
                     kolom.every(function (i) {
 
-                        if(i === kolom['0'].length - 1){
+                        if(i === kolom['0'].length - 1 || i === kolom['0'].length - 4){
                             return false;
                         }
                         var column = this;
@@ -89,9 +103,9 @@ class BusinessFileDataTable extends DataTable
                 'name'  => 'businesses.nama_usaha',
                 'title' => 'Nama Usaha'
             ]),
-            // 'file',
+            'file',
+            'is_photo' => ['title' => 'Apakah menggunakan foto?'],
             'is_video' => ['title' => 'Apakah menggunakan video?'],
-            'is_photo' => ['title' => 'Apakah menggunakan foto?']
         ];
     }
 

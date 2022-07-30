@@ -67,12 +67,12 @@ class WithdrawBalance extends Model
         'id_bank' => 'integer',
         'nominal_request' => 'integer',
         'no_rek' => 'integer',
-        'rek_name' => 'integer',
-        'bank_name' => 'integer',
+        'rek_name' => 'string',
+        'bank_name' => 'string',
         'cost_admin' => 'integer',
         'total_withdraw' => 'integer',
         'status' => 'string',
-        'note' => 'integer'
+        'note' => 'string'
     ];
 
     /**
@@ -90,7 +90,8 @@ class WithdrawBalance extends Model
         'bank_name' => 'required',
         'cost_admin' => 'required',
         'total_withdraw' => 'required',
-        'status' => 'required'
+        'status' => 'required',
+        'note#' => 'required',
     ];
 
     /**

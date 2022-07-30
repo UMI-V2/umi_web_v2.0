@@ -22,7 +22,15 @@ class ProductDiscountDataTable extends DataTable
             'nama',
             function ($data) {
                 return $data->products->nama;})->addColumn('nama_promo', function ($data) {
-            return $data->discounts->nama_promo;});
+            return $data->discounts->nama_promo;})->addColumn('harga_diskon', function ($model) {
+                if ($model->harga_diskon == '0') {
+                    return "Invalid Request" ;
+                } else {
+                    return  "Rp. " .number_format($model->harga_diskon, 0, ',', '.');
+                }
+            });
+
+            
     }
 
     /**

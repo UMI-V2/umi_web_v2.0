@@ -89,7 +89,8 @@ class MasterDeliveryService extends Model
     public static $rules = [
         'nama_jasa_pengiriman' => 'required',
         'is_set_seller' => 'required',
-        'deskripsi' => 'required'
+        'deskripsi' => 'required',
+        'kode_rajaongkir' => 'string'
     ];
 
     public static function boot() {

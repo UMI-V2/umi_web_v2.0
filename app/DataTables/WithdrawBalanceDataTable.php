@@ -122,17 +122,12 @@ class WithdrawBalanceDataTable extends DataTable
             'nama_bank' => ([
                 'data' => 'master_banks.name',
                 'name' => 'master_banks.name',
-                'title' => 'Nama Bank',
+                'title' => 'Bank yang digunakan',
             ]),
             'status' => ([
                 'data' => 'status',
                 'name' => 'status',
                 'title' => 'Status',
-            ]),
-            'nominal_request' => ([
-                'data' => 'nominal_request',
-                'name' => 'nominal_request',
-                'title' => 'Permintaan Penarikan',
             ]),
             'no_rek' => ([
                 'data' => 'no_rek',
@@ -143,6 +138,11 @@ class WithdrawBalanceDataTable extends DataTable
                 'data' => 'rek_name',
                 'name' => 'rek_name',
                 'title' => 'Atas Nama',
+            ]),
+            'nominal_request' => ([
+                'data' => 'nominal_request',
+                'name' => 'nominal_request',
+                'title' => 'Permintaan Penarikan',
             ]),
             'cost_admin' => ([
                 'data' => 'cost_admin',
