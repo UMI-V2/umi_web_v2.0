@@ -119,7 +119,7 @@ class Address extends Model
     public $table = 'addresses';
     protected $dates = ['deleted_at'];
 
-
+    protected $appends = ['provinsi', 'kota', 'kecamatan'];
 
     public $fillable = [
         'id_users',
@@ -195,10 +195,6 @@ class Address extends Model
 
     public static function boot() {
         parent::boot();
-
-        static::deleting(function($model) { 
-           
-        });
     }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -234,5 +230,22 @@ class Address extends Model
     public function business()
     {
         return $this->belongsTo(Business::class, 'id_users', 'id_user');
+    }
+
+
+
+    public function getProvinsiAttribute()
+    {
+        return MasterProvince::where('province_id',$this->province_id)->first();
+    }
+
+    public function getKotaAttribute()
+    {
+        return MasterCity::where('city_id',$this->city_id)->first();
+    }
+
+    public function getKecamatanAttribute()
+    {
+        return MasterSubDistrict::where('subdistrict_id',$this->subdistrict_id)->first();
     }
 }

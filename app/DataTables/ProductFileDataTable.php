@@ -18,7 +18,23 @@ class ProductFileDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'product_files.datatables_actions');
+        return $dataTable->addColumn('action', 'product_files.datatables_actions')->addColumn('nama', function ($data) {
+            return $data->products->nama;
+        })->addColumn('video', function ($model) {
+            if ($model->video == '1') {
+                return "Ya" ;
+            } else {
+                return  "Tidak";
+            }
+        })->addColumn('photo', function ($model) {
+            if ($model->photo == '1') {
+                return "Ya" ;
+            } else {
+                return  "Tidak";
+            }
+        })->addColumn('file', function($data){
+            return '<img src="'.$data->file.'" width="400px" style="border-radius: 1%">';
+        })->rawColumns(['file', 'action']);
     }
 
     // public function dataTable($query)
@@ -69,7 +85,7 @@ class ProductFileDataTable extends DataTable
                     var kolom = this.api().columns();
                     kolom.every(function (i) {
 
-                        if(i === kolom['0'].length - 1){
+                        if(i === kolom['0'].length - 1 || i === kolom['0'].length - 4){
                             return false;
                         }
                         var column = this;
@@ -93,15 +109,23 @@ class ProductFileDataTable extends DataTable
     {
         return [
             'id' => ['visible' => false],
-            'id_produk' => ([
+            'nama' => ([
                 'data' => 'products.nama',
                 'name' => 'products.nama',
                 'title' => 'Produk',
             ]),
             'file',
             // 'image_url',
-            'video',
-            'photo'
+            'photo' => ([
+                'data' => 'photo',
+                'name' => 'photo',
+                'title' => 'Apakah menggunakan Foto?',
+            ]),
+            'video' => ([
+                'data' => 'video',
+                'name' => 'video',
+                'title' => 'Apakah menggunakan Video?',
+            ]),
         ];
     }
 

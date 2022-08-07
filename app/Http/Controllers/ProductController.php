@@ -102,7 +102,8 @@ class ProductController extends AppBaseController
     public function show($id)
     {
         // $product = $this->productRepository->find($id);
-        $product = Product::with(['businesses', 'master_units'])->where('id', $id)->first();
+        // $product = Product::with(['businesses', 'master_units'])->where('id', $id)->first();
+        $product = Product::with(['businesses', 'master_units', 'product_category', 'product_files', 'available_discount', 'product_discounts', 'discounts', 'ratings'])->where('id', $id)->first();
 
         if (empty($product)) {
             Flash::error('Product not found');

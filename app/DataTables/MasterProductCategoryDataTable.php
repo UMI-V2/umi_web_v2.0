@@ -18,7 +18,13 @@ class MasterProductCategoryDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'master_product_categories.datatables_actions');
+        return $dataTable->addColumn('action', 'master_product_categories.datatables_actions')->addColumn('status_kategori_produk', function ($model) {
+            if ($model->status_kategori_produk == '1') {
+                return "Jasa" ;
+            } else {
+                return  "Barang";
+            }
+        });
     }
 
     /**
@@ -82,8 +88,8 @@ class MasterProductCategoryDataTable extends DataTable
     {
         return [
             'id' => ['visible' => false],
-            'nama_kategori_produk',
-            'status_kategori_produk'
+            'nama_kategori_produk' => ['title' => 'Jenis Kategori'],
+            'status_kategori_produk' => ['title' => 'Status Kategori'],
         ];
     }
 

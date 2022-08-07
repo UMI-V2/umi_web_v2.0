@@ -4,57 +4,62 @@
     <p>{{ $discount->id }}</p>
 </div> --}}
 
-<!-- Id Produk Field -->
-<div class="col-sm-12">
-    {!! Form::label('id_usaha', 'Nama Usaha:') !!}
-    <p>{{ $discount->businesses->nama_usaha }}</p>
-</div>
+<div class="row">
+    @foreach ($business->discounts as $business)
+        {{-- <!-- Id Produk Field -->
+        <div class="col-sm-12">
+            {!! Form::label('id_usaha', 'Nama Usaha:') !!}
+            <p>{{ $business->nama_usaha }}</p>
+        </div> --}}
 
-<!-- Nama Promo Field -->
-<div class="col-sm-12">
-    {!! Form::label('nama_promo', 'Nama Promo:') !!}
-    <p>{{ $discount->nama_promo }}</p>
-</div>
+        <!-- Nama Promo Field -->
+        <div class="col-sm-12">
+            {!! Form::label('nama_promo', 'Nama Promo:') !!}
+            <p>{{ $business->nama_promo }}</p>
+        </div>
 
-<!-- Waktu Mulai Field -->
-<div class="col-sm-12">
-    {!! Form::label('waktu_mulai', 'Waktu Mulai:') !!}
-    <p>{{ $discount->waktu_mulai }}</p>
-</div>
+        <!-- Waktu Mulai Field -->
+        <div class="col-sm-6">
+            {!! Form::label('waktu_mulai', 'Waktu Mulai:') !!}
+            <p>{{ $business->waktu_mulai }}</p>
+        </div>
 
-<!-- Waktu Berakhir Field -->
-<div class="col-sm-12">
-    {!! Form::label('waktu_berakhir', 'Waktu Berakhir:') !!}
-    <p>{{ $discount->waktu_berakhir }}</p>
-</div>
+        <!-- Waktu Berakhir Field -->
+        <div class="col-sm-6">
+            {!! Form::label('waktu_berakhir', 'Waktu Berakhir:') !!}
+            <p>{{ $business->waktu_berakhir }}</p>
+        </div>
+        
+        <!-- Type Field -->
+        <div class="col-sm-6">
+            {!! Form::label('type', 'Tipe Diskon:') !!}
+            <p>{{ $business->type == '0' ? 'Persentase' : 'Potongan Harga' }}</p>
+        </div>
 
-<!-- Harga Field -->
-<div class="col-sm-12">
-    {!! Form::label('potongan', 'Potongan Harga:') !!}
-    <p>{{ $discount->potongan }}</p>
-</div>
+        <!-- Harga Field -->
+        <div class="col-sm-6">
+            {!! Form::label('potongan', 'Potongan Harga:') !!}
+            <p>{{ $business->type == '0' ? $business->potongan.' %' : "Rp. ".number_format($business->potongan, 0, ',', '.') }}</p>
+        </div>
 
-<!-- Batas Pembelian Field -->
-{{-- <div class="col-sm-12">
+        <!-- Created At Field -->
+        <div class="col-sm-6">
+            {!! Form::label('created_at', 'Created At:') !!}
+            <p>{{ $business->created_at }}</p>
+        </div>
+
+        <!-- Updated At Field -->
+        <div class="col-sm-6">
+            {!! Form::label('updated_at', 'Updated At:') !!}
+            <p>{{ $business->updated_at }}</p>
+        </div>
+
+        <hr style="height:2px; width:100%; border-width:0; color:white; background-color:white">
+
+        <!-- Batas Pembelian Field -->
+        {{-- <div class="col-sm-12">
     {!! Form::label('batas_pembelian', 'Batas Pembelian:') !!}
-    <p>{{ $discount->batas_pembelian }}</p>
+    <p>{{ $business->batas_pembelian }}</p>
 </div> --}}
-
-<!-- Type Field -->
-<div class="col-sm-12">
-    {!! Form::label('type', 'Type:') !!}
-    <p>{{ $discount->type }}</p>
+    @endforeach
 </div>
-
-<!-- Created At Field -->
-<div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $discount->created_at }}</p>
-</div>
-
-<!-- Updated At Field -->
-<div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $discount->updated_at }}</p>
-</div>
-

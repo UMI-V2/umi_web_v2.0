@@ -98,7 +98,10 @@ class News extends Model
         'title' => 'required',
         'sub_title' => 'required',
         'description' => 'required',
-        'author' => 'required'
+        'author' => 'required',
+        'title_related_link' => 'required',
+        'related_link' => 'required',
+        'is_headline' => 'required',
     ];
 
 

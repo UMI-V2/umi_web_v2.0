@@ -169,6 +169,11 @@ class Business extends Model
     {
         return $this->hasOne(OpenHour::class,  'id_usaha', 'id');
     }
+    
+    public function discounts()
+    {
+        return $this->hasMany(Discount::class,  'id_usaha', 'id');
+    }
 
     public function address()
     {

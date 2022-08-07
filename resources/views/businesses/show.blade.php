@@ -41,6 +41,10 @@
                         href="#custom-tabs-two-settings" role="tab" aria-controls="custom-tabs-two-settings"
                         aria-selected="false">Kategori</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home"
+                        role="tab" aria-controls="custom-tabs-one-home" aria-selected="false">Daftar Diskon</a>
+                </li>
             </ul>
         </div>
         <div class="card-body">
@@ -60,6 +64,10 @@
                 <div class="tab-pane fade" id="custom-tabs-two-settings" role="tabpanel"
                     aria-labelledby="custom-tabs-two-settings-tab">
                     @include('business_categories.show_fields')
+                </div>
+                <div class="tab-pane fade" id="custom-tabs-one-home" role="tabpanel"
+                    aria-labelledby="custom-tabs-one-home-tab">
+                    @include('discounts.show_fields')
                 </div>
             </div>
         </div>

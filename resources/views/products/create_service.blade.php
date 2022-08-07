@@ -19,15 +19,18 @@
 
             {{-- {!! Form::open(['route' => 'products.store']) !!} --}}
 
-            <div class="card-body">
+            {{-- <div class="card-body"> --}}
 
-                <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="card-header" style="text-align: left">
-                        <a href="{{ route('products.create') }}" class="btn btn-success"><< Klik disini untuk kembali ke menu barang</a>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
+            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="card-header" style="text-align: left">
+                    <a href="{{ route('products.create') }}" class="btn btn-success">
+                        << Klik disini untuk kembali ke menu barang</a>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
                             <label>Nama Toko</label>
                             <select class="form-control" name="id_usaha">
                                 <option value="#" disabled selected>Pilih Toko</option>
@@ -36,7 +39,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-sm-6">
                             <label>Satuan Jasa</label>
                             <select class="form-control" name="id_satuan">
                                 <option value="#" disabled selected>Pilih Satuan Jasa</option>
@@ -45,31 +48,31 @@
                                 @endforeach
                             </select>
                         </div>
-                        
-                        {{-- <div class="form-group">
+
+                        {{-- <div class="form-group col-sm-6">
                             <label>is_service</label> --}}
-                            <input type="hidden" name="is_service" value="1" class="form-control">
+                        <input type="hidden" name="is_service" value="1" class="form-control">
                         {{-- </div> --}}
-                        
-                        <div class="form-group">
+
+                        <div class="form-group col-sm-6">
                             <label>Nama Jasa</label>
                             <input type="input" name="nama" class="form-control" placeholder="Nama Produk">
                         </div>
-                        
-                        <div class="form-group">
+
+                        <div class="form-group col-sm-6">
                             <label>Deskripsi Jasa</label>
                             <textarea name="deskripsi" class="form-control" placeholder="Deskripsi Produk"></textarea>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-sm-6">
                             <label>Harga Jasa</label>
                             <input type="input" name="harga" class="form-control" placeholder="Harga Produk">
                         </div>
-                        
-                        {{--    --}}
-                        
 
-                        {{-- <div class="form-group">
+                        {{--  --}}
+
+
+                        {{-- <div class="form-group col-sm-6">
                             <label>Kategori Produk</label>
                             <select class="form-control" name="id_kategori">
                                 <option value="#" disabled selected>Pilih Kategori Produk</option>
@@ -79,7 +82,7 @@
                             </select>
                         </div> --}}
 
-                        <div class="form-group">
+                        <div class="form-group col-sm-6">
                             <label for="exampleInputFile">File input</label>
                             <div class="input-group">
                                 <div class="custom-file">
@@ -92,28 +95,29 @@
                             </div>
                         </div>
                     </div>
-  
-                    
+                </div>
+
+
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <a href="{{ route('products.index') }}" class="btn btn-default">Cancel</a>
                     </div>
-                </form>
+            </form>
 
-                <div class="row">
-                    {{-- @include('products.fields') --}}
-                </div>
 
-            </div>
+            {{-- @include('products.fields') --}}
+        </div>
 
-            {{-- <div class="card-footer">
+        {{-- </div> --}}
+
+        {{-- <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ route('products.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!} --}}
 
-        </div>
+    </div>
     </div>
 @endsection

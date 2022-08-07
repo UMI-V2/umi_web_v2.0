@@ -18,7 +18,13 @@ class MasterDeliveryServiceDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'master_delivery_services.datatables_actions');
+        return $dataTable->addColumn('action', 'master_delivery_services.datatables_actions')->addColumn('is_set_seller', function ($model) {
+            if ($model->is_set_seller == '0') {
+                return "RajaOngkir" ;
+            } else {
+                return  "Pedagang";
+            }
+        });
     }
 
     /**
@@ -83,9 +89,9 @@ class MasterDeliveryServiceDataTable extends DataTable
         return [
             'id' => ['visible' => false],
             'nama_jasa_pengiriman',
-            // 'is_set_seller',
+            'is_set_seller' => ['title' => 'Ongkir ditentukan oleh?'],
+            'kode_rajaongkir',
             'deskripsi',
-            'kode_rajaongkir'
         ];
     }
 

@@ -20,6 +20,18 @@ class DiscountDataTable extends DataTable
 
         return $dataTable->addColumn('action', 'discounts.datatables_actions')->addColumn('nama_usaha', function ($data) {
             return $data->businesses->nama_usaha;
+        })->addColumn('type', function ($model) {
+            if ($model->type == '1') {
+                return "Potongan Harga" ;
+            } else {
+                return  "Persentase";
+            }
+        })->addColumn('potongan', function ($model) {
+            if ($model->type == '1') {
+                return  "Rp. " .number_format($model->potongan, 0, ',', '.');
+            } else {
+                return $model->potongan." %";
+            }
         });
     }
 
@@ -95,11 +107,15 @@ class DiscountDataTable extends DataTable
             //     'title' => 'Nama Usaha',
             // ]),
             'nama_promo',
+            'type' => ([
+                'data' => 'type',
+                'name' => 'type',
+                'title' => 'Tipe Diskon',
+            ]),
+            'potongan',
             // 'waktu_mulai',
             // 'waktu_berakhir',
-            'potongan',
             // 'batas_pembelian',
-            'type'
         ];
     }
 

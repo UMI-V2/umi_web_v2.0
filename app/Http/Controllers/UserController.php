@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Response;
 use Exception;
 use App\Models\User;
+use App\Models\Address;
 use App\Http\Requests;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
@@ -101,7 +102,9 @@ class UserController extends AppBaseController
      */
     public function show($id)
     {
-        $user = $this->userRepository->find($id);
+        // $user = $this->userRepository->find($id);
+        $user = User::with(['addresses'])->where('id', $id)->first();
+        // dd($user->addresses);
 
         if (empty($user)) {
             Flash::error('User not found');

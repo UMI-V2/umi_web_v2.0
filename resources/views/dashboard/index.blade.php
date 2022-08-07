@@ -74,7 +74,7 @@
                                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-credit-card"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Auto Payment</span>
-                                    <span class="info-box-number">{{ $transaksiAutoPayment }}</span>
+                                    <span class="info-box-number">{{ "Rp. " .number_format($transaksiAutoPayment, 0, ',', '.'); }}</span>
                                 </div>
 
                             </div>
@@ -86,7 +86,7 @@
                                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-credit-card"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Manual Payment</span>
-                                    <span class="info-box-number">{{ $transaksiManualPayment }}</span>
+                                    <span class="info-box-number">{{ "Rp. " .number_format($transaksiAutoPayment, 0, ',', '.'); }}</span>
                                 </div>
 
                             </div>

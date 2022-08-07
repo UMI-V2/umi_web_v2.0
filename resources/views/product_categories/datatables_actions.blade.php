@@ -1,8 +1,8 @@
 {!! Form::open(['route' => ['productCategories.destroy', $id], 'method' => 'delete', 'id' => 'delete-form-' . $id]) !!}
 <div class='btn-group'>
-    <a href="{{ route('productCategories.show', $id) }}" class='btn btn-default btn-xs'>
+    {{-- <a href="{{ route('productCategories.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-eye"></i>
-    </a>
+    </a> --}}
     <a href="{{ route('productCategories.edit', $id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-edit"></i>
     </a>

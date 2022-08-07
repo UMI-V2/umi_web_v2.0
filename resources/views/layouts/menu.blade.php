@@ -84,6 +84,31 @@
 </li>
 <li class="nav-item menu-is-closed menu-open">
     <a href="#" class="nav-link active">
+        <i class="nav-icon fa fa-bolt"></i>
+        <p>
+            Penarikan Dana
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview" style="display: block;">
+        <li class="nav-item">
+            <a href="{{ route('masterBanks.index') }}"
+               class="nav-link {{ Request::is('masterBanks*') ? 'active' : '' }}">
+               <i class="far fa-circle nav-icon"></i> 
+               <p>Master Banks</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('withdrawBalances.index') }}"
+               class="nav-link {{ Request::is('withdrawBalances*') ? 'active' : '' }}">
+               <i class="far fa-circle nav-icon"></i> 
+               <p>Withdraw Balances</p>
+            </a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item menu-is-closed menu-open">
+    <a href="#" class="nav-link active">
         <i class="nav-icon fas fa-users"></i>
         <p>
             Pengguna
@@ -109,6 +134,13 @@
             <a href="{{ route('users.index') }}" class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Pengguna</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('addresses.index') }}"
+                class="nav-link {{ Request::is('addresses*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Alamat</p>
             </a>
         </li>
     </ul>
@@ -164,6 +196,13 @@
                 <p>File Usaha</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('discounts.index') }}"
+                class="nav-link {{ Request::is('discounts*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Diskon Usaha</p>
+            </a>
+        </li>
     </ul>
 </li>
 <li class="nav-item menu-is-closed menu-open">
@@ -201,13 +240,6 @@
                 class="nav-link {{ Request::is('productCategories*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Kategori Produk</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('discounts.index') }}"
-                class="nav-link {{ Request::is('discounts*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Diskon</p>
             </a>
         </li>
         <li class="nav-item">
@@ -299,13 +331,6 @@
                 class="nav-link {{ Request::is('subDistricts*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Kecamatan</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('addresses.index') }}"
-                class="nav-link {{ Request::is('addresses*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Alamat</p>
             </a>
         </li>
     </ul>
@@ -437,6 +462,31 @@
 </li>
 <li class="nav-item menu-is-closed menu-open">
     <a href="#" class="nav-link active">
+        <i class="nav-icon fa fa-bolt"></i>
+        <p>
+            Penarikan Dana
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview" style="display: block;">
+        <li class="nav-item">
+            <a href="{{ route('masterBanks.index') }}"
+               class="nav-link {{ Request::is('masterBanks*') ? 'active' : '' }}">
+               <i class="far fa-circle nav-icon"></i> 
+               <p>Master Banks</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('withdrawBalances.index') }}"
+               class="nav-link {{ Request::is('withdrawBalances*') ? 'active' : '' }}">
+               <i class="far fa-circle nav-icon"></i> 
+               <p>Withdraw Balances</p>
+            </a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item menu-is-closed menu-open">
+    <a href="#" class="nav-link active">
         <i class="nav-icon fas fa-users"></i>
         <p>
             Pengguna
@@ -448,6 +498,13 @@
             <a href="{{ route('users.index') }}" class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Pengguna</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('addresses.index') }}"
+                class="nav-link {{ Request::is('addresses*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Alamat</p>
             </a>
         </li>
     </ul>
@@ -466,13 +523,6 @@
                 class="nav-link {{ Request::is('businesses*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Usaha</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('addresses.index') }}"
-                class="nav-link {{ Request::is('addresses*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Alamat</p>
             </a>
         </li>
         <li class="nav-item">

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Response;
+use App\Http\Requests;
+use App\Models\Rating;
 use App\Models\Product;
+use Laracasts\Flash\Flash;
 use App\Models\SalesTransaction;
 use App\DataTables\RatingDataTable;
-use App\Http\Requests;
+use App\Repositories\RatingRepository;
 use App\Http\Requests\CreateRatingRequest;
 use App\Http\Requests\UpdateRatingRequest;
-use App\Repositories\RatingRepository;
-use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class RatingController extends AppBaseController
 {
@@ -74,7 +75,9 @@ class RatingController extends AppBaseController
      */
     public function show($id)
     {
-        $rating = $this->ratingRepository->find($id);
+        // $rating = $this->ratingRepository->find($id);
+
+        $rating = Rating::with(['products', 'transaction_product', 'user_author', 'sales_transactions'])->where('id', $id)->first();
 
         if (empty($rating)) {
             Flash::error('Rating not found');

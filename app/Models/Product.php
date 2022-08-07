@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
+use App\Models\MasterProductCategory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Bagusindrayana\LaravelCoordinate\Traits\LaravelCoordinate;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * @SWG\Definition(
@@ -184,10 +185,16 @@ class Product extends Model
     {
         return $this->belongsTo(\App\Models\Business::class, 'id_usaha', 'id');
     }
-
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
+
+    public function master_product_categories()
+    {
+        return $this->belongsTo(MasterProductCategory::class);
+    }
+
     public function master_units()
     {
         return $this->belongsTo(\App\Models\MasterUnit::class, 'id_satuan', 'id');
@@ -213,7 +220,21 @@ class Product extends Model
     }
     public function product_discount()
     {
-        return $this->belongsTo(\App\Models\ProductDiscount::class, 'id', 'id_product');
+        return $this->belongsTo(\App\Models\ProductDiscount::class, 'id_product', 'id');
+    }
+    public function product_discounts()
+    {
+        return $this->belongsTo(\App\Models\ProductDiscount::class, 'id_product', 'id');
+    }
+
+    public function discounts()
+    {
+        return $this->hasMany(\App\Models\Discount::class, 'id_usaha', 'id');
+    }
+    
+    public function ratings()
+    {
+        return $this->hasOne(\App\Models\Rating::class, 'id_produk', 'id');
     }
 
     public static function boot()

@@ -138,7 +138,7 @@ class Discount extends Model
      **/
     public function businesses()
     {
-        return $this->belongsTo(\App\Models\Business::class, 'id_usaha');
+        return $this->belongsTo(\App\Models\Business::class, 'id_usaha', 'id');
     }
     public function product_discounts()
     {

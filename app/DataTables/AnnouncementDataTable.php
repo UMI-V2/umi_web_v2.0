@@ -82,10 +82,10 @@ class AnnouncementDataTable extends DataTable
     {
         return [
             'id' => ['visible' => false],
-            'title',
-            'sub_title',
-            'description',
-            'author'
+            'title' => ['title' => 'Judul Pengumuman'],
+            'sub_title' => ['title' => 'Sub Judul'],
+            'description' => ['title' => 'Deskripsi'],
+            'author' => ['title' => 'Penulis'],
         ];
     }
 

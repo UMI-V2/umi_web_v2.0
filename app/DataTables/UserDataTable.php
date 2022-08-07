@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -17,13 +18,11 @@ class UserDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
-
-        return $dataTable->addColumn('action', 'users.datatables_actions')->addColumn(
-            'nama_hak_akses_pengguna', 
-            function ($data) {
+        
+        return $dataTable->addColumn('action', 'users.datatables_actions')
+        ->addColumn('nama_hak_akses_pengguna', function ($data) {
                 return $data->master_privileges->nama_hak_akses_pengguna;
-            }
-        )->addColumn('nama_status_pengguna', function ($data) {
+        })->addColumn('nama_status_pengguna', function ($data) {
             return $data->master_status_users->nama_status_pengguna;
         })->addColumn('id', function ($data) {
             return $data->id;
@@ -35,8 +34,7 @@ class UserDataTable extends DataTable
             }
         })->addColumn('profile_photo_url', function($data){
             return '<img src="'.$data->profile_photo_url.'" width="50px" style="border-radius: 25%">';
-        })
-        ->rawColumns(['profile_photo_url', 'action']);
+        })->rawColumns(['profile_photo_url', 'action']);
     }
 
     // public function dataTable($query)
@@ -50,6 +48,7 @@ class UserDataTable extends DataTable
     //     ->rawColumns(['image_url', 'action']);
     // }
 
+
     /**
      * Get query source of dataTable.
      *
@@ -58,7 +57,17 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->where('id_privilege', 4)->orWhere('id_privilege', 5)->with('master_privileges')->with('master_status_users');
+        $user = User::with('master_privileges')->find(Auth::user()->id);
+        // return $model->newQuery()->with('master_privileges')->with('master_status_users');
+        if($user->id_privilege ==1){
+            return $model->newQuery()->with('master_privileges')->with('master_status_users');
+        }else if($user->id_privilege ==2){
+            return $model->newQuery()->where('id_privilege','!=', 1)->with('master_privileges')->with('master_status_users');
+        }else{
+            return $model->newQuery()->where('id_privilege', 4)->orWhere('id_privilege', 5)->with('master_privileges')->with('master_status_users');
+        }
+        
+        // return $model->newQuery()->with('master_privileges')->with('master_status_users');
     }
 
     /**

@@ -87,13 +87,16 @@ class EventDataTable extends DataTable
     {
         return [
             'id' => ['visible' => false],
-            'title',
-            'sub_title',
-            'description',
-            'author',
-            'start_time',
-            'end_time',
-            'contact_person'
+            'title' => ['title' => 'Judul Event'],
+            'sub_title' => ['title' => 'Sub Judul Event'],
+            'description' => ['title' => 'Deskripsi Event'],
+            'author' => ['title' => 'Penyelenggara Event'],
+            'contact_person' => ['title' => 'Kontak Person'],
+            'address' => ['title' => 'Alamat'],
+            'max_registers' => ['title' => 'Pendaftaran Maksimal'],
+            'registration_deadline' => ['visible' => false],
+            'end_time'=> ['visible' => false],
+            'start_time'=> ['visible' => false],
         ];
     }
 

@@ -160,7 +160,7 @@ h2 {
   background: #ccc; }
 
 .control input:checked ~ .control__indicator {
-  background: #6c63ff; }
+  background: #3287ca; }
 
 .control:hover input:not([disabled]):checked ~ .control__indicator,
 .control input:checked:focus ~ .control__indicator {

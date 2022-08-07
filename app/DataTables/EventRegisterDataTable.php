@@ -18,7 +18,16 @@ class EventRegisterDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'event_registers.datatables_actions');
+        return $dataTable->addColumn('action', 'event_registers.datatables_actions')->addColumn('jenis_kelamin', function ($data) {
+            if ($data->jenis_kelamin == 'L') {
+                return "Laki-laki" ;
+            } else {
+                return  "Perempuan";
+            }
+        })->addColumn('foto', function($data){
+            return '<img src="'.$data->foto.'" width="50px" style="border-radius: 25%">';
+        })
+        ->rawColumns(['foto', 'action']);
     }
 
     /**
@@ -54,7 +63,7 @@ class EventRegisterDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
-'initComplete' => "function () {
+                'initComplete' => "function () {
                     var kolom = this.api().columns();
                     kolom.every(function (i) {
 
@@ -92,6 +101,22 @@ class EventRegisterDataTable extends DataTable
                 'name' => 'users.name',
                 'title' => 'Nama Penyelenggara'
             ]),
+            'name' => ['title' => 'Nama Pendaftar'],
+            'jenis_kelamin',
+            'tanggal_lahir',
+            'no_hp',
+            'foto',
+            'city' => ['title' => 'Asal Kota'],
+            'subdistrict' => ['title' => 'Asal Desa'],
+            'full_address' => ['title' => 'Alamat Lengkap'],
+            'created_at' => [
+                'title' => 'Tanggal Daftar',
+                'visible' => false
+            ],
+            'updated_at' => [
+                'title' => 'Tanggal Update',
+                'visible' => false
+            ],
         ];
     }
 

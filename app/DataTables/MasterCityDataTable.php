@@ -81,14 +81,15 @@ class MasterCityDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id' => ['visible' => false],
+            // 'id' => ['visible' => false],
             'province_id' => ([
                 'data' => 'master_provinces.province_name',
                 'name' => 'master_provinces.province_name',
                 'title' => 'Nama Provinsi',
+                'visible' => false,
             ]),
-            'city_name',
-            'postal_code',
+            'city_name' => ['title' => 'Nama Kota'],
+            'postal_code' => ['title' => 'Kode Pos'],
         ];
     }
 

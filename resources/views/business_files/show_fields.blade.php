@@ -1,6 +1,6 @@
 <div class="card card-primary">
     <div class="card-header">
-        <h1 class="card-title"><strong>Foto-foto - {{ $business->nama_usaha }}</strong></h1>
+        <h1 class="card-title"><strong>Daftar Foto ({{ $business->nama_usaha }})</strong></h1>
     </div>
     <div class="card-body">
         <div class="row">

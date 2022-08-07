@@ -14,15 +14,15 @@
 
 <!-- Id Kota Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('id_kota', 'Id Kota:') !!}
-    {!! Form::select('id_kota', $master_cities, null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::label('city_id', 'Id Kota:') !!}
+    {!! Form::select('city_id', $master_cities, null, ['class' => 'form-control custom-select']) !!}
 </div>
 
 
 <!-- Id Kecamatan Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('id_kecamatan', 'Id Kecamatan:') !!}
-    {!! Form::select('id_kecamatan', $sub_districts, null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::label('subdistrict_id', 'Id Kecamatan:') !!}
+    {!! Form::select('subdistrict_id', $sub_districts, null, ['class' => 'form-control custom-select']) !!}
 </div>
 
 

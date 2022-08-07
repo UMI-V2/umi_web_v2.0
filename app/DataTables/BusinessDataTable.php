@@ -18,13 +18,36 @@ class BusinessDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'businesses.datatables_actions')->addColumn(
-            'name', 
-            function ($data) {
+        return $dataTable->addColumn('action', 'businesses.datatables_actions')
+        ->addColumn('name', function ($data) {
                 return $data->users->name;
-            }
-        )->addColumn('nama_status_usaha', function ($data) {
+            })
+        ->addColumn('nama_status_usaha', function ($data) {
             return $data->master_status_businesses->nama_status_usaha;
+        })->addColumn('is_ambil_di_toko', function ($model) {
+            if ($model->is_ambil_di_toko == '1') {
+                return "Ya, Produk dapat diambil langsung di toko";
+            } else {
+                return "Tidak, Produk tidak dapat diambil langsung di toko";
+            }
+        })->addColumn('is_auto_payment', function ($model) {
+            if ($model->is_auto_payment == '1') {
+                return "Ya";
+            } else {
+                return "Tidak";
+            }
+        })->addColumn('is_manual_payment', function ($model) {
+            if ($model->is_manual_payment == '1') {
+                return "Ya";
+            } else {
+                return "Tidak";
+            }
+        })->addColumn('is_delivery', function ($model) {
+            if ($model->is_delivery == '1') {
+                return "Ya";
+            } else {
+                return "Tidak";
+            }
         });
     }
 
@@ -88,18 +111,15 @@ class BusinessDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id' => ['visible' => false],
-            'name' => ([
-                'data' => 'users.name',
-                'name' => 'users.name',
-                'title' => 'Pemilik Usaha',
-            ]),
-            'nama_status_usaha' => ([
-                'data' => 'master_status_businesses.nama_status_usaha',
-                'name' => 'master_status_businesses.nama_status_usaha',
-                'title' => 'Status Usaha',
-            ]),
-            'nama_usaha'
+            'id' => ['title' => 'Id', 'visible' => false],
+            'nama_usaha' => ['title' => 'Nama Usaha'],
+            'name' => ['title' => 'Nama Pemilik'],
+            'nama_status_usaha' => ['title' => 'Status Usaha'],
+            'is_ambil_di_toko' => ['title' => 'Apakah produk dapat diambil langsung di Toko?'],
+            'is_auto_payment' => ['title' => 'Apakah pembayaran dilakukan secara elektronik?'],
+            'is_manual_payment' => ['title' => 'Apakah pembayaran dilakukan secara manual?'],
+            'is_delivery' => ['title' => 'Apakah lapak menyediakan pengiriman?'],
+            'deskripsi' => ['title' => 'Deskripsi'],
         ];
     }
 

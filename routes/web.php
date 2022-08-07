@@ -203,3 +203,11 @@ Route::resource('eventRegisters', App\Http\Controllers\EventRegisterController::
 
 
 Route::resource('productDiscounts', App\Http\Controllers\ProductDiscountController::class);
+
+
+Route::resource('masterBanks', App\Http\Controllers\MasterBankController::class);
+
+
+Route::resource('withdrawBalances', App\Http\Controllers\WithdrawBalanceController::class);
+
+

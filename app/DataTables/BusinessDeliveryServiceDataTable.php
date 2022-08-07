@@ -18,7 +18,13 @@ class BusinessDeliveryServiceDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'business_delivery_services.datatables_actions');
+        return $dataTable->addColumn('action', 'business_delivery_services.datatables_actions')->addColumn('biaya', function ($model) {
+            if ($model->biaya == '0') {
+                return "Invalid Request" ;
+            } else {
+                return  "Rp. " .number_format($model->biaya, 0, ',', '.');
+            }
+        });;
     }
 
     /**
@@ -84,11 +90,11 @@ class BusinessDeliveryServiceDataTable extends DataTable
             'id' => ['visible' => false],
             'id_usaha' => ([
                 'data'  => 'businesses.nama_usaha',
-                'title' => 'Usaha'
+                'title' => 'Nama Lapak'
             ]),
             'id_master_jasa_pengiriman' => ([
                 'data'  => 'master_delivery_services.nama_jasa_pengiriman',
-                'title' => 'Jasa Pengiriman'
+                'title' => 'Nama Jasa Pengiriman'
             ]),
             'biaya'
         ];
