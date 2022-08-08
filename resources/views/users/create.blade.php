@@ -25,7 +25,7 @@
 
                     <div class="row">
 
-                    <div class="form-group col-sm-6">
+                    {{-- <div class="form-group col-sm-6">
                         <label>Nama Lengkap</label>
                         <input type="input" name="name" class="form-control" placeholder="Nama Pengguna">
                     </div>
@@ -66,7 +66,7 @@
                         <label for="profile_photo_path">Foto Profil</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" name="profile_photo_path" id="profile_photo_path">
+                                <input type="file" class="custom-file-input" name="profile_photo_path" id="profile_photo_path">
                                 <label class="custom-file-label" for="profile_photo_path"></label>
                             </div>
                         </div>
@@ -107,10 +107,10 @@
                                 Perempuan
                             </label>
                         </div>
-                    </div>
+                    </div> --}}
 
                     
-                        {{-- @include('users.fields') --}}
+                        @include('users.fields')
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -129,3 +129,16 @@
     </div>
     </div>
 @endsection
+
+@push('tampil_foto_js')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#profile_photo_path').on('change', function () {
+                //get the file name
+                var fileName = $(this).val().split('\\').pop();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+@endpush

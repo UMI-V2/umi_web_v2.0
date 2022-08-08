@@ -86,7 +86,7 @@ if (!defined('STDIN')) {
 
 @stack('leaflet_css')
 
-@push('datepicker_css')
+@stack('datepicker_css')
 
 </head>
 
@@ -229,6 +229,8 @@ if (!defined('STDIN')) {
     @stack('bootstrap_checkBox')
 
     @stack('datepicker_scripts')
+
+    @stack('tampil_foto_js')
 
     <script>
         $(function() {
