@@ -7,12 +7,12 @@
                 <div class="col-sm-6">
                     <h1>Transaksi Produk</h1>
                 </div>
-                <div class="col-sm-6">
+                {{-- <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('transactionProducts.create') }}">
                         Add New
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SalesTransaction;
-use App\Models\Product;
-use App\DataTables\TransactionProductDataTable;
+use Response;
 use App\Http\Requests;
+use App\Models\Product;
+use Laracasts\Flash\Flash;
+use App\Models\SalesTransaction;
+use App\Models\TransactionProduct;
+use App\Http\Controllers\AppBaseController;
+use App\DataTables\TransactionProductDataTable;
+use App\Repositories\TransactionProductRepository;
 use App\Http\Requests\CreateTransactionProductRequest;
 use App\Http\Requests\UpdateTransactionProductRequest;
-use App\Repositories\TransactionProductRepository;
-use Laracasts\Flash\Flash;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 class TransactionProductController extends AppBaseController
 {
@@ -74,7 +75,8 @@ class TransactionProductController extends AppBaseController
      */
     public function show($id)
     {
-        $transactionProduct = $this->transactionProductRepository->find($id);
+        // $transactionProduct = $this->transactionProductRepository->find($id);
+        $transactionProduct = TransactionProduct::with(['sales_transactions', 'status_transactions', 'products', 'rating', 'transaction_status'])->where('id', $id)->first();
 
         if (empty($transactionProduct)) {
             Flash::error('Transaction Product not found');
@@ -83,6 +85,7 @@ class TransactionProductController extends AppBaseController
         }
 
         return view('transaction_products.show')->with('transactionProduct', $transactionProduct);
+
     }
 
     /**

@@ -89,6 +89,7 @@ class ProductController extends AppBaseController
                 ]);
             }
         }
+        Flash::success('Product saved successfully.');
         return redirect()->route('products.index');
     }
 

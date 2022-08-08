@@ -121,6 +121,7 @@ class BusinessController extends AppBaseController
             'id_usaha' => $business->id,
             'id_master_kategori_usaha' => $request->id_master_kategori_usaha,
         ]);
+        Flash::success('Business saved successfully.');
         return redirect()->route('businesses.index');
     }
 
