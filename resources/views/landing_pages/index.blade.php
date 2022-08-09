@@ -75,7 +75,7 @@
 
                             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                                 <li class="active"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
-                                <li><a href="{{ route('features') }}" class="nav-link">Features</a></li>
+                                {{-- <li><a href="{{ route('features') }}" class="nav-link">Features</a></li>
                                 <li><a href="{{ route('pricing') }}" class="nav-link">Pricing</a></li>
 
                                 <li class="has-children">
@@ -85,7 +85,7 @@
                                         <li><a href="{{ route('blog-single') }}" class="nav-link">Blog Sigle</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
+                                <li><a href="{{ route('contact') }}" class="nav-link">Contact</a></li> --}}
                             </ul>
                         </nav>
                     </div>
@@ -436,7 +436,7 @@
                     </div>
                     <div class="col-md-7 ml-auto">
                         <div class="row site-section pt-0">
-                            <div class="col-md-4 mb-4 mb-md-0">
+                            {{-- <div class="col-md-4 mb-4 mb-md-0">
                                 <h3>Navigasi</h3>
                                 <ul class="list-unstyled">
                                     <li><a href="{{ route('pricing') }}">Pricing</a></li>
@@ -444,7 +444,7 @@
                                     <li><a href="{{ route('blog') }}">Blog</a></li>
                                     <li><a href="{{ route('contact') }}">Contact</a></li>
                                 </ul>
-                            </div>
+                            </div> --}}
                             <div class="col-md-4 mb-4 mb-md-0">
                                 <h3>Services</h3>
                                 <ul class="list-unstyled">
