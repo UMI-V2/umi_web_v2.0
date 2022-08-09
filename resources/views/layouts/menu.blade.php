@@ -335,7 +335,7 @@
         </li>
     </ul>
 </li>
-<li class="nav-item menu-is-closed menu-open">
+{{-- <li class="nav-item menu-is-closed menu-open">
     <a href="#" class="nav-link active">
         <i class="nav-icon fa fa-truck"></i>
         <p>
@@ -380,7 +380,7 @@
             </a>
         </li>
     </ul>
-</li>
+</li> --}}
 <li class="nav-item menu-is-closed menu-open">
     <a href="#" class="nav-link active">
         <i class="nav-icon fa fa-credit-card"></i>
@@ -639,7 +639,7 @@
         </li>
     </ul>
 </li>
-<li class="nav-item menu-is-closed menu-open">
+{{-- <li class="nav-item menu-is-closed menu-open">
     <a href="#" class="nav-link active">
         <i class="nav-icon fa fa-truck"></i>
         <p>
@@ -677,7 +677,7 @@
             </a>
         </li>
     </ul>
-</li>
+</li> --}}
 <li class="nav-item menu-is-closed menu-open">
     <a href="#" class="nav-link active">
         <i class="nav-icon fa fa-credit-card"></i>
