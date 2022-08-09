@@ -220,11 +220,11 @@ class Product extends Model
     }
     public function product_discount()
     {
-        return $this->belongsTo(\App\Models\ProductDiscount::class, 'id_product', 'id');
+        return $this->belongsTo(\App\Models\ProductDiscount::class, 'id', 'id_product');
     }
     public function product_discounts()
     {
-        return $this->belongsTo(\App\Models\ProductDiscount::class, 'id_product', 'id');
+        return $this->belongsTo(\App\Models\ProductDiscount::class, 'id', 'id_product');
     }
 
     public function discounts()
