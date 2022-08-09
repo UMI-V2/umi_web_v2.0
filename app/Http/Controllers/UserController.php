@@ -125,8 +125,10 @@ class UserController extends AppBaseController
     public function edit($id)
     {
         $user = $this->userRepository->find($id);
-        $master_privileges = MasterPrivilege::query()->pluck('nama_hak_akses_pengguna', 'id');
-        $master_status_users = MasterStatusUser::query()->pluck('nama_status_pengguna', 'id');
+        // $master_privileges = MasterPrivilege::query()->pluck('nama_hak_akses_pengguna', 'id');
+        // $master_status_users = MasterStatusUser::query()->pluck('nama_status_pengguna', 'id');
+        $master_privileges = MasterPrivilege::query()->select('nama_hak_akses_pengguna', 'id')->get();
+        $master_status_users = MasterStatusUser::query()->select('nama_status_pengguna', 'id')->get();
 
         if (empty($user)) {
             Flash::error('User not found');
@@ -141,7 +143,7 @@ class UserController extends AppBaseController
      * Update the specified User in storage.
      *
      * @param int $id
-     * @param UpdateUserRequest $request
+     * @param   UserRequest $request
      *
      * @return Response
      */

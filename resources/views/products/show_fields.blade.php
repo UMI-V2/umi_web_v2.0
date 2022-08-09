@@ -33,7 +33,7 @@
 <!-- Harga Field -->
 <div class="col-sm-6">
     {!! Form::label('harga', 'Harga:') !!}
-    <p>{{ $product->harga }}</p>
+    <p>{{ $product->harga == '0' ? 'Gratis' : "Rp. ".number_format($product->harga, 0, ',', '.') }}</p>
 </div>
 
 <!-- Stok Field -->

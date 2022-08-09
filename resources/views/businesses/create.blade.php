@@ -72,7 +72,7 @@
                                 <label for="exampleInputFile">File input</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" name="file[]" multiple="multiple" id="exampleInputFile">
+                                        <input type="file" name="file[]" multiple id="exampleInputFile">
                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                     </div>
                                     {{-- <div class="input-group-append">
@@ -391,3 +391,17 @@
         </div>
     </div>
 @endsection
+
+@push('tampil_foto_js')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#exampleInputFile').on('change', function () {
+                //get the file name
+                var list=document.getElementById('exampleInputFile');
+                var fileName = $(this).val().split('\\').pop();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(this.files.length+' foto terpilih');
+            });
+        });
+    </script>
+@endpush

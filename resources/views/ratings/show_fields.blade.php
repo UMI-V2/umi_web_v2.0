@@ -61,7 +61,7 @@
 
 <div class="row">
 
-    @if ($product->ratings == 0)
+    @if ($product->ratings == null)
         <div class="col-sm-6">
             {!! Form::label('rating', 'Rating:') !!}
             <p>-</p>
@@ -124,6 +124,7 @@
                 {!! Form::label('updated_at', 'Updated At:') !!}
                 <p>{{ $product->ratings->updated_at }}</p>
             </div>
+            <hr style="height:2px; width:100%; border-width:0; color:white; background-color:white">
         @endforeach
 
     @endif

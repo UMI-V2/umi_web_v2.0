@@ -18,7 +18,31 @@ class TransactionProductDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'transaction_products.datatables_actions');
+        return $dataTable->addColumn('action', 'transaction_products.datatables_actions')->addColumn('harga_produk', function ($model) {
+            if ($model->harga_produk == '0') {
+                return "Gratis" ;
+            } else {
+                return  "Rp. " .number_format($model->harga_produk, 0, ',', '.');
+            }
+        })->addColumn('harga_diskon', function ($model) {
+            if ($model->harga_diskon == '0') {
+                return "Gratis" ;
+            } else {
+                return  "Rp. " .number_format($model->harga_diskon, 0, ',', '.');
+            }
+        })->addColumn('kondisi', function ($model) {
+            if ($model->kondisi == true) {
+                return "Baru" ;
+            } else {
+                return  "Bekas";
+            }
+        })->addColumn('preorder', function ($model) {
+            if ($model->preorder == true) {
+                return "Ya, Product ini dapat di preorder" ;
+            } else {
+                return  "Tidak, Product ini tidak dapat di preorder";
+            }
+        });
     }
 
     /**
@@ -48,7 +72,7 @@ class TransactionProductDataTable extends DataTable
                 'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
+                    // ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -97,7 +121,7 @@ class TransactionProductDataTable extends DataTable
             'deskripsi_produk',
             'kondisi',
             'preorder',
-            'ongkir'
+            // 'ongkir'
         ];
     }
 

@@ -18,15 +18,34 @@ class ProductDiscountDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'product_discounts.datatables_actions')->addColumn(
-            'nama',
-            function ($data) {
-                return $data->products->nama;})->addColumn('nama_promo', function ($data) {
-            return $data->discounts->nama_promo;})->addColumn('harga_diskon', function ($model) {
+        return $dataTable->addColumn('action', 'product_discounts.datatables_actions')
+        
+            ->addColumn('nama', function ($data) {
+                return $data->products->nama;
+            
+            })
+            
+            ->addColumn('id_discount', function ($product) {
+                if ($product->nama_promo == null) {
+                    return "Belum ada promo" ;
+                } else {
+                    return $product->discounts->nama_promo;
+                }
+            })
+
+            ->addColumn('harga_diskon', function ($model) {
                 if ($model->harga_diskon == '0') {
                     return "Invalid Request" ;
                 } else {
                     return  "Rp. " .number_format($model->harga_diskon, 0, ',', '.');
+                }
+            })
+            
+            ->addColumn('batas_pembelian', function ($model) {
+                if ($model->batas_pembelian == null) {
+                    return "Tidak ada batas pembelian" ;
+                } else {
+                    return  $model->batas_pembelian;
                 }
             });
 
@@ -41,7 +60,7 @@ class ProductDiscountDataTable extends DataTable
      */
     public function query(ProductDiscount $model)
     {
-        return $model->newQuery()->with('products')->with('discounts');
+        return $model->newQuery()->with(['products', 'discounts']);
     }
 
     /**
@@ -60,7 +79,7 @@ class ProductDiscountDataTable extends DataTable
                 'stateSave' => false,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
+                    // ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -95,7 +114,12 @@ class ProductDiscountDataTable extends DataTable
         return [
             'id' => ['visible' => false],
             'nama',
-            'nama_promo',
+            // 'nama_promo',
+            // 'id_discount' => ([
+            //     'data' => 'discounts.nama_promo',
+            //     'name' => 'discounts.nama_promo',
+            //     'title' => 'Nama Promo',
+            // ]),
             'harga_diskon',
             'batas_pembelian'
         ];

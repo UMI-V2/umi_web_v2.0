@@ -174,7 +174,7 @@ class User extends Authenticatable
         'no_hp' => 'required|numeric',
         'profile_photo_path' => 'required',
         'email' => 'required',
-        'password' => 'required',
+        // 'password' => 'required',
         'id_privilege' => 'required',
         'id_status_pengguna' => 'required'
     ];

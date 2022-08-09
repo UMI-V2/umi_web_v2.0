@@ -56,25 +56,33 @@ class ProductDiscount extends Model
         'harga_diskon' => 'required',
         'batas_pembelian' => 'nullable'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
     public static function boot() {
         parent::boot();
-
-        static::deleting(function($model) { 
-           
-        });
     }
 
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
     public function discounts()
     {
         return $this->belongsTo(\App\Models\Discount::class, 'id_discount', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
     public function products()
     {
         return $this->belongsTo(\App\Models\Product::class, 'id_product', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
     public function businesses()
     {
         return $this->belongsTo(\App\Models\Business::class, 'id_usaha', 'id');

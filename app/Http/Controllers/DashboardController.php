@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\SalesTransaction;
 use App\Models\Address;
 use App\Helpers\ResponseFormatter;
+use App\Models\MasterPaymentMethod;
 use App\Models\TransactionStatus;
 use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
@@ -46,8 +47,13 @@ class DashboardController extends Controller
         
         $totalLapakPopuler = Business::all();
         $totalLapakPopuler = $totalLapakPopuler->sortByDesc(function($business){
-            return $business->total_order;
+            return $business->total_business;
         })->take(5);
+
+        // $metodePembayaranTerpopuler = SalesTransaction::all();
+        // $metodePembayaranTerpopuler = $metodePembayaranTerpopuler->sortByDesc(function($masterPaymentMethod){
+        //     return $masterPaymentMethod->sales_history;
+        // })->take(5);
         
         $historiTransaksi = SalesTransaction::all()->take(5);
         

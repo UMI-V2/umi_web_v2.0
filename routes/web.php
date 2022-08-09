@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LPBlogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BusinessController;
@@ -85,6 +86,7 @@ Route::post('/businessFile/index', [BusinessFileController::class, 'store'])->na
 Route::post('/business/index', [BusinessController::class, 'store'])->name('businesses.store');
 Route::post('/products/create', [ProductController::class, 'store'])->name('products.store');
 Route::post('/users/create', [UserController::class, 'store'])->name('users.store');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 
 Route::get('/products/create_service', [ProductController::class, 'create_service'])->name('products.create_service');
 

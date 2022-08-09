@@ -237,7 +237,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
 
                                     <div class="card">
                                         <div class="card-header border-transparent">
@@ -289,7 +289,7 @@
 
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
 
                                     <div class="card">
                                         <div class="card-header border-transparent">
@@ -342,9 +342,7 @@
                                 </div>
 
 
-                                <div class="col-md-4">
-
-
+                                {{-- <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header border-transparent">
                                             <h3 class="card-title">Metode Pembayaran
@@ -382,19 +380,13 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-
                                         </div>
-
                                         <div class="card-footer clearfix" style="text-align: center">
-
                                             <a href="{{ route('masterPaymentMethods.index') }}"
                                                 class="btn btn-sm btn-info">Lihat Semua Metode</a>
-
                                         </div>
-
                                     </div>
-
-                                </div>
+                                </div> --}}
 
                             </div>
 
