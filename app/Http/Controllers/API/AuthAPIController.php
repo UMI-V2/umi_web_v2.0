@@ -113,6 +113,9 @@ class AuthAPIController extends Controller
 
     public function logout(Request $request)
     {
+        $user = $request->user();
+        $user->token_notification = null;
+        $user->update();
 
         $token = $request->user()->currentAccessToken()->delete();
 
