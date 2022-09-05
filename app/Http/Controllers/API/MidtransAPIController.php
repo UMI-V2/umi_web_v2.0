@@ -54,6 +54,8 @@ class MidtransAPIController extends Controller
             $transactionStatus->status = 'Sedang Disiapkan';
             $transactionStatus->status_auto_payment = 'Telah Dibayar';
             $transactionStatus->tanggal_pembayaran = Carbon::now()->format('Y-m-d H:i:s');
+            $transactionStatus->tanggal_pesanan_disiapkan = Carbon::now()->format('Y-m-d H:i:s');
+            
             // Balances::create([
             //     'id_user' =>  $transaction->id_user,
             //     'id_kategori_transaksi' => 1,
