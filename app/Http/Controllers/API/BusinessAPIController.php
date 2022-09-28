@@ -76,7 +76,9 @@ class BusinessAPIController extends Controller
                 ], $distance, 2)->selectDistance($this->request_only, 'distance');
             }
 
-
+            if(!$request->page){
+                return ResponseFormatter::success($business->with(['users', 'business_file', 'open_hours', 'category.master_business_categories', 'address.sub_districts'])->get(), 'Data Usaha berhasil diambil');
+            }
             return ResponseFormatter::success($business->with(['users', 'business_file', 'open_hours', 'category.master_business_categories', 'address.sub_districts'])->paginate($limit), 'Data Usaha berhasil diambil');
         } catch (Exception $error) {
             return ResponseFormatter::error([
