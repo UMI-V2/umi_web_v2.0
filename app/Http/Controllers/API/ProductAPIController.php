@@ -78,9 +78,9 @@ class ProductAPIController extends AppBaseController
             if ($id_usaha) {
                 $value->where('id_usaha', $id_usaha);
             }
-            
+
             //Filter hanya menampilkan produk diskon
-            
+
             if ($is_show_discount_only) {
                 $value->whereHas('product_discount', function ($q) {
                     $q->with('discounts')->whereHas('discounts', function ($q) {
@@ -106,8 +106,8 @@ class ProductAPIController extends AppBaseController
                 // dd("MAsuk Sini");
                 $value->where('is_arshive', 0);
             }
-            
-            
+
+
             //Memfilter produk berdasarkan kondisi
             if ($kondisi != null) {
                 $value->where('kondisi',  $kondisi);
@@ -155,7 +155,7 @@ class ProductAPIController extends AppBaseController
 
             // dd(  $value->get());
 
-            
+
 
             if ($sort_distance) {
                 $value->nearby([
@@ -201,15 +201,22 @@ class ProductAPIController extends AppBaseController
                 $data['longitude'] =  $businessAddress->longitude;
             }
 
-            $data['kondisi'] = ($request->kondisi =='')?null:$request->kondisi;
-            $data['preorder'] = ($request->preorder =='')?null:$request->preorder;
-            $data['is_service'] = ($request->is_service =='')?null:$request->is_service;
-            $data['stok'] = ($request->stok =='')?null:$request->stok;
+            $data['kondisi'] = ($request->kondisi == '') ? null : $request->kondisi;
+            $data['preorder'] = ($request->preorder == '') ? null : $request->preorder;
+            $data['is_service'] = ($request->is_service == '') ? null : $request->is_service;
+            $data['stok'] = ($request->stok == '') ? null : $request->stok;
 
             $result = Product::updateOrCreate(['id' => $request->id], $data);
 
             ProductCategoryAPIController::createDelete($request, $result->id);
-
+            if ($request->add_file_ar) {
+                $extension = $request->file('add_file_ar')->getClientOriginalExtension();
+                if (!($extension == 'glb' || $extension == 'gltf' || $extension == 'usdz')) {
+                    return ResponseFormatter::error([
+                        'error' => "Format AR tidak didukung",
+                    ],  'Format AR tidak didukung', 500);
+                }
+            }
             ProductFileAPIController::uploadOrDeleteFile($request, $result);
             $value = Product::find($result->id);
             DB::commit();

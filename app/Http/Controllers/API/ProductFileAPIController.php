@@ -21,14 +21,30 @@ use App\Models\Product;
 
 class ProductFileAPIController extends AppBaseController
 {
-    static function uploadOrDeleteFile(Request $request, Product $product, )
+    static function uploadOrDeleteFile(Request $request, Product $product,)
     {
         try {
+            if ($request->add_file_ar) {
+                $file = $request->file('add_file_ar');
+                $fileRoot = $file->store("assets/business/$product->id_usaha/products/ar", 'public');
+                    // dd($fileRoot);
+                    // dd("Masuk sini");
+                    $custom_name = uniqid()."_".$file->getClientOriginalName();
+                    $fileRoot =   $file->storeAs("public/assets/business/$product->id_usaha/products/ar", $custom_name);
+                    ProductFile::create([
+                        'id_produk' => $product->id,
+                        'file' => $fileRoot,
+                        'video' => false,
+                        'photo' => false,
+                        'ar' => true
+                    ]);
+            }
+
             if ($request->add_file_photos) {
                 foreach ($request->file('add_file_photos') as $file) {
                     $fileRoot = $file->store("assets/business/$product->id_usaha/products", 'public');
                     // dd($fileRoot);
-                   $productFile= ProductFile::create([
+                    ProductFile::create([
                         'id_produk' => $product->id,
                         'file' => $fileRoot,
                         'video' => false,
@@ -36,17 +52,17 @@ class ProductFileAPIController extends AppBaseController
                     ]);
                 }
             }
-    
+
             if ($request->delete_files) {
-                foreach ($request->delete_files as $photo) {
-                    ProductFile::where('file', $photo)->delete();
-                    if (Storage::disk('public')->exists($photo)) {
-                        Storage::disk('public')->delete($photo);
+                foreach ($request->delete_files as $file) {
+                    ProductFile::where('file', $file)->delete();
+                    if (Storage::disk('public')->exists($file)) {
+                        Storage::disk('public')->delete($file);
                     }
                 }
             }
         } catch (Exception $e) {
-            throw new Exception("Error Add Photo Product : ". $e->getMessage(), 1);
+            throw new Exception("Error Add Photo Product : " . $e->getMessage(), 1);
 
             return ResponseFormatter::error(
                 [
@@ -55,6 +71,5 @@ class ProductFileAPIController extends AppBaseController
                 'Upload Product File Failed',
             );
         }
-        
     }
 }

@@ -65,6 +65,7 @@ class ProductFile extends Model
         'file',
         'video',
         'photo',
+        'ar',
     ];
 
     /**
