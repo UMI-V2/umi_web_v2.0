@@ -18,8 +18,9 @@ class CreateProductFilesTable extends Migration
             $table->id();
             $table->bigInteger('id_produk')->unsigned();
             $table->string('file');
-            $table->boolean('video');
-            $table->boolean('photo');
+            $table->boolean('video')->default(false);
+            $table->boolean('photo')->default(false);
+            $table->boolean('ar')->default(false);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('id_produk')->references('id')->on('products');
