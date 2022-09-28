@@ -79,6 +79,7 @@ class ProductFile extends Model
         'file' => 'string',
         'video' => 'boolean',
         'photo' => 'boolean',
+        'ar' => 'boolean',
     ];
 
     /**
