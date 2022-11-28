@@ -45,7 +45,7 @@ class ProductAPIController extends AppBaseController
 
             $latitude = $request->input('latitude', -6.399987);
             $longitude = $request->input('longitude', 108.284429);
-            $distance = $request->input('distance', 100);
+            $distance = $request->input('distance', 3000);
 
             $category_id = $request->input('category_id');
             $is_service = $request->input('is_service');
