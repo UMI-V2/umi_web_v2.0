@@ -34,7 +34,7 @@ class BusinessAPIController extends Controller
             $sort_distance = $request->input('sort_distance', 1);
             $latitude = $request->input('latitude', -6.399987);
             $longitude = $request->input('longitude', 108.284429);
-            $distance = $request->input('distance', 100);
+            $distance = $request->input('distance', 3000);
             $category_id = $request->input('category_id');
 
             if ($id) {
