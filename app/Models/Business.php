@@ -101,7 +101,8 @@ class Business extends Model
         'is_auto_payment' => 'boolean',
         'is_manual_payment' => 'boolean',
         'is_delivery' => 'boolean',
-        'total_business'=>'integer'
+        'is_mobile'=> 'boolean',
+        'total_business'=>'integer',
     ];
 
     /**
