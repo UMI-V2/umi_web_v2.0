@@ -79,6 +79,7 @@ class Business extends Model
         'is_auto_payment',
         'is_manual_payment',
         'is_delivery',
+        'is_mobile',
         'latitude',
         'longitude',
         'created_at',
